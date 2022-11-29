@@ -1,7 +1,7 @@
 ---
 name: Issue_Template_default
 about: 기본 이슈 템플릿입니다.
-title: "[IMPLEMENT/BUG/ENHANCEMENT/QUESTION] OOO 컴포넌트 구현 "
+title: "[IMPLEMENT/BUG/ENHANCEMENT/CONFIG/QUESTION] OOO 컴포넌트 구현 "
 labels: ''
 assignees: ''
 
