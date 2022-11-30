@@ -1,5 +1,5 @@
 ---
-name: PR_Template_default
+name: pull_request_template.md
 about: 기본 PR 템플릿입니다.
 title:
 labels: ''
