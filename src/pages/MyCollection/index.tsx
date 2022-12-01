@@ -1,15 +1,8 @@
-import {
-  Link,
-  useParams,
-  useSearchParams,
-  createSearchParams,
-  useNavigate,
-} from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 
 export default function MyCollection() {
   const { userid, collectionid } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
 
   function getMyitemPath(isbn, userid) {
     return `/myitem/${isbn}?userid=${userid}`;
@@ -18,20 +11,23 @@ export default function MyCollection() {
   function handleSubmit(e) {
     e.preventDefault();
     let { value } = e.target.querySelector("input");
-    const params = { query: value };
-    setSearchParams(params);
+    let p = new URLSearchParams(window.location.search);
+    p.set("query", value);
+    setSearchParams(p);
   }
 
   function selectSort(e) {
     const value = e.target.options[e.target.selectedIndex].value;
-    const sorted = { sort: value };
-    setSearchParams(sorted);
+    let p = new URLSearchParams(window.location.search);
+    p.set("sort", value);
+    setSearchParams(p);
   }
 
   function selectView(e) {
     const value = e.target.options[e.target.selectedIndex].value;
-    const sorted = { view: value };
-    setSearchParams(sorted);
+    let p = new URLSearchParams(window.location.search);
+    p.set("view", value);
+    setSearchParams(p);
   }
 
   return (
@@ -39,23 +35,34 @@ export default function MyCollection() {
       <h1>
         {userid}의 콜렉션 {collectionid}
       </h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" id="main-search-bar" placeholder="Search..." />
+
+      <form onSubmit={handleSubmit} style={{ display: "inline-block" }}>
+        <input
+          type="text"
+          id="main-search-bar"
+          placeholder="Search..."
+          style={{ width: "15rem" }}
+        />
       </form>
       <select name="정렬방식" onChange={selectSort} style={{ width: "6rem" }}>
-        <option value="none" selected disabled>
-          == 선택 ==
+        <option value="name" defaultValue="true">
+          이름순
         </option>
-        <option value="name">이름순</option>
         <option value="date">년도순</option>
         <option value="price">가격순</option>
       </select>
       <select name="보기방식" onChange={selectView} style={{ width: "6rem" }}>
-        <option value="list" selected>
-          리스트
+        <option value="block" defaultValue="true">
+          블록
         </option>
-        <option value="block">블록</option>
+        <option value="list">리스트</option>
       </select>
+
+      <div style={{ marginTop: "1rem" }}>
+        검색어: {searchParams.get("query")}
+      </div>
+      <div>정렬방식: {searchParams.get("sort")}</div>
+      <div>보기방식: {searchParams.get("view")}</div>
 
       <div
         style={{
