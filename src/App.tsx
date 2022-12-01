@@ -1,33 +1,52 @@
 import { useState } from "react";
-import reactLogo from "@/assets/react.svg";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Home from "@/pages/Home/index";
+import Signin from "@/pages/Signin/index";
+import Signup from "@/pages/Signup/index";
+import SearchResult from "./pages/SearchResult";
+import Item from "./pages/Item";
+import MyCollections from "@/pages/MyCollections/index";
+import MyCollection from "@/pages/MyCollection/index";
+import MyItem from "./pages/MyItem";
+
 import "@/App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // 임시 지역 상태m
+  const isSignedIn = true;
+  const userid = "ulgoon";
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <Router>
+      <header>
+        <Link to="/">33 ⅓</Link>
+        <Link to={`/mycollections/${userid}`}>MyCollections</Link>
+        {isSignedIn ? (
+          <div>
+            Hi, <b>{userid}</b>
+          </div>
+        ) : (
+          <Link to="/signin">Signin</Link>
+        )}
+      </header>
+
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/signin" element={<Signin />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
+        <Route path="/searchresult" element={<SearchResult />}></Route>
+        <Route path="/item/:isbn" element={<Item />}></Route>
+        <Route
+          path="/mycollections/:userid"
+          element={<MyCollections />}
+        ></Route>
+        <Route
+          path="/mycollection/:userid/:collectionid"
+          element={<MyCollection />}
+        ></Route>
+        <Route path="/myitem/:isbn" element={<MyItem />}></Route>
+      </Routes>
+    </Router>
   );
 }
 
