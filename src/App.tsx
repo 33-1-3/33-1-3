@@ -19,7 +19,7 @@ function App() {
   return (
     <Router>
       <header>
-        <Link to="/">33 ⅓</Link>
+        <Link to="/"><img src="logo.png" alt="Thirty Three Third" style={{width:"3rem"}}/></Link>
         <Link to={`/mycollections/${userid}`}>MyCollections</Link>
         {isSignedIn ? (
           <div>
