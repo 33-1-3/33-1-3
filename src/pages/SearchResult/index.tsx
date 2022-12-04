@@ -1,8 +1,56 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+// import Discogs from 'disconnet';
+
+// const SECRET = import.meta.env.VITE_API_SECRET;
+// const KEY = import.meta.env.VITE_API_KEY;
+const SECRET = 'FhkTdZaKNGjEscpVfZAQMhMOAXrcjgLr';
+const KEY = 'aaDvoScQTvvqyWzyQfvj';
 
 export default function SearchResult() {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get("query");
+  const query = searchParams.get('query');
+
+  const getResults = () => {
+    let p = new URLSearchParams(window.location.search);
+    const value = p.get('query');
+
+    const [result, setResult] = useState([]);
+
+    useEffect(() => {
+      async function fetchResults() {
+        try {
+          const res = await axios.get(
+            `https://api.discogs.com/database/search?q=${value}&key=${KEY}&secret=${SECRET}`
+          );
+          setResult(res.data.results);
+          // console.log(res);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      fetchResults();
+    }, []);
+    return result.map((re, i) => {
+      console.log(re);
+
+      return (
+        <Link
+          to={getItemPath({ i })}
+          style={{
+            display: 'block',
+            width: '10rem',
+            height: '10rem',
+            lineHeight: '5rem',
+            backgroundColor: 'lightgray',
+          }}
+        >
+          {re.title}
+        </Link>
+      );
+    });
+  };
 
   function getItemPath(isbn) {
     return `/item/${isbn}`;
@@ -14,20 +62,22 @@ export default function SearchResult() {
       <div>검색어: {query}</div>
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
-          margin: "1rem auto",
-          gap: "2rem",
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          margin: '1rem auto',
+          gap: '2rem',
         }}
       >
-        <Link
+        {getResults()}
+        {/* <Link
           to={getItemPath(1)}
           style={{
-            display: "block",
-            width: "10rem",
-            height: "10rem",
-            lineHeight: "5rem",
-            backgroundColor: "lightgray",
+            display: 'block',
+            width: '10rem',
+            height: '10rem',
+            lineHeight: '5rem',
+            backgroundColor: 'lightgray',
           }}
         >
           isbn:1인 음반
@@ -35,11 +85,11 @@ export default function SearchResult() {
         <Link
           to={getItemPath(2)}
           style={{
-            display: "block",
-            width: "10rem",
-            height: "10rem",
-            lineHeight: "5rem",
-            backgroundColor: "lightgray",
+            display: 'block',
+            width: '10rem',
+            height: '10rem',
+            lineHeight: '5rem',
+            backgroundColor: 'lightgray',
           }}
         >
           isbn:2인 음반
@@ -47,11 +97,11 @@ export default function SearchResult() {
         <Link
           to={getItemPath(3)}
           style={{
-            display: "block",
-            width: "10rem",
-            height: "10rem",
-            lineHeight: "5rem",
-            backgroundColor: "lightgray",
+            display: 'block',
+            width: '10rem',
+            height: '10rem',
+            lineHeight: '5rem',
+            backgroundColor: 'lightgray',
           }}
         >
           isbn:3인 음반
@@ -59,11 +109,11 @@ export default function SearchResult() {
         <Link
           to={getItemPath(4)}
           style={{
-            display: "block",
-            width: "10rem",
-            height: "10rem",
-            lineHeight: "5rem",
-            backgroundColor: "lightgray",
+            display: 'block',
+            width: '10rem',
+            height: '10rem',
+            lineHeight: '5rem',
+            backgroundColor: 'lightgray',
           }}
         >
           isbn:4인 음반
@@ -71,15 +121,15 @@ export default function SearchResult() {
         <Link
           to={getItemPath(5)}
           style={{
-            display: "block",
-            width: "10rem",
-            height: "10rem",
-            lineHeight: "5rem",
-            backgroundColor: "lightgray",
+            display: 'block',
+            width: '10rem',
+            height: '10rem',
+            lineHeight: '5rem',
+            backgroundColor: 'lightgray',
           }}
         >
           isbn:5인 음반
-        </Link>
+        </Link> */}
       </div>
     </>
   );
