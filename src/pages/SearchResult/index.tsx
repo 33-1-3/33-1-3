@@ -84,7 +84,7 @@ export default function SearchResult() {
         </option>
         <option value="list">리스트</option>
       </select>
-
+      
       <div style={{ marginTop: '1rem' }}>
         검색어: {searchParams.get('query')}
       </div>
