@@ -1,27 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle/*css*/ `
-  @font-face {
-    font-family: 'LINESeed';
-    src: url('LINESeedKR-Th.woff') format('woff');
-    font-weight: 100;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'LINESeed';
-    src: url('LINESeedKR-Rg.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'LINESeed';
-    src: url('LINESeedKR-Bd.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
   :root {
     /* color */
     --white: #ffffff;
