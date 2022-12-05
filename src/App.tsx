@@ -1,25 +1,30 @@
-import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "@/pages/Home/index";
-import Signin from "@/pages/Signin/index";
-import Signup from "@/pages/Signup/index";
-import SearchResult from "./pages/SearchResult";
-import Item from "./pages/Item";
-import MyCollections from "@/pages/MyCollections/index";
-import MyCollection from "@/pages/MyCollection/index";
-import MyItem from "./pages/MyItem";
-import "@/App.css";
-
+import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from '@/pages/Home/index';
+import Signin from '@/pages/Signin/index';
+import Signup from '@/pages/Signup/index';
+import SearchResult from './pages/SearchResult';
+import Item from './pages/Item';
+import MyCollections from '@/pages/MyCollections/index';
+import MyCollection from '@/pages/MyCollection/index';
+import MyItem from './pages/MyItem';
+import '@/App.css';
 
 function App() {
   // 임시 지역 상태
   const isSignedIn = true;
-  const userid = "ulgoon";
+  const userid = 'ulgoon';
 
   return (
     <Router>
       <header>
-        <Link to="/"><img src="logo.png" alt="Thirty Three Third" style={{width:"3rem"}}/></Link>
+        <Link to="/">
+          <img
+            src="/assets/logo.png"
+            alt="Thirty Three Third"
+            style={{ width: '3rem' }}
+          />
+        </Link>
         <Link to={`/mycollections/${userid}`}>MyCollections</Link>
         {isSignedIn ? (
           <div>
