@@ -1,34 +1,38 @@
-import { useNavigate, createSearchParams } from "react-router-dom";
+import { useNavigate, createSearchParams } from 'react-router-dom';
 
 export default function Home() {
   const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
-    let { value } = e.target.querySelector("input");
+    const { value } = e.target.querySelector('input');
     const params = { query: value };
     navigate({
-      pathname: "/searchresult",
+      pathname: '/searchresult',
       search: `?${createSearchParams(params)}`,
     });
   }
 
   return (
     <>
-      <h1 style={{ fontSize: "5rem" }}>
+      <h1 style={{ fontSize: '5rem' }}>
         {/* TODO: 이미지가 깨진다 svg로 불러오쟈 */}
-        <img src="logo.png" alt="Thirty Three Third" style={{width:"10rem"}}/>
+        <img
+          src="/assets/logo.png"
+          alt="Thirty Three Third"
+          style={{ width: '10rem' }}
+        />
       </h1>
-      <h2 style={{ fontSize: "2rem" }}>Record your records!</h2>
+      <h2 style={{ fontSize: '2rem' }}>Record your records!</h2>
       <form
         onSubmit={handleSubmit}
-        style={{ width: "30rem", margin: "2rem auto" }}
+        style={{ width: '30rem', margin: '2rem auto' }}
       >
         <input
           type="text"
           id="main-search-bar"
           placeholder="Search vinyls by artist, album, song!"
-          style={{ width: "30rem", height: "1.5rem" }}
+          style={{ width: '30rem', height: '1.5rem' }}
         />
       </form>
     </>
