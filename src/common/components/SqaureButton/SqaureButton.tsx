@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface SqaureButtonProps {
+export interface SqaureButtonProps {
   children: string;
 }
 
@@ -14,7 +14,7 @@ const SqaureButton = styled.button<SqaureButtonProps>`
   background-color: ${({ children }) =>
     isCancel(children) ? 'var(--white)' : 'var(--purple-900)'};
   border: ${({ children }) =>
-    isCancel(children) ? '1px solid var(--purple-900)' : null};
+    isCancel(children) ? '1px solid var(--purple-900)' : 'none'};
   border-radius: 6px;
   font-family: 'LINESeed';
   font-weight: 700;
