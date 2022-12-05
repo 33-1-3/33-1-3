@@ -52,7 +52,7 @@ export const normalizeStyle = createGlobalStyle/*css*/ `
     box-sizing: border-box;
   }
   body {
-    font-family: 'Y_Spotlight', sans-serif;
+    font-family: 'LINESeed', sans-serif;
     background-color: var(--color-skyblue);
   }
   input, button {
