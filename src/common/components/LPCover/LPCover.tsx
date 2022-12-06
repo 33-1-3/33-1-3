@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface props {
+interface LPCoverProps {
   // 음반 커버 이미지 경로
   imgURL?: string;
   // 음반 커버 이미지 경로가 올바르지 않을 때 대체 음반 커버 이미지와 함께 표시할 음반 제목
@@ -17,7 +17,7 @@ export const LPCover = ({
   size = 'small',
   hoverInteraction = true,
   ...props
-}: props) => {
+}: LPCoverProps) => {
   const height = size === 'small' ? 150 : 394;
 
   const Wrapper = styled.div`
