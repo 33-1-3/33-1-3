@@ -24,4 +24,5 @@ White.args = {
   children: 'Sign In',
   backgroundColor: 'var(--white)',
   color: 'var(--purple-900)',
+  transition: true,
 };

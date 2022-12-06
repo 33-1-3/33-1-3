@@ -10,9 +10,14 @@ export interface LinkProps {
   backgroundColor: string;
   color: string;
   border: string;
+  transition: boolean;
 }
 
-const StyledLink = styled('a')<{ backgroundColor: string; border: string }>`
+const StyledLink = styled('a')<{
+  backgroundColor: string;
+  border: string;
+  transition: boolean;
+}>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -23,6 +28,24 @@ const StyledLink = styled('a')<{ backgroundColor: string; border: string }>`
   border-radius: 0.3125rem;
   text-decoration: none;
   font-weight: 700;
+
+  ${(props) => {
+    return props.transition
+      ? `
+    &:hover,
+    &:focus {
+    transition: 0.3s ease-out;
+    color: ${props.backgroundColor};
+    background-color: ${props.color};
+  }`
+      : null;
+  }}
+
+  &:focus {
+    cursor: pointer;
+    outline: 0.2em solid hsl(219deg 63% 44%);
+    outline-offset: 0.2em;
+  }
 `;
 
 const Link = ({
@@ -33,6 +56,7 @@ const Link = ({
   backgroundColor,
   color,
   border,
+  transition,
 }: LinkProps) => {
   return (
     <>
@@ -43,6 +67,7 @@ const Link = ({
         backgroundColor={backgroundColor}
         color={color}
         border={border}
+        transition={transition}
       >
         {children}
       </StyledLink>
@@ -58,12 +83,14 @@ Link.propTypes = {
   backgroundColor: PropTypes.string,
   color: PropTypes.string,
   border: PropTypes.string,
+  transition: PropTypes.bool,
 };
 
 Link.defaultProps = {
   backgroundColor: 'var(--purple-900)',
   color: 'var(--white)',
   border: 'var(--purple-900)',
+  transition: false,
 };
 
 export default Link;
