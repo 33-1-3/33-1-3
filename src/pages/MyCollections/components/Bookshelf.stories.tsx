@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Bookshelf } from './Bookshelf';
+import Bookshelf from './Bookshelf';
 
 export default {
   title: 'pages/MyCollections/Bookshelf',
