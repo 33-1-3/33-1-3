@@ -1,3 +1,6 @@
+const svgrPlugin = require('vite-plugin-svgr');
+const { resolve } = require('path');
+
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
@@ -11,5 +14,22 @@ module.exports = {
   },
   features: {
     storyStoreV7: true,
+  },
+  async viteFinal(config) {
+    config.plugins = [
+      ...config.plugins,
+      svgrPlugin({
+        svgrOptions: {
+          icon: true,
+        },
+      }),
+    ];
+
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': resolve('./src'),
+    };
+
+    return config;
   },
 };
