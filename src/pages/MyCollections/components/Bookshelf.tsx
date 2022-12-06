@@ -16,7 +16,6 @@ const Bookshelf = ({ count, step, ...props }: BookshelfProps) => {
 };
 
 Bookshelf.defaultProps = {
-  count: 0,
   step: 10,
 };
 
