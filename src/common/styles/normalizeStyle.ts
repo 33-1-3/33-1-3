@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-export const normalizeStyle = createGlobalStyle/*css*/ `
+export const NormalizeStyle = createGlobalStyle/*css*/ `
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -52,11 +52,18 @@ export const normalizeStyle = createGlobalStyle/*css*/ `
     box-sizing: border-box;
   }
   body {
-    font-family: 'Y_Spotlight', sans-serif;
+    font-family: 'LINESeed', sans-serif;
     background-color: var(--color-skyblue);
   }
-  input, button {
-    font-family: inherit;
+  button {
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+  margin: 0;
+	font-family: inherit;
+	cursor: pointer;
+	outline: inherit;  
   }
   a {
     text-decoration: none;
