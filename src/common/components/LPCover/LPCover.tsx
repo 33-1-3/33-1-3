@@ -9,13 +9,14 @@ interface LPCoverProps {
   size?: 'small' | 'large';
   // 마우스 호버시 LP판 나오는 애니메이션 작동 여부
   hoverInteraction: boolean;
+  // TODO: rest props는 어떻게 받아와야 하는가?
 }
 
 export const LPCover = ({
   imgURL,
   title,
-  size = 'small',
-  hoverInteraction = true,
+  size,
+  hoverInteraction,
   ...props
 }: LPCoverProps) => {
   const height = size === 'small' ? 150 : 394;
@@ -70,4 +71,9 @@ export const LPCover = ({
       )}
     </Wrapper>
   );
+};
+
+LPCover.defaultProps = {
+  size: 'small',
+  hoverInteraction: true,
 };
