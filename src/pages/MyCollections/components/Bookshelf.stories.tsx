@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Bookshelf } from './Bookshelf';
 
 export default {
-  title: 'Example/Bookshelf',
+  title: 'pages/MyCollections/Bookshelf',
   component: Bookshelf,
   argTypes: {
     count: { control: { type: 'number', min: 0, step: 1 } },
