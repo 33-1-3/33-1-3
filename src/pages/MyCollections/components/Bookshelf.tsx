@@ -10,12 +10,13 @@ const Img = styled.img`
   height: 160px;
 `;
 
-export const Bookshelf = ({ count, step, ...props }: BookshelfProps) => {
+const Bookshelf = ({ count, step, ...props }: BookshelfProps) => {
   const imgIdx = Math.min(Math.ceil(count / step), 5);
   return <Img src={`/assets/shelf${imgIdx}.svg`} alt="" {...props} />;
 };
 
 Bookshelf.defaultProps = {
-  count: 0,
   step: 10,
 };
+
+export default Bookshelf;
