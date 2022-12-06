@@ -1,3 +1,3 @@
-import { Bookshelf } from './Bookshelf';
+import Bookshelf from './Bookshelf';
 
 export { Bookshelf };
