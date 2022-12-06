@@ -15,7 +15,7 @@ export interface IconButtonProps {
   iconType: 'plus' | 'minus' | 'pencil';
 }
 
-const IconButton = ({ width, height, iconType }: IconButtonProps) => {
+const IconButton = ({ width, height, iconType, ...props }: IconButtonProps) => {
   const ButtonStyle = { width, height };
   const IconStyle = {
     width,
@@ -55,15 +55,10 @@ const IconButton = ({ width, height, iconType }: IconButtonProps) => {
   `;
 
   return (
-    <button style={ButtonStyle} type="button">
+    <button style={ButtonStyle} type="button" {...props}>
       <StyledIconComponent style={IconStyle} />
     </button>
   );
-};
-
-IconButton.defaultProps = {
-  width: 16,
-  height: 16,
 };
 
 export default IconButton;
