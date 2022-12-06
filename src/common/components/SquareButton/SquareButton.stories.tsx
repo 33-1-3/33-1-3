@@ -3,7 +3,7 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import SquareButton from './SquareButton';
 
 export default {
-  title: 'Components/Common/SqaureButton',
+  title: 'common/components/SqaureButton',
   args: {
     fontSize: '20px',
     isBig: false,
