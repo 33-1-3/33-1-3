@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle/*css*/ `
+
   :root {
     /* color */
     --white: #ffffff;
@@ -40,5 +41,35 @@ export const GlobalStyle = createGlobalStyle/*css*/ `
     --space-lg: 24px;
     --space-xl: 28px;
     --space-xxl: 32px; 
+  }
+
+  @font-face {
+    font-family: 'LINESeed';
+    font-style: normal;
+    font-weight: 100;
+    src: url('/assets/LINESeedKR-Th.woff') format('woff'),
+        url('/assets/LINESeedKR-Th.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'LINESeed';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/LINESeedKR-Rg.woff') format('woff'),
+        url('/assets/LINESeedKR-Rg.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'LINESeed';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/assets/LINESeedKR-Bd.woff') format('woff'),
+        url('/assets/LINESeedKR-Bd.ttf') format('truetype');
+    font-display: swap;
+  }
+  body {
+    font-family: 'LINESeed';
+    font-weight: 700;
+    color: var(--purple-900);
   }
 `;
