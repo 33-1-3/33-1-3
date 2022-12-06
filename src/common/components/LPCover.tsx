@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface LPCoverProps {
+export interface LPCoverProps {
   // 음반 커버 이미지 경로
   imgURL?: string;
   // 음반 커버 이미지 경로가 올바르지 않을 때 대체 음반 커버 이미지와 함께 표시할 음반 제목
@@ -12,7 +12,7 @@ interface LPCoverProps {
   // TODO: rest props는 어떻게 받아와야 하는가?
 }
 
-export const LPCover = ({
+const LPCover = ({
   imgURL,
   title,
   size,
@@ -77,3 +77,5 @@ LPCover.defaultProps = {
   size: 'small',
   hoverInteraction: true,
 };
+
+export default LPCover;

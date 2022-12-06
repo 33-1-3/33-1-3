@@ -1,19 +1,10 @@
 // import React from 'react';
-import { GlobalStyle } from '../../styles/globalStyle';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { LPCover } from './LPCover';
+import LPCover from './LPCover';
 
 export default {
   title: 'common/components/LPCover',
   component: LPCover,
-  decorators: [
-    (Story) => (
-      <>
-        <GlobalStyle />
-        <Story />
-      </>
-    ),
-  ],
 } as ComponentMeta<typeof LPCover>;
 
 const Template: ComponentStory<typeof LPCover> = (args) => (
