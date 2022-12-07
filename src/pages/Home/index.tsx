@@ -1,11 +1,12 @@
+import React from 'react';
 import { useNavigate, createSearchParams } from 'react-router-dom';
 
 export default function Home() {
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { value } = e.target.querySelector('input');
+    const { value } = (e.target as HTMLElement).querySelector('input');
     const params = { query: value };
     navigate({
       pathname: '/searchresult',

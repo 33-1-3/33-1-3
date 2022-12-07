@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 export default function MyItem() {
   const { isbn } = useParams();
@@ -6,7 +6,7 @@ export default function MyItem() {
   return (
     <>
       <h1>My Item</h1>
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         <div>
           <div>artist: 가수 이름</div>
           <div>album: 앨범 이름</div>
@@ -18,11 +18,11 @@ export default function MyItem() {
 
         <div
           style={{
-            width: "20rem",
-            height: "20rem",
-            margin: "2rem auto",
-            lineHeight: "15rem",
-            backgroundColor: "lightgray",
+            width: '20rem',
+            height: '20rem',
+            margin: '2rem auto',
+            lineHeight: '15rem',
+            backgroundColor: 'lightgray',
           }}
         >
           album cover
