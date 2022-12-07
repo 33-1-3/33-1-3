@@ -1,20 +1,14 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
 export interface LogoProps {
-  width: string;
-  height: string;
+  width: string | number;
+  height: string | number;
 }
-
-const StyledImg = styled.img`
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-`;
 
 const LogoLink = ({ width, height }: LogoProps) => {
   return (
-    <Link to="/">
-      <StyledImg
+    <Link to="/" aria-label="메인 화면으로 이동">
+      <img
         src="/assets/logo.svg"
         alt="Thirty Three Third"
         width={width}
