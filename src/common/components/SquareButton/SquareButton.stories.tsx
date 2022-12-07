@@ -1,23 +1,20 @@
-import { GlobalStyle } from '../../styles/globalStyle';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import SquareButton from './SquareButton';
 
 export default {
   title: 'common/components/SqaureButton',
   args: {
-    fontSize: '20px',
-    isBig: false,
+    fontSize: 20,
+    size: 'small',
     isFilled: true,
   },
+  argTypes: {
+    size: {
+      options: ['small', 'large'],
+      control: { type: 'radio' },
+    },
+  },
   component: SquareButton,
-  decorators: [
-    (Story) => (
-      <>
-        <GlobalStyle />
-        <Story />
-      </>
-    ),
-  ],
 } as ComponentMeta<typeof SquareButton>;
 
 const Template: ComponentStory<typeof SquareButton> = (args) => (
@@ -39,16 +36,16 @@ SignUp.args = {
 export const Approve = Template.bind({});
 
 Approve.args = {
-  fontSize: '18px',
-  isBig: true,
+  fontSize: 18,
+  size: 'large',
   children: '확인',
 };
 
 export const Cancel = Template.bind({});
 
 Cancel.args = {
-  fontSize: '18px',
-  isBig: true,
+  fontSize: 18,
+  size: 'large',
   isFilled: false,
   children: '취소',
 };
