@@ -17,6 +17,8 @@ Small.args = {
   width: 16,
   height: 16,
   iconType: 'plus',
+  color: 'var(--purple-900)',
+  backgroundColor: 'var(--white)',
 };
 
 export const Regular = Template.bind({});
@@ -24,6 +26,8 @@ Regular.args = {
   width: 28,
   height: 28,
   iconType: 'plus',
+  color: 'var(--purple-900)',
+  backgroundColor: 'var(--white)',
 };
 
 export const Large = Template.bind({});
@@ -31,4 +35,6 @@ Large.args = {
   width: 32,
   height: 32,
   iconType: 'plus',
+  color: 'var(--purple-900)',
+  backgroundColor: 'var(--white)',
 };
