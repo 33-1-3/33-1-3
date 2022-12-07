@@ -1,74 +1,77 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const fontSize = { small: '15px', large: '28px' };
+
+const inputMixin = {
+  small: css`
+    width: 240px;
+    height: 40px;
+    padding: 10px 12px;
+    border: 1px solid var(--black);
+    border-radius: 20px;
+  `,
+  large: css`
+    width: 516px;
+    height: 72px;
+    padding: 22px 24px;
+    border: 3px solid var(--black);
+    border-radius: 36px;
+  `,
+};
+
+const buttonMixin = {
+  small: css`
+    width: 28px;
+    height: 28px;
+    margin: 6px;
+  `,
+  large: css`
+    width: 48px;
+    height: 48px;
+    margin: 12px;
+  `,
+};
 
 export interface SearchInputProps {
   placeholder: string;
   page: '전체' | '리스트';
-  width: number;
+  size: 'small' | 'large';
 }
 
-export interface InputProps {
-  inputStyles: {
-    width: number;
-    height: number;
-    border: number;
-    radius: number;
-    paddingColumn: number;
-    paddingRow: number;
-    placeholderSize: number;
-  };
+export interface formProps {
+  formSize: 'small' | 'large';
 }
 
-export interface SearchButtonProps {
-  buttonStyles: {
-    size: number;
-    top: number;
-    margin: number;
-  };
-}
-
-function SearchInput({ placeholder, page, width }: SearchInputProps) {
-  const inputStyles = {
-    width: width,
-    height: Math.floor(width * 0.14),
-    border: Math.floor(width * 0.0066),
-    radius: Math.floor(width * 0.66),
-    paddingColumn: Math.floor(width * 0.033),
-    paddingRow: Math.floor(width * 0.04),
-    placeholderSize: Math.floor(width * 0.053),
-  };
-  const buttonStyles = {
-    size: Math.floor(width * 0.093),
-    top: width * 0.0066 - 1,
-    margin: Math.floor(width * 0.02),
-  };
-
+function SearchInput({ placeholder, page, size }: SearchInputProps) {
   return (
     <InputWrapper>
       <Input
         type="search"
         placeholder={placeholder}
         aria-label={`${page} 검색 창`}
-        inputStyles={inputStyles}
+        formSize={size}
       />
-      <SearchButton type="submit" buttonStyles={buttonStyles}></SearchButton>
+      <SearchButton type="submit" formSize={size}></SearchButton>
     </InputWrapper>
   );
 }
+
+SearchInput.defaultProps = {
+  placeholder: '검색어를 입력하세요.',
+  page: '전체',
+  size: 'large',
+};
 
 const InputWrapper = styled.form`
   display: inline-block;
   position: relative;
 `;
 
-const Input = styled.input<InputProps>`
-  width: ${({ inputStyles }) => inputStyles.width}px;
-  height: ${({ inputStyles }) => inputStyles.height}px;
-  padding: ${({ inputStyles }) => inputStyles.paddingColumn}px
-    ${({ inputStyles }) => inputStyles.paddingRow}px;
-  border: ${({ inputStyles }) => inputStyles.border}px solid black;
-  border-radius: ${({ inputStyles }) => inputStyles.radius}px;
+const Input = styled.input<formProps>`
+  ${({ formSize }) => inputMixin[formSize]};
   font-family: 'LINESeed';
-  font-size: ${({ inputStyles }) => inputStyles.placeholderSize}px;
+  font-weight: 400;
+  font-size: ${({ formSize }) => fontSize[formSize]};
 
   &::-webkit-search-decoration,
   &::-webkit-search-cancel-button,
@@ -78,18 +81,15 @@ const Input = styled.input<InputProps>`
   }
 
   &::placeholder {
-    font-size: ${({ inputStyles }) => inputStyles.placeholderSize}px;
+    font-size: ${({ formSize }) => fontSize[formSize]};
     color: var(--black);
   }
 `;
 
-const SearchButton = styled.button<SearchButtonProps>`
+const SearchButton = styled.button<formProps>`
   position: absolute;
-  top: ${({ buttonStyles }) => buttonStyles.top}px;
   right: 0;
-  width: ${({ buttonStyles }) => buttonStyles.size}px;
-  height: ${({ buttonStyles }) => buttonStyles.size}px;
-  margin: ${({ buttonStyles }) => buttonStyles.margin}px;
+  ${({ formSize }) => buttonMixin[formSize]}
   background: url('/assets/searchButton.svg') no-repeat center/contain;
   border: none;
 `;
