@@ -13,9 +13,18 @@ export interface IconButtonProps {
   width: number | string;
   height: number | string;
   iconType: 'plus' | 'minus' | 'pencil';
+  color: string;
+  backgroundColor: string;
 }
 
-const IconButton = ({ width, height, iconType, ...props }: IconButtonProps) => {
+const IconButton = ({
+  width,
+  height,
+  iconType,
+  color,
+  backgroundColor,
+  ...props
+}: IconButtonProps) => {
   const ButtonStyle = { width, height };
   const IconStyle = {
     width,
@@ -26,30 +35,30 @@ const IconButton = ({ width, height, iconType, ...props }: IconButtonProps) => {
 
   const StyledIconComponent = styled(IconComponent)`
     rect {
-      fill: var(--white);
-      stroke: var(--purple-900);
+      fill: ${backgroundColor};
+      stroke: ${color};
     }
     path {
-      fill: var(--purple-900);
-      stroke: var(--purple-900);
+      fill: ${color};
+      stroke: ${color};
     }
     line {
-      stroke: var(--purple-900);
+      stroke: ${color};
     }
     &:hover,
     &:focus {
       rect {
         transition: 0.3s ease-out;
-        fill: var(--purple-900);
+        fill: ${color};
       }
       path {
         transition: 0.3s ease-out;
-        fill: var(--white);
-        stroke: var(--white);
+        fill: ${backgroundColor};
+        stroke: ${backgroundColor};
       }
       line {
         transition: 0.3s ease-out;
-        stroke: var(--white);
+        stroke: ${backgroundColor};
       }
     }
   `;
@@ -59,6 +68,11 @@ const IconButton = ({ width, height, iconType, ...props }: IconButtonProps) => {
       <StyledIconComponent style={IconStyle} />
     </button>
   );
+};
+
+IconButton.defaultProps = {
+  color: 'var(--purple-900)',
+  backgroundColor: 'var(--white)',
 };
 
 export default IconButton;
