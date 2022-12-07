@@ -22,7 +22,7 @@ function App() {
         <header>
           <Link to="/">
             <img
-              src="/assets/logo.png"
+              src="/assets/logo.svg"
               alt="Thirty Three Third"
               style={{ width: '3rem' }}
             />

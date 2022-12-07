@@ -3,23 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export interface IconProps {
+  $width: string;
+  $height: string;
+  $color: string;
+  $backgroundcolor: string;
+}
+
+export interface LinkProps {
   width: string;
   height: string;
   color: string;
-  backgroundColor: string;
+  backgroundcolor: string;
 }
 
 const StyledArrowIcon = styled(ArrowIcon)<IconProps>`
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-  color: ${({ color }) => color};
-  backgroundcolor: ${({ backgroundColor }) => backgroundColor};
+  width: ${({ $width }) => $width};
+  height: ${({ $height }) => $height};
   path {
-    fill: ${({ color }) => color};
-    stroke: ${({ color }) => color};
+    fill: ${({ $color }) => $color};
+    stroke: ${({ $color }) => $color};
   }
   circle {
-    fill: ${({ backgroundColor }) => backgroundColor};
+    fill: ${({ $backgroundcolor }) => $backgroundcolor};
   }
 `;
 
@@ -27,17 +32,17 @@ const ArrowLink = ({
   width,
   height,
   color,
-  backgroundColor,
+  backgroundcolor,
   ...props
-}: IconProps) => {
+}: LinkProps) => {
   const navigate = useNavigate();
   return (
     <button onClick={() => navigate(-1)} {...props}>
       <StyledArrowIcon
-        width={width}
-        height={height}
-        color={color}
-        backgroundColor={backgroundColor}
+        $width={width}
+        $height={height}
+        $color={color}
+        $backgroundcolor={backgroundcolor}
       />
     </button>
   );
@@ -47,7 +52,7 @@ ArrowLink.defaultProps = {
   width: '60px',
   height: '60px',
   color: 'var(--white)',
-  backgroundColor: 'var(--purple-900)',
+  backgroundcolor: 'var(--purple-900)',
 };
 
 export default ArrowLink;

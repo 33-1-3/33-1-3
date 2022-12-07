@@ -1,11 +1,12 @@
+import React from 'react';
 import { useNavigate, createSearchParams } from 'react-router-dom';
 
 export default function Home() {
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { value } = e.target.querySelector('input');
+    const { value } = (e.target as HTMLElement).querySelector('input');
     const params = { query: value };
     navigate({
       pathname: '/searchresult',
@@ -18,7 +19,7 @@ export default function Home() {
       <h1 style={{ fontSize: '5rem' }}>
         {/* TODO: 이미지가 깨진다 svg로 불러오쟈 */}
         <img
-          src="/assets/logo.png"
+          src="/assets/logo.svg"
           alt="Thirty Three Third"
           style={{ width: '10rem' }}
         />
