@@ -16,5 +16,5 @@ Default.args = {
   width: '60px',
   height: '60px',
   color: 'var(--white)',
-  backgroundColor: 'var(--purple-900)',
+  backgroundcolor: 'var(--purple-900)',
 };
