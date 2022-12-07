@@ -19,12 +19,6 @@ export default {
       control: { type: 'radio' },
     },
   },
-  parameters: {
-    design: {
-      type: 'figspec',
-      accessToken: 'figd_gfB52ZhyikbSGoKCtXkZoWvY5UphKsJde4RtP7mt',
-    },
-  },
 } as ComponentMeta<typeof SearchInput>;
 
 const Template: ComponentStory<typeof SearchInput> = (args) => (
