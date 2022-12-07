@@ -50,6 +50,8 @@
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-interactions": "^6.5.13",
     "@storybook/addon-links": "^6.5.13",
+    "storybook-addon-designs": "6.3.1",
+    "@storybook/addon-a11y": "6.5.14",
     "@storybook/builder-vite": "^0.2.5",
     "@storybook/react": "^6.5.13",
     "@storybook/testing-library": "^0.0.13",
@@ -72,16 +74,15 @@
     "prettier": "^2.8.0",
     "styled-components": "^5.3.6",
     "typescript": "^4.9.3",
-    "vite": "^3.2.4"
+    "vite": "^3.2.4",
+    "vite-plugin-checker": "^0.5.1"
   },
   "dependencies": {
-    "@storybook/addon-a11y": "6.5.14",
     "axios": "^1.2.0",
     "disconnect": "^1.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
-    "storybook-addon-designs": "6.3.1",
     "vite-plugin-svgr": "^2.2.2"
   }
 }
