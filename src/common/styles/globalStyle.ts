@@ -70,6 +70,5 @@ export const GlobalStyle = createGlobalStyle/*css*/ `
   body {
     font-family: 'LINESeed';
     font-weight: 700;
-    color: var(--purple-900);
   }
 `;

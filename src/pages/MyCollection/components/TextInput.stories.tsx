@@ -15,6 +15,7 @@ export const CollectionNameInput = Template.bind({});
 CollectionNameInput.args = {
   width: 416,
   height: 36,
+  label: 'Collection Name',
   placeholder: '생성할 콜렉션의 이름을 입력해주세요.',
   required: true,
   validationTester: /^.{2,}$/,
@@ -25,6 +26,7 @@ export const EmailInput = Template.bind({});
 EmailInput.args = {
   width: 416,
   height: 36,
+  label: 'Email',
   placeholder: '이메일을 입력해주세요.',
   required: true,
   validationTester:

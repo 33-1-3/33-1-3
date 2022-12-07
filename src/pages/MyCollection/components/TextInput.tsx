@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+const Label = styled.label`
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+`;
+
 const Input = styled.input`
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
@@ -40,6 +47,7 @@ const validateTest = (
 export interface TextInputProps {
   width: number;
   height: number;
+  label?: string;
   placeholder?: string;
   required?: boolean;
   validationTester?: RegExp;
@@ -49,6 +57,7 @@ export interface TextInputProps {
 const TextInput = ({
   width,
   height,
+  label,
   placeholder,
   required,
   validationTester,
@@ -56,8 +65,11 @@ const TextInput = ({
   ...props
 }: TextInputProps) => (
   <>
+    {label && <Label htmlFor="textInput">{label}</Label>}
     <Input
       type="text"
+      id="textInput"
+      name={label}
       width={width}
       height={height}
       placeholder={placeholder}
