@@ -19,6 +19,12 @@ export default {
       control: { type: 'radio' },
     },
   },
+  parameters: {
+    design: {
+      type: 'figspec',
+      accessToken: 'figd_gfB52ZhyikbSGoKCtXkZoWvY5UphKsJde4RtP7mt',
+    },
+  },
 } as ComponentMeta<typeof SearchInput>;
 
 const Template: ComponentStory<typeof SearchInput> = (args) => (
@@ -29,15 +35,25 @@ export const Header = Template.bind({});
 Header.args = {
   size: 'small',
 };
+Header.parameters = {
+  design: {
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=130%3A224&t=JiHlUULV7Tp6Y1lx-4',
+  },
+};
 
 export const Main = Template.bind({});
+Main.parameters = {
+  design: {
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=132%3A81&t=JiHlUULV7Tp6Y1lx-4',
+  },
+};
 
 export const Collection = Template.bind({});
 Collection.args = {
   page: '리스트',
 };
-
-export const Custom = Template.bind({});
-Custom.args = {
-  placeholder: '찾으시는 LP가 있나요?',
+Collection.parameters = {
+  design: {
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=132%3A81&t=JiHlUULV7Tp6Y1lx-4',
+  },
 };
