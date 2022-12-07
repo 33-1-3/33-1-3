@@ -11,6 +11,10 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  design: {
+    type: 'figspec',
+    accessToken: import.meta.env.VITE_FIGMA_ACCESS_TOKEN,
+  },
   a11y: {
     config: { locale: ko },
   },
