@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+const heightPx = {
+  small: 150,
+  large: 394,
+};
+
 export interface LPCoverProps {
   // 음반 커버 이미지 경로
   imgURL?: string;
@@ -19,7 +24,7 @@ const LPCover = ({
   hoverInteraction,
   ...props
 }: LPCoverProps) => {
-  const height = size === 'small' ? 150 : 394;
+  const height = heightPx[size];
 
   const Wrapper = styled.div`
     position: relative;
