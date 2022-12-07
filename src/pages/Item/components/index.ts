@@ -1,3 +1,3 @@
-import ArrowLink from './ArrowLink';
+import ArrowLink from './ArrowLink/ArrowLink';
 
 export { ArrowLink };

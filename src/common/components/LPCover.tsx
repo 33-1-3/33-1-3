@@ -11,7 +11,7 @@ export interface LPCoverProps {
   // 음반 커버 이미지 경로가 올바르지 않을 때 대체 음반 커버 이미지와 함께 표시할 음반 제목
   title: string;
   // 표시할 음반 커버 크기
-  size?: 'small' | 'large';
+  size: 'small' | 'large';
   // 마우스 호버시 LP판 나오는 애니메이션 작동 여부
   hoverInteraction: boolean;
   // TODO: rest props는 어떻게 받아와야 하는가?
