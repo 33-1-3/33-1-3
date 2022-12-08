@@ -35,6 +35,7 @@ const Dropdown = ({
     if (!(e.target as HTMLTextAreaElement).getAttribute) return;
 
     const value = (e.target as HTMLTextAreaElement).getAttribute('value');
+    const content = (e.target as HTMLTextAreaElement).textContent;
 
     const param = new URLSearchParams(window.location.search);
     if (value !== null) {
@@ -42,7 +43,7 @@ const Dropdown = ({
     }
 
     setSearchParams(param);
-    setPicker(value);
+    setPicker(content);
     setIsOpen(!isOpen);
   };
 
@@ -62,7 +63,7 @@ const Dropdown = ({
           isOpen={isOpen}
           backgroundColor={backgroundColor}
           color={color}
-          content={content[0].value}
+          content={picker ?? content[0].value}
           {...props}
         />
         <ListContainer
