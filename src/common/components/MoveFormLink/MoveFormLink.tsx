@@ -27,9 +27,9 @@ const StyledLink = styled(Link)`
   text-underline-position: under;
 `;
 
-function MoveFormLink({ moveTarget }: MoveFormLinkProps) {
+function MoveFormLink({ moveTarget, ...props }: MoveFormLinkProps) {
   return (
-    <LinkWrapper>
+    <LinkWrapper {...props}>
       <span>{INFO_MESSAGES[moveTarget]}</span>
       <StyledLink to={`/${moveTarget}`}>{LINK_MESSAGES[moveTarget]}</StyledLink>
     </LinkWrapper>

@@ -42,9 +42,9 @@ export interface formProps {
   formSize: 'small' | 'large';
 }
 
-function SearchInput({ placeholder, page, size }: SearchInputProps) {
+function SearchInput({ placeholder, page, size, ...props }: SearchInputProps) {
   return (
-    <InputWrapper>
+    <InputWrapper {...props}>
       <Input
         type="search"
         placeholder={placeholder}
