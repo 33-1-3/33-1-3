@@ -5,6 +5,11 @@ import TextInput from './TextInput';
 export default {
   title: 'pages/MyCollection/TextInput',
   component: TextInput,
+  parameters: {
+    design: {
+      url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=181%3A2903&t=ri42uDzp7Wjgw7vi-4',
+    },
+  },
 } as ComponentMeta<typeof TextInput>;
 
 const Template: ComponentStory<typeof TextInput> = (args) => (
