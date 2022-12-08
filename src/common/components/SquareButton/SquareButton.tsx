@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
-const paddingValue = { small: '10px 16px', large: '12px 24px' };
+const PADDING_VALUE = { small: '10px 16px', large: '12px 24px' };
 
 export interface SqaureButtonProps {
   fontSize: number;
   size: 'small' | 'large';
-  isFilled: boolean;
-  disabled: boolean;
+  isFilled?: boolean;
+  disabled?: boolean;
   children: string;
 }
 
 const SqaureButton = styled.button<SqaureButtonProps>`
-  padding: ${({ size }) => paddingValue[size]};
+  padding: ${({ size }) => PADDING_VALUE[size]};
   background-color: ${({ disabled, isFilled }) => {
     if (disabled) {
       return 'var(--gray-100)';
@@ -19,8 +19,13 @@ const SqaureButton = styled.button<SqaureButtonProps>`
       return isFilled ? 'var(--purple-900)' : 'var(--white)';
     }
   }};
-  border: ${({ isFilled }) =>
-    isFilled ? 'none' : '1px solid var(--purple-900)'};
+  border: ${({ disabled, isFilled }) => {
+    if (disabled) {
+      return 'none';
+    } else {
+      return isFilled ? 'none' : '1px solid var(--purple-900)';
+    }
+  }};
   border-radius: 6px;
   font-family: 'LINESeed';
   font-weight: 700;
