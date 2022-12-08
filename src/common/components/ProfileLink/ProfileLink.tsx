@@ -5,7 +5,7 @@ export interface ProfileProps {
   width: string | number;
   height: string | number;
   imgFileName: string;
-  userid?: string;
+  userid: string;
 }
 
 const CircleWrapper = styled.div`
@@ -19,18 +19,22 @@ const CircleWrapper = styled.div`
   }
 `;
 
-const ProfileLink = ({ width, height, imgFileName, userid }: ProfileProps) => {
+const ProfileLink = ({
+  width,
+  height,
+  imgFileName,
+  userid,
+  ...props
+}: ProfileProps) => {
   return (
-    <CircleWrapper>
+    <CircleWrapper {...props}>
       <Link
         to={`/mycollections/${userid}`}
-        aria-label={`${
-          userid === undefined ? '로그인이 필요합니다.' : '내 콜렉션으로 이동'
-        }`}
+        aria-label={`${'내 콜렉션으로 이동'}`}
       >
         <img
           src={`/assets/${imgFileName}`}
-          alt="Thirty Three Third"
+          alt="프로필 이미지"
           width={width}
           height={height}
         />
@@ -42,7 +46,7 @@ const ProfileLink = ({ width, height, imgFileName, userid }: ProfileProps) => {
 ProfileLink.defaultProps = {
   width: 40,
   height: 40,
-  imgFileName: 'guest.svg',
+  imgFileName: 'defaultUser.svg',
 };
 
 export default ProfileLink;

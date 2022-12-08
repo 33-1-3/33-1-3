@@ -18,10 +18,9 @@ User.args = {
   height: 40,
 };
 
-export const Guest = Template.bind({});
-Guest.args = {
-  imgFileName: 'guest.svg',
-  userid: undefined,
+export const Default = Template.bind({});
+Default.args = {
+  userid: 'ulgoon',
   width: 40,
   height: 40,
 };
