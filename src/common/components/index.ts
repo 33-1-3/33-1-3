@@ -5,6 +5,7 @@ import SquareButton from './SquareButton/SquareButton';
 import LogoLink from './LogoLink/LogoLink';
 import MoveFormLink from './MoveFormLink/MoveFormLink';
 import LPCover from './LPCover/LPCover';
+import ProfileLink from './ProfileLink/ProfileLink';
 
 export {
   IconButton,
@@ -14,4 +15,5 @@ export {
   LogoLink,
   MoveFormLink,
   LPCover,
+  ProfileLink,
 };
