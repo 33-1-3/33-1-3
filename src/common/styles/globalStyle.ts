@@ -29,7 +29,7 @@ export const GlobalStyle = createGlobalStyle/*css*/ `
     --text-bs: 16px;
     --text-md: 20px;
     --text-lg: 28px;
-    --text-xl: 32px;
+    --text-xl: 36px;
     --text-xxl: 44px;
     --text-xxxl: 56px;
 
@@ -70,5 +70,17 @@ export const GlobalStyle = createGlobalStyle/*css*/ `
   body {
     font-family: 'LINESeed';
     font-weight: 700;
+  }
+  .srOnly {
+    overflow: hidden;
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
   }
 `;
