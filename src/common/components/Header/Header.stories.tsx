@@ -13,22 +13,12 @@ export default {
 
 const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
 
-export const Ver1 = Template.bind({});
-Ver1.args = {
+export const Guest = Template.bind({});
+Guest.args = {
   isLogin: false,
 };
 
-export const Ver2 = Template.bind({});
-Ver2.args = {
-  isLogin: true,
-};
-
-export const Ver3 = Template.bind({});
-Ver3.args = {
-  isLogin: false,
-};
-
-export const Ver4 = Template.bind({});
-Ver4.args = {
+export const Member = Template.bind({});
+Member.args = {
   isLogin: true,
 };

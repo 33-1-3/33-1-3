@@ -9,6 +9,7 @@ import SearchResultText from './SearchResultText/SearchResultText';
 import SignInAndUpForm from './SignInAndUpForm/SignInAndUpForm';
 import SignInAndUpInput from './SignInAndUpInput/SignInAndUpInput';
 import SquareButton from './SquareButton/SquareButton';
+import SquareLink from './SquareLink/SquareLink';
 import TextInput from './TextInput/TextInput';
 import TitleInfo from './TitleInfo/TitleInfo';
 import ImageLink from './ImageLink/ImageLink';
@@ -26,6 +27,7 @@ export {
   SignInAndUpForm,
   SignInAndUpInput,
   SquareButton,
+  SquareLink,
   TextInput,
   TitleInfo,
   ImageLink,

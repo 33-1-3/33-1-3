@@ -1,8 +1,10 @@
 import styled from 'styled-components';
-import LogoLink from '@/common/components/LogoLink/LogoLink';
-import SearchInput from '@/common/components/SearchInput/SearchInput';
-import SquareLink from '@/common/components/SquareLink/SquareLink';
-import ProfileLink from '@/common/components/ProfileLink/ProfileLink';
+import {
+  LogoLink,
+  SearchInput,
+  SquareLink,
+  ProfileLink,
+} from '@/common/components';
 
 export interface HeaderProps {
   isLogin: boolean;
