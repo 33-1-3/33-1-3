@@ -10,8 +10,8 @@ function SearchResultText({ resultCount, ...props }: SearchResultTextProps) {
 
   return (
     <SearchResultTextWrapper {...props}>
-      <KeyWord {...props}>{`"${searchParams.get('query')}"`}</KeyWord>
-      <ResultInfo {...props}>{`검색 결과 ${resultCount}건`}</ResultInfo>
+      <KeyWord>{`"${searchParams.get('query')}"`}</KeyWord>
+      <ResultInfo>{`검색 결과 ${resultCount}건`}</ResultInfo>
     </SearchResultTextWrapper>
   );
 }

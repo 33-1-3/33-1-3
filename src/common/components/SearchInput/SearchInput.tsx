@@ -50,9 +50,8 @@ function SearchInput({ placeholder, page, size, ...props }: SearchInputProps) {
         placeholder={placeholder}
         aria-label={`${page} 검색 창`}
         formSize={size}
-        {...props}
       />
-      <SearchButton type="submit" formSize={size} {...props}></SearchButton>
+      <SearchButton type="submit" formSize={size}></SearchButton>
     </InputWrapper>
   );
 }
