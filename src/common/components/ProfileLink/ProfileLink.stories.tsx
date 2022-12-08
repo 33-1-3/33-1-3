@@ -17,10 +17,20 @@ User.args = {
   width: 40,
   height: 40,
 };
+User.parameters = {
+  design: {
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=130%3A344&t=ri42uDzp7Wjgw7vi-4',
+  },
+};
 
 export const Default = Template.bind({});
 Default.args = {
   userid: 'ulgoon',
   width: 40,
   height: 40,
+};
+Default.parameters = {
+  design: {
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=130%3A342&t=ri42uDzp7Wjgw7vi-4',
+  },
 };

@@ -9,6 +9,11 @@ export default {
     count: { control: { type: 'number', min: 0, step: 1 } },
     step: { control: { type: 'range', min: 1, max: 10, step: 1 } },
   },
+  parameters: {
+    design: {
+      url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=181%3A2454&t=ri42uDzp7Wjgw7vi-4',
+    },
+  },
 } as ComponentMeta<typeof Bookshelf>;
 
 const Template: ComponentStory<typeof Bookshelf> = (args) => (
