@@ -6,10 +6,10 @@ module.exports = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
+    '@storybook/addon-actions',
     '@storybook/addon-interactions',
     'storybook-addon-designs',
     '@storybook/addon-a11y',
-    '@storybook/addon-actions',
     'storybook-addon-react-router-v6',
   ],
   framework: '@storybook/react',
