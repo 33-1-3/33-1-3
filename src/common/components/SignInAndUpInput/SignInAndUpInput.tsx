@@ -79,11 +79,13 @@ const SignInAndUpInput = ({
   ...props
 }: SignInAndUpInputProps) => {
   const newId = uuid();
-  const { inputType, placeholder, errorMsg } = optionInfo[option];
+  const { inputType, label, placeholder, errorMsg } = optionInfo[option];
   return (
     <Wrapper>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-      <label className="srOnly" htmlFor={newId}></label>
+      <label className="srOnly" htmlFor={newId}>
+        {label}
+      </label>
       <Input
         option={option}
         type={inputType}
