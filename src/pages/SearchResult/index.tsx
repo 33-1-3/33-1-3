@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // import Discogs from 'disconnet';
 
@@ -28,13 +28,12 @@ export default function SearchResult() {
   }, []);
 
   const getResults = () => {
-    return result.map((re, i) => {
-      console.log(re);
-
+    return result.map((re: { title: string }, i) => {
+      //console.log(re);
       return (
         <Link
           key={i}
-          to={getItemPath({ i })}
+          to={getItemPath(i)}
           style={{
             display: 'block',
             width: '10rem',
@@ -49,18 +48,18 @@ export default function SearchResult() {
     });
   };
 
-  function getItemPath(isbn: string) {
+  function getItemPath(isbn: number) {
     return `/item/${isbn}`;
   }
 
-  function selectSort(e) {
+  function selectSort(e: React.ChangeEvent<HTMLSelectElement>) {
     const value = e.target.options[e.target.selectedIndex].value;
     const p = new URLSearchParams(window.location.search);
     p.set('sort', value);
     setSearchParams(p);
   }
 
-  function selectView(e) {
+  function selectView(e: React.ChangeEvent<HTMLSelectElement>) {
     const value = e.target.options[e.target.selectedIndex].value;
     const p = new URLSearchParams(window.location.search);
     p.set('view', value);
@@ -101,66 +100,6 @@ export default function SearchResult() {
         }}
       >
         {getResults()}
-        {/* <Link
-          to={getItemPath(1)}
-          style={{
-            display: 'block',
-            width: '10rem',
-            height: '10rem',
-            lineHeight: '5rem',
-            backgroundColor: 'lightgray',
-          }}
-        >
-          isbn:1인 음반
-        </Link>
-        <Link
-          to={getItemPath(2)}
-          style={{
-            display: 'block',
-            width: '10rem',
-            height: '10rem',
-            lineHeight: '5rem',
-            backgroundColor: 'lightgray',
-          }}
-        >
-          isbn:2인 음반
-        </Link>
-        <Link
-          to={getItemPath(3)}
-          style={{
-            display: 'block',
-            width: '10rem',
-            height: '10rem',
-            lineHeight: '5rem',
-            backgroundColor: 'lightgray',
-          }}
-        >
-          isbn:3인 음반
-        </Link>
-        <Link
-          to={getItemPath(4)}
-          style={{
-            display: 'block',
-            width: '10rem',
-            height: '10rem',
-            lineHeight: '5rem',
-            backgroundColor: 'lightgray',
-          }}
-        >
-          isbn:4인 음반
-        </Link>
-        <Link
-          to={getItemPath(5)}
-          style={{
-            display: 'block',
-            width: '10rem',
-            height: '10rem',
-            lineHeight: '5rem',
-            backgroundColor: 'lightgray',
-          }}
-        >
-          isbn:5인 음반
-        </Link> */}
       </div>
     </>
   );

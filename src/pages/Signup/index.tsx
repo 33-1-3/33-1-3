@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function Signup() {
   return (
@@ -6,11 +6,11 @@ export default function Signup() {
       <h1>Signup</h1>
       <div
         style={{
-          width: "20rem",
-          height: "25rem",
-          margin: "2rem auto",
-          lineHeight: "25rem",
-          backgroundColor: "lightGray",
+          width: '20rem',
+          height: '25rem',
+          margin: '2rem auto',
+          lineHeight: '25rem',
+          backgroundColor: 'lightGray',
         }}
       >
         Signup Form
