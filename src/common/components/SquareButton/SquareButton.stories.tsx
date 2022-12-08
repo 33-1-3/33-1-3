@@ -7,6 +7,7 @@ export default {
     fontSize: 20,
     size: 'small',
     isFilled: true,
+    disabled: false,
   },
   argTypes: {
     size: {
@@ -73,5 +74,16 @@ Edit.args = {
 Edit.parameters = {
   design: {
     url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=378%3A1038&t=JiHlUULV7Tp6Y1lx-4',
+  },
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  disabled: true,
+  children: '비활성화',
+};
+Disabled.parameters = {
+  design: {
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=108%3A57&t=ri42uDzp7Wjgw7vi-4',
   },
 };
