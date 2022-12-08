@@ -30,10 +30,8 @@ const StyledLink = styled(Link)`
 function MoveFormLink({ moveTarget, ...props }: MoveFormLinkProps) {
   return (
     <LinkWrapper {...props}>
-      <span {...props}>{INFO_MESSAGES[moveTarget]}</span>
-      <StyledLink to={`/${moveTarget}`} {...props}>
-        {LINK_MESSAGES[moveTarget]}
-      </StyledLink>
+      <span>{INFO_MESSAGES[moveTarget]}</span>
+      <StyledLink to={`/${moveTarget}`}>{LINK_MESSAGES[moveTarget]}</StyledLink>
     </LinkWrapper>
   );
 }
