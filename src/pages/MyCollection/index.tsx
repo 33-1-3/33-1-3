@@ -1,3 +1,4 @@
+import { LPCover } from '@/common/components';
 import React from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 
@@ -70,69 +71,27 @@ export default function MyCollection() {
           display: 'flex',
           justifyContent: 'center',
           margin: '1rem auto',
-          gap: '2rem',
+          gap: '5rem',
         }}
       >
-        <Link
-          to={getMyitemPath(1, userid)}
-          style={{
-            display: 'block',
-            width: '10rem',
-            height: '10rem',
-            lineHeight: '5rem',
-            backgroundColor: 'lightgray',
-          }}
-        >
-          isbn:1인 음반
-        </Link>
-        <Link
-          to={getMyitemPath(2, userid)}
-          style={{
-            display: 'block',
-            width: '10rem',
-            height: '10rem',
-            lineHeight: '5rem',
-            backgroundColor: 'lightgray',
-          }}
-        >
-          isbn:2인 음반
-        </Link>
-        <Link
-          to={getMyitemPath(3, userid)}
-          style={{
-            display: 'block',
-            width: '10rem',
-            height: '10rem',
-            lineHeight: '5rem',
-            backgroundColor: 'lightgray',
-          }}
-        >
-          isbn:3인 음반
-        </Link>
-        <Link
-          to={getMyitemPath(4, userid)}
-          style={{
-            display: 'block',
-            width: '10rem',
-            height: '10rem',
-            lineHeight: '5rem',
-            backgroundColor: 'lightgray',
-          }}
-        >
-          isbn:4인 음반
-        </Link>
-        <Link
-          to={getMyitemPath(5, userid)}
-          style={{
-            display: 'block',
-            width: '10rem',
-            height: '10rem',
-            lineHeight: '5rem',
-            backgroundColor: 'lightgray',
-          }}
-        >
-          isbn:5인 음반
-        </Link>
+        <LPCover
+          imgURL="https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg"
+          title="꽃갈피"
+          size="small"
+          hoverInteraction={true}
+        />
+        <LPCover
+          imgURL=""
+          title="꽃갈피"
+          size="small"
+          hoverInteraction={true}
+        />
+        <LPCover
+          imgURL="invalidString"
+          title="꽃갈피"
+          size="small"
+          hoverInteraction={true}
+        />
       </div>
     </>
   );
