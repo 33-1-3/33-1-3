@@ -3,5 +3,15 @@ import Link from './Link/Link';
 import SearchInput from './SearchInput/SearchInput';
 import SquareButton from './SquareButton/SquareButton';
 import LogoLink from './LogoLink/LogoLink';
+import MoveFormLink from './MoveFormLink/MoveFormLink';
+import LPCover from './LPCover/LPCover';
 
-export { IconButton, Link, SearchInput, SquareButton, LogoLink };
+export {
+  IconButton,
+  Link,
+  SearchInput,
+  SquareButton,
+  LogoLink,
+  MoveFormLink,
+  LPCover,
+};
