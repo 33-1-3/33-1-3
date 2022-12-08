@@ -1,4 +1,3 @@
-import { GlobalStyle } from '../../styles/globalStyle';
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import SearchInput from './SearchInput';
 
@@ -8,25 +7,18 @@ export default {
   args: {
     placeholder: '검색어를 입력하세요.',
     page: '전체',
-    width: 516,
+    size: 'large',
   },
   argTypes: {
     page: {
       options: ['전체', '리스트'],
       control: { type: 'radio' },
     },
-    width: {
-      control: { type: 'range', min: 200, max: 1000, step: 1 },
+    size: {
+      options: ['small', 'large'],
+      control: { type: 'radio' },
     },
   },
-  decorators: [
-    (Story) => (
-      <>
-        <GlobalStyle />
-        <Story />
-      </>
-    ),
-  ],
 } as ComponentMeta<typeof SearchInput>;
 
 const Template: ComponentStory<typeof SearchInput> = (args) => (
@@ -35,18 +27,27 @@ const Template: ComponentStory<typeof SearchInput> = (args) => (
 
 export const Header = Template.bind({});
 Header.args = {
-  width: 240,
+  size: 'small',
+};
+Header.parameters = {
+  design: {
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=130%3A224&t=JiHlUULV7Tp6Y1lx-4',
+  },
 };
 
 export const Main = Template.bind({});
+Main.parameters = {
+  design: {
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=132%3A81&t=JiHlUULV7Tp6Y1lx-4',
+  },
+};
 
 export const Collection = Template.bind({});
 Collection.args = {
   page: '리스트',
 };
-
-export const Custom = Template.bind({});
-Custom.args = {
-  placeholder: '찾으시는 LP가 있나요?',
-  width: 360,
+Collection.parameters = {
+  design: {
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=132%3A81&t=JiHlUULV7Tp6Y1lx-4',
+  },
 };
