@@ -1,12 +1,14 @@
 import IconButton from './IconButton/IconButton';
-import Link from './Link/Link';
+import Link from './SquareLink/SquareLink';
 import SearchInput from './SearchInput/SearchInput';
 import SquareButton from './SquareButton/SquareButton';
 import LogoLink from './LogoLink/LogoLink';
-import MoveFormLink from './MoveFormLink/MoveFormLink';
+import MoveLink from './MoveLink/MoveLink';
 import LPCover from './LPCover/LPCover';
 import ProfileLink from './ProfileLink/ProfileLink';
 import TitleInfo from './TitleInfo/TitleInfo';
+import ImageLink from './ImageLink/ImageLink';
+import Header from './Header/Header';
 
 export {
   IconButton,
@@ -14,8 +16,10 @@ export {
   SearchInput,
   SquareButton,
   LogoLink,
-  MoveFormLink,
+  MoveLink,
   LPCover,
   ProfileLink,
   TitleInfo,
+  ImageLink,
+  Header,
 };
