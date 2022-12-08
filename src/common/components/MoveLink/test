@@ -1,0 +1,101 @@
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+const INFO_MESSAGES = {
+  signin: '이미 회원이라면?',
+  signup: '아직 회원이 아니라면?',
+  github: '질문이 있으신가요?',
+};
+const LINK_MESSAGES = {
+  signin: '로그인!',
+  signup: '가입하기!',
+  github: '문의 사항 남기기',
+};
+
+export interface MoveLinkProps {
+  color: string;
+  fontSize: string;
+  moveTarget: 'signin' | 'signup' | 'github';
+}
+
+export interface LinkWrapperProps {
+  color: string;
+  fontSize: string;
+}
+
+const LinkWrapper = styled.div<LinkWrapperProps>`
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 6px;
+  color: ${({ color }) => color};
+  font-size: ${({ fontSize }) => fontSize};
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: underline;
+  text-underline-position: under;
+`;
+
+const MoveLink = ({ color, fontSize, moveTarget, ...props }: MoveLinkProps) => {
+  return (
+    <LinkWrapper color={color} fontSize={fontSize} {...props}>
+      <span>{INFO_MESSAGES[moveTarget]}</span>
+      <StyledLink to={`/${moveTarget}`}>{LINK_MESSAGES[moveTarget]}</StyledLink>
+    </LinkWrapper>
+  );
+};
+
+MoveLink.defaultProps = {
+  color: 'var(--purple-900)',
+  fontSize: 'var(--text-sm)',
+};
+
+export default MoveLink;
+
+
+
+
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import MoveLink from './MoveLink';
+
+export default {
+  title: 'common/components/MoveLink',
+  component: MoveLink,
+  argTypes: {
+    moveTarget: {
+      options: ['signin', 'signup', 'github'],
+      control: { type: 'radio' },
+    },
+  },
+} as ComponentMeta<typeof MoveLink>;
+
+const Template: ComponentStory<typeof MoveLink> = (args) => (
+  <MoveLink {...args} />
+);
+
+export const MoveSignIn = Template.bind({});
+MoveSignIn.args = {
+  moveTarget: 'signin',
+};
+MoveSignIn.parameters = {
+  design: {
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=133%3A194&t=JiHlUULV7Tp6Y1lx-4',
+  },
+};
+
+export const MoveSignUp = Template.bind({});
+MoveSignUp.args = {
+  moveTarget: 'signup',
+};
+MoveSignUp.parameters = {
+  design: {
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=133%3A192&t=JiHlUULV7Tp6Y1lx-4',
+  },
+};
+
+export const MoveGithub = Template.bind({});
+MoveGithub.args = {
+  color: 'var(--white)',
+  fontSize: 'var(--text-xs)',
+  moveTarget: 'github',
+};
