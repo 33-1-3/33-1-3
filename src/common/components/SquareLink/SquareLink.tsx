@@ -1,42 +1,44 @@
-import PropTypes from 'prop-types';
 import { GlobalStyle } from '../../styles/globalStyle';
 import styled from 'styled-components';
 
-export interface LinkProps {
+export interface SquareLinkProps {
   link: string;
-  width: string;
-  height: string;
+  width: string | number;
+  height: string | number;
   children: string;
   backgroundColor: string;
   color: string;
-  border: string;
+  borderColor: string;
   transition: boolean;
 }
 
-const StyledLink = styled('a')<{
+export interface StyledLinkProps {
   backgroundColor: string;
-  border: string;
+  borderColor: string;
   transition: boolean;
-}>`
+  color: string;
+}
+
+export const StyledLink = styled.a<StyledLinkProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => props.backgroundColor};
-  color: ${(props) => props.color};
-  border: 1px solid ${(props) => props.border};
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  color: ${({ color }) => color};
+  border: 1px solid ${({ borderColor }) => borderColor};
   border-radius: 0.3125rem;
   text-decoration: none;
   font-weight: 700;
 
-  ${(props) => {
-    return props.transition
-      ? `
+  ${({ transition, backgroundColor, color }) => {
+    return transition
+      ? /*css*/ `
     &:hover,
     &:focus {
     transition: 0.3s ease-out;
-    color: ${props.backgroundColor};
-    background-color: ${props.color};
+    color: ${backgroundColor};
+    background-color: ${color};
   }`
       : null;
   }}
@@ -48,16 +50,16 @@ const StyledLink = styled('a')<{
   }
 `;
 
-const Link = ({
+const SquareLink = ({
   link,
   width,
   height,
   children,
   backgroundColor,
   color,
-  border,
+  borderColor,
   transition,
-}: LinkProps) => {
+}: SquareLinkProps) => {
   return (
     <>
       <GlobalStyle />
@@ -66,7 +68,7 @@ const Link = ({
         style={{ width, height }}
         backgroundColor={backgroundColor}
         color={color}
-        border={border}
+        borderColor={borderColor}
         transition={transition}
       >
         {children}
@@ -75,22 +77,11 @@ const Link = ({
   );
 };
 
-Link.propTypes = {
-  link: PropTypes.string.isRequired,
-  width: PropTypes.string.isRequired,
-  height: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
-  backgroundColor: PropTypes.string,
-  color: PropTypes.string,
-  border: PropTypes.string,
-  transition: PropTypes.bool,
-};
-
-Link.defaultProps = {
+SquareLink.defaultProps = {
   backgroundColor: 'var(--purple-900)',
   color: 'var(--white)',
-  border: 'var(--purple-900)',
+  borderColor: 'var(--purple-900)',
   transition: false,
 };
 
-export default Link;
+export default SquareLink;

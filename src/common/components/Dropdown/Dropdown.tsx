@@ -12,6 +12,7 @@ export interface DropdownProps {
   content: { key: string; value: string }[];
   backgroundColor: string;
   color: string;
+  label: string;
 }
 
 const ListContainer = styled(ListBox)`
@@ -25,6 +26,7 @@ const Dropdown = ({
   content,
   backgroundColor,
   color,
+  label,
   ...props
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -32,10 +34,12 @@ const Dropdown = ({
   const [searchParams, setSearchParams] = useSearchParams();
 
   const select = (e: React.FormEvent<HTMLFormElement>): void => {
-    if (!(e.target as HTMLTextAreaElement).getAttribute) return;
+    const target = e.target as HTMLTextAreaElement;
 
-    const value = (e.target as HTMLTextAreaElement).getAttribute('value');
-    const content = (e.target as HTMLTextAreaElement).textContent;
+    if (!target.getAttribute) return;
+
+    const value = target.getAttribute('value');
+    const content = target.textContent;
 
     const param = new URLSearchParams(window.location.search);
     if (value !== null) {
@@ -53,8 +57,9 @@ const Dropdown = ({
 
   return (
     <>
-      {/* sr-only 추가되면 숨겨질 라벨입니다 */}
-      <label htmlFor="dropdown">test label</label>
+      <label className="srOnly" htmlFor="dropdown">
+        {label}
+      </label>
       <div className="combo">
         <ComboInput
           onClick={handleVisible}
@@ -73,13 +78,11 @@ const Dropdown = ({
           height={height}
           color={color}
           backgroundColor={backgroundColor}
-          content={content
-            .slice(1)
-            .map((ele: { key: string; value: string }, index) => (
-              <Option key={index} value={ele.key}>
-                {ele.value}
-              </Option>
-            ))}
+          content={content.slice(1).map(({ key, value }, index) => (
+            <Option key={index} value={key}>
+              {value}
+            </Option>
+          ))}
           {...props}
         />
       </div>

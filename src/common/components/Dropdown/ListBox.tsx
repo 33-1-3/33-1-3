@@ -18,15 +18,15 @@ export interface ListProps {
 }
 
 const List = styled.div<ListProps>`
-  display: ${(props) => (props.isOpen ? 'flex' : 'none')};
+  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
   border-radius: 4px;
-  background-color: ${(props) => props.backgroundColor};
-  color: ${(props) => props.color};
-  border: 1px solid ${(props) => props.color};
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  color: ${({ color }) => color};
+  border: 1px solid ${({ color }) => color};
   font-weight: 400;
 `;
 
