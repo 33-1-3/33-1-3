@@ -1,9 +1,46 @@
 import styled from 'styled-components';
 
-const heightPx = {
+const HEIGHT_PX = {
   small: 150,
   large: 394,
 };
+
+const Wrapper = styled.div<{ height: number }>`
+  position: relative;
+  width: max-content;
+  height: max-content;
+
+  &:hover .vinyl {
+    left: ${({ height }) => height / 3}px;
+  }
+`;
+
+const Cover = styled.img<{ height: number }>`
+  box-shadow: var(--shadow-Item);
+
+  &::before {
+    content: attr(alt);
+    display: block;
+    position: absolute;
+    width: ${({ height }) => height}px;
+    height: ${({ height }) => height}px;
+    text-align: center;
+    line-height: ${({ height }) => height}px;
+    background-color: var(--gray-100);
+    box-shadow: var(--shadow-Item);
+  }
+`;
+
+const Vinyl = styled.img`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: all 0.3s ease;
+  z-index: -100;
+  filter: drop-shadow(var(--shadow-Item));
+`;
 
 export interface LPCoverProps {
   // 음반 커버 이미지 경로
@@ -24,47 +61,10 @@ const LPCover = ({
   hoverInteraction,
   ...props
 }: LPCoverProps) => {
-  const height = heightPx[size];
-
-  const Wrapper = styled.div`
-    position: relative;
-    width: max-content;
-    height: max-content;
-
-    &:hover .vinyl {
-      left: ${height / 3}px;
-    }
-  `;
-
-  const Cover = styled.img`
-    box-shadow: var(--shadow-Item);
-
-    &::before {
-      content: attr(alt);
-      display: block;
-      position: absolute;
-      width: ${height}px;
-      height: ${height}px;
-      text-align: center;
-      line-height: ${height}px;
-      background-color: var(--gray-100);
-      box-shadow: var(--shadow-Item);
-    }
-  `;
-
-  const Vinyl = styled.img`
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transition: all 0.3s ease;
-    z-index: -100;
-    filter: drop-shadow(var(--shadow-Item));
-  `;
+  const height = HEIGHT_PX[size];
 
   return (
-    <Wrapper {...props}>
+    <Wrapper height={height} {...props}>
       <Cover src={imgURL} alt={title} height={height} />
       {hoverInteraction && (
         <Vinyl
