@@ -1,20 +1,22 @@
 import styled, { css } from 'styled-components';
+import { useSearchParams } from 'react-router-dom';
 
 export interface SearchResultTextProps {
-  keyword: string;
   resultCount: number;
 }
 
-function SearchResultText({ keyword, resultCount }: SearchResultTextProps) {
+function SearchResultText({ resultCount, ...props }: SearchResultTextProps) {
+  const [searchParams] = useSearchParams();
+
   return (
-    <SearchResultTextWrapper>
-      <KeyWord>{`"${keyword}"`}</KeyWord>
-      <ResultInfo>{`검색 결과 ${resultCount}건`}</ResultInfo>
+    <SearchResultTextWrapper {...props}>
+      <KeyWord {...props}>{`"${searchParams.get('query')}"`}</KeyWord>
+      <ResultInfo {...props}>{`검색 결과 ${resultCount}건`}</ResultInfo>
     </SearchResultTextWrapper>
   );
 }
 
-SearchResultText.defaultProps = { keyword: '검색어', resultCount: 0 };
+SearchResultText.defaultProps = { resultCount: 0 };
 
 const fontStyle = css`
   font-weight: 700;

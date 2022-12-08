@@ -42,16 +42,17 @@ export interface formProps {
   formSize: 'small' | 'large';
 }
 
-function SearchInput({ placeholder, page, size }: SearchInputProps) {
+function SearchInput({ placeholder, page, size, ...props }: SearchInputProps) {
   return (
-    <InputWrapper>
+    <InputWrapper {...props}>
       <Input
         type="search"
         placeholder={placeholder}
         aria-label={`${page} 검색 창`}
         formSize={size}
+        {...props}
       />
-      <SearchButton type="submit" formSize={size}></SearchButton>
+      <SearchButton type="submit" formSize={size} {...props}></SearchButton>
     </InputWrapper>
   );
 }
