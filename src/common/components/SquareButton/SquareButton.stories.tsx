@@ -7,7 +7,6 @@ export default {
     fontSize: 20,
     size: 'small',
     isFilled: true,
-    disabled: false,
   },
   argTypes: {
     size: {
@@ -79,6 +78,7 @@ Edit.parameters = {
 
 export const Disabled = Template.bind({});
 Disabled.args = {
+  isFilled: false,
   disabled: true,
   children: '비활성화',
 };
