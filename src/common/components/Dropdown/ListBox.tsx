@@ -69,7 +69,6 @@ const ListBox = ({
       style={{
         width,
         height: +height * content.length,
-        transition: 'height 2s transform 2s',
       }}
       color={color}
       height={height}

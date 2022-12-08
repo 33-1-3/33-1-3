@@ -66,7 +66,6 @@ const ComboInput = ({
       onClick={onClick}
       role="combobox"
       id="dropdown"
-      aria-labelledby="dropdown"
       tabIndex={0}
       style={{ width, height }}
       color={color}

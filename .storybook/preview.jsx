@@ -25,11 +25,9 @@ export const decorators = [
   withRouter,
   (Story) => (
     <>
-      <Router>
-        <GlobalStyle />
-        <NormalizeStyle />
-        <Story />
-      </Router>
+      <GlobalStyle />
+      <NormalizeStyle />
+      <Story />
     </>
   ),
 ];
