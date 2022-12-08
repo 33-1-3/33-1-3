@@ -23,9 +23,9 @@ const Input = styled.div<InputProps>`
   position: relative;
   padding-right: 24px;
   border-radius: 4px;
-  background-color: ${(props) => props.backgroundColor};
-  color: ${(props) => props.color};
-  border: 1px solid ${(props) => props.color};
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  color: ${({ color }) => color};
+  border: 1px solid ${({ color }) => color};
   font-weight: 400;
 
   &:hover {
@@ -38,10 +38,10 @@ const Input = styled.div<InputProps>`
     width: 100%;
     height: 100%;
     right: 0;
-    background: no-repeat url('/assets/allow.svg');
+    background: no-repeat url('/assets/arrow.svg');
     background-position: center right 12px;
-    ${(props) => {
-      return props.isOpen
+    ${({ isOpen }) => {
+      return isOpen
         ? `
         transition: 0.3s;
         transform: scaleY(-1);
