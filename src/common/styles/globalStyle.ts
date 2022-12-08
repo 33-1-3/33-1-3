@@ -29,7 +29,7 @@ export const GlobalStyle = createGlobalStyle/*css*/ `
     --text-bs: 16px;
     --text-md: 20px;
     --text-lg: 28px;
-    --text-xl: 32px;
+    --text-xl: 36px;
     --text-xxl: 44px;
     --text-xxxl: 56px;
 
