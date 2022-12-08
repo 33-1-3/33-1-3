@@ -3,7 +3,6 @@ import { ReactComponent as PlusIcon } from '@/assets/plus-circle.svg';
 
 export interface AddCollectionButtonProps {
   size: 'small' | 'large';
-  height: string;
   color: string;
   backgroundColor: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
