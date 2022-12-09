@@ -9,7 +9,7 @@ export interface TracklistType {
 }
 
 export interface commonProps {
-  infoName: 'Country' | 'Genre' | 'Label' | 'Style' | 'Year' | 'Tracklist';
+  infoName: 'Country' | 'Genre' | 'Label' | 'Style' | 'Released' | 'Tracklist';
   infoContent: string | Array<string> | Array<TracklistType>;
 }
 
@@ -23,11 +23,10 @@ const checkTracklist = ({ infoName, infoContent }: commonProps) =>
 function DetailInfo({ infoName, infoContent, isValid }: DetailInfoProps) {
   const isTracklist = checkTracklist({ infoName, infoContent });
 
-  const infoString = isTracklist ? (
-    <InfoContent>{(infoContent as Array<string>).join(', ')}</InfoContent>
-  ) : (
-    infoContent
-  );
+  const infoString =
+    typeof infoContent === 'string' && !isTracklist
+      ? infoContent
+      : (infoContent as Array<string>).join(', ');
 
   return isValid ? (
     <>
@@ -45,7 +44,7 @@ function DetailInfo({ infoName, infoContent, isValid }: DetailInfoProps) {
           </Tracklist>
         </InfoContent>
       ) : (
-        <InfoContent>{infoString as JSX.Element}</InfoContent>
+        <InfoContent>{infoString}</InfoContent>
       )}
     </>
   ) : null;
@@ -63,12 +62,14 @@ const InfoName = styled.dt`
 
 const InfoContent = styled.dd`
   font-weight: 400;
+  word-break: break-all;
   ${commonInfoStyle};
 `;
 
 const Tracklist = styled.div`
   display: grid;
-  grid-template-columns: 51px 180px 36px;
+  grid-template-columns: 23px 152px 36px;
+  column-gap: var(--space-xl);
   row-gap: var(--space-bs);
 `;
 
