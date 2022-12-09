@@ -1,5 +1,25 @@
 import styled, { css } from 'styled-components';
 
+export interface ViewProps {
+  view: 'cover' | 'list' | 'detail';
+}
+
+export interface TitleInfoProps extends ViewProps {
+  title: string;
+  artist: string;
+}
+
+function TitleInfo({ title, artist, view }: TitleInfoProps) {
+  return (
+    <TitleInfoWrapper view={view}>
+      <dt className="srOnly">{'앨범 제목'}</dt>
+      <TitleText view={view}>{title}</TitleText>
+      <dt className="srOnly">{'가수 이름'}</dt>
+      <ArtistText view={view}>{artist}</ArtistText>
+    </TitleInfoWrapper>
+  );
+}
+
 const TEXT_WIDTH = {
   cover: '118px',
   list: '587px',
@@ -23,26 +43,6 @@ const GAP_SIZE = {
   list: 'var(--space-sm)',
   detail: 'var(--space-lg)',
 };
-
-export interface ViewProps {
-  view: 'cover' | 'list' | 'detail';
-}
-
-export interface TitleInfoProps extends ViewProps {
-  title: string;
-  artist: string;
-}
-
-function TitleInfo({ title, artist, view }: TitleInfoProps) {
-  return (
-    <TitleInfoWrapper view={view}>
-      <dt className="srOnly">{'앨범 제목'}</dt>
-      <TitleText view={view}>{title}</TitleText>
-      <dt className="srOnly">{'가수 이름'}</dt>
-      <ArtistText view={view}>{artist}</ArtistText>
-    </TitleInfoWrapper>
-  );
-}
 
 const textMixin = css<ViewProps>`
   width: ${({ view }) => TEXT_WIDTH[view]};
