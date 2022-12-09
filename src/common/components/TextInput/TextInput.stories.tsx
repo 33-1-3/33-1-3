@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import TextInput from './TextInput';
 
 export default {
-  title: 'pages/MyCollection/TextInput',
+  title: 'common/components/TextInput',
   component: TextInput,
   parameters: {
     design: {
@@ -23,8 +23,20 @@ CollectionNameInput.args = {
   label: 'Collection Name',
   placeholder: '생성할 콜렉션의 이름을 입력해주세요.',
   required: true,
-  validationTester: /^.{2,}$/,
-  errorMsg: '최소 두 글자 이상 입력해주세요.',
+  validationTester: /^.{1,}$/,
+  errorMsg: '최소 한 글자 이상 입력해주세요.',
+};
+
+export const ModalCollectionNameInput = Template.bind({});
+ModalCollectionNameInput.args = {
+  width: 408,
+  height: 48,
+  color: 'var(--purple-900)',
+  borderColor: 'var(--purple-900)',
+  placeholder: '생성할 콜렉션의 이름을 입력해주세요.',
+  required: true,
+  validationTester: /^.{1,}$/,
+  errorMsg: '최소 한 글자 이상 입력해주세요.',
 };
 
 export const EmailInput = Template.bind({});
