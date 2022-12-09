@@ -1,4 +1,3 @@
-import uuid from 'react-uuid';
 import TitleInfo from '../TitleInfo/TitleInfo';
 import DetailInfo, { DetailInfoProps } from '../DetailInfo/DetailInfo';
 import IconButton from '../IconButton/IconButton';
@@ -26,8 +25,8 @@ function AlbumInfo({
   view,
   ...props
 }: AlbumInfoProps) {
-  const iconSize = view === 'cover' ? 16 : 32;
-  const iconType = page === 'all' ? 'plus' : 'minus';
+  const buttonSize = view === 'cover' ? 16 : 32;
+  const buttonType = page === 'all' ? 'plus' : 'minus';
 
   const listInfo = detailInfo.filter(
     ({ infoName }) => infoName === 'Released' || infoName === 'Genre'
@@ -43,41 +42,33 @@ function AlbumInfo({
         />
         {view === 'list' && (
           <ListInfoWrapper>
-            {listInfo.map(({ infoName, infoContent, isValid }) => {
-              const key = uuid();
-
-              return (
-                <DetailInfo
-                  key={key}
-                  infoName={infoName}
-                  infoContent={infoContent}
-                  isValid={isValid}
-                />
-              );
-            })}
+            {listInfo.map(({ infoName, infoContent, isValid }) => (
+              <DetailInfo
+                key={infoName}
+                infoName={infoName}
+                infoContent={infoContent}
+                isValid={isValid}
+              />
+            ))}
           </ListInfoWrapper>
         )}
         <S_IconButton
-          width={iconSize}
-          height={iconSize}
-          iconType={iconType}
+          width={buttonSize}
+          height={buttonSize}
+          iconType={buttonType}
           view={view}
         />
       </AlbumInfoWrapper>
       {view === 'detail' && (
         <DetailInfoWrapper>
-          {detailInfo.map(({ infoName, infoContent, isValid }) => {
-            const key = uuid();
-
-            return (
-              <DetailInfo
-                key={key}
-                infoName={infoName}
-                infoContent={infoContent}
-                isValid={isValid}
-              />
-            );
-          })}
+          {detailInfo.map(({ infoName, infoContent, isValid }) => (
+            <DetailInfo
+              key={infoName}
+              infoName={infoName}
+              infoContent={infoContent}
+              isValid={isValid}
+            />
+          ))}
         </DetailInfoWrapper>
       )}
     </>
@@ -88,7 +79,7 @@ const WRAPPER_STYLE = {
   cover: css`
     width: 150px;
     height: 76px;
-    padding: 20px 8px;
+    padding: var(--space-md) var(--space-xs);
   `,
   list: css`
     width: 618px;
@@ -98,14 +89,14 @@ const WRAPPER_STYLE = {
   detail: css`
     width: 394px;
     height: 160px;
-    padding: 36px 8px;
+    padding: 36px var(--space-xs);
   `,
 };
 
 const BUTTON_STYLE = {
   cover: css`
-    top: 20px;
-    right: 8px;
+    top: var(--space-lg);
+    right: var(--space-xs);
   `,
   list: css`
     top: 60px;
@@ -113,7 +104,7 @@ const BUTTON_STYLE = {
   `,
   detail: css`
     top: 64px;
-    right: 8px;
+    right: var(--space-xs);
   `,
 };
 
@@ -127,7 +118,7 @@ const ListInfoWrapper = styled.dl`
   grid-template-columns: 103px 483px;
   row-gap: var(--space-bs);
   width: 394px;
-  margin-top: 24px;
+  margin-top: var(--space-lg);
 `;
 
 const DetailInfoWrapper = styled.dl`
@@ -135,7 +126,7 @@ const DetailInfoWrapper = styled.dl`
   grid-template-columns: 107px 267px;
   row-gap: var(--space-bs);
   width: 394px;
-  padding: 0px 8px;
+  padding: 0px var(--space-xs);
 `;
 
 const S_IconButton = styled(IconButton)<ResultViewProps>`
