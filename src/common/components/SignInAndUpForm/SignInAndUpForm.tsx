@@ -43,7 +43,7 @@ const SignInAndUpForm = ({ option, ...props }: SignInAndUpFormProps) => {
     pwdCheck: '',
   });
 
-  const isValid = {
+  const IS_VALID = {
     id: formState.id === '' || validateRgx.id.test(formState.id),
     nickname:
       formState.nickname === '' ||
@@ -52,68 +52,53 @@ const SignInAndUpForm = ({ option, ...props }: SignInAndUpFormProps) => {
     pwdCheck: formState.pwdCheck === '' || formState.pwd === formState.pwdCheck,
   };
 
-  console.log(formState);
-
   return (
     <Form {...props}>
       <InputSet>
         {option === 'signin' && (
           <>
-            <SignInAndUpInput
-              option="id"
-              isValid={isValid.id}
-              setFormState={setFormState}
-            />
-            <SignInAndUpInput
-              option="pwd"
-              isValid={isValid.pwd}
-              setFormState={setFormState}
-            />
+            {(['id', 'pwd'] as Array<keyof formState>).map((option, idx) => (
+              <SignInAndUpInput
+                key={idx}
+                option={option}
+                isValid={IS_VALID[option]}
+                setFormState={setFormState}
+              />
+            ))}
           </>
         )}
         {option === 'signup' && (
           <>
-            <SignInAndUpInput
-              option="id"
-              isValid={isValid.id}
-              setFormState={setFormState}
-            />
-            <SignInAndUpInput
-              option="nickname"
-              isValid={isValid.nickname}
-              setFormState={setFormState}
-            />
-            <SignInAndUpInput
-              option="pwd"
-              isValid={isValid.pwd}
-              setFormState={setFormState}
-            />
-            <SignInAndUpInput
-              option="pwdCheck"
-              isValid={isValid.pwdCheck}
-              setFormState={setFormState}
-            />
+            {(
+              ['id', 'nickname', 'pwd', 'pwdCheck'] as Array<keyof formState>
+            ).map((option, idx) => (
+              <SignInAndUpInput
+                key={idx}
+                option={option}
+                isValid={IS_VALID[option]}
+                setFormState={setFormState}
+              />
+            ))}
           </>
         )}
       </InputSet>
       <SubmitBtn
-        fontSize="20px"
-        isBig={false}
+        fontSize={20}
+        size="small"
         isFilled={true}
         disabled={
           formState.id === '' ||
           formState.nickname === '' ||
           formState.pwd === '' ||
           formState.pwdCheck === '' ||
-          !isValid.id ||
-          !isValid.nickname ||
-          !isValid.pwd ||
-          !isValid.pwdCheck
+          !IS_VALID.id ||
+          !IS_VALID.nickname ||
+          !IS_VALID.pwd ||
+          !IS_VALID.pwdCheck
         }
       >
         {option === 'signin' ? 'Sign In' : 'Sign Up'}
       </SubmitBtn>
-      {/* <MoveFormLink moveTarget={option === 'signin' ? 'signup' : 'signin'} /> */}
     </Form>
   );
 };

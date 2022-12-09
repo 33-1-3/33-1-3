@@ -4,7 +4,7 @@ import uuid from 'react-uuid';
 
 import { formState } from '../SignInAndUpForm/SignInAndUpForm';
 
-const optionInfo = {
+const OPTION_INFO = {
   id: {
     inputType: 'email',
     label: '아이디',
@@ -41,8 +41,6 @@ export interface InputProps {
 
 const Input = styled.input<InputProps>`
   display: block;
-  width: 280px;
-  height: 36px;
   padding-left: 36px;
   padding-right: 10px;
   font-size: 12px;
@@ -79,10 +77,9 @@ const SignInAndUpInput = ({
   ...props
 }: SignInAndUpInputProps) => {
   const newId = uuid();
-  const { inputType, label, placeholder, errorMsg } = optionInfo[option];
+  const { inputType, label, placeholder, errorMsg } = OPTION_INFO[option];
   return (
     <Wrapper>
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label className="srOnly" htmlFor={newId}>
         {label}
       </label>
@@ -92,6 +89,7 @@ const SignInAndUpInput = ({
         id={newId}
         placeholder={placeholder}
         required={true}
+        style={{ width: '280px', height: '36px' }}
         onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
           setFormState((inputState) => ({
             ...inputState,
