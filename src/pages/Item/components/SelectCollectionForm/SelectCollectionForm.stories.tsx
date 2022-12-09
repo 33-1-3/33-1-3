@@ -18,12 +18,12 @@ const Template: ComponentStory<typeof SelectCollectionForm> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  mockCollectionList: [],
+  collectionList: [],
 };
 
 export const List = Template.bind({});
 List.args = {
-  mockCollectionList: [
+  collectionList: [
     { title: '소장 중 💼', isChecked: false },
     { title: '갖고 싶다... 🤤', isChecked: true },
     { title: '❤K-POP❤', isChecked: false },

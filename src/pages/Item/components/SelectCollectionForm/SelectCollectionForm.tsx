@@ -4,7 +4,7 @@ import CollectionCheckbox from '../CollectionCheckbox/CollectionCheckbox';
 import ToggleInputButton from './ToggleInputButton';
 
 export interface FormProps {
-  mockCollectionList: { title: string; isChecked: boolean }[];
+  collectionList: { title: string; isChecked: boolean }[];
 }
 
 const CollectionList = styled.ul`
@@ -16,8 +16,10 @@ const CollectionList = styled.ul`
   }
 `;
 
-const SelectCollectionForm = ({ mockCollectionList }: FormProps) => {
-  const [collectionList, setCollectionList] = useState(mockCollectionList);
+const SelectCollectionForm = ({
+  collectionList: _collectionList,
+}: FormProps) => {
+  const [collectionList, setCollectionList] = useState(_collectionList);
 
   return (
     <>
@@ -38,7 +40,7 @@ const SelectCollectionForm = ({ mockCollectionList }: FormProps) => {
 };
 
 SelectCollectionForm.defaultProps = {
-  mockCollectionList: [],
+  collectionList: [],
 };
 
 export default SelectCollectionForm;

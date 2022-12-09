@@ -1,6 +1,25 @@
 import styled from 'styled-components';
 import uuid from 'react-uuid';
 
+export interface TextInputProps {
+  width: number;
+  height: number;
+  color: string;
+  borderColor: string;
+  label: string;
+  placeholder: string;
+  required: boolean;
+  validationTester: RegExp;
+  errorMsg: string;
+  onKeyUp: React.KeyboardEventHandler<HTMLInputElement>;
+}
+
+export interface InputProps {
+  height: number;
+  color: string;
+  borderColor: string;
+}
+
 const Label = styled.label`
   display: block;
   font-size: 20px;
@@ -9,8 +28,6 @@ const Label = styled.label`
 `;
 
 const Input = styled.input<InputProps>`
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
   padding-left: 10px;
   padding-right: 10px;
   font-size: 12px;
@@ -45,24 +62,6 @@ const validateTest = (
     e.target.value !== '' && !validationTester.test(e.target.value)
   );
 };
-
-export interface TextInputProps {
-  width: number;
-  height: number;
-  color: string;
-  borderColor: string;
-  label: string;
-  placeholder: string;
-  required: boolean;
-  validationTester: RegExp;
-  errorMsg: string;
-  onKeyUp: React.KeyboardEventHandler<HTMLInputElement>;
-}
-
-export interface InputProps {
-  height: number;
-  borderColor: string;
-}
 
 const TextInput = ({
   width,
