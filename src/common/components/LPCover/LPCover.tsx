@@ -1,13 +1,53 @@
 import styled from 'styled-components';
 
-const heightPx = {
+const HEIGHT_PX = {
   small: 150,
   large: 394,
 };
 
+const Wrapper = styled.div<{ heightNum: number }>`
+  position: relative;
+
+  &:hover .vinyl {
+    left: ${({ heightNum }) => heightNum / 3}px;
+  }
+`;
+
+const Cover = styled.img<{ heightNum: number }>`
+  box-shadow: var(--shadow-Item);
+
+  // img가 제대로 불러와지지 않았을 때 보일 가상 요소
+  &::before {
+    content: attr(data-title);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: ${({ heightNum }) => heightNum}px;
+    background-color: var(--gray-100);
+    box-shadow: var(--shadow-Item);
+  }
+`;
+
+const Vinyl = styled.img`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: all 0.3s ease;
+  z-index: -100;
+  // TODO: box-shadow 방식과 shadow 형태가 살짝 다름
+  filter: drop-shadow(var(--shadow-Item));
+`;
+
 export interface LPCoverProps {
   // 음반 커버 이미지 경로
-  imgURL?: string;
+  imgURL: string;
   // 음반 커버 이미지 경로가 올바르지 않을 때 대체 음반 커버 이미지와 함께 표시할 음반 제목
   title: string;
   // 표시할 음반 커버 크기
@@ -24,54 +64,28 @@ const LPCover = ({
   hoverInteraction,
   ...props
 }: LPCoverProps) => {
-  const height = heightPx[size];
-
-  const Wrapper = styled.div`
-    position: relative;
-    width: max-content;
-    height: max-content;
-
-    &:hover .vinyl {
-      left: ${height / 3}px;
-    }
-  `;
-
-  const Cover = styled.img`
-    box-shadow: var(--shadow-Item);
-
-    &::before {
-      content: attr(alt);
-      display: block;
-      position: absolute;
-      width: ${height}px;
-      height: ${height}px;
-      text-align: center;
-      line-height: ${height}px;
-      background-color: var(--gray-100);
-      box-shadow: var(--shadow-Item);
-    }
-  `;
-
-  const Vinyl = styled.img`
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transition: all 0.3s ease;
-    z-index: -100;
-    filter: drop-shadow(var(--shadow-Item));
-  `;
+  const heightNum = HEIGHT_PX[size];
 
   return (
-    <Wrapper {...props}>
-      <Cover src={imgURL} alt={title} height={height} />
+    <Wrapper
+      heightNum={heightNum}
+      style={{ width: `${heightNum}px`, height: `${heightNum}px` }}
+      {...props}
+    >
+      <Cover
+        src={imgURL}
+        alt=""
+        data-title={title}
+        heightNum={heightNum}
+        width={`${heightNum}`}
+        height={`${heightNum}`}
+      />
       {hoverInteraction && (
         <Vinyl
           className="vinyl"
           src="/assets/vinyl.svg"
           alt=""
-          height={height}
+          style={{ width: `${heightNum}px`, height: `${heightNum}px` }}
         />
       )}
     </Wrapper>
@@ -79,6 +93,7 @@ const LPCover = ({
 };
 
 LPCover.defaultProps = {
+  imgUrl: '',
   size: 'small',
   hoverInteraction: true,
 };

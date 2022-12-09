@@ -42,14 +42,6 @@ ImgURLIsEmptyString.args = {
   hoverInteraction: true,
 };
 
-export const ImgURLIsUndefined = Template.bind({});
-ImgURLIsUndefined.args = {
-  imgURL: undefined,
-  title: '꽃갈피',
-  size: 'small',
-  hoverInteraction: true,
-};
-
 export const ImgURLIsInvalid = Template.bind({});
 ImgURLIsInvalid.args = {
   imgURL: 'asdfasdf',
