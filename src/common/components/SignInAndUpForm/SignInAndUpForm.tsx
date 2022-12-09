@@ -87,14 +87,20 @@ const SignInAndUpForm = ({ option, ...props }: SignInAndUpFormProps) => {
         size="small"
         isFilled={true}
         disabled={
-          formState.id === '' ||
-          formState.nickname === '' ||
-          formState.pwd === '' ||
-          formState.pwdCheck === '' ||
-          !IS_VALID.id ||
-          !IS_VALID.nickname ||
-          !IS_VALID.pwd ||
-          !IS_VALID.pwdCheck
+          (option === 'signin' &&
+            (formState.id === '' ||
+              formState.pwd === '' ||
+              !IS_VALID.id ||
+              !IS_VALID.pwd)) ||
+          (option === 'signup' &&
+            (formState.id === '' ||
+              formState.nickname === '' ||
+              formState.pwd === '' ||
+              formState.pwdCheck === '' ||
+              !IS_VALID.id ||
+              !IS_VALID.nickname ||
+              !IS_VALID.pwd ||
+              !IS_VALID.pwdCheck))
         }
       >
         {option === 'signin' ? 'Sign In' : 'Sign Up'}
