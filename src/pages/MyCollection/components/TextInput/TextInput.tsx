@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import uuid from 'react-uuid';
 
 const Label = styled.label`
   display: block;
@@ -7,13 +8,11 @@ const Label = styled.label`
   margin-bottom: 4px;
 `;
 
-const Input = styled.input`
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
+const Input = styled.input<{ height: number }>`
   padding-left: 10px;
   padding-right: 10px;
   font-size: 12px;
-  line-height: ${(props) => props.height}px;
+  line-height: ${({ height }) => height}px;
   border: 1px solid var(--black);
   border-radius: 4px;
 
@@ -38,6 +37,7 @@ const validateTest = (
   e: React.ChangeEvent<HTMLInputElement>,
   validationTester: RegExp
 ) => {
+  // TODO: nextElementSibling 대신 다른 좋은 방법은?
   e.target.nextElementSibling?.classList.toggle(
     'show',
     e.target.value !== '' && !validationTester.test(e.target.value)
@@ -47,11 +47,11 @@ const validateTest = (
 export interface TextInputProps {
   width: number;
   height: number;
-  label?: string;
-  placeholder?: string;
-  required?: boolean;
-  validationTester?: RegExp;
-  errorMsg?: string;
+  label: string;
+  placeholder: string;
+  required: boolean;
+  validationTester: RegExp;
+  errorMsg: string;
 }
 
 const TextInput = ({
@@ -63,31 +63,29 @@ const TextInput = ({
   validationTester,
   errorMsg,
   ...props
-}: TextInputProps) => (
-  <>
-    {label && <Label htmlFor="textInput">{label}</Label>}
-    <Input
-      type="text"
-      id="textInput"
-      name={label}
-      width={width}
-      height={height}
-      placeholder={placeholder}
-      required={required}
-      onInput={
-        validationTester &&
-        ((e: React.ChangeEvent<HTMLInputElement>) =>
-          validateTest(e, validationTester))
-      }
-      {...props}
-    />
-    {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
-  </>
-);
-
-TextInput.defaultProps = {
-  placeholder: '',
-  required: false,
+}: TextInputProps) => {
+  const newId = uuid();
+  return (
+    <>
+      {label.trim() && <Label htmlFor={newId}>{label}</Label>}
+      <Input
+        type="text"
+        id={newId}
+        name={label}
+        placeholder={placeholder}
+        required={required}
+        height={height}
+        style={{ width: `${width}px`, height: `${height}px` }}
+        onInput={
+          validationTester &&
+          ((e: React.ChangeEvent<HTMLInputElement>) =>
+            validateTest(e, validationTester))
+        }
+        {...props}
+      />
+      {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
+    </>
+  );
 };
 
 export default TextInput;
