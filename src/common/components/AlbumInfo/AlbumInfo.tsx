@@ -84,7 +84,7 @@ const WRAPPER_STYLE = {
   list: css`
     width: 618px;
     height: 152px;
-    padding: 14px 0px;
+    padding: 10px 0px;
   `,
   detail: css`
     width: 394px;
