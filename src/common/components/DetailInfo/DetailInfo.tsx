@@ -2,65 +2,71 @@ import styled, { css } from 'styled-components';
 
 const ARRAY_INFO = ['Genre', 'Style', 'Label'];
 
-export interface TrackListType {
+export interface TracklistType {
   position: string;
   title: string;
   duration: string;
 }
 
-export interface DetailInfoProps<T> {
+export interface commonProps {
   infoName: 'Country' | 'Genre' | 'Label' | 'Style' | 'Year' | 'Tracklist';
-  infoContent: T;
-  isValidInfo: boolean;
+  infoContent: string | Array<string> | Array<TracklistType>;
 }
 
-function DetailInfo<T>({
-  infoName,
-  infoContent,
-  isValidInfo,
-}: DetailInfoProps<T>) {
-  return isValidInfo ? (
+export interface DetailInfoProps extends commonProps {
+  isValid: boolean;
+}
+
+const checkTracklist = ({ infoName, infoContent }: commonProps) =>
+  Array.isArray(infoContent) && !ARRAY_INFO.includes(infoName);
+
+function DetailInfo({ infoName, infoContent, isValid }: DetailInfoProps) {
+  const isTracklist = checkTracklist({ infoName, infoContent });
+
+  const infoString = isTracklist ? (
+    <InfoContent>{(infoContent as Array<string>).join(', ')}</InfoContent>
+  ) : (
+    infoContent
+  );
+
+  return isValid ? (
     <>
       <InfoName>{infoName}</InfoName>
-      {typeof infoContent === 'string' && (
-        <InfoContent>{infoContent}</InfoContent>
-      )}
-      {Array.isArray(infoContent) && ARRAY_INFO.includes(infoName) && (
-        <InfoContent>{infoContent.join(', ')}</InfoContent>
-      )}
-      {Array.isArray(infoContent) && !ARRAY_INFO.includes(infoName) && (
+      {isTracklist ? (
         <InfoContent>
-          <TrackList>
-            {infoContent.map((track: TrackListType) => (
+          <Tracklist>
+            {(infoContent as Array<TracklistType>).map((track) => (
               <>
                 <span>{track.position}</span>
                 <span>{track.title}</span>
                 <span>{track.duration}</span>
               </>
             ))}
-          </TrackList>
+          </Tracklist>
         </InfoContent>
+      ) : (
+        <InfoContent>{infoString as JSX.Element}</InfoContent>
       )}
     </>
   ) : null;
 }
 
-const infoCommonStyle = css`
+const commonInfoStyle = css`
   font-size: var(--text-bs);
   color: var(--gray-400);
 `;
 
 const InfoName = styled.dt`
   font-weight: 700;
-  ${infoCommonStyle};
+  ${commonInfoStyle};
 `;
 
 const InfoContent = styled.dd`
   font-weight: 400;
-  ${infoCommonStyle};
+  ${commonInfoStyle};
 `;
 
-const TrackList = styled.div`
+const Tracklist = styled.div`
   display: grid;
   grid-template-columns: 51px 180px 36px;
   row-gap: var(--space-bs);

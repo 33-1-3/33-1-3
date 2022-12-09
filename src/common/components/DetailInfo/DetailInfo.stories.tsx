@@ -5,7 +5,7 @@ export default {
   title: 'common/components/DetailInfo',
   component: DetailInfo,
   args: {
-    isValidInfo: true,
+    isValid: true,
   },
   parameters: {
     design: {
