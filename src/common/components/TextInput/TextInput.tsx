@@ -1,6 +1,25 @@
 import styled from 'styled-components';
 import uuid from 'react-uuid';
 
+export interface TextInputProps {
+  width: number;
+  height: number;
+  color: string;
+  borderColor: string;
+  label: string;
+  placeholder: string;
+  required: boolean;
+  validationTester: RegExp;
+  errorMsg: string;
+  onKeyUp: React.KeyboardEventHandler<HTMLInputElement>;
+}
+
+export interface InputProps {
+  height: number;
+  color: string;
+  borderColor: string;
+}
+
 const Label = styled.label`
   display: block;
   font-size: 20px;
@@ -8,16 +27,16 @@ const Label = styled.label`
   margin-bottom: 4px;
 `;
 
-const Input = styled.input<{ height: number }>`
+const Input = styled.input<InputProps>`
   padding-left: 10px;
   padding-right: 10px;
   font-size: 12px;
   line-height: ${({ height }) => height}px;
-  border: 1px solid var(--black);
+  border: 1px solid ${({ borderColor }) => borderColor};
   border-radius: 4px;
 
   &::placeholder {
-    color: var(--gray-200);
+    color: ${({ color }) => color};
   }
 `;
 
@@ -44,38 +63,36 @@ const validateTest = (
   );
 };
 
-export interface TextInputProps {
-  width: number;
-  height: number;
-  label: string;
-  placeholder: string;
-  required: boolean;
-  validationTester: RegExp;
-  errorMsg: string;
-}
-
 const TextInput = ({
   width,
   height,
+  color,
+  borderColor,
   label,
   placeholder,
   required,
   validationTester,
   errorMsg,
+  onKeyUp,
   ...props
 }: TextInputProps) => {
   const newId = uuid();
   return (
     <>
-      {label.trim() && <Label htmlFor={newId}>{label}</Label>}
+      {label && label.trim() && <Label htmlFor={newId}>{label}</Label>}
       <Input
         type="text"
         id={newId}
         name={label}
         placeholder={placeholder}
         required={required}
+        autoComplete="off"
+        autoFocus={true}
         height={height}
         style={{ width: `${width}px`, height: `${height}px` }}
+        color={color}
+        borderColor={borderColor}
+        onKeyUp={onKeyUp}
         onInput={
           validationTester &&
           ((e: React.ChangeEvent<HTMLInputElement>) =>
@@ -86,6 +103,14 @@ const TextInput = ({
       {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
     </>
   );
+};
+
+TextInput.defaultProps = {
+  placeholder: '',
+  required: false,
+  errorMsg: '생성할 콜렉션의 이름을 입력해주세요.',
+  color: 'var(--gray-200)',
+  borderColor: 'var(--black)',
 };
 
 export default TextInput;

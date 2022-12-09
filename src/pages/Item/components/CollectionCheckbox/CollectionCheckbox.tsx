@@ -4,9 +4,10 @@ import styled from 'styled-components';
 export interface CollectionCheckboxProps {
   title: string;
   width: string;
-  collectionId: string;
   isChecked: boolean;
-  setIsChecked: Dispatch<SetStateAction<{ [key: string]: boolean }>>;
+  setCollectionList: Dispatch<
+    SetStateAction<{ title: string; isChecked: boolean }[]>
+  >;
 }
 
 export interface CheckboxProps {
@@ -53,9 +54,8 @@ const CheckboxDiv = styled.div<CheckboxProps>/*css*/ `
 const CollectionCheckbox = ({
   title,
   width,
-  collectionId,
   isChecked,
-  setIsChecked,
+  setCollectionList,
   ...args
 }: CollectionCheckboxProps) => {
   return (
@@ -65,9 +65,12 @@ const CollectionCheckbox = ({
       tabIndex={0}
       width={width}
       onClick={() => {
-        setIsChecked((state) => {
-          const newState = { ...state };
-          newState[collectionId] = !state[collectionId];
+        setCollectionList((state) => {
+          const newState = [...state].map(({ title: _title, isChecked }) =>
+            _title === title
+              ? { title: _title, isChecked: !isChecked }
+              : { title: _title, isChecked }
+          );
           return newState;
         });
       }}
@@ -80,7 +83,6 @@ const CollectionCheckbox = ({
 
 CollectionCheckbox.defaultProps = {
   width: '408px',
-  isChecked: false,
 };
 
 export default CollectionCheckbox;
