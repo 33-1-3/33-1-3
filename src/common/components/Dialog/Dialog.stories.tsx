@@ -65,4 +65,5 @@ LongText.args = {
   height: 200,
   children:
     'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque minima voluptate vero, nam repellat ipsam reiciendis nemo officiis quis voluptates, commodi animi dolores rem soluta praesentium molestias molestiae ad voluptas?',
+  confirm: () => console.log('확인'),
 };
