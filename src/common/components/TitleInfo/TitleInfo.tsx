@@ -62,6 +62,7 @@ const TitleInfoWrapper = styled.dl<ViewProps>`
 
 const TitleText = styled.dd<ViewProps>`
   ${textMixin};
+  padding-top: 4px;
   font-weight: 700;
   font-size: ${({ view }) => TITLE_FONT_SIZE[view]};
 `;
