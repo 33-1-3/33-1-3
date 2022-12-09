@@ -31,7 +31,7 @@ const Template: ComponentStory<typeof DetailInfo> = (args) => (
 
 export const Released = Template.bind({});
 Released.args = {
-  infoName: 'Year',
+  infoName: 'Released',
   infoContent: '2014',
 };
 
