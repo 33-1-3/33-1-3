@@ -1,19 +1,19 @@
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import MoveFormLink from './MoveFormLink';
+import MoveLink from './MoveLink';
 
 export default {
-  title: 'common/components/MoveFormLink',
-  component: MoveFormLink,
+  title: 'common/components/MoveLink',
+  component: MoveLink,
   argTypes: {
     moveTarget: {
-      options: ['signin', 'signup'],
+      options: ['signin', 'signup', 'github'],
       control: { type: 'radio' },
     },
   },
-} as ComponentMeta<typeof MoveFormLink>;
+} as ComponentMeta<typeof MoveLink>;
 
-const Template: ComponentStory<typeof MoveFormLink> = (args) => (
-  <MoveFormLink {...args} />
+const Template: ComponentStory<typeof MoveLink> = (args) => (
+  <MoveLink {...args} />
 );
 
 export const MoveSignIn = Template.bind({});
@@ -34,4 +34,11 @@ MoveSignUp.parameters = {
   design: {
     url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=133%3A192&t=JiHlUULV7Tp6Y1lx-4',
   },
+};
+
+export const MoveGithub = Template.bind({});
+MoveGithub.args = {
+  color: 'var(--white)',
+  fontSize: 'var(--text-xs)',
+  moveTarget: 'github',
 };

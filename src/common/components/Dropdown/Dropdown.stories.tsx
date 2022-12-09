@@ -18,22 +18,20 @@ const Template: ComponentStory<typeof Dropdown> = (args) => (
 export const Sort = Template.bind({});
 Sort.args = {
   label: '정렬방식 선택',
-  width: 120,
-  height: 36,
   dropKind: 'sort',
   content: [
     { key: 'default', value: '정렬방식' },
-    { key: 'name', value: '이름순' },
-    { key: 'date', value: '년도순' },
-    { key: 'price', value: '가격순' },
+    { key: 'title', value: '앨범 제목' },
+    { key: 'name', value: '가수 이름' },
+    { key: 'date', value: '발매일' },
+    { key: 'update', value: '업데이트' },
+    { key: 'price', value: '가격' },
   ],
 };
 
 export const Show = Template.bind({});
 Show.args = {
   label: '보기방식 선택',
-  width: 105,
-  height: 36,
   dropKind: 'view',
   content: [
     { key: 'default', value: '보기방식' },

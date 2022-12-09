@@ -78,6 +78,7 @@ const SquareLink = ({
 };
 
 SquareLink.defaultProps = {
+  height: 40,
   backgroundColor: 'var(--purple-900)',
   color: 'var(--white)',
   borderColor: 'var(--purple-900)',

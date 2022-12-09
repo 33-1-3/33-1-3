@@ -91,6 +91,8 @@ const Dropdown = ({
 };
 
 Dropdown.defaultProps = {
+  width: 120,
+  height: 36,
   backgroundColor: 'var(--white)',
   color: 'var(--black)',
   isopen: false,
