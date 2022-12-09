@@ -1,18 +1,20 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Link from './Link';
+import SquareLink from './SquareLink';
 
 export default {
   title: 'common/components/Link',
-  component: Link,
-} as ComponentMeta<typeof Link>;
+  component: SquareLink,
+} as ComponentMeta<typeof SquareLink>;
 
-const Template: ComponentStory<typeof Link> = (args) => <Link {...args} />;
+const Template: ComponentStory<typeof SquareLink> = (args) => (
+  <SquareLink {...args} />
+);
 
 export const Prime = Template.bind({});
 Prime.args = {
   link: '/',
-  width: '11.125rem',
-  height: '2.5rem',
+  width: 178,
+  height: 40,
   children: 'My Collections',
 };
 Prime.parameters = {
@@ -24,8 +26,8 @@ Prime.parameters = {
 export const White = Template.bind({});
 White.args = {
   link: '/',
-  width: '6.0625rem',
-  height: '2.5rem',
+  width: 97,
+  height: 40,
   children: 'Sign In',
   backgroundColor: 'var(--white)',
   color: 'var(--purple-900)',

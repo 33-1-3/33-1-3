@@ -10,8 +10,6 @@ const Li = styled.li`
   justify-content: center;
   align-items: center;
   list-style: none;
-  width: 100%;
-  height: 100%;
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--gray-200);
@@ -24,7 +22,12 @@ const Li = styled.li`
 
 const Option = ({ value, children, ...props }: OptionProps) => {
   return (
-    <Li role="option" value={value} {...props}>
+    <Li
+      role="option"
+      style={{ width: '100%', height: '100%' }}
+      value={value}
+      {...props}
+    >
       {children}
     </Li>
   );

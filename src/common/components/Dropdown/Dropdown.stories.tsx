@@ -17,6 +17,7 @@ const Template: ComponentStory<typeof Dropdown> = (args) => (
 
 export const Sort = Template.bind({});
 Sort.args = {
+  label: '정렬방식 선택',
   width: 120,
   height: 36,
   dropKind: 'sort',
@@ -30,11 +31,12 @@ Sort.args = {
 
 export const Show = Template.bind({});
 Show.args = {
+  label: '보기방식 선택',
   width: 105,
   height: 36,
   dropKind: 'view',
   content: [
-    { key: 'dafult', value: '보기방식' },
+    { key: 'default', value: '보기방식' },
     { key: 'block', value: '블록' },
     { key: 'list', value: '리스트' },
   ],
