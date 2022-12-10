@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle/*css*/ `
     --black: #000000;
     --red: #fe2828;
     --purple-100: #ece2ff;
+    --purple-500: #a07cef;
     --purple-900: #6c33e8;
     --gray-100: #dadada;
     --gray-200: #979797;
