@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '@/pages/Home/index';
 import Signin from '@/pages/Signin/index';
 import Signup from '@/pages/Signup/index';
@@ -7,17 +7,10 @@ import Item from './pages/Item';
 import MyCollections from '@/pages/MyCollections/index';
 import MyCollection from '@/pages/MyCollection/index';
 import MyItem from './pages/MyItem';
-import '@/App.css';
-import { GlobalStyle } from './common/styles/globalStyle';
 
 function App() {
-  // 임시 지역 상태
-  const isSignedIn = true;
-  const userid = 'ulgoon';
-
   return (
     <>
-      <GlobalStyle />
       <Router>
         <Routes>
           <Route path="/" element={<Home />}></Route>
