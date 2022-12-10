@@ -17,6 +17,7 @@ export interface DropdownProps {
 
 const ListContainer = styled(ListBox)`
   margin-top: 4px;
+  z-index: 1000;
 `;
 
 const Dropdown = ({
@@ -31,7 +32,7 @@ const Dropdown = ({
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [picker, setPicker] = useState<string | null>(null);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
 
   const select = (e: React.FormEvent<HTMLFormElement>): void => {
     const target = e.target as HTMLTextAreaElement;

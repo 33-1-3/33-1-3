@@ -7,14 +7,14 @@ export interface FooterProps {
 }
 
 const StyledFooter = styled.footer<FooterProps>`
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
-  bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 40px;
+  padding: 40px 0;
+  margin: 0 auto;
   background-color: ${({ backgroundColor }) => backgroundColor};
   > p {
     color: ${({ color }) => color};

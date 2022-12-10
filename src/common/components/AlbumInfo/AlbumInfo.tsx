@@ -4,7 +4,7 @@ import IconButton from '../IconButton/IconButton';
 import styled, { css } from 'styled-components';
 
 export interface ResultViewProps {
-  view: 'cover' | 'list' | 'detail';
+  view: 'block' | 'list' | 'detail';
 }
 
 export interface TitleInfoProps {
@@ -25,7 +25,7 @@ function AlbumInfo({
   view,
   ...props
 }: AlbumInfoProps) {
-  const buttonSize = view === 'cover' ? 16 : 32;
+  const buttonSize = view === 'block' ? 16 : 32;
   const buttonType = page === 'all' ? 'plus' : 'minus';
 
   const listInfo = detailInfo.filter(
@@ -76,7 +76,7 @@ function AlbumInfo({
 }
 
 const WRAPPER_STYLE = {
-  cover: css`
+  block: css`
     width: 150px;
     height: 76px;
     padding: var(--space-md) var(--space-xs);
@@ -84,7 +84,6 @@ const WRAPPER_STYLE = {
   list: css`
     width: 618px;
     height: 152px;
-    padding: 10px 0px;
   `,
   detail: css`
     width: 394px;
@@ -94,7 +93,7 @@ const WRAPPER_STYLE = {
 };
 
 const BUTTON_STYLE = {
-  cover: css`
+  block: css`
     top: var(--space-lg);
     right: var(--space-xs);
   `,
@@ -110,13 +109,16 @@ const BUTTON_STYLE = {
 
 const AlbumInfoWrapper = styled.div<ResultViewProps>`
   position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
   ${({ view }) => WRAPPER_STYLE[view]};
 `;
 
 const ListInfoWrapper = styled.dl`
   display: grid;
   grid-template-columns: 103px 483px;
-  row-gap: var(--space-bs);
+  row-gap: 8px;
   width: 394px;
   margin-top: var(--space-lg);
 `;
