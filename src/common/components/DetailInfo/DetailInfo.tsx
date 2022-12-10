@@ -21,6 +21,8 @@ const checkTracklist = ({ infoName, infoContent }: commonProps) =>
   Array.isArray(infoContent) && !ARRAY_INFO.includes(infoName);
 
 function DetailInfo({ infoName, infoContent, isValid }: DetailInfoProps) {
+  if (!isValid) return null;
+
   const isTracklist = checkTracklist({ infoName, infoContent });
 
   const infoString =
@@ -28,7 +30,7 @@ function DetailInfo({ infoName, infoContent, isValid }: DetailInfoProps) {
       ? infoContent
       : (infoContent as Array<string>).join(', ');
 
-  return isValid ? (
+  return (
     <>
       <InfoName>{infoName}</InfoName>
       {isTracklist ? (
@@ -47,11 +49,13 @@ function DetailInfo({ infoName, infoContent, isValid }: DetailInfoProps) {
         <InfoContent>{infoString}</InfoContent>
       )}
     </>
-  ) : null;
+  );
 }
 
 const commonInfoStyle = css`
   font-size: var(--text-bs);
+  text-align: start;
+  line-height: normal;
   color: var(--gray-400);
 `;
 
