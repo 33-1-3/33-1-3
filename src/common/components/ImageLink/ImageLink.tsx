@@ -8,7 +8,11 @@ export interface ImageLinkProps {
 
 const ImageLink = ({ width, height, moveToLink }: ImageLinkProps) => {
   return (
-    <a href={`${moveToLink.pathname}`} target="_blank" rel="noreferrer">
+    <a
+      href={`${moveToLink.pathname}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <img
         src={`/assets/${moveToLink.site}.svg`}
         alt={`${moveToLink.site}로 이동`}
