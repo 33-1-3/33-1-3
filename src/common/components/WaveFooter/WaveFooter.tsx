@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { ReactComponent as WaveIcon } from '@/assets/wave.svg';
 
 const FixedFooter = styled.footer`
-  width: 100vw;
   position: absolute;
   left: 0px;
   bottom: 0px;
@@ -10,17 +9,12 @@ const FixedFooter = styled.footer`
 `;
 
 const BottomBackground = styled.div`
-  width: 100vw;
-  height: 10px;
   position: absolute;
   background: var(--purple-500);
   bottom: 0px;
 `;
 
-const MoveWaveIcon = styled(WaveIcon)`
-  
-  width: 100%;
-  
+const MoveWaveIcon = styled(WaveIcon)`  
   .wave {
     animation: wave 5s linear;
     animation-iteration-count: infinite;
@@ -88,9 +82,9 @@ const MoveWaveIcon = styled(WaveIcon)`
 
 export default function WaveFooter({ ...args }) {
   return (
-    <FixedFooter>
+    <FixedFooter style={{ width: '100vw' }}>
       <MoveWaveIcon {...args} />
-      <BottomBackground />
+      <BottomBackground style={{ width: '100vw', height: '10px' }} />
     </FixedFooter>
   );
 }
