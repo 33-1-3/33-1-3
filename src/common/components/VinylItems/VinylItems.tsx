@@ -27,7 +27,7 @@ function VinylItems({ searchResult, page, view, ...props }: VinylItemsProps) {
           imgURL={imgURL}
           page={page}
           view={view}
-        ></VinylItem>
+        />
       ))}
     </VinylItemsWrapper>
   );
