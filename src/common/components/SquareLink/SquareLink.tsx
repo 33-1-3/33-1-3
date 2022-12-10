@@ -10,6 +10,7 @@ export interface SquareLinkProps {
   color: string;
   borderColor: string;
   transition: boolean;
+  fontSize: string;
 }
 
 export interface StyledLinkProps {
@@ -17,6 +18,7 @@ export interface StyledLinkProps {
   borderColor: string;
   transition: boolean;
   color: string;
+  fontSize: string;
 }
 
 export const StyledLink = styled.a<StyledLinkProps>`
@@ -30,6 +32,7 @@ export const StyledLink = styled.a<StyledLinkProps>`
   border-radius: 0.3125rem;
   text-decoration: none;
   font-weight: 700;
+  font-size: ${({ fontSize }) => fontSize};
 
   ${({ transition, backgroundColor, color }) => {
     return transition
@@ -59,6 +62,7 @@ const SquareLink = ({
   color,
   borderColor,
   transition,
+  fontSize,
 }: SquareLinkProps) => {
   return (
     <>
@@ -70,6 +74,7 @@ const SquareLink = ({
         color={color}
         borderColor={borderColor}
         transition={transition}
+        fontSize={fontSize}
       >
         {children}
       </StyledLink>
@@ -83,6 +88,7 @@ SquareLink.defaultProps = {
   color: 'var(--white)',
   borderColor: 'var(--purple-900)',
   transition: false,
+  fontSize: 'var(--text-md)',
 };
 
 export default SquareLink;
