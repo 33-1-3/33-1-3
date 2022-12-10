@@ -14,12 +14,12 @@ const Template: ComponentStory<typeof VinylItems> = (args) => (
   <VinylItems {...args}></VinylItems>
 );
 
-export const AllCover = Template.bind({});
-AllCover.args = {
+export const AllBlock = Template.bind({});
+AllBlock.args = {
   page: 'all',
-  view: 'cover',
+  view: 'block',
 };
-AllCover.parameters = {
+AllBlock.parameters = {
   design: {
     url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=133%3A344&t=klXldng2oaYkGL1Z-4',
   },
@@ -36,12 +36,12 @@ AllList.parameters = {
   },
 };
 
-export const CollectionCover = Template.bind({});
-CollectionCover.args = {
+export const CollectionBlock = Template.bind({});
+CollectionBlock.args = {
   page: 'collection',
-  view: 'cover',
+  view: 'block',
 };
-CollectionCover.parameters = {
+CollectionBlock.parameters = {
   design: {
     url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=133%3A344&t=klXldng2oaYkGL1Z-4',
   },

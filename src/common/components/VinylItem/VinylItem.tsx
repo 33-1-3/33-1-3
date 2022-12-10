@@ -39,7 +39,7 @@ function VinylItem({
 }
 
 const WRAPPER_STYLE = {
-  cover: css`
+  block: css`
     display: flex;
     flex-flow: column wrap;
     width: 150px;
