@@ -43,7 +43,7 @@ const Header = ({ isLogin, ...props }: HeaderProps) => {
         <SquareLink
           backgroundColor="var(--white)"
           color="var(--purple-900)"
-          link="/"
+          link="/signin"
           transition
           width={97}
         >
