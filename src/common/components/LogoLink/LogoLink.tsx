@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
-
 export interface LogoProps {
   width: string | number;
   height: string | number;
 }
 
-const LogoLink = ({ width, height }: LogoProps) => {
+const LogoLink = ({ width, height, ...args }: LogoProps) => {
   return (
     <Link to="/" aria-label="메인 화면으로 이동">
       <img
@@ -13,6 +12,7 @@ const LogoLink = ({ width, height }: LogoProps) => {
         alt="Thirty Three Third"
         width={width}
         height={height}
+        {...args}
       />
     </Link>
   );
