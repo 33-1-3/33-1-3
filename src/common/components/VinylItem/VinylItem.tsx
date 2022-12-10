@@ -57,7 +57,7 @@ const WRAPPER_STYLE = {
   `,
 };
 
-const VinylItemWrapper = styled.section<ResultViewProps>`
+const VinylItemWrapper = styled.article<ResultViewProps>`
   ${({ view }) => WRAPPER_STYLE[view]}
 `;
 
