@@ -83,7 +83,7 @@ const MoveWaveIcon = styled(WaveIcon)`
 export default function WaveFooter({ ...args }) {
   return (
     <FixedFooter style={{ width: '100vw' }}>
-      <MoveWaveIcon {...args} />
+      <MoveWaveIcon width="100%" {...args} />
       <BottomBackground style={{ width: '100vw', height: '10px' }} />
     </FixedFooter>
   );

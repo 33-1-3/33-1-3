@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Dialog from './Dialog';
 
-import { TextInput } from '@/pages/MyCollection/components';
+import { TextInput } from '@/common/components';
 
 export default {
   title: 'common/components/Dialog',
