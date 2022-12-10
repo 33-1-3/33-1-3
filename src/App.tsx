@@ -19,24 +19,6 @@ function App() {
     <>
       <GlobalStyle />
       <Router>
-        <header>
-          <Link to="/">
-            <img
-              src="/assets/logo.svg"
-              alt="Thirty Three Third"
-              style={{ width: '3rem' }}
-            />
-          </Link>
-          <Link to={`/mycollections/${userid}`}>MyCollections</Link>
-          {isSignedIn ? (
-            <div>
-              Hi, <b>{userid}</b>
-            </div>
-          ) : (
-            <Link to="/signin">Signin</Link>
-          )}
-        </header>
-
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/signin" element={<Signin />}></Route>
