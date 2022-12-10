@@ -14,6 +14,8 @@ import TextInput from './TextInput/TextInput';
 import TitleInfo from './TitleInfo/TitleInfo';
 import ImageLink from './ImageLink/ImageLink';
 import Header from './Header/Header';
+import AlbumInfo from './AlbumInfo/AlbumInfo';
+import VinylItem from './VinylItem/VinylItem';
 
 export {
   AddCollectionButton,
@@ -32,4 +34,6 @@ export {
   TitleInfo,
   ImageLink,
   Header,
+  AlbumInfo,
+  VinylItem,
 };
