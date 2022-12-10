@@ -7,6 +7,10 @@ export interface FooterProps {
 }
 
 const StyledFooter = styled.footer<FooterProps>`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,7 +39,7 @@ const LinkContainer = styled.div`
 const Footer = ({ backgroundColor, color, ...props }: FooterProps) => {
   return (
     <StyledFooter
-      style={{ height: 200, width: '100%' }}
+      style={{ height: 200, width: '100vw' }}
       backgroundColor={backgroundColor}
       color={color}
       {...props}

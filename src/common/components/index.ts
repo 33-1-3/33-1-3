@@ -17,6 +17,7 @@ import Header from './Header/Header';
 import AlbumInfo from './AlbumInfo/AlbumInfo';
 import VinylItem from './VinylItem/VinylItem';
 import Footer from './Footer/Footer';
+import Main from './Main/Main';
 
 export {
   AddCollectionButton,
@@ -38,4 +39,5 @@ export {
   AlbumInfo,
   VinylItem,
   Footer,
+  Main,
 };
