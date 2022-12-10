@@ -13,7 +13,7 @@ export default function Home() {
     const params = { query: value };
     navigate({
       pathname: '/searchresult',
-      search: `?${createSearchParams(params)}`,
+      search: `?${createSearchParams(params)}&view=block`,
     });
   }
 
@@ -38,7 +38,7 @@ export default function Home() {
         <Catchphrase style={{ fontSize: '2rem' }}>
           Record your <HighLight>Records!</HighLight>
         </Catchphrase>
-        <SearchInput />
+        <SearchInput handleSubmit={handleSubmit} />
       </Main>
       <Footer />
     </>
