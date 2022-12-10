@@ -73,10 +73,224 @@ const mockDetailInfo_ellipsis: DetailInfoProps[] = [
 const mockImgURL =
   'https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg';
 
+const mockSearchResult = [
+  {
+    titleInfo: { title: '꽃갈피', artist: 'IU' },
+    detailInfo: [
+      { infoName: 'Released', infoContent: '2014', isValid: true },
+      {
+        infoName: 'Genre',
+        infoContent: ['Pop', 'Folk, World, & Country'],
+        isValid: true,
+      },
+      {
+        infoName: 'Style',
+        infoContent: ['Folk', 'Ballad', 'K-pop'],
+        isValid: true,
+      },
+      { infoName: 'Country', infoContent: 'South Korea', isValid: true },
+      { infoName: 'Label', infoContent: ['Loen Entertainment'], isValid: true },
+      { infoName: 'Tracklist', infoContent: mockTrackList, isValid: true },
+    ],
+    imgURL:
+      'https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg',
+  },
+  {
+    titleInfo: { title: '꽃갈피', artist: 'IU' },
+    detailInfo: [
+      { infoName: 'Released', infoContent: '2014', isValid: true },
+      {
+        infoName: 'Genre',
+        infoContent: ['Pop', 'Folk, World, & Country'],
+        isValid: true,
+      },
+      {
+        infoName: 'Style',
+        infoContent: ['Folk', 'Ballad', 'K-pop'],
+        isValid: true,
+      },
+      { infoName: 'Country', infoContent: 'South Korea', isValid: true },
+      { infoName: 'Label', infoContent: ['Loen Entertainment'], isValid: true },
+      { infoName: 'Tracklist', infoContent: mockTrackList, isValid: true },
+    ],
+    imgURL:
+      'https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg',
+  },
+  {
+    titleInfo: { title: '꽃갈피', artist: 'IU' },
+    detailInfo: [
+      { infoName: 'Released', infoContent: '2014', isValid: true },
+      {
+        infoName: 'Genre',
+        infoContent: ['Pop', 'Folk, World, & Country'],
+        isValid: true,
+      },
+      {
+        infoName: 'Style',
+        infoContent: ['Folk', 'Ballad', 'K-pop'],
+        isValid: true,
+      },
+      { infoName: 'Country', infoContent: 'South Korea', isValid: true },
+      { infoName: 'Label', infoContent: ['Loen Entertainment'], isValid: true },
+      { infoName: 'Tracklist', infoContent: mockTrackList, isValid: true },
+    ],
+    imgURL:
+      'https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg',
+  },
+  {
+    titleInfo: { title: '꽃갈피', artist: 'IU' },
+    detailInfo: [
+      { infoName: 'Released', infoContent: '2014', isValid: true },
+      {
+        infoName: 'Genre',
+        infoContent: ['Pop', 'Folk, World, & Country'],
+        isValid: true,
+      },
+      {
+        infoName: 'Style',
+        infoContent: ['Folk', 'Ballad', 'K-pop'],
+        isValid: true,
+      },
+      { infoName: 'Country', infoContent: 'South Korea', isValid: true },
+      { infoName: 'Label', infoContent: ['Loen Entertainment'], isValid: true },
+      { infoName: 'Tracklist', infoContent: mockTrackList, isValid: true },
+    ],
+    imgURL:
+      'https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg',
+  },
+  {
+    titleInfo: { title: '꽃갈피', artist: 'IU' },
+    detailInfo: [
+      { infoName: 'Released', infoContent: '2014', isValid: true },
+      {
+        infoName: 'Genre',
+        infoContent: ['Pop', 'Folk, World, & Country'],
+        isValid: true,
+      },
+      {
+        infoName: 'Style',
+        infoContent: ['Folk', 'Ballad', 'K-pop'],
+        isValid: true,
+      },
+      { infoName: 'Country', infoContent: 'South Korea', isValid: true },
+      { infoName: 'Label', infoContent: ['Loen Entertainment'], isValid: true },
+      { infoName: 'Tracklist', infoContent: mockTrackList, isValid: true },
+    ],
+    imgURL:
+      'https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg',
+  },
+  {
+    titleInfo: { title: '꽃갈피', artist: 'IU' },
+    detailInfo: [
+      { infoName: 'Released', infoContent: '2014', isValid: true },
+      {
+        infoName: 'Genre',
+        infoContent: ['Pop', 'Folk, World, & Country'],
+        isValid: true,
+      },
+      {
+        infoName: 'Style',
+        infoContent: ['Folk', 'Ballad', 'K-pop'],
+        isValid: true,
+      },
+      { infoName: 'Country', infoContent: 'South Korea', isValid: true },
+      { infoName: 'Label', infoContent: ['Loen Entertainment'], isValid: true },
+      { infoName: 'Tracklist', infoContent: mockTrackList, isValid: true },
+    ],
+    imgURL:
+      'https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg',
+  },
+  {
+    titleInfo: { title: '꽃갈피', artist: 'IU' },
+    detailInfo: [
+      { infoName: 'Released', infoContent: '2014', isValid: true },
+      {
+        infoName: 'Genre',
+        infoContent: ['Pop', 'Folk, World, & Country'],
+        isValid: true,
+      },
+      {
+        infoName: 'Style',
+        infoContent: ['Folk', 'Ballad', 'K-pop'],
+        isValid: true,
+      },
+      { infoName: 'Country', infoContent: 'South Korea', isValid: true },
+      { infoName: 'Label', infoContent: ['Loen Entertainment'], isValid: true },
+      { infoName: 'Tracklist', infoContent: mockTrackList, isValid: true },
+    ],
+    imgURL:
+      'https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg',
+  },
+  {
+    titleInfo: { title: '꽃갈피', artist: 'IU' },
+    detailInfo: [
+      { infoName: 'Released', infoContent: '2014', isValid: true },
+      {
+        infoName: 'Genre',
+        infoContent: ['Pop', 'Folk, World, & Country'],
+        isValid: true,
+      },
+      {
+        infoName: 'Style',
+        infoContent: ['Folk', 'Ballad', 'K-pop'],
+        isValid: true,
+      },
+      { infoName: 'Country', infoContent: 'South Korea', isValid: true },
+      { infoName: 'Label', infoContent: ['Loen Entertainment'], isValid: true },
+      { infoName: 'Tracklist', infoContent: mockTrackList, isValid: true },
+    ],
+    imgURL:
+      'https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg',
+  },
+  {
+    titleInfo: { title: '꽃갈피', artist: 'IU' },
+    detailInfo: [
+      { infoName: 'Released', infoContent: '2014', isValid: true },
+      {
+        infoName: 'Genre',
+        infoContent: ['Pop', 'Folk, World, & Country'],
+        isValid: true,
+      },
+      {
+        infoName: 'Style',
+        infoContent: ['Folk', 'Ballad', 'K-pop'],
+        isValid: true,
+      },
+      { infoName: 'Country', infoContent: 'South Korea', isValid: true },
+      { infoName: 'Label', infoContent: ['Loen Entertainment'], isValid: true },
+      { infoName: 'Tracklist', infoContent: mockTrackList, isValid: true },
+    ],
+    imgURL:
+      'https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg',
+  },
+  {
+    titleInfo: { title: '꽃갈피', artist: 'IU' },
+    detailInfo: [
+      { infoName: 'Released', infoContent: '2014', isValid: true },
+      {
+        infoName: 'Genre',
+        infoContent: ['Pop', 'Folk, World, & Country'],
+        isValid: true,
+      },
+      {
+        infoName: 'Style',
+        infoContent: ['Folk', 'Ballad', 'K-pop'],
+        isValid: true,
+      },
+      { infoName: 'Country', infoContent: 'South Korea', isValid: true },
+      { infoName: 'Label', infoContent: ['Loen Entertainment'], isValid: true },
+      { infoName: 'Tracklist', infoContent: mockTrackList, isValid: true },
+    ],
+    imgURL:
+      'https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg',
+  },
+];
+
 export {
   mockTitleInfo_default,
   mockTitleInfo_ellipsis,
   mockDetailInfo_default,
   mockDetailInfo_ellipsis,
   mockImgURL,
+  mockSearchResult,
 };
