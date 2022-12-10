@@ -8,7 +8,6 @@ import MyCollections from '@/pages/MyCollections/index';
 import MyCollection from '@/pages/MyCollection/index';
 import MyItem from './pages/MyItem';
 import '@/App.css';
-import { GlobalStyle } from './common/styles/globalStyle';
 
 function App() {
   // 임시 지역 상태
@@ -16,27 +15,19 @@ function App() {
   const userid = 'ulgoon';
 
   return (
-    <>
-      <GlobalStyle />
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/signin" element={<Signin />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/searchresult" element={<SearchResult />}></Route>
-          <Route path="/item/:isbn" element={<Item />}></Route>
-          <Route
-            path="/mycollections/:userid"
-            element={<MyCollections />}
-          ></Route>
-          <Route
-            path="/mycollection/:userid/:collectionid"
-            element={<MyCollection />}
-          ></Route>
-          <Route path="/myitem/:isbn" element={<MyItem />}></Route>
-        </Routes>
-      </Router>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />}></Route>
+      <Route path="/signin" element={<Signin />}></Route>
+      <Route path="/signup" element={<Signup />}></Route>
+      <Route path="/searchresult" element={<SearchResult />}></Route>
+      <Route path="/item/:isbn" element={<Item />}></Route>
+      <Route path="/mycollections/:userid" element={<MyCollections />}></Route>
+      <Route
+        path="/mycollection/:userid/:collectionid"
+        element={<MyCollection />}
+      ></Route>
+      <Route path="/myitem/:isbn" element={<MyItem />}></Route>
+    </Routes>
   );
 }
 
