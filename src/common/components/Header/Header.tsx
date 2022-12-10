@@ -10,7 +10,7 @@ export interface HeaderProps {
   isLogin: boolean;
 }
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   background-color: var(--white);
@@ -22,11 +22,11 @@ const StyledHeader = styled.div`
   }
 `;
 
-const Header = ({ isLogin }: HeaderProps) => {
+const Header = ({ isLogin, ...props }: HeaderProps) => {
   const isMain: boolean = window.location.pathname === '/';
 
   return (
-    <StyledHeader style={{ height: 64, width: '100%' }}>
+    <StyledHeader style={{ height: 64, width: '100%' }} {...props}>
       <LogoLink height="40px" width="74px" />
       {!isMain && <SearchInput size="small" />}
       <SquareLink link="/" width={178}>
