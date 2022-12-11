@@ -17,9 +17,4 @@ const Template: ComponentStory<typeof ArrowLink> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {
-  width: '60px',
-  height: '60px',
-  color: 'var(--white)',
-  backgroundcolor: 'var(--purple-900)',
-};
+Default.args = {};

@@ -9,7 +9,6 @@ export interface ProfileProps {
 }
 
 const CircleWrapper = styled.div`
-  width: fit-content;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   border: 1px solid var(--black);
@@ -27,7 +26,7 @@ const ProfileLink = ({
   ...props
 }: ProfileProps) => {
   return (
-    <CircleWrapper {...props}>
+    <CircleWrapper style={{ width: 'fit-content' }} {...props}>
       <Link
         to={`/mycollections/${userid}`}
         aria-label={`${'내 콜렉션으로 이동'}`}

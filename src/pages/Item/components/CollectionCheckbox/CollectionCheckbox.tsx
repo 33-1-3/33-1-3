@@ -12,15 +12,14 @@ export interface CollectionCheckboxProps {
 
 export interface CheckboxProps {
   'aria-checked': boolean;
-  width: string;
+  $width: string;
 }
 
 const CheckboxDiv = styled.div<CheckboxProps>/*css*/ `
   display: flex;
   gap: 40px;
   align-items: center;
-  width: fit-content;
-  max-width: ${({ width }) => width};
+  max-width: ${({ $width }) => $width};
   cursor: pointer;
   & > span {
     overflow: hidden;
@@ -63,7 +62,8 @@ const CollectionCheckbox = ({
       role="checkbox"
       aria-checked={isChecked}
       tabIndex={0}
-      width={width}
+      $width={width}
+      style={{ width: 'fit-content' }}
       onClick={() => {
         setCollectionList((state) => {
           const newState = [...state].map(({ title: _title, isChecked }) =>

@@ -18,27 +18,27 @@ export interface IconButtonProps {
 }
 
 export interface IconButtonContainerProps {
-  color: string;
+  $color: string;
   backgroundColor: string;
 }
 
 const IconButtonContainer = styled.button<IconButtonContainerProps>`
   rect {
     fill: ${({ backgroundColor }) => backgroundColor};
-    stroke: ${({ color }) => color};
+    stroke: ${({ $color }) => $color};
   }
   path {
-    fill: ${({ color }) => color};
-    stroke: ${({ color }) => color};
+    fill: ${({ $color }) => $color};
+    stroke: ${({ $color }) => $color};
   }
   line {
-    stroke: ${({ color }) => color};
+    stroke: ${({ $color }) => $color};
   }
   &:hover,
   &:focus {
     rect {
       transition: 0.3s ease-out;
-      fill: ${({ color }) => color};
+      fill: ${({ $color }) => $color};
     }
     path {
       transition: 0.3s ease-out;
@@ -66,7 +66,7 @@ const IconButton = ({
     <IconButtonContainer
       type="button"
       style={{ width, height }}
-      color={color}
+      $color={color}
       backgroundColor={backgroundColor}
       {...props}
     >
