@@ -83,8 +83,8 @@ const mockSearchResult_ellipsis = {
   id: mockId,
   titleInfo: mockTitleInfo_ellipsis,
   detailInfo: mockDetailInfo_ellipsis,
-  imgURL: mockImgUrl,
-  resourceURL: mockResourceUrl,
+  imgUrl: mockImgUrl,
+  resourceUrl: mockResourceUrl,
 };
 
 const mockSearchResults = Array.from({ length: 10 }).fill(
