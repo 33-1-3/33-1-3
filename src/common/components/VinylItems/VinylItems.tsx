@@ -1,3 +1,4 @@
+import uuid from 'react-uuid';
 import VinylItem from '../VinylItem/VinylItem';
 import { ResultViewProps } from '../AlbumInfo/AlbumInfo';
 import { ProcessedResult } from '@/types/data';
@@ -12,12 +13,7 @@ function VinylItems({ searchResult, page, view, ...props }: VinylItemsProps) {
   return (
     <VinylItemsWrapper view={view} {...props}>
       {searchResult.map((result) => (
-        <VinylItem
-          key={result.id}
-          searchResult={result}
-          page={page}
-          view={view}
-        />
+        <VinylItem key={uuid()} searchResult={result} page={page} view={view} />
       ))}
     </VinylItemsWrapper>
   );
