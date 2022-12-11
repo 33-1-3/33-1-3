@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '@/pages/Home/index';
 import Signin from '@/pages/Signin/index';
 import Signup from '@/pages/Signup/index';
@@ -10,10 +10,6 @@ import MyItem from './pages/MyItem';
 import '@/App.css';
 
 function App() {
-  // 임시 지역 상태
-  const isSignedIn = true;
-  const userid = 'ulgoon';
-
   return (
     <Routes>
       <Route path="/" element={<Home />}></Route>

@@ -12,6 +12,7 @@ import SquareButton from './SquareButton/SquareButton';
 import SquareLink from './SquareLink/SquareLink';
 import TextInput from './TextInput/TextInput';
 import TitleInfo from './TitleInfo/TitleInfo';
+import WaveFooter from './WaveFooter/WaveFooter';
 import ImageLink from './ImageLink/ImageLink';
 import Header from './Header/Header';
 import AlbumInfo from './AlbumInfo/AlbumInfo';
@@ -36,6 +37,7 @@ export {
   SquareLink,
   TextInput,
   TitleInfo,
+  WaveFooter,
   ImageLink,
   Header,
   AlbumInfo,

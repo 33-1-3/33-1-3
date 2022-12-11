@@ -11,7 +11,7 @@ export interface TextInputProps {
   required: boolean;
   validationTester: RegExp;
   errorMsg: string;
-  onKeyUp: React.KeyboardEventHandler<HTMLInputElement>;
+  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
 export interface InputProps {
