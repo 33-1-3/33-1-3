@@ -1,5 +1,5 @@
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { mockSearchResult } from '@/utils/mockInfo';
+import { mockSearchResult } from '@/utils/mocks/mockInfo';
 import VinylItems from './VinylItems';
 
 export default {
