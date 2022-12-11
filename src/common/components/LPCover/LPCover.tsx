@@ -63,7 +63,7 @@ const LPCover = ({
   ...props
 }: LPCoverProps) => {
   const heightNum = HEIGHT_PX[size];
-  const { id, titleInfo, imgURL } = searchResult;
+  const { id, titleInfo, imgUrl } = searchResult;
 
   return (
     <Wrapper
@@ -74,7 +74,7 @@ const LPCover = ({
       {...props}
     >
       <Cover
-        src={imgURL}
+        src={imgUrl}
         alt=""
         data-title={titleInfo.title}
         heightNum={heightNum}

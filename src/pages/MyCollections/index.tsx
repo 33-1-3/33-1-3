@@ -9,7 +9,7 @@ import {
   Footer,
 } from '@/common/components';
 import { Bookshelf } from './components';
-import { mockUsersData } from '@/utils/mockInfo';
+import { mockUsersData } from '@/utils/mocks/mockInfo';
 
 const MyCollectionsPageTitle = styled(PageTitle)`
   margin-top: 56px;
