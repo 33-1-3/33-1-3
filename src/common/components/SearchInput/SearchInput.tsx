@@ -1,7 +1,37 @@
-import { ComponentProps } from 'react';
 import styled, { css } from 'styled-components';
+import useHandleSubmit from '@/hooks/useHandleSubmit';
 
 const fontSize = { small: '15px', large: '28px' };
+
+export interface SearchInputProps {
+  placeholder: string;
+  page: '전체' | '리스트';
+  size: 'small' | 'large';
+}
+
+export interface formProps {
+  formSize: 'small' | 'large';
+}
+
+function SearchInput({ placeholder, page, size, ...props }: SearchInputProps) {
+  return (
+    <InputWrapper onSubmit={useHandleSubmit()} {...props}>
+      <Input
+        type="search"
+        placeholder={placeholder}
+        aria-label={`${page} 검색 창`}
+        formSize={size}
+      />
+      <SearchButton type="submit" formSize={size}></SearchButton>
+    </InputWrapper>
+  );
+}
+
+SearchInput.defaultProps = {
+  placeholder: '검색어를 입력하세요.',
+  page: '전체',
+  size: 'large',
+};
 
 const inputMixin = {
   small: css`
@@ -31,43 +61,6 @@ const buttonMixin = {
     height: 48px;
     margin: 12px;
   `,
-};
-
-export interface SearchInputProps {
-  placeholder: string;
-  page: '전체' | '리스트';
-  size: 'small' | 'large';
-  handleSubmit?: ComponentProps<'form'>['onSubmit'];
-}
-
-export interface formProps {
-  formSize: 'small' | 'large';
-}
-
-function SearchInput({
-  placeholder,
-  page,
-  size,
-  handleSubmit,
-  ...props
-}: SearchInputProps) {
-  return (
-    <InputWrapper onSubmit={handleSubmit} {...props}>
-      <Input
-        type="search"
-        placeholder={placeholder}
-        aria-label={`${page} 검색 창`}
-        formSize={size}
-      />
-      <SearchButton type="submit" formSize={size}></SearchButton>
-    </InputWrapper>
-  );
-}
-
-SearchInput.defaultProps = {
-  placeholder: '검색어를 입력하세요.',
-  page: '전체',
-  size: 'large',
 };
 
 const InputWrapper = styled.form`

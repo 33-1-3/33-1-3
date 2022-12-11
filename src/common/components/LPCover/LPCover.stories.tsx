@@ -32,18 +32,18 @@ BigWithoutHoverEvent.args = {
   hoverInteraction: false,
 };
 
-export const ImgURLIsEmptyString = Template.bind({});
-ImgURLIsEmptyString.args = {
-  searchResult: { ...mockSearchResult_default, imgURL: '' } as ProcessedResult,
+export const ImgUrlIsEmptyString = Template.bind({});
+ImgUrlIsEmptyString.args = {
+  searchResult: { ...mockSearchResult_default, imgUrl: '' } as ProcessedResult,
   size: 'small',
   hoverInteraction: true,
 };
 
-export const ImgURLIsInvalid = Template.bind({});
-ImgURLIsInvalid.args = {
+export const ImgUrlIsInvalid = Template.bind({});
+ImgUrlIsInvalid.args = {
   searchResult: {
     ...mockSearchResult_default,
-    imgURL: 'asdfasdf',
+    imgUrl: 'asdfasdf',
   } as ProcessedResult,
   size: 'small',
   hoverInteraction: true,

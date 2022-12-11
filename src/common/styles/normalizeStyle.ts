@@ -31,7 +31,7 @@ export const NormalizeStyle = createGlobalStyle/*css*/ `
       display: none;
   }
   body {
-    line-height: 1;
+    line-height: auto;
   }
   menu, ol, ul {
     list-style: none;
