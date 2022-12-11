@@ -37,7 +37,7 @@ export interface SearchInputProps {
   placeholder: string;
   page: '전체' | '리스트';
   size: 'small' | 'large';
-  handleSubmit: ComponentProps<'form'>['onSubmit'];
+  handleSubmit?: ComponentProps<'form'>['onSubmit'];
 }
 
 export interface formProps {
