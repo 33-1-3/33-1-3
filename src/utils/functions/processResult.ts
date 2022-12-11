@@ -1,4 +1,4 @@
-import { RawResult, ProcessResult } from '@/types/data';
+import { RawResult, ProcessedResult } from '@/types/data';
 
 const validator = (data: string | Array<string>) => {
   if (typeof data === 'string') {
@@ -10,9 +10,10 @@ const validator = (data: string | Array<string>) => {
   return false;
 };
 
-const processResult = (result: RawResult[]): ProcessResult[] =>
+const processResult = (result: RawResult[]): ProcessedResult[] =>
   result.map(
     ({
+      id,
       country,
       cover_image,
       genre,
@@ -25,6 +26,7 @@ const processResult = (result: RawResult[]): ProcessResult[] =>
       const [artist, albumTitle] = title.split(' - ');
 
       return {
+        id: id,
         titleInfo: { title: albumTitle, artist },
         detailInfo: [
           {
