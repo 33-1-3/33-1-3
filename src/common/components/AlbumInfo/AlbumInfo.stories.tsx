@@ -1,11 +1,10 @@
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
-  mockTitleInfo_default,
-  mockTitleInfo_ellipsis,
-  mockDetailInfo_default,
-  mockDetailInfo_ellipsis,
+  mockSearchResult_default,
+  mockSearchResult_ellipsis,
 } from '@/utils/mocks/mockInfo';
 import AlbumInfo from './AlbumInfo';
+import { ProcessedResult } from '@/types/data';
 
 export default {
   title: 'common/components/AlbumInfo',
@@ -42,30 +41,26 @@ export const AllDefault = Template.bind({});
 AllDefault.args = {
   page: 'all',
   view: 'block',
-  titleInfo: mockTitleInfo_default,
-  detailInfo: mockDetailInfo_default,
+  searchResult: mockSearchResult_default as ProcessedResult,
 };
 
 export const AllEllpsis = Template.bind({});
 AllEllpsis.args = {
   page: 'all',
   view: 'block',
-  titleInfo: mockTitleInfo_ellipsis,
-  detailInfo: mockDetailInfo_ellipsis,
+  searchResult: mockSearchResult_ellipsis as ProcessedResult,
 };
 
 export const CollectionDefault = Template.bind({});
 CollectionDefault.args = {
   page: 'collection',
   view: 'block',
-  titleInfo: mockTitleInfo_default,
-  detailInfo: mockDetailInfo_default,
+  searchResult: mockSearchResult_default as ProcessedResult,
 };
 
 export const CollectionEllpsis = Template.bind({});
 CollectionEllpsis.args = {
   page: 'collection',
   view: 'block',
-  titleInfo: mockTitleInfo_ellipsis,
-  detailInfo: mockDetailInfo_ellipsis,
+  searchResult: mockSearchResult_ellipsis as ProcessedResult,
 };
