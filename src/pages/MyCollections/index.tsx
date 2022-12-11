@@ -7,9 +7,12 @@ import {
   PageTitle,
   AddCollectionButton,
   Footer,
+  TextInput,
 } from '@/common/components';
 import { Bookshelf } from './components';
 import { mockUsersData } from '@/utils/mockInfo';
+import { useRecoilState } from 'recoil';
+import { dialogState } from '@/recoil/globalState';
 
 const MyCollectionsPageTitle = styled(PageTitle)`
   margin-top: 56px;
@@ -27,7 +30,7 @@ export default function MyCollections() {
   const userid = +useParams().userid;
   const [userData] = mockUsersData.filter((userData) => userData.id === userid);
   const userCollections = userData.collections;
-  console.log(userCollections);
+  const [_, setDialog] = useRecoilState(dialogState);
 
   return (
     <>
@@ -36,9 +39,26 @@ export default function MyCollections() {
         <MyCollectionsPageTitle>My Collections</MyCollectionsPageTitle>
         <CollectionsWrapper style={{ width: '640px' }}>
           <AddCollectionButton
-            onClick={() => {
-              console.log('TODO: open modal');
-            }}
+            onClick={() =>
+              setDialog({
+                isOpen: true,
+                width: 480,
+                height: 300,
+                title: 'Create Collection',
+                children: (
+                  <TextInput
+                    errorMsg="최소 두 글자 이상 입력해주세요."
+                    height={36}
+                    label="Collection Name"
+                    placeholder="생성할 콜렉션의 이름을 입력해주세요."
+                    required
+                    validationTester={/^.{2,}$/}
+                    width={416}
+                  />
+                ),
+                confirm: () => console.log('콜렉션 생성'),
+              })
+            }
             size="large"
           />
           {userCollections.map((collection) => {

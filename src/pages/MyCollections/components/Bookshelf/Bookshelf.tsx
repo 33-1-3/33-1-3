@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { IconButton } from '@/common/components';
+import { useRecoilState } from 'recoil';
+import { dialogState } from '@/recoil/globalState';
 export interface BookshelfProps {
   userId: number;
   collectionId: number;
@@ -37,6 +39,7 @@ const Bookshelf = ({
   step,
   ...props
 }: BookshelfProps) => {
+  const [_, setDialog] = useRecoilState(dialogState);
   const imgIdx = Math.min(Math.ceil(count / step), 5);
   return (
     <Wrapper style={{ width: '640px' }}>
@@ -46,13 +49,21 @@ const Bookshelf = ({
           width={28}
           height={28}
           iconType="pencil"
-          clickHandler={() => console.log('TODO: open modal')}
+          clickHandler={() => console.log('TODO: 편집 모달 디자인 필요')}
         />
         <IconButton
           width={28}
           height={28}
           iconType="minus"
-          clickHandler={() => console.log('TODO: open modal')}
+          clickHandler={() =>
+            setDialog({
+              isOpen: true,
+              width: 480,
+              height: 200,
+              children: '콜렉션을 삭제하시겠습니까?',
+              confirm: () => console.log('콜렉션 삭제'),
+            })
+          }
         />
       </IconButtons>
       <Link

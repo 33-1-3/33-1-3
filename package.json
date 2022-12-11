@@ -85,6 +85,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
     "react-uuid": "^2.0.0",
+    "recoil": "^0.7.6",
     "vite-plugin-svgr": "^2.2.2"
   }
 }

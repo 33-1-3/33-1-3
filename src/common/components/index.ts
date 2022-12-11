@@ -22,6 +22,7 @@ import Footer from './Footer/Footer';
 import Main from './Main/Main';
 import Dropdown from './Dropdown/Dropdown';
 import VinylItems from './VinylItems/VinylItems';
+import Dialog from './Dialog/Dialog';
 
 export {
   AddCollectionButton,
@@ -48,4 +49,5 @@ export {
   Main,
   Dropdown,
   VinylItems,
+  Dialog,
 };

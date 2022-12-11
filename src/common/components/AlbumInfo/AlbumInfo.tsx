@@ -2,6 +2,9 @@ import TitleInfo from '../TitleInfo/TitleInfo';
 import DetailInfo, { DetailInfoProps } from '../DetailInfo/DetailInfo';
 import IconButton from '../IconButton/IconButton';
 import styled, { css } from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { dialogState } from '@/recoil/globalState';
+import { SelectCollectionForm } from '@/pages/Item/components';
 
 export interface ResultViewProps {
   view: 'block' | 'list' | 'detail';
@@ -32,6 +35,8 @@ function AlbumInfo({
     ({ infoName }) => infoName === 'Released' || infoName === 'Genre'
   );
 
+  const [_, setDialog] = useRecoilState(dialogState);
+
   return (
     <>
       <AlbumInfoWrapper view={view} {...props}>
@@ -57,6 +62,46 @@ function AlbumInfo({
           height={buttonSize}
           iconType={buttonType}
           view={view}
+          clickHandler={() =>
+            page === 'all'
+              ? setDialog({
+                  isOpen: true,
+                  width: 480,
+                  height: 480,
+                  title: 'Add Items',
+                  children: (
+                    <SelectCollectionForm
+                      collectionList={[
+                        {
+                          isChecked: false,
+                          title: '소장 중 💼',
+                        },
+                        {
+                          isChecked: true,
+                          title: '갖고 싶다... 🤤',
+                        },
+                        {
+                          isChecked: false,
+                          title: '❤K-POP❤',
+                        },
+                        {
+                          isChecked: false,
+                          title:
+                            '엄청엄청긴타이트으으응으ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ일때',
+                        },
+                      ]}
+                    />
+                  ),
+                  confirm: () => console.log('아이템 추가'),
+                })
+              : setDialog({
+                  isOpen: true,
+                  width: 480,
+                  height: 200,
+                  children: '아이템을 삭제하시겠습니까?',
+                  confirm: () => console.log('아이템 삭제'),
+                })
+          }
         />
       </AlbumInfoWrapper>
       {view === 'detail' && (
@@ -67,6 +112,7 @@ function AlbumInfo({
               infoName={infoName}
               infoContent={infoContent}
               isValid={isValid}
+              // TODO: handler
             />
           ))}
         </DetailInfoWrapper>
