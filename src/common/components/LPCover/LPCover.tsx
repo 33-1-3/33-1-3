@@ -1,11 +1,13 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { ProcessedResult } from '@/types/data';
 
 const HEIGHT_PX = {
   small: 150,
   large: 394,
 };
 
-const Wrapper = styled.div<{ heightNum: number }>`
+const Wrapper = styled(Link)<{ heightNum: number }>`
   position: relative;
 
   &:hover .vinyl {
@@ -46,10 +48,7 @@ const Vinyl = styled.img`
 `;
 
 export interface LPCoverProps {
-  // 음반 커버 이미지 경로
-  imgURL: string;
-  // 음반 커버 이미지 경로가 올바르지 않을 때 대체 음반 커버 이미지와 함께 표시할 음반 제목
-  title: string;
+  searchResult: ProcessedResult;
   // 표시할 음반 커버 크기
   size: 'small' | 'large';
   // 마우스 호버시 LP판 나오는 애니메이션 작동 여부
@@ -58,16 +57,18 @@ export interface LPCoverProps {
 }
 
 const LPCover = ({
-  imgURL,
-  title,
+  searchResult,
   size,
   hoverInteraction,
   ...props
 }: LPCoverProps) => {
   const heightNum = HEIGHT_PX[size];
+  const { id, titleInfo, imgURL } = searchResult;
 
   return (
     <Wrapper
+      to={`/item/${id}`}
+      state={searchResult}
       heightNum={heightNum}
       style={{ width: `${heightNum}px`, height: `${heightNum}px` }}
       {...props}
@@ -75,7 +76,7 @@ const LPCover = ({
       <Cover
         src={imgURL}
         alt=""
-        data-title={title}
+        data-title={titleInfo.title}
         heightNum={heightNum}
         width={`${heightNum}`}
         height={`${heightNum}`}
