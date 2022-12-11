@@ -10,7 +10,7 @@ export const SORT_CONTENT: DropdownContentType[] = [
   },
   {
     key: 'default',
-    value: '정확도',
+    value: '정확도순',
   },
   {
     key: 'date',
@@ -20,7 +20,7 @@ export const SORT_CONTENT: DropdownContentType[] = [
 
 export const SORT_LABEL = '정렬 방식 선택';
 
-export const VIEW_CONTENT = [
+export const VIEW_CONTENT: DropdownContentType[] = [
   {
     key: 'default',
     value: '보기 방식',

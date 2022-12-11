@@ -1,12 +1,12 @@
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { mockSearchResult } from '@/utils/mocks/mockInfo';
+import { mockSearchResults } from '@/utils/mocks/mockInfo';
 import VinylItems from './VinylItems';
 
 export default {
   title: 'common/components/VinylItems',
   component: VinylItems,
   args: {
-    searchResult: mockSearchResult,
+    searchResults: mockSearchResults,
   },
 } as ComponentMeta<typeof VinylItems>;
 

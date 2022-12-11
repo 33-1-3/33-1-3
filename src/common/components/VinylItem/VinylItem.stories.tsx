@@ -1,18 +1,12 @@
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import {
-  mockTitleInfo_default,
-  mockDetailInfo_default,
-  mockImgURL,
-} from '@/utils/mocks/mockInfo';
+import { mockSearchResult_default } from '@/utils/mocks/mockInfo';
 import VinylItem from './VinylItem';
 
 export default {
   title: 'common/components/VinylItem',
   component: VinylItem,
   args: {
-    titleInfo: mockTitleInfo_default,
-    detailInfo: mockDetailInfo_default,
-    imgURL: mockImgURL,
+    searchResult: mockSearchResult_default,
   },
   argTypes: {
     page: {
