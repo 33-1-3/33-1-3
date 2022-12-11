@@ -7,7 +7,6 @@ import Item from './pages/Item';
 import MyCollections from '@/pages/MyCollections/index';
 import MyCollection from '@/pages/MyCollection/index';
 import MyItem from './pages/MyItem';
-import '@/App.css';
 
 function App() {
   return (
@@ -17,7 +16,9 @@ function App() {
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/searchresult" element={<SearchResult />}></Route>
       <Route path="/item/:isbn" element={<Item />}></Route>
-      <Route path="/mycollections/:userid" element={<MyCollections />}></Route>
+      {/* <Route path="/mycollections/:userid" element={<MyCollections />}></Route> */}
+      {/* 로그인 기능 구현 이전 임시 MyCollections 페이지 */}
+      <Route path="/mycollections" element={<MyCollections />}></Route>
       <Route
         path="/mycollection/:userid/:collectionid"
         element={<MyCollection />}
