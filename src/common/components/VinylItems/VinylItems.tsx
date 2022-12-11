@@ -3,7 +3,7 @@ import VinylItem from '../VinylItem/VinylItem';
 import { TitleInfoProps } from '../TitleInfo/TitleInfo';
 import { DetailInfoProps } from '../DetailInfo/DetailInfo';
 import { ResultViewProps } from '../AlbumInfo/AlbumInfo';
-import { ProcessResultProps } from '@/pages/SearchResult';
+import { ProcessResult } from '@/types/data';
 import styled, { css } from 'styled-components';
 
 export interface VinylItemProps {
@@ -13,7 +13,7 @@ export interface VinylItemProps {
 }
 
 export interface VinylItemsProps extends ResultViewProps {
-  searchResult: ProcessResultProps[];
+  searchResult: ProcessResult[];
   page: 'all' | 'collection';
 }
 

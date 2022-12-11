@@ -3,7 +3,7 @@ import {
   mockTitleInfo_default,
   mockDetailInfo_default,
   mockImgURL,
-} from '@/utils/mockInfo';
+} from '@/utils/mocks/mockInfo';
 import VinylItem from './VinylItem';
 
 export default {

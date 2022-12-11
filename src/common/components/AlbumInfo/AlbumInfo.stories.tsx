@@ -4,7 +4,7 @@ import {
   mockTitleInfo_ellipsis,
   mockDetailInfo_default,
   mockDetailInfo_ellipsis,
-} from '@/utils/mockInfo';
+} from '@/utils/mocks/mockInfo';
 import AlbumInfo from './AlbumInfo';
 
 export default {
