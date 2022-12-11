@@ -1,6 +1,5 @@
 import AddCollectionButton from './AddCollectionButton/AddCollectionButton';
 import IconButton from './IconButton/IconButton';
-import SquareLink from './SquareLink/SquareLink';
 import LogoLink from './LogoLink/LogoLink';
 import MoveLink from './MoveLink/MoveLink';
 import LPCover from './LPCover/LPCover';
@@ -20,11 +19,11 @@ import AlbumInfo from './AlbumInfo/AlbumInfo';
 import VinylItem from './VinylItem/VinylItem';
 import Footer from './Footer/Footer';
 import Main from './Main/Main';
+import Dropdown from './Dropdown/Dropdown';
 
 export {
   AddCollectionButton,
   IconButton,
-  SquareLink,
   LogoLink,
   MoveLink,
   LPCover,
@@ -44,4 +43,5 @@ export {
   VinylItem,
   Footer,
   Main,
+  Dropdown,
 };

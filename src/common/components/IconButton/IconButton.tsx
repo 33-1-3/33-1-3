@@ -17,6 +17,41 @@ export interface IconButtonProps {
   backgroundColor: string;
 }
 
+export interface IconButtonContainerProps {
+  color: string;
+  backgroundColor: string;
+}
+
+const IconButtonContainer = styled.button<IconButtonContainerProps>`
+  rect {
+    fill: ${({ backgroundColor }) => backgroundColor};
+    stroke: ${({ color }) => color};
+  }
+  path {
+    fill: ${({ color }) => color};
+    stroke: ${({ color }) => color};
+  }
+  line {
+    stroke: ${({ color }) => color};
+  }
+  &:hover,
+  &:focus {
+    rect {
+      transition: 0.3s ease-out;
+      fill: ${({ color }) => color};
+    }
+    path {
+      transition: 0.3s ease-out;
+      fill: ${({ backgroundColor }) => backgroundColor};
+      stroke: ${({ backgroundColor }) => backgroundColor};
+    }
+    line {
+      transition: 0.3s ease-out;
+      stroke: ${({ backgroundColor }) => backgroundColor};
+    }
+  }
+`;
+
 const IconButton = ({
   width,
   height,
@@ -25,48 +60,18 @@ const IconButton = ({
   backgroundColor,
   ...props
 }: IconButtonProps) => {
-  const ButtonStyle = { width, height };
-  const IconStyle = {
-    width,
-    height,
-  };
-
   const IconComponent = Icons[iconType];
 
-  const StyledIconComponent = styled(IconComponent)`
-    rect {
-      fill: ${backgroundColor};
-      stroke: ${color};
-    }
-    path {
-      fill: ${color};
-      stroke: ${color};
-    }
-    line {
-      stroke: ${color};
-    }
-    &:hover,
-    &:focus {
-      rect {
-        transition: 0.3s ease-out;
-        fill: ${color};
-      }
-      path {
-        transition: 0.3s ease-out;
-        fill: ${backgroundColor};
-        stroke: ${backgroundColor};
-      }
-      line {
-        transition: 0.3s ease-out;
-        stroke: ${backgroundColor};
-      }
-    }
-  `;
-
   return (
-    <button style={ButtonStyle} type="button" {...props}>
-      <StyledIconComponent style={IconStyle} />
-    </button>
+    <IconButtonContainer
+      type="button"
+      style={{ width, height }}
+      color={color}
+      backgroundColor={backgroundColor}
+      {...props}
+    >
+      <IconComponent width={width} height={height} />
+    </IconButtonContainer>
   );
 };
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
   LogoLink,
-  MoveFormLink,
+  MoveLink,
   SignInAndUpForm,
   WaveFooter,
 } from '@/common/components';
@@ -24,7 +24,7 @@ export default function Signin() {
       <FormContainer>
         <HeaderLogo height="72px" width="132px" />
         <SignInAndUpForm option="signin" />
-        <MoveFormLink moveTarget="signup" />
+        <MoveLink moveTarget="signup" />
       </FormContainer>
       <WaveFooter />
     </>
