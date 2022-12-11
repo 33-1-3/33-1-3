@@ -16,9 +16,7 @@ function App() {
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/searchresult" element={<SearchResult />}></Route>
       <Route path="/item/:isbn" element={<Item />}></Route>
-      {/* <Route path="/mycollections/:userid" element={<MyCollections />}></Route> */}
-      {/* 로그인 기능 구현 이전 임시 MyCollections 페이지 */}
-      <Route path="/mycollections" element={<MyCollections />}></Route>
+      <Route path="/mycollections/:userid" element={<MyCollections />}></Route>
       <Route
         path="/mycollection/:userid/:collectionid"
         element={<MyCollection />}
