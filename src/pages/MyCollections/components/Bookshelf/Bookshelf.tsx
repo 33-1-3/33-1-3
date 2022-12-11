@@ -72,6 +72,8 @@ const Bookshelf = ({
 };
 
 Bookshelf.defaultProps = {
+  width: '640px',
+  height: '160px',
   step: 10,
 };
 

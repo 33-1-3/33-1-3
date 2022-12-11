@@ -6,7 +6,7 @@ export interface TextInputProps {
   height: number;
   color: string;
   borderColor: string;
-  label: string;
+  label?: string;
   placeholder: string;
   required: boolean;
   validationTester: RegExp;

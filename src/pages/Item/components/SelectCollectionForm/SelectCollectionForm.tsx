@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import CollectionCheckbox from '../CollectionCheckbox/CollectionCheckbox';
+import { CollectionCheckbox } from '../';
 import ToggleInputButton from './ToggleInputButton';
 
 export interface FormProps {
