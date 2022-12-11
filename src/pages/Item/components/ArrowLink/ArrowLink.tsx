@@ -3,22 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export interface IconProps {
-  $width: string;
-  $height: string;
   $color: string;
   $backgroundcolor: string;
 }
 
 export interface LinkProps {
-  width: string;
-  height: string;
+  width: string | number;
+  height: string | number;
   color: string;
   backgroundcolor: string;
 }
 
 const StyledArrowIcon = styled(ArrowIcon)<IconProps>`
-  width: ${({ $width }) => $width};
-  height: ${({ $height }) => $height};
   path {
     fill: ${({ $color }) => $color};
     stroke: ${({ $color }) => $color};
@@ -37,10 +33,10 @@ const ArrowLink = ({
 }: LinkProps) => {
   const navigate = useNavigate();
   return (
-    <button onClick={() => navigate(-1)} {...props}>
+    <button style={{ width, height }} onClick={() => navigate(-1)} {...props}>
       <StyledArrowIcon
-        $width={width}
-        $height={height}
+        width={width}
+        height={height}
         $color={color}
         $backgroundcolor={backgroundcolor}
       />

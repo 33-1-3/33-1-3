@@ -8,6 +8,13 @@ export interface AddCollectionButtonProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
+export interface DashButtonProps {
+  size: 'small' | 'large';
+  $color: string;
+  backgroundColor: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}
+
 const buttonStyle = {
   small: {
     width: '408px',
@@ -23,22 +30,19 @@ const buttonStyle = {
   },
 };
 
-const DashButton = styled.button<AddCollectionButtonProps>`
+const DashButton = styled.button<DashButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: ${({ size }) => buttonStyle[size].gap};
 
-  width: ${({ size }) => buttonStyle[size].width};
-  height: ${({ size }) => buttonStyle[size].height};
-
-  border: 1px dashed ${({ color }) => color};
+  border: 1px dashed ${({ $color }) => $color};
   border-radius: 4px;
-  color: ${({ color }) => color};
+  color: ${({ $color }) => $color};
   font-size: ${({ size }) => buttonStyle[size].fontSize};
 
   circle {
-    fill: ${({ color }) => color};
+    fill: ${({ $color }) => $color};
   }
   path {
     fill: ${({ backgroundColor }) => backgroundColor};
@@ -50,14 +54,14 @@ const DashButton = styled.button<AddCollectionButtonProps>`
   }
 
   :hover {
-    background-color: ${({ color }) => color};
+    background-color: ${({ $color }) => $color};
     color: ${({ backgroundColor }) => backgroundColor};
     circle {
       fill: ${({ backgroundColor }) => backgroundColor};
     }
     path {
-      fill: ${({ color }) => color};
-      stroke: ${({ color }) => color};
+      fill: ${({ $color }) => $color};
+      stroke: ${({ $color }) => $color};
     }
   }
 `;
@@ -69,11 +73,13 @@ const AddCollectionButton = ({
   onClick,
   ...args
 }: AddCollectionButtonProps) => {
+  const { width, height } = buttonStyle[size];
   return (
     <DashButton
       type="button"
+      style={{ width, height }}
       size={size}
-      color={color}
+      $color={color}
       backgroundColor={backgroundColor}
       onClick={onClick}
       {...args}
