@@ -21,7 +21,8 @@ export interface RawResult {
   formats: string[];
 }
 
-export interface ProcessResult {
+export interface ProcessedResult {
+  id: number;
   titleInfo: { title: string; artist: string };
   detailInfo: {
     infoName: 'Country' | 'Genre' | 'Label' | 'Style' | 'Released';
@@ -30,4 +31,17 @@ export interface ProcessResult {
   }[];
   imgURL: string;
   resourceURL: string;
+}
+
+export interface RawTracklist {
+  position: string;
+  type_: string;
+  title: string;
+  duration: string;
+}
+
+export interface ProcessedTracklist {
+  infoName: 'Tracklist';
+  infoContent: RawTracklist[];
+  isValid: boolean;
 }

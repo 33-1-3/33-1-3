@@ -18,7 +18,7 @@ import {
   VIEW_LABEL,
 } from '@/utils/constants/dropdown';
 import processResult from '@/utils/functions/processResult';
-import { ProcessResult } from '@/types/data';
+import { ProcessedResult } from '@/types/data';
 
 const SECRET = import.meta.env.VITE_API_SECRET;
 const KEY = import.meta.env.VITE_API_KEY;
@@ -26,7 +26,7 @@ const KEY = import.meta.env.VITE_API_KEY;
 export default function SearchResult() {
   const [searchParams] = useSearchParams();
   const [itemCount, setItemCount] = useState<number>(0);
-  const [result, setResult] = useState<ProcessResult[]>([]);
+  const [result, setResult] = useState<ProcessedResult[]>([]);
 
   const params = new URLSearchParams(window.location.search);
   const value = params.get('query');

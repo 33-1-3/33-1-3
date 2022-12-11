@@ -1,30 +1,66 @@
-import { useParams } from 'react-router-dom';
-import { ArrowLink } from './components';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+import { Header, Main, Footer, LPCover, AlbumInfo } from '@/common/components';
+import {
+  ProcessedResult,
+  ProcessedTracklist,
+  RawTracklist,
+} from '@/types/data';
+import axios from 'axios';
+
+const vaildator = (tracklist: RawTracklist[]) =>
+  tracklist.length !== 0 && Array.isArray(tracklist);
 
 export default function Item() {
-  const { isbn } = useParams();
+  const [tracklist, setTracklist] = useState({});
+  const location = useLocation();
+  const searchResult = location.state as ProcessedResult;
 
+  useEffect(() => {
+    async function fetchTrackList() {
+      try {
+        const res = await axios.get(searchResult.resourceURL);
+
+        setTracklist({
+          infoName: 'Tracklist',
+          infoContent: res.data.tracklist,
+          isValid: vaildator(res.data.tracklist),
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchTrackList();
+  }, []);
+
+  console.log(tracklist);
   return (
     <>
-      <h1>음반 상세정보</h1>
-      <div
-        style={{
-          width: '15rem',
-          height: '15rem',
-          margin: '2rem auto',
-          lineHeight: '15rem',
-          backgroundColor: 'lightgray',
-        }}
-      >
-        album cover
-      </div>
-      <div>artist: 가수 이름</div>
-      <div>album: 앨범 이름</div>
-      <div>release date: 발매일</div>
-      <div>genre: 장르</div>
-      <div>isbn number: {isbn}</div>
-      <div>track list: 트랙 리스트</div>
-      <ArrowLink />
+      <Header />
+      <Main>
+        <h1 className="srOnly">LP 상세 정보</h1>
+        <DetailWrapper>
+          <LPCover
+            searchResult={searchResult}
+            size="large"
+            hoverInteraction={false}
+          ></LPCover>
+          <AlbumInfo
+            searchResult={searchResult}
+            tracklist={tracklist as ProcessedTracklist}
+            page="all"
+            view="detail"
+          />
+        </DetailWrapper>
+      </Main>
+      <Footer />
     </>
   );
 }
+
+const DetailWrapper = styled.div`
+  width: min-content;
+  margin: 0 auto;
+  margin-top: 60px;
+`;
