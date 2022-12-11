@@ -7,7 +7,6 @@ import Item from './pages/Item';
 import MyCollections from '@/pages/MyCollections/index';
 import MyCollection from '@/pages/MyCollection/index';
 import MyItem from './pages/MyItem';
-import '@/App.css';
 
 function App() {
   return (

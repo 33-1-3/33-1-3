@@ -34,7 +34,7 @@ const Header = ({ isLogin, ...props }: HeaderProps) => {
     <StyledHeader style={{ height: 64, width: '100vw' }} {...props}>
       <LogoLink height="40px" width="74px" />
       {!isMain && <SearchInput size="small" />}
-      <SquareLink link="/" width={178}>
+      <SquareLink link="/mycollections/1" width={178}>
         My Collections
       </SquareLink>
       {isLogin ? (
