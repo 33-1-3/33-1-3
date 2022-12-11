@@ -2,6 +2,7 @@ import { ReactComponent as PlusIcon } from '@/assets/plus.svg';
 import { ReactComponent as MinusIcon } from '@/assets/minus.svg';
 import { ReactComponent as PencilIcon } from '@/assets/pencil.svg';
 import styled from 'styled-components';
+import { MouseEventHandler } from 'react';
 
 const Icons = {
   plus: PlusIcon,
@@ -15,6 +16,7 @@ export interface IconButtonProps {
   iconType: 'plus' | 'minus' | 'pencil';
   color: string;
   backgroundColor: string;
+  clickHandler: MouseEventHandler<HTMLButtonElement>;
 }
 
 export interface IconButtonContainerProps {
@@ -58,6 +60,7 @@ const IconButton = ({
   iconType,
   color,
   backgroundColor,
+  clickHandler,
   ...props
 }: IconButtonProps) => {
   const IconComponent = Icons[iconType];
@@ -68,6 +71,7 @@ const IconButton = ({
       style={{ width, height }}
       color={color}
       backgroundColor={backgroundColor}
+      onClick={clickHandler}
       {...props}
     >
       <IconComponent width={width} height={height} />

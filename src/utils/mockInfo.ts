@@ -21,6 +21,7 @@ const mockTitleInfo_ellipsis = {
   title: '가나다라마바사아자차카타파하ABCDEFGHIJKLMNOPQRSTUVWXYZ',
   artist: '가나다라마바사아자차카타파하ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 };
+
 const mockDetailInfo_default: DetailInfoProps[] = [
   { infoName: 'Released', infoContent: '2014', isValid: true },
   {
@@ -286,6 +287,36 @@ const mockSearchResult = [
   },
 ];
 
+const mockUsersData = [
+  {
+    id: 1,
+    email: 'alice@gmail.com',
+    name: 'Alice',
+    password: 'alice12345',
+    collections: [
+      { id: 1, title: 'Harry Potter', albums: [11268237, 15860024, 21021292] },
+      {
+        id: 2,
+        title: 'Beatles',
+        albums: [
+          46402, 45729, 45799, 45760, 67473, 46382, 329854, 54549, 81019, 59435,
+          75259,
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    gmail: 'bob@gmail.com',
+    name: 'Bob',
+    password: 'bob12345',
+    collections: [
+      { id: 1, title: 'My Vinyls', albums: [21303211, 11255518] },
+      { id: 2, title: 'Wish Lists', albums: [6008401] },
+    ],
+  },
+];
+
 export {
   mockTitleInfo_default,
   mockTitleInfo_ellipsis,
@@ -293,4 +324,5 @@ export {
   mockDetailInfo_ellipsis,
   mockImgURL,
   mockSearchResult,
+  mockUsersData,
 };

@@ -24,6 +24,7 @@ Small.args = {
   iconType: 'plus',
   color: 'var(--purple-900)',
   backgroundColor: 'var(--white)',
+  clickHandler: () => console.log('Plus icon clicked'),
 };
 
 export const Regular = Template.bind({});
@@ -33,6 +34,7 @@ Regular.args = {
   iconType: 'plus',
   color: 'var(--purple-900)',
   backgroundColor: 'var(--white)',
+  clickHandler: () => console.log('Plus icon clicked'),
 };
 
 export const Large = Template.bind({});
@@ -42,4 +44,5 @@ Large.args = {
   iconType: 'plus',
   color: 'var(--purple-900)',
   backgroundColor: 'var(--white)',
+  clickHandler: () => console.log('Plus icon clicked'),
 };
