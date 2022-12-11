@@ -70,7 +70,6 @@ export const GlobalStyle = createGlobalStyle/*css*/ `
   }
   body {
     font-family: 'LINESeed';
-    font-weight: 700;
   }
   .srOnly {
     overflow: hidden;

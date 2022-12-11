@@ -3,6 +3,7 @@ import IconButton from './IconButton/IconButton';
 import LogoLink from './LogoLink/LogoLink';
 import MoveLink from './MoveLink/MoveLink';
 import LPCover from './LPCover/LPCover';
+import PageTitle from './PageTitle/PageTitle';
 import ProfileLink from './ProfileLink/ProfileLink';
 import SearchInput from './SearchInput/SearchInput';
 import SearchResultText from './SearchResultText/SearchResultText';
@@ -28,6 +29,7 @@ export {
   LogoLink,
   MoveLink,
   LPCover,
+  PageTitle,
   ProfileLink,
   SearchInput,
   SearchResultText,
