@@ -10,7 +10,7 @@ export default {
   },
   argTypes: {
     view: {
-      options: ['cover', 'list', 'detail'],
+      options: ['block', 'list', 'detail'],
       control: { type: 'radio' },
     },
   },
@@ -20,11 +20,11 @@ const Template: ComponentStory<typeof TitleInfo> = (args) => (
   <TitleInfo {...args} />
 );
 
-export const Cover = Template.bind({});
-Cover.args = {
-  view: 'cover',
+export const Block = Template.bind({});
+Block.args = {
+  view: 'block',
 };
-Cover.parameters = {
+Block.parameters = {
   design: {
     url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=177%3A643&t=ri42uDzp7Wjgw7vi-4',
   },

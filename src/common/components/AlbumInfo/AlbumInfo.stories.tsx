@@ -16,7 +16,7 @@ export default {
       control: { type: 'radio' },
     },
     view: {
-      options: ['cover', 'list', 'detail'],
+      options: ['block', 'list', 'detail'],
       control: { type: 'radio' },
     },
   },
@@ -41,7 +41,7 @@ const Template: ComponentStory<typeof AlbumInfo> = (args) => (
 export const AllDefault = Template.bind({});
 AllDefault.args = {
   page: 'all',
-  view: 'cover',
+  view: 'block',
   titleInfo: mockTitleInfo_default,
   detailInfo: mockDetailInfo_default,
 };
@@ -49,7 +49,7 @@ AllDefault.args = {
 export const AllEllpsis = Template.bind({});
 AllEllpsis.args = {
   page: 'all',
-  view: 'cover',
+  view: 'block',
   titleInfo: mockTitleInfo_ellipsis,
   detailInfo: mockDetailInfo_ellipsis,
 };
@@ -57,7 +57,7 @@ AllEllpsis.args = {
 export const CollectionDefault = Template.bind({});
 CollectionDefault.args = {
   page: 'collection',
-  view: 'cover',
+  view: 'block',
   titleInfo: mockTitleInfo_default,
   detailInfo: mockDetailInfo_default,
 };
@@ -65,7 +65,7 @@ CollectionDefault.args = {
 export const CollectionEllpsis = Template.bind({});
 CollectionEllpsis.args = {
   page: 'collection',
-  view: 'cover',
+  view: 'block',
   titleInfo: mockTitleInfo_ellipsis,
   detailInfo: mockDetailInfo_ellipsis,
 };

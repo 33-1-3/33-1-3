@@ -20,7 +20,7 @@ export default {
       control: { type: 'radio' },
     },
     view: {
-      options: ['cover', 'list', 'detail'],
+      options: ['block', 'list', 'detail'],
       control: { type: 'radio' },
     },
   },
@@ -42,10 +42,10 @@ const Template: ComponentStory<typeof VinylItem> = (args) => (
   <VinylItem {...args} />
 );
 
-export const AllCover = Template.bind({});
-AllCover.args = {
+export const AllBlock = Template.bind({});
+AllBlock.args = {
   page: 'all',
-  view: 'cover',
+  view: 'block',
 };
 
 export const AllList = Template.bind({});
@@ -60,10 +60,10 @@ AllDetail.args = {
   view: 'detail',
 };
 
-export const CollectionCover = Template.bind({});
-CollectionCover.args = {
+export const CollectionBlock = Template.bind({});
+CollectionBlock.args = {
   page: 'collection',
-  view: 'cover',
+  view: 'block',
 };
 
 export const CollectionList = Template.bind({});

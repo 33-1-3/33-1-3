@@ -20,6 +20,7 @@ import VinylItem from './VinylItem/VinylItem';
 import Footer from './Footer/Footer';
 import Main from './Main/Main';
 import Dropdown from './Dropdown/Dropdown';
+import VinylItems from './VinylItems/VinylItems';
 
 export {
   AddCollectionButton,
@@ -44,4 +45,5 @@ export {
   Footer,
   Main,
   Dropdown,
+  VinylItems,
 };

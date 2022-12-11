@@ -11,12 +11,10 @@ function SearchResultText({ resultCount, ...props }: SearchResultTextProps) {
   return (
     <SearchResultTextWrapper {...props}>
       <KeyWord>{`"${searchParams.get('query')}"`}</KeyWord>
-      <ResultInfo>{`검색 결과 ${resultCount}건`}</ResultInfo>
+      <ResultInfo>{`검색 결과  ${resultCount} 건`}</ResultInfo>
     </SearchResultTextWrapper>
   );
 }
-
-SearchResultText.defaultProps = { resultCount: 0 };
 
 const fontStyle = css`
   font-weight: 700;

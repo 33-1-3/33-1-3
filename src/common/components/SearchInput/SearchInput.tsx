@@ -1,3 +1,4 @@
+import { ComponentProps } from 'react';
 import styled, { css } from 'styled-components';
 
 const fontSize = { small: '15px', large: '28px' };
@@ -36,15 +37,22 @@ export interface SearchInputProps {
   placeholder: string;
   page: '전체' | '리스트';
   size: 'small' | 'large';
+  handleSubmit: ComponentProps<'form'>['onSubmit'];
 }
 
 export interface formProps {
   formSize: 'small' | 'large';
 }
 
-function SearchInput({ placeholder, page, size, ...props }: SearchInputProps) {
+function SearchInput({
+  placeholder,
+  page,
+  size,
+  handleSubmit,
+  ...props
+}: SearchInputProps) {
   return (
-    <InputWrapper {...props}>
+    <InputWrapper onSubmit={handleSubmit} {...props}>
       <Input
         type="search"
         placeholder={placeholder}
