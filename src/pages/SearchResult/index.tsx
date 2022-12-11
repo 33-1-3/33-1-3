@@ -1,5 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
 import {
   Header,
   Main,
@@ -9,109 +11,22 @@ import {
   VinylItems,
 } from '@/common/components';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
-import styled from 'styled-components';
-import axios from 'axios';
+import {
+  SORT_CONTENT,
+  SORT_LABEL,
+  VIEW_CONTENT,
+  VIEW_LABEL,
+} from '@/utils/constants/dropdown';
+import processResult from '@/utils/functions/processResult';
+import { ProcessResult } from '@/types/data';
 
 const SECRET = import.meta.env.VITE_API_SECRET;
 const KEY = import.meta.env.VITE_API_KEY;
 
-export interface RawResult {
-  country: string;
-  year: string;
-  format: string[];
-  label: string[];
-  type: string;
-  genre: string[];
-  style: string[];
-  id: number;
-  barcode: string[];
-  master_id: number;
-  master_url: string;
-  uri: string;
-  catno: string;
-  title: string;
-  thumb: string;
-  cover_image: string;
-  resource_url: string;
-  community: string[];
-  format_quantity: number;
-  formats: string[];
-}
-
-export interface ProcessResultProps {
-  titleInfo: { title: string; artist: string };
-  detailInfo: {
-    infoName: 'Country' | 'Genre' | 'Label' | 'Style' | 'Released';
-    infoContent: string | string[];
-    isValid: boolean;
-  }[];
-  imgURL: string;
-  resourceURL: string;
-}
-
-const validator = (data: string | Array<string>) => {
-  if (typeof data === 'string') {
-    return data !== '';
-  }
-  if (Array.isArray(data)) {
-    return data.length !== 0;
-  }
-  return false;
-};
-
-const processResult = (result: RawResult[]): ProcessResultProps[] =>
-  result.map(
-    ({
-      country,
-      cover_image,
-      genre,
-      label,
-      resource_url,
-      style,
-      title,
-      year,
-    }: RawResult) => {
-      const [artist, albumTitle] = title.split(' - ');
-
-      return {
-        titleInfo: { title: albumTitle, artist },
-        detailInfo: [
-          {
-            infoName: 'Released',
-            infoContent: year,
-            isValid: validator(year),
-          },
-          {
-            infoName: 'Genre',
-            infoContent: genre,
-            isValid: validator(genre),
-          },
-          {
-            infoName: 'Style',
-            infoContent: style,
-            isValid: validator(style),
-          },
-          {
-            infoName: 'Country',
-            infoContent: country,
-            isValid: validator(country),
-          },
-          {
-            infoName: 'Label',
-            infoContent: label,
-            isValid: validator(label),
-          },
-        ],
-        imgURL: cover_image,
-        resourceURL: resource_url,
-      };
-    }
-  );
-
 export default function SearchResult() {
   const [searchParams] = useSearchParams();
   const [itemCount, setItemCount] = useState<number>(0);
-  const [result, setResult] = useState<ProcessResultProps[]>([]);
+  const [result, setResult] = useState<ProcessResult[]>([]);
 
   const params = new URLSearchParams(window.location.search);
   const value = params.get('query');
@@ -145,42 +60,8 @@ export default function SearchResult() {
         <h1 className="srOnly">Search Result</h1>
         <SearchResultWrapper>
           <SearchResultText resultCount={itemCount} />
-          <Dropdown
-            content={[
-              {
-                key: 'default',
-                value: '정확도',
-              },
-              {
-                key: 'default',
-                value: '정확도',
-              },
-              {
-                key: 'date',
-                value: '최신순',
-              },
-            ]}
-            dropKind="sort"
-            label="정렬방식 선택"
-          />
-          <Dropdown
-            content={[
-              {
-                key: 'default',
-                value: '보기방식',
-              },
-              {
-                key: 'block',
-                value: '블록',
-              },
-              {
-                key: 'list',
-                value: '리스트',
-              },
-            ]}
-            dropKind="view"
-            label="보기방식 선택"
-          />
+          <Dropdown content={SORT_CONTENT} dropKind="sort" label={SORT_LABEL} />
+          <Dropdown content={VIEW_CONTENT} dropKind="view" label={VIEW_LABEL} />
         </SearchResultWrapper>
         <VinylItems
           searchResult={result}

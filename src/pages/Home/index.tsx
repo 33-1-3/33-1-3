@@ -9,27 +9,14 @@ export default function Home() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const { value } = (e.target as HTMLElement).querySelector('input');
+    const value = (e.target as HTMLElement).querySelector('input')
+      ?.value as string;
     const params = { query: value };
     navigate({
       pathname: '/searchresult',
       search: `?${createSearchParams(params)}&view=block`,
     });
   }
-
-  const Catchphrase = styled.h2`
-    margin-top: 10vh;
-    margin-bottom: var(--space-xl);
-    width: 100%;
-    text-shadow: 0px 2px 8px rgba(0, 0, 0, 1);
-  `;
-
-  const HighLight = styled.span`
-    margin-left: var(--space-sm);
-    font-size: 52px;
-    font-weight: 700;
-    color: var(--purple-900);
-  `;
 
   return (
     <>
@@ -44,3 +31,17 @@ export default function Home() {
     </>
   );
 }
+
+const Catchphrase = styled.h2`
+  margin-top: 10vh;
+  margin-bottom: var(--space-xl);
+  width: 100%;
+  text-shadow: 0px 2px 8px rgba(0, 0, 0, 1);
+`;
+
+const HighLight = styled.span`
+  margin-left: var(--space-sm);
+  font-size: 52px;
+  font-weight: 700;
+  color: var(--purple-900);
+`;
