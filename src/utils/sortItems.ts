@@ -1,16 +1,7 @@
-interface ProcessResultProps {
-  titleInfo: { title: string; artist: string };
-  detailInfo: {
-    infoName: 'Country' | 'Genre' | 'Label' | 'Style' | 'Released';
-    infoContent: string | string[];
-    isValid: boolean;
-  }[];
-  imgURL: string;
-  resourceURL: string;
-}
+import { ProcessedResult } from '@/types/data';
 
 const sortItems = (
-  processedResult: ProcessResultProps[],
+  processedResult: ProcessedResult[],
   sort: 'title' | 'artist' | 'count' | 'Released' | 'update'
 ) => {
   if (sort === 'title' || sort === 'artist') {

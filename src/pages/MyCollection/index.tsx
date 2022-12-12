@@ -10,115 +10,30 @@ import {
   SearchResultText,
   VinylItems,
 } from '@/common/components';
+import {
+  Collection_SORT_CONTENT,
+  SORT_LABEL,
+  VIEW_CONTENT,
+  VIEW_LABEL,
+} from '@/utils/constants/dropdown';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
 import { mockUsersData } from '@/utils/mocks/mockInfo';
 import styled from 'styled-components';
 import axios from 'axios';
 import { sortItems } from '@/utils/sortItems';
+import processResult from '@/utils/functions/processResult';
+import { ProcessedResult, RawResult } from '@/types/data';
 
 const SECRET = import.meta.env.VITE_API_SECRET;
 const KEY = import.meta.env.VITE_API_KEY;
 
-export interface RawResult {
-  country: string;
-  year: string;
-  format: string[];
-  label: string[];
-  type: string;
-  genre: string[];
-  style: string[];
-  id: number;
-  barcode: string[];
-  master_id: number;
-  master_url: string;
-  uri: string;
-  catno: string;
-  title: string;
-  thumb: string;
-  cover_image: string;
-  resource_url: string;
-  community: string[];
-  format_quantity: number;
-  formats: string[];
-}
-
-export interface ProcessResultProps {
-  titleInfo: { title: string; artist: string };
-  detailInfo: {
-    infoName: 'Country' | 'Genre' | 'Label' | 'Style' | 'Released';
-    infoContent: string | string[];
-    isValid: boolean;
-  }[];
-  imgURL: string;
-  resourceURL: string;
-}
-
-const validator = (data: string | Array<string>) => {
-  if (typeof data === 'string') {
-    return data !== '';
-  }
-  if (Array.isArray(data)) {
-    return data.length !== 0;
-  }
-  return false;
-};
-
-const processResult = (result: RawResult[]): ProcessResultProps[] =>
-  result.map(
-    ({
-      country,
-      cover_image,
-      genre,
-      label,
-      resource_url,
-      style,
-      title,
-      year,
-    }: RawResult) => {
-      const [artist, albumTitle] = title.split(' - ');
-
-      return {
-        titleInfo: { title: albumTitle, artist },
-        detailInfo: [
-          {
-            infoName: 'Released',
-            infoContent: year,
-            isValid: validator(year),
-          },
-          {
-            infoName: 'Genre',
-            infoContent: genre,
-            isValid: validator(genre),
-          },
-          {
-            infoName: 'Style',
-            infoContent: style,
-            isValid: validator(style),
-          },
-          {
-            infoName: 'Country',
-            infoContent: country,
-            isValid: validator(country),
-          },
-          {
-            infoName: 'Label',
-            infoContent: label,
-            isValid: validator(label),
-          },
-        ],
-        imgURL: cover_image,
-        resourceURL: resource_url,
-      };
-    }
-  );
-
-let collectionItems: undefined | ProcessResultProps[];
+let collectionItems: undefined | ProcessedResult[];
 
 export default function MyCollection() {
   const { userid, collectionid } = useParams();
   const [searchParams, _] = useSearchParams();
   // const [itemCount, setItemCount] = useState<number>(0);
-  const [result, setResult] = useState<ProcessResultProps[]>([]);
+  const [result, setResult] = useState<ProcessedResult[]>([]);
   const [count, setCount] = useState<number>();
   const [searchWord, setSearchWord] = useState<string>();
   const { collections } = mockUsersData.find(({ id }) => id === +userid);
@@ -132,7 +47,7 @@ export default function MyCollection() {
         return title.search(regexp) !== -1 || artist.search(regexp) !== -1;
       }
     );
-    setResult(matchItems as ProcessResultProps[]);
+    setResult(matchItems as ProcessedResult[]);
     setCount(matchItems?.length);
     setSearchWord(e.target.value);
   }
@@ -193,53 +108,11 @@ export default function MyCollection() {
             <SearchResultText searchWord={searchWord} resultCount={count} />
           )}
           <Dropdown
-            content={[
-              {
-                key: 'default',
-                value: '정렬 방식',
-              },
-              {
-                key: 'title',
-                value: '앨범 제목 순',
-              },
-              {
-                key: 'artist',
-                value: '가수 이름 순',
-              },
-              {
-                key: 'count',
-                value: '소장 개수 순',
-              },
-              {
-                key: 'Released',
-                value: '발매일 순',
-              },
-              {
-                key: 'update',
-                value: '업데이트 순',
-              },
-            ]}
+            content={Collection_SORT_CONTENT}
             dropKind="sort"
-            label="정렬방식 선택"
+            label={SORT_LABEL}
           />
-          <Dropdown
-            content={[
-              {
-                key: 'default',
-                value: '보기방식',
-              },
-              {
-                key: 'block',
-                value: '블록',
-              },
-              {
-                key: 'list',
-                value: '리스트',
-              },
-            ]}
-            dropKind="view"
-            label="보기방식 선택"
-          />
+          <Dropdown content={VIEW_CONTENT} dropKind="view" label={VIEW_LABEL} />
         </SearchResultWrapper>
 
         <VinylItems
