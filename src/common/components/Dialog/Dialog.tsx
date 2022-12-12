@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 import SqaureButton from '../SquareButton/SquareButton';
+import { useRecoilState } from 'recoil';
+import { initialDialogState, dialogState } from '@/recoil/globalState';
 
 const DialogBackground = styled.div`
   position: fixed;
-  z-index: 1000;
+  z-index: 9999;
   top: 0;
   left: 0;
   width: 100vw;
@@ -57,10 +59,6 @@ const DialogButtons = styled.div`
   padding: 24px;
 `;
 
-const closeDialog = () => {
-  console.log('closeDialog');
-};
-
 export interface DialogProps {
   isOpen: boolean;
   width: number;
@@ -78,11 +76,12 @@ const Dialog = ({
   children,
   confirm,
   ...props
-}: DialogProps) =>
-  createPortal(
+}: DialogProps) => {
+  const [_, setDialog] = useRecoilState(dialogState);
+  return createPortal(
     <>
       {isOpen && (
-        <DialogBackground onClick={closeDialog}>
+        <DialogBackground onClick={() => setDialog(initialDialogState)}>
           <DialogContainer
             style={{ width, height }}
             onClick={(e) => e.stopPropagation()}
@@ -101,7 +100,7 @@ const Dialog = ({
                 fontSize={18}
                 size={'large'}
                 isFilled={false}
-                onClick={closeDialog}
+                onClick={() => setDialog(initialDialogState)}
               >
                 취소
               </SqaureButton>
@@ -110,7 +109,8 @@ const Dialog = ({
         </DialogBackground>
       )}
     </>,
-    document.getElementById('root') as Element
+    document.getElementById('dialog-root') as Element
   );
+};
 
 export default Dialog;

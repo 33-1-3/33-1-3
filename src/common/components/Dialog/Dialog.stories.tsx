@@ -2,6 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Dialog from './Dialog';
 
 import { TextInput } from '@/common/components';
+import { SelectCollectionForm } from '@/pages/Item/components';
 
 export default {
   title: 'common/components/Dialog',
@@ -16,7 +17,28 @@ AddItemDialog.args = {
   width: 480,
   height: 480,
   title: 'Add Items',
-  children: <div>Pull 받아서 컴포넌트 채워넣을 예정</div>,
+  children: (
+    <SelectCollectionForm
+      collectionList={[
+        {
+          isChecked: false,
+          title: '소장 중 💼',
+        },
+        {
+          isChecked: true,
+          title: '갖고 싶다... 🤤',
+        },
+        {
+          isChecked: false,
+          title: '❤K-POP❤',
+        },
+        {
+          isChecked: false,
+          title: '엄청엄청긴타이트으으응으ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ일때',
+        },
+      ]}
+    />
+  ),
   confirm: () => console.log('아이템 추가'),
 };
 
