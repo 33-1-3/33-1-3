@@ -259,13 +259,13 @@ export default function MyCollection() {
 const MainWrapper = styled(Main)`
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 56px;
 `;
 
 const CenterSearchInput = styled(SearchInput)`
   width: fit-content;
-  transform: translateX(50%);
+  align-self: center;
   margin-top: var(--space-xxl);
 `;
 
