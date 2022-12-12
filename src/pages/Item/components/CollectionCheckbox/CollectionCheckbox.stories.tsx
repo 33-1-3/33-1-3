@@ -20,7 +20,6 @@ export const Default = Template.bind({});
 Default.args = {
   title: '소장 중 👜',
   isChecked: false,
-  setIsChecked() {},
 };
 
 export const Overflow = Template.bind({});
@@ -29,5 +28,4 @@ Overflow.args = {
     '부모 width를 넘어갈 때는 ellipsis 적용 부모 width를 넘어갈 때는 ellipsis 적용 부모 width를 넘어갈 때는 ellipsis 적용 부모 width를 넘어갈 때는 ellipsis 적용 부모 width를 넘어갈 때는 ellipsis 적용',
   width: '1000px',
   isChecked: true,
-  setIsChecked() {},
 };

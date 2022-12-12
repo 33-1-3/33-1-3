@@ -11,7 +11,7 @@ export default {
   },
   argTypes: {
     page: {
-      options: ['전체', '리스트'],
+      options: ['전체', '나의 콜렉션'],
       control: { type: 'radio' },
     },
     size: {

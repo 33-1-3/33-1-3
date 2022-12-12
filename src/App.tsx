@@ -1,5 +1,4 @@
-
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { dialogState } from './recoil/globalState';
 
