@@ -1,39 +1,27 @@
 import LPCover from '../LPCover/LPCover';
-import AlbumInfo, {
-  ResultViewProps,
-  AlbumInfoProps,
-} from '../AlbumInfo/AlbumInfo';
+import { AlbumInfo } from '@/common/components';
+import { ProcessedResult } from '@/types/data';
+import { ResultViewProps } from '../AlbumInfo/AlbumInfo';
 import styled, { css } from 'styled-components';
 
-export interface VinylItemProps extends AlbumInfoProps, ResultViewProps {
-  imgURL: string;
+export interface VinylItemProps {
+  searchResult: ProcessedResult;
+  page: 'all' | 'collection';
+  view: 'block' | 'list' | 'detail';
 }
 
-function VinylItem({
-  titleInfo,
-  detailInfo,
-  imgURL,
-  page,
-  view,
-  ...props
-}: VinylItemProps) {
+function VinylItem({ searchResult, page, view, ...props }: VinylItemProps) {
   const vinylSize = view === 'detail' ? 'large' : 'small';
   const isHover = view !== 'detail';
 
   return (
     <VinylItemWrapper view={view} {...props}>
       <LPCover
-        imgURL={imgURL}
-        title={titleInfo.title}
+        searchResult={searchResult}
         size={vinylSize}
         hoverInteraction={isHover}
       />
-      <AlbumInfo
-        titleInfo={titleInfo}
-        detailInfo={detailInfo}
-        page={page}
-        view={view}
-      />
+      <AlbumInfo searchResult={searchResult} page={page} view={view} />
     </VinylItemWrapper>
   );
 }

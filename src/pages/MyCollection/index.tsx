@@ -11,7 +11,7 @@ import {
   VinylItems,
 } from '@/common/components';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
-import { mockUsersData } from '@/utils/mockInfo';
+import { mockUsersData } from '@/utils/mocks/mockInfo';
 import styled from 'styled-components';
 import axios from 'axios';
 import { sortItems } from '@/utils/sortItems';
