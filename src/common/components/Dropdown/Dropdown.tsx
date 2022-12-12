@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import ComboInput from '@/common/components/Dropdown/ComboInput';
@@ -34,7 +34,7 @@ const Dropdown = ({
   const [picker, setPicker] = useState<string | null>(null);
   const [_, setSearchParams] = useSearchParams();
 
-  const select = (e: React.FormEvent<HTMLFormElement>): void => {
+  const select = (e: MouseEvent<HTMLDivElement>): void => {
     const target = e.target as HTMLTextAreaElement;
 
     if (!target.getAttribute) return;
