@@ -1,36 +1,33 @@
-import TitleInfo from '../TitleInfo/TitleInfo';
-import DetailInfo, { DetailInfoProps } from '../DetailInfo/DetailInfo';
-import IconButton from '../IconButton/IconButton';
+import uuid from 'react-uuid';
+import { TitleInfo, IconButton } from '@/common/components';
+import DetailInfo from '../DetailInfo/DetailInfo';
 import styled, { css } from 'styled-components';
+import { ProcessedResult, ProcessedTracklist } from '@/types/data';
 
 export interface ResultViewProps {
   view: 'block' | 'list' | 'detail';
 }
-
-export interface TitleInfoProps {
-  title: string;
-  artist: string;
-}
-
 export interface AlbumInfoProps extends ResultViewProps {
-  titleInfo: TitleInfoProps;
-  detailInfo: DetailInfoProps[];
+  searchResult: ProcessedResult;
+  tracklist?: ProcessedTracklist;
   page: 'all' | 'collection';
 }
 
 function AlbumInfo({
-  titleInfo,
-  detailInfo,
+  searchResult,
+  tracklist,
   page,
   view,
   ...props
 }: AlbumInfoProps) {
   const buttonSize = view === 'block' ? 16 : 32;
   const buttonType = page === 'all' ? 'plus' : 'minus';
+  const { titleInfo, detailInfo } = searchResult;
 
   const listInfo = detailInfo.filter(
     ({ infoName }) => infoName === 'Released' || infoName === 'Genre'
   );
+  const newDetailInfo = tracklist ? [...detailInfo, tracklist] : detailInfo;
 
   return (
     <>
@@ -44,7 +41,7 @@ function AlbumInfo({
           <ListInfoWrapper>
             {listInfo.map(({ infoName, infoContent, isValid }) => (
               <DetailInfo
-                key={infoName}
+                key={uuid()}
                 infoName={infoName}
                 infoContent={infoContent}
                 isValid={isValid}
@@ -52,18 +49,19 @@ function AlbumInfo({
             ))}
           </ListInfoWrapper>
         )}
-        <S_IconButton
+        <StyledIconButton
           width={buttonSize}
           height={buttonSize}
           iconType={buttonType}
           view={view}
+          clickHandler={() => console.log('아이콘 버튼 클릭!')}
         />
       </AlbumInfoWrapper>
       {view === 'detail' && (
         <DetailInfoWrapper>
-          {detailInfo.map(({ infoName, infoContent, isValid }) => (
+          {newDetailInfo.map(({ infoName, infoContent, isValid }) => (
             <DetailInfo
-              key={infoName}
+              key={uuid()}
               infoName={infoName}
               infoContent={infoContent}
               isValid={isValid}
@@ -131,7 +129,7 @@ const DetailInfoWrapper = styled.dl`
   padding: 0px var(--space-xs);
 `;
 
-const S_IconButton = styled(IconButton)<ResultViewProps>`
+const StyledIconButton = styled(IconButton)<ResultViewProps>`
   position: absolute;
   ${({ view }) => BUTTON_STYLE[view]};
 `;

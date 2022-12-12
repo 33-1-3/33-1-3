@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from '@/pages/Home/index';
 import Signin from '@/pages/Signin/index';
 import Signup from '@/pages/Signup/index';
@@ -15,7 +15,7 @@ function App() {
       <Route path="/signin" element={<Signin />}></Route>
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/searchresult" element={<SearchResult />}></Route>
-      <Route path="/item/:isbn" element={<Item />}></Route>
+      <Route path="/item/:id" element={<Item />}></Route>
       <Route path="/mycollections/:userid" element={<MyCollections />}></Route>
       <Route
         path="/mycollection/:userid/:collectionid"

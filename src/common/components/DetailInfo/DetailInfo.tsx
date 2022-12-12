@@ -1,34 +1,29 @@
+import uuid from 'react-uuid';
+import { Fragment } from 'react';
 import styled, { css } from 'styled-components';
+import { RawTracklist } from '@/types/data';
 
-const ARRAY_INFO = ['Genre', 'Style', 'Label'];
-
-export interface TracklistType {
-  position: string;
-  title: string;
-  duration: string;
-}
-
-export interface commonProps {
+export interface InfoNameProps {
   infoName: 'Country' | 'Genre' | 'Label' | 'Style' | 'Released' | 'Tracklist';
-  infoContent: string | Array<string> | Array<TracklistType>;
 }
 
-export interface DetailInfoProps extends commonProps {
+export interface InfoContentProps {
+  infoContent: string | string[] | RawTracklist[];
+}
+
+export interface DetailInfoProps extends InfoNameProps, InfoContentProps {
   isValid: boolean;
 }
 
-const checkTracklist = ({ infoName, infoContent }: commonProps) =>
-  Array.isArray(infoContent) && !ARRAY_INFO.includes(infoName);
+const checkTracklist = ({ infoName }: InfoNameProps) =>
+  infoName === 'Tracklist';
 
 function DetailInfo({ infoName, infoContent, isValid }: DetailInfoProps) {
   if (!isValid) return null;
 
-  const isTracklist = checkTracklist({ infoName, infoContent });
-
+  const isTracklist = checkTracklist({ infoName });
   const infoString =
-    typeof infoContent === 'string' && !isTracklist
-      ? infoContent
-      : (infoContent as Array<string>).join(', ');
+    typeof infoContent === 'string' ? infoContent : infoContent.join(', ');
 
   return (
     <>
@@ -36,12 +31,12 @@ function DetailInfo({ infoName, infoContent, isValid }: DetailInfoProps) {
       {isTracklist ? (
         <InfoContent>
           <Tracklist>
-            {(infoContent as Array<TracklistType>).map((track) => (
-              <>
+            {(infoContent as RawTracklist[]).map((track) => (
+              <Fragment key={uuid()}>
                 <span>{track.position}</span>
                 <span>{track.title}</span>
                 <span>{track.duration}</span>
-              </>
+              </Fragment>
             ))}
           </Tracklist>
         </InfoContent>

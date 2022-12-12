@@ -1,3 +1,4 @@
+import { ComponentProps } from 'react';
 import styled from 'styled-components';
 
 export interface ListBoxProps {
@@ -7,7 +8,7 @@ export interface ListBoxProps {
   backgroundColor: string;
   color: string;
   isOpen: boolean;
-  onClick: (e: React.FormEvent<HTMLFormElement>) => void;
+  onClick: ComponentProps<'div'>['onClick'];
 }
 
 export interface ListProps {
