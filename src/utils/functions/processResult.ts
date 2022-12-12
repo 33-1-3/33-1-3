@@ -55,8 +55,8 @@ const processResult = (result: RawResult[]): ProcessedResult[] =>
             isValid: validator(label),
           },
         ],
-        imgURL: cover_image,
-        resourceURL: resource_url,
+        imgUrl: cover_image,
+        resourceUrl: resource_url,
       };
     }
   );

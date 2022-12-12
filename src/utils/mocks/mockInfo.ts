@@ -66,25 +66,25 @@ const mockDetailInfo_ellipsis: DetailInfoProps[] = [
 
 const mockId = 112313213;
 
-const mockImgURL =
+const mockImgUrl =
   'https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg';
 
-const mockResourceURL = 'https://www.naver.com';
+const mockResourceUrl = 'https://www.naver.com';
 
 const mockSearchResult_default = {
   id: mockId,
   titleInfo: mockTitleInfo_default,
   detailInfo: mockDetailInfo_default,
-  imgURL: mockImgURL,
-  resourceURL: mockResourceURL,
+  imgUrl: mockImgUrl,
+  resourceUrl: mockResourceUrl,
 };
 
 const mockSearchResult_ellipsis = {
   id: mockId,
   titleInfo: mockTitleInfo_ellipsis,
   detailInfo: mockDetailInfo_ellipsis,
-  imgURL: mockImgURL,
-  resourceURL: mockResourceURL,
+  imgUrl: mockImgUrl,
+  resourceUrl: mockResourceUrl,
 };
 
 const mockSearchResults = Array.from({ length: 10 }).fill(
@@ -125,7 +125,7 @@ export {
   mockTrackList,
   mockSearchResult_default,
   mockSearchResult_ellipsis,
-  mockImgURL,
+  mockImgUrl,
   mockSearchResults,
   mockUsersData,
 };

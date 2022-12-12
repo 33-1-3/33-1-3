@@ -39,7 +39,7 @@ export const StyledLink = styled.a<StyledLinkProps>`
       ? /*css*/ `
     &:hover,
     &:focus {
-    transition: 0.3s ease-out;
+    transition: color 0.3s ease-out, background-color 0.3s ease-out;
     color: ${backgroundColor};
     background-color: ${color};
   }`

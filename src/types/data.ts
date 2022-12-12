@@ -29,8 +29,8 @@ export interface ProcessedResult {
     infoContent: string | string[];
     isValid: boolean;
   }[];
-  imgURL: string;
-  resourceURL: string;
+  imgUrl: string;
+  resourceUrl: string;
 }
 
 export interface RawTracklist {

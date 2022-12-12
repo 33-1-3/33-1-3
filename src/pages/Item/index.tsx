@@ -20,7 +20,7 @@ export default function Item() {
   useEffect(() => {
     async function fetchTrackList() {
       try {
-        const res = await axios.get(searchResult.resourceURL);
+        const res = await axios.get(searchResult.resourceUrl);
 
         setTracklist({
           infoName: 'Tracklist',
@@ -34,7 +34,6 @@ export default function Item() {
     fetchTrackList();
   }, []);
 
-  console.log(tracklist);
   return (
     <>
       <Header />

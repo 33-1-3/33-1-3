@@ -54,6 +54,7 @@ function AlbumInfo({
           height={buttonSize}
           iconType={buttonType}
           view={view}
+          clickHandler={() => console.log('아이콘 버튼 클릭!')}
         />
       </AlbumInfoWrapper>
       {view === 'detail' && (

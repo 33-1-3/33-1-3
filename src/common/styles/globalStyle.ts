@@ -68,6 +68,11 @@ export const GlobalStyle = createGlobalStyle/*css*/ `
         url('/assets/LINESeedKR-Bd.ttf') format('truetype');
     font-display: swap;
   }
+  #root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
   body {
     font-family: 'LINESeed';
   }
