@@ -44,7 +44,7 @@ Main.parameters = {
 
 export const Collection = Template.bind({});
 Collection.args = {
-  page: '리스트',
+  page: '나의 콜렉션',
 };
 Collection.parameters = {
   design: {

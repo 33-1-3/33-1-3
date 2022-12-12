@@ -1,3 +1,4 @@
+import { RecoilRoot } from 'recoil';
 import { GlobalStyle } from '../src/common/styles/globalStyle';
 import { NormalizeStyle } from '../src/common/styles/normalizeStyle';
 import { withRouter } from 'storybook-addon-react-router-v6';
@@ -24,10 +25,10 @@ export const parameters = {
 export const decorators = [
   withRouter,
   (Story) => (
-    <>
-      <GlobalStyle />
+    <RecoilRoot>
       <NormalizeStyle />
+      <GlobalStyle />
       <Story />
-    </>
+    </RecoilRoot>
   ),
 ];

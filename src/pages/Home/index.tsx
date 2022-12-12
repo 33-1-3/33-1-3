@@ -23,6 +23,7 @@ const StyledMain = styled(Main)`
   align-items: center;
   margin-bottom: 52px;
   background: center/cover url('/assets/background_img.svg');
+  text-align: center;
 `;
 
 const Catchphrase = styled.h2`

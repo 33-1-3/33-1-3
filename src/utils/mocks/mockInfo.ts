@@ -102,16 +102,13 @@ const mockUsersData = [
       {
         id: 2,
         title: 'Beatles',
-        albums: [
-          46402, 45729, 45799, 45760, 67473, 46382, 329854, 54549, 81019, 59435,
-          75259,
-        ],
+        albums: [46402, 45729, 45799, 45760, 67473, 46382],
       },
     ],
   },
   {
     id: 2,
-    gmail: 'bob@gmail.com',
+    email: 'bob@gmail.com',
     name: 'Bob',
     password: 'bob12345',
     collections: [

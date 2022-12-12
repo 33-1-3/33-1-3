@@ -8,9 +8,7 @@ const StyledMain = styled.main`
   flex: 1;
   width: 100vw;
   height: auto;
-  // padding-top: 64px;
   padding-bottom: 64px;
-  text-align: center;
 `;
 
 const Main = ({ ...props }) => {
