@@ -6,8 +6,10 @@ const fontSize = { small: '15px', large: '28px' };
 
 export interface SearchInputProps {
   placeholder: string;
-  page: '전체' | '리스트';
+  page: '전체' | '나의 콜렉션';
   size: 'small' | 'large';
+  handleSubmit?: ComponentProps<'form'>['onSubmit'];
+  handleChange?: ComponentProps<'input'>['onChange'];
 }
 
 export interface formProps {
@@ -18,14 +20,12 @@ function SearchInput({
   placeholder,
   page,
   size,
+  handleSubmit,
   handleChange,
   ...props
 }: SearchInputProps) {
   return (
-    <InputWrapper
-      onSubmit={handleChange ? undefined : useHandleSubmit()}
-      {...props}
-    >
+    <InputWrapper onSubmit={handleSubmit} {...props}>
       <Input
         type="search"
         placeholder={placeholder}
@@ -72,24 +72,6 @@ const buttonMixin = {
     height: 48px;
     margin: 12px;
   `,
-};
-
-export interface SearchInputProps {
-  placeholder: string;
-  page: '전체' | '리스트';
-  size: 'small' | 'large';
-  handleSubmit?: ComponentProps<'form'>['onSubmit'];
-  handleChange?: ComponentProps<'input'>['onChange'];
-}
-
-export interface formProps {
-  formSize: 'small' | 'large';
-}
-
-SearchInput.defaultProps = {
-  placeholder: '검색어를 입력하세요.',
-  page: '전체',
-  size: 'large',
 };
 
 const InputWrapper = styled.form`
