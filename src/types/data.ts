@@ -52,7 +52,7 @@ export interface CollectionData {
   albums: number[];
 }
 
-export interface UserData extends CollectionData {
+export interface UserData {
   id: number;
   email: string;
   name: string;
