@@ -37,7 +37,8 @@ export interface SearchInputProps {
   placeholder: string;
   page: '전체' | '리스트';
   size: 'small' | 'large';
-  handleSubmit: ComponentProps<'form'>['onSubmit'];
+  handleSubmit?: ComponentProps<'form'>['onSubmit'];
+  handleChange?: ComponentProps<'input'>['onChange'];
 }
 
 export interface formProps {
@@ -49,6 +50,7 @@ function SearchInput({
   page,
   size,
   handleSubmit,
+  handleChange,
   ...props
 }: SearchInputProps) {
   return (
@@ -58,6 +60,7 @@ function SearchInput({
         placeholder={placeholder}
         aria-label={`${page} 검색 창`}
         formSize={size}
+        onChange={handleChange}
       />
       <SearchButton type="submit" formSize={size}></SearchButton>
     </InputWrapper>
