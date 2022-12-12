@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import {
@@ -26,14 +26,28 @@ const KEY = import.meta.env.VITE_API_KEY;
 export default function SearchResult() {
   const [searchParams] = useSearchParams();
   const [itemCount, setItemCount] = useState<number>(0);
+  const [pageNum, setPageNum] = useState<number>(1);
   const [result, setResult] = useState<ProcessedResult[]>([]);
+  const observerTarget = useRef<HTMLDivElement>(null);
 
   const params = new URLSearchParams(window.location.search);
   const value = params.get('query');
   const sort = params.get('sort');
   const url = `https://api.discogs.com/database/search?&q=${value}&key=${KEY}&secret=${SECRET}&format=vinyl${
     sort === 'date' ? '&sort=date_added&sort_order=desc' : ''
-  }&per_page=24`;
+  }&page=${pageNum}&per_page=24`;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setPageNum((pageNum) => (pageNum += 1));
+      }
+    });
+
+    observer.observe(observerTarget?.current as HTMLDivElement);
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     async function fetchResults() {
@@ -41,17 +55,13 @@ export default function SearchResult() {
         const res = await axios.get(url);
 
         setItemCount(res.data.pagination.items);
-        setResult(processResult(res.data.results));
+        setResult([...result, ...processResult(res.data.results)]);
       } catch (error) {
         console.error(error);
       }
     }
     fetchResults();
-  }, [searchParams]);
-
-  function getItemPath(isbn: number) {
-    return `/item/${isbn}`;
-  }
+  }, [searchParams, pageNum]);
 
   return (
     <>
@@ -68,6 +78,7 @@ export default function SearchResult() {
           page={'all'}
           view={params.get('view') as ResultViewProps['view']}
         />
+        <div ref={observerTarget} style={{ width: '100vw', height: '50px' }} />
       </Main>
       <Footer />
     </>

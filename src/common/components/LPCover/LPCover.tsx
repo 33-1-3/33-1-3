@@ -7,15 +7,15 @@ const HEIGHT_PX = {
   large: 394,
 };
 
-const Wrapper = styled(Link)<{ heightNum: number }>`
+const Wrapper = styled(Link)<{ $heightNum: number }>`
   position: relative;
 
   &:hover .vinyl {
-    left: ${({ heightNum }) => heightNum / 3}px;
+    left: ${({ $heightNum }) => $heightNum / 3}px;
   }
 `;
 
-const Cover = styled.img<{ heightNum: number }>`
+const Cover = styled.img<{ $heightNum: number }>`
   box-shadow: var(--shadow-Item);
 
   // img가 제대로 불러와지지 않았을 때 보일 가상 요소
@@ -29,7 +29,7 @@ const Cover = styled.img<{ heightNum: number }>`
     width: 100%;
     height: 100%;
     text-align: center;
-    line-height: ${({ heightNum }) => heightNum}px;
+    line-height: ${({ $heightNum }) => $heightNum}px;
     background-color: var(--gray-100);
     box-shadow: var(--shadow-Item);
   }
@@ -63,21 +63,21 @@ const LPCover = ({
   ...props
 }: LPCoverProps) => {
   const heightNum = HEIGHT_PX[size];
-  const { id, titleInfo, imgURL } = searchResult;
+  const { id, titleInfo, imgUrl } = searchResult;
 
   return (
     <Wrapper
       to={`/item/${id}`}
       state={searchResult}
-      heightNum={heightNum}
+      $heightNum={heightNum}
       style={{ width: `${heightNum}px`, height: `${heightNum}px` }}
       {...props}
     >
       <Cover
-        src={imgURL}
+        src={imgUrl}
         alt=""
         data-title={titleInfo.title}
-        heightNum={heightNum}
+        $heightNum={heightNum}
         width={`${heightNum}`}
         height={`${heightNum}`}
       />
@@ -94,7 +94,6 @@ const LPCover = ({
 };
 
 LPCover.defaultProps = {
-  imgUrl: '',
   size: 'small',
   hoverInteraction: true,
 };
