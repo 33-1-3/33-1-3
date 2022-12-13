@@ -76,6 +76,9 @@ export const GlobalStyle = createGlobalStyle/*css*/ `
   body {
     font-family: 'LINESeed';
   }
+  input {
+    font-family: 'LINESeed';
+  }
   .srOnly {
     overflow: hidden;
     position: absolute;
