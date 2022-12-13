@@ -28,5 +28,5 @@ assignees: ''
 * 추후 함께 논의할 점에 대해 작성해주세요.
 
 ---
-Close #1
+Resolves #1
 (작성한 Issue를 연결해주세요.)
