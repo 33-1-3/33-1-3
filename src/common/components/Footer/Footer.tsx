@@ -23,11 +23,15 @@ const StyledFooter = styled.footer<FooterProps>`
   }
 `;
 
+const Adress = styled.span`
+  text-decoration: underline;
+`;
+
 const LinkContainer = styled.div`
   display: flex;
   gap: 24px;
   height: 47px;
-  margin-top: 28px;
+  margin-top: 4px;
   > a:first-child {
     margin-bottom: 7px;
   }
@@ -45,16 +49,17 @@ const Footer = ({ backgroundColor, color, ...props }: FooterProps) => {
       {...props}
     >
       <p>Copyright © 2022 33-1/3 All rights reserved</p>
-      <MoveLink
-        color="var(--white)"
-        fontSize="var(--text-xs)"
-        moveTarget="github"
-      />
+      <p>
+        질문이 있으신가요?&nbsp;&nbsp;
+        <Adress>
+          <a href="mailto:33.1.3.contact@gmail.com">문의 사항 남기기</a>
+        </Adress>
+      </p>
       <LinkContainer>
         <ImageLink
           height={40}
           moveToLink={{
-            pathname: 'https://github.com/33-1-3/33-1-3/issues',
+            pathname: 'https://github.com/33-1-3',
             site: 'github',
           }}
           width={40}
