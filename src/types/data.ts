@@ -45,3 +45,17 @@ export interface ProcessedTracklist {
   infoContent: RawTracklist[];
   isValid: boolean;
 }
+
+export interface CollectionData {
+  id: number;
+  title: string;
+  albums: number[];
+}
+
+export interface UserData {
+  id: number;
+  email: string;
+  name: string;
+  password: string;
+  collections: CollectionData[];
+}

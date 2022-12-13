@@ -22,7 +22,12 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { sortItems } from '@/utils/sortItems';
 import processResult from '@/utils/functions/processResult';
-import { ProcessedResult, RawResult } from '@/types/data';
+import {
+  ProcessedResult,
+  RawResult,
+  CollectionData,
+  UserData,
+} from '@/types/data';
 
 const SECRET = import.meta.env.VITE_API_SECRET;
 const KEY = import.meta.env.VITE_API_KEY;
@@ -36,8 +41,12 @@ export default function MyCollection() {
   const [result, setResult] = useState<ProcessedResult[]>([]);
   const [count, setCount] = useState<number>();
   const [searchWord, setSearchWord] = useState<string>();
-  const { collections } = mockUsersData.find(({ id }) => id === +userid);
-  const { title, albums } = collections.find(({ id }) => id === +collectionid);
+  const { collections } = mockUsersData.find(
+    ({ id }) => id === +(userid as string)
+  ) as UserData;
+  const { title, albums } = collections.find(
+    ({ id }) => id === +(collectionid as string)
+  ) as CollectionData;
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -97,7 +106,7 @@ export default function MyCollection() {
       <MainWrapper>
         <PageTitle>{title}</PageTitle>
         <CenterSearchInput
-          page="리스트"
+          page="나의 콜렉션"
           handleSubmit={(e) => {
             e.preventDefault();
           }}

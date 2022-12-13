@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Header, SearchInput, Footer, Main } from '@/common/components';
+import useHandleSubmit from './../../hooks/useHandleSubmit';
 
 export default function Home() {
   return (
@@ -9,7 +10,7 @@ export default function Home() {
         <Catchphrase style={{ fontSize: '2rem' }}>
           Record your <HighLight>Records!</HighLight>
         </Catchphrase>
-        <SearchInput />
+        <SearchInput handleSubmit={useHandleSubmit()} />
       </StyledMain>
       <Footer />
     </>

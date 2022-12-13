@@ -27,8 +27,11 @@ const CollectionsWrapper = styled.div`
 `;
 
 export default function MyCollections() {
-  const userid = +useParams().userid;
-  const [userData] = mockUsersData.filter((userData) => userData.id === userid);
+  const params = useParams();
+  const { userid } = params;
+  const [userData] = mockUsersData.filter(
+    (userData) => userData.id === +(userid as string)
+  );
   const userCollections = userData.collections;
   const [_, setDialog] = useRecoilState(dialogState);
 
@@ -66,7 +69,7 @@ export default function MyCollections() {
             return (
               <Bookshelf
                 key={newUuid}
-                userId={userid}
+                userId={+(userid as string)}
                 collectionId={collection.id}
                 title={collection.title}
                 count={collection.albums.length}
