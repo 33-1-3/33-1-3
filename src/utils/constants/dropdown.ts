@@ -6,7 +6,7 @@ export interface DropdownContentType {
 export const SORT_CONTENT: DropdownContentType[] = [
   {
     key: 'default',
-    value: '정렬 방식',
+    value: '정확도순',
   },
   {
     key: 'default',
@@ -49,8 +49,8 @@ export const SORT_LABEL = '정렬 방식 선택';
 
 export const VIEW_CONTENT: DropdownContentType[] = [
   {
-    key: 'default',
-    value: '보기 방식',
+    key: 'block',
+    value: '블록',
   },
   {
     key: 'block',
