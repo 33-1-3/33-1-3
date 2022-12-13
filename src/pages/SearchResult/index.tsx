@@ -78,7 +78,10 @@ export default function SearchResult() {
           page={'all'}
           view={params.get('view') as ResultViewProps['view']}
         />
-        <div ref={observerTarget} style={{ width: '100vw', height: '50px' }} />
+        <div
+          ref={observerTarget}
+          style={{ width: '100vw', height: '100px', backgroundColor: 'yellow' }}
+        />
       </Main>
       <Footer />
     </>
