@@ -35,10 +35,3 @@ MoveSignUp.parameters = {
     url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=133%3A192&t=JiHlUULV7Tp6Y1lx-4',
   },
 };
-
-export const MoveGithub = Template.bind({});
-MoveGithub.args = {
-  color: 'var(--white)',
-  fontSize: 'var(--text-xs)',
-  moveTarget: 'github',
-};

@@ -4,18 +4,16 @@ import { Link } from 'react-router-dom';
 const INFO_MESSAGES = {
   signin: '이미 회원이라면?',
   signup: '아직 회원이 아니라면?',
-  github: '질문이 있으신가요?',
 };
 const LINK_MESSAGES = {
   signin: '로그인!',
   signup: '가입하기!',
-  github: '문의 사항 남기기',
 };
 
 export interface MoveLinkProps {
   color: string;
   fontSize: string;
-  moveTarget: 'signin' | 'signup' | 'github';
+  moveTarget: 'signin' | 'signup';
 }
 
 export interface LinkWrapperProps {

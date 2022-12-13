@@ -27,7 +27,6 @@ const SqaureButton = styled.button<SqaureButtonProps>`
     }
   }};
   border-radius: 6px;
-  font-family: 'LINESeed';
   font-weight: 700;
   text-align: center;
   font-size: ${({ fontSize }) => fontSize}px;

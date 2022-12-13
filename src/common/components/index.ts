@@ -23,6 +23,7 @@ import Main from './Main/Main';
 import Dropdown from './Dropdown/Dropdown';
 import VinylItems from './VinylItems/VinylItems';
 import Dialog from './Dialog/Dialog';
+import ScrollToTop from './ScrollToTop/ScrollToTop';
 
 export {
   AddCollectionButton,
@@ -50,4 +51,5 @@ export {
   Dropdown,
   VinylItems,
   Dialog,
+  ScrollToTop,
 };
