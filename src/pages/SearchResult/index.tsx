@@ -55,13 +55,26 @@ export default function SearchResult() {
         const res = await axios.get(url);
 
         setItemCount(res.data.pagination.items);
+        setResult(processResult(res.data.results));
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchResults();
+  }, [searchParams]);
+
+  useEffect(() => {
+    async function fetchResults() {
+      try {
+        const res = await axios.get(url);
+
         setResult([...result, ...processResult(res.data.results)]);
       } catch (error) {
         console.error(error);
       }
     }
     fetchResults();
-  }, [searchParams, pageNum]);
+  }, [pageNum]);
 
   return (
     <>
