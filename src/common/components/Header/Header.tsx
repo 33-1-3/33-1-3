@@ -30,12 +30,13 @@ const StyledHeader = styled.header`
 
 const Header = ({ isLogin, ...props }: HeaderProps) => {
   const isMain: boolean = window.location.pathname === '/';
-  const handleSubmit = useHandleSubmit();
+
+  const SearchInputRender = useHandleSubmit();
 
   return (
     <StyledHeader style={{ height: 64, width: '100vw' }} {...props}>
       <LogoLink height="40px" width="74px" />
-      {!isMain && <SearchInput size="small" handleSubmit={handleSubmit} />}
+      {!isMain && <SearchInput size="small" handleSubmit={SearchInputRender} />}
       <SquareLink link="/mycollections/1" width={178}>
         My Collections
       </SquareLink>

@@ -36,7 +36,7 @@ let collectionItems: undefined | ProcessedResult[];
 
 export default function MyCollection() {
   const { userid, collectionid } = useParams();
-  const [searchParams, _] = useSearchParams();
+  const [searchParams] = useSearchParams();
   // const [itemCount, setItemCount] = useState<number>(0);
   const [result, setResult] = useState<ProcessedResult[]>([]);
   const [count, setCount] = useState<number>();

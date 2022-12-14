@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import useHandleSubmit from '@/hooks/useHandleSubmit';
 import { ComponentProps } from 'react';
 
 const fontSize = { small: '15px', large: '28px' };
@@ -81,7 +80,6 @@ const InputWrapper = styled.form`
 
 const Input = styled.input<formProps>`
   ${({ formSize }) => inputMixin[formSize]};
-  font-family: 'LINESeed';
   font-weight: 400;
   font-size: ${({ formSize }) => fontSize[formSize]};
 
