@@ -8,10 +8,16 @@ const useHandleSubmit = () => {
 
     const value = (e.target as HTMLElement).querySelector('input')
       ?.value as string;
-    const params = { query: value };
+    const param = { query: value };
+
+    const params = new URLSearchParams(window.location.search);
+    const view = params.get('view');
+
     navigate({
       pathname: '/searchresult',
-      search: `?${createSearchParams(params)}&view=block`,
+      search: `?${createSearchParams(param)}&view=${
+        view === 'list' ? 'list' : 'block'
+      }`,
     });
   };
 };
