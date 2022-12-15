@@ -82,7 +82,10 @@ export default function MyItem() {
         searchResult={searchResult}
         tracklist={tracklist as ProcessedTracklist}
       />
-      <WritableInfo purchaseInfo={mockPurchaseInfoContent} memo={mockMemo} />
+      <WritableInfo
+        purchaseInfo={mockPurchaseInfoContent}
+        memoInfo={mockMemo}
+      />
       <StyledSquareButton
         fontSize={20}
         size="small"

@@ -6,10 +6,10 @@ import PURCHASE_INFO_NAME from '@/utils/constants/purchaseInfoName';
 
 export interface WritableInfoProps {
   purchaseInfo: PurchaseData[];
-  memo: string;
+  memoInfo: string;
 }
 
-function WritableInfo({ purchaseInfo, memo }: WritableInfoProps) {
+function WritableInfo({ purchaseInfo, memoInfo }: WritableInfoProps) {
   return (
     <WritableWrppaer>
       <PurchaseInfo>
@@ -26,7 +26,9 @@ function WritableInfo({ purchaseInfo, memo }: WritableInfoProps) {
       </PurchaseInfo>
       <Memo>
         <InfoName>메모</InfoName>
-        <InfoContent dangerouslySetInnerHTML={{ __html: memo }}></InfoContent>
+        <InfoContent
+          dangerouslySetInnerHTML={{ __html: memoInfo }}
+        ></InfoContent>
       </Memo>
     </WritableWrppaer>
   );
