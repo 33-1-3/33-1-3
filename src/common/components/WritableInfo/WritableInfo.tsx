@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
 import { PurchaseData } from '@/types/data';
@@ -16,11 +17,11 @@ function WritableInfo({ purchaseInfo, memo }: WritableInfoProps) {
           <InfoName key={uuid()}>{name}</InfoName>
         ))}
         {purchaseInfo.map(({ date, price, state }) => (
-          <>
-            <InfoContent key={uuid()}>{date}</InfoContent>
-            <InfoContent key={uuid()}>{price}</InfoContent>
-            <InfoContent key={uuid()}>{state}</InfoContent>
-          </>
+          <Fragment key={uuid()}>
+            <InfoContent>{date}</InfoContent>
+            <InfoContent>{price}</InfoContent>
+            <InfoContent>{state}</InfoContent>
+          </Fragment>
         ))}
       </PurchaseInfo>
       <Memo>
