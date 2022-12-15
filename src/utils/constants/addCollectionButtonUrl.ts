@@ -1,0 +1,3 @@
+export const SMALL_BORDER_IMG = `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='4' ry='4' stroke='%236C33E8FF' stroke-width='2' stroke-dasharray='7%2c 8' stroke-dashoffset='29' stroke-linecap='square'/%3e%3c/svg%3e")`;
+
+export const LARGE_BORDER_IMG = `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='8' ry='8' stroke='%236C33E8FF' stroke-width='6' stroke-dasharray='8%2c 18' stroke-dashoffset='5' stroke-linecap='square'/%3e%3c/svg%3e")`;
