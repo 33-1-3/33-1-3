@@ -14,7 +14,7 @@ const BottomBackground = styled.div`
   bottom: 0px;
 `;
 
-const MoveWaveIcon = styled(WaveIcon)`  
+const MoveWaveIcon = styled(WaveIcon)`
   .wave {
     animation: wave 5s linear;
     animation-iteration-count: infinite;
@@ -76,7 +76,6 @@ const MoveWaveIcon = styled(WaveIcon)`
     to {
       transform: translateX(-100%);
     }
-  }
   }
 `;
 
