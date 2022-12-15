@@ -24,21 +24,21 @@ const TEXT_WIDTH = {
   block: '118px',
   list: '587px',
   detail: '346px',
-  myitem: '318px',
+  myitem: '400px',
 };
 
 const TITLE_FONT_SIZE = {
   block: 'var(--text-bs)',
   list: '24px',
   detail: '36px',
-  myitem: '36px',
+  myitem: '28px',
 };
 
 const ARTIST_FONT_SIZE = {
   block: 'var(--text-xs)',
   list: 'var(--text-md)',
   detail: 'var(--text-lg)',
-  myitem: 'var(--text-lg)',
+  myitem: '20px',
 };
 
 const GAP_SIZE = {
@@ -61,9 +61,7 @@ const textMixin = css<ViewProps>`
 const TitleInfoWrapper = styled.dl<ViewProps>`
   width: min-content;
   display: flex;
-  flex-flow: ${({ view }) =>
-    view === 'myitem' ? 'row nowrap' : 'column wrap'};
-  align-items: ${({ view }) => view === 'myitem' && 'center'};
+  flex-flow: column wrap;
   gap: ${({ view }) => GAP_SIZE[view]};
   color: var(--black);
 `;
@@ -77,7 +75,7 @@ const TitleText = styled.dd<ViewProps>`
 
 const ArtistText = styled.dd<ViewProps>`
   ${textMixin};
-  width: ${({ view }) => (view === 'myitem' ? '152px' : '')};
+  width: ${({ view }) => (view === 'myitem' ? '280px' : '')};
   font-weight: 400;
   font-size: ${({ view }) => ARTIST_FONT_SIZE[view]};
   color: ${({ view }) =>
