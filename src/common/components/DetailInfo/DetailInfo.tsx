@@ -13,12 +13,18 @@ export interface InfoContentProps {
 
 export interface DetailInfoProps extends InfoNameProps, InfoContentProps {
   isValid: boolean;
+  isMyItem?: boolean;
 }
 
 const checkTracklist = ({ infoName }: InfoNameProps) =>
   infoName === 'Tracklist';
 
-function DetailInfo({ infoName, infoContent, isValid }: DetailInfoProps) {
+function DetailInfo({
+  infoName,
+  infoContent,
+  isValid,
+  isMyItem,
+}: DetailInfoProps) {
   if (!isValid) return null;
 
   const isTracklist = checkTracklist({ infoName });
@@ -41,7 +47,10 @@ function DetailInfo({ infoName, infoContent, isValid }: DetailInfoProps) {
           </Tracklist>
         </InfoContent>
       ) : (
-        <InfoContent>{infoString}</InfoContent>
+        <InfoContent>
+          {isMyItem && <span aria-hidden={true}>{' ㆍ '}</span>}
+          {infoString}
+        </InfoContent>
       )}
     </>
   );
