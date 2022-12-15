@@ -10,7 +10,7 @@ import { SelectCollectionForm } from '@/pages/Item/components';
 import { ProcessedResult, ProcessedTracklist } from '@/types/data';
 
 export interface ResultViewProps {
-  view: 'block' | 'list' | 'detail';
+  view: 'block' | 'list' | 'detail' | 'myitem';
 }
 export interface AlbumInfoProps extends ResultViewProps {
   searchResult: ProcessedResult;
@@ -135,6 +135,7 @@ const WRAPPER_STYLE = {
     height: 160px;
     padding: 36px var(--space-xs);
   `,
+  myitem: css``,
 };
 
 const BUTTON_STYLE = {
@@ -150,6 +151,7 @@ const BUTTON_STYLE = {
     top: 64px;
     right: var(--space-xs);
   `,
+  myitem: css``,
 };
 
 const AlbumInfoWrapper = styled.div<ResultViewProps>`

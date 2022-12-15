@@ -67,7 +67,9 @@ const LPCover = ({
 
   return (
     <Wrapper
-      to={`/item/${id}`}
+      to={`${
+        location.pathname === '/searchresult' ? `/item/${id}` : `/myitem/${id}`
+      }`}
       state={searchResult}
       $heightNum={heightNum}
       style={{ width: `${heightNum}px`, height: `${heightNum}px` }}
