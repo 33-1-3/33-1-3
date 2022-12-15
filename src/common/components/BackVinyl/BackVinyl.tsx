@@ -8,7 +8,6 @@ export interface BackVinylProps {
 function BackVinyl({ imgUrl }: BackVinylProps) {
   return (
     <>
-      <ToneArm aria-hidden={true} />
       <VinylWrapper aria-hidden={true}>
         <VinylImage imgUrl={imgUrl} />
         <VinylHole aria-hidden={true} />
@@ -22,27 +21,15 @@ const vinylRotate = keyframes`
   100% {rotate: 360deg}
 `;
 
-const ToneArm = styled.div`
-  z-index: -98;
-  position: absolute;
-  top: 0;
-  left: 50vw;
-  transform: translate(-50%, -10%);
-  width: 187px;
-  height: 290px;
-  background: url('/assets/tonearm.svg') no-repeat center/contain;
-  filter: drop-shadow(var(--shadow-Item));
-`;
-
 const VinylWrapper = styled.div`
   z-index: -99;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 48%;
   transform-origin: -5.2% 0;
   transform: translate(-55%, -50%);
-  width: 39vw;
-  height: 39vw;
+  width: 37vw;
+  height: 37vw;
   background: url('/assets/vinyl.svg') no-repeat center/contain;
   filter: drop-shadow(var(--shadow-Item));
   animation: ${vinylRotate} 60s infinite linear;
@@ -74,7 +61,7 @@ const BackgroundContainer = styled.div`
   z-index: -100;
   position: absolute;
   top: 0;
-  left: 44vw;
+  left: 41vw;
   transform: rotate(15deg);
   width: 200vw;
   height: 200vh;
