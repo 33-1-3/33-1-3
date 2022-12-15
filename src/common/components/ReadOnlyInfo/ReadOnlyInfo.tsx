@@ -70,9 +70,9 @@ const DetailInfoWrapper = styled.dl`
 
 const BlurContainer = styled.div`
   position: absolute;
-  top: 72vh;
+  top: 74vh;
   width: 280px;
-  height: 80px;
+  height: 100px;
   background: linear-gradient(
     0deg,
     rgba(255, 255, 255, 1) 28%,
