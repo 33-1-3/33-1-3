@@ -118,7 +118,7 @@ const MyItemPageWrapper = styled.div`
 
 const PurchaseInfo = styled.article`
   display: grid;
-  grid-template-columns: repeat(3, 6.5vw);
+  grid-template-columns: repeat(3, 96px);
   column-gap: 56px;
   row-gap: var(--space-bs);
   width: min-content;
