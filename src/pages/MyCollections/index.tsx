@@ -44,18 +44,15 @@ export default function MyCollections() {
             onClick={() => setDialog(createCollectionDialogState)}
             size="large"
           />
-          {userCollections.map((collection) => {
-            const newUuid = uuid();
-            return (
-              <Bookshelf
-                key={newUuid}
-                userId={+(userid as string)}
-                collectionId={collection.id}
-                title={collection.title}
-                count={collection.albums.length}
-              ></Bookshelf>
-            );
-          })}
+          {userCollections.map((collection) => (
+            <Bookshelf
+              key={uuid()}
+              userId={+(userid as string)}
+              collectionId={collection.id}
+              title={collection.title}
+              count={collection.albums.length}
+            ></Bookshelf>
+          ))}
         </CollectionsWrapper>
       </Main>
       <Footer />
