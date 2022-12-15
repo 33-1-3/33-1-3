@@ -13,7 +13,7 @@ const ToggleInputButton = ({ setCollectionList }: ToggleInputButtonProps) => {
     <>
       {isClicked ? (
         <TextInput
-          width={408}
+          width={432}
           height={48}
           color="var(--purple-900)"
           borderColor="var(--purple-900)"
