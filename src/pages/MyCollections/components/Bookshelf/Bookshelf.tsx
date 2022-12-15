@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
 import { IconButton } from '@/common/components';
 import { useRecoilState } from 'recoil';
-import { dialogState } from '@/recoil/globalState';
+import {
+  dialogState,
+  editCollectionDialogState,
+  deleteCollectionDialogState,
+} from '@/recoil/globalState';
+
 export interface BookshelfProps {
   userId: number;
   collectionId: number;
@@ -19,7 +23,6 @@ const Wrapper = styled.div`
 const Title = styled.div`
   font-size: 28px;
   margin-left: 8px;
-  margin-bottom: 8px;
 `;
 
 const IconButtons = styled.div`
@@ -42,28 +45,20 @@ const Bookshelf = ({
   const [_, setDialog] = useRecoilState(dialogState);
   const imgIdx = Math.min(Math.ceil(count / step), 5);
   return (
-    <Wrapper style={{ width: '640px' }}>
+    <Wrapper style={{ width: '640px', height: 'fit-content' }}>
       <Title>{title}</Title>
       <IconButtons>
         <IconButton
           width={28}
           height={28}
           iconType="pencil"
-          clickHandler={() => console.log('TODO: 편집 모달 디자인 필요')}
+          clickHandler={() => setDialog(editCollectionDialogState)}
         />
         <IconButton
           width={28}
           height={28}
           iconType="minus"
-          clickHandler={() =>
-            setDialog({
-              isOpen: true,
-              width: 480,
-              height: 200,
-              children: '콜렉션을 삭제하시겠습니까?',
-              confirm: () => console.log('콜렉션 삭제'),
-            })
-          }
+          clickHandler={() => setDialog(deleteCollectionDialogState)}
         />
       </IconButtons>
       <Link

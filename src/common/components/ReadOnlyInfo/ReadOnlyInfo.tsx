@@ -39,7 +39,7 @@ const ReadOnlyWrapper = styled.section`
   display: flex;
   flex-flow: column nowrap;
   gap: 32px;
-  width: 486px;
+  width: 400px;
   margin: 28px;
 `;
 
@@ -48,8 +48,9 @@ const DetailInfoWrapper = styled.dl`
   display: flex;
   flex-flow: column nowrap;
   gap: 16px;
-  width: 280px;
+  width: 23.75vw;
   height: 65vh;
+  padding-right: 24px;
   overflow-x: hidden;
   overflow-y: scroll;
 
@@ -69,7 +70,7 @@ const DetailInfoWrapper = styled.dl`
 
 const BlurContainer = styled.div`
   position: absolute;
-  top: 70vh;
+  top: 72vh;
   width: 280px;
   height: 80px;
   background: linear-gradient(

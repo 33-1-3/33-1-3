@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ImageLink, MoveLink } from '@/common/components';
+import { ImageLink } from '@/common/components';
 
 export interface FooterProps {
   backgroundColor: string;
@@ -10,6 +10,7 @@ const StyledFooter = styled.footer<FooterProps>`
   position: relative;
   left: 0;
   right: 0;
+  bottom: -64px;
   display: flex;
   flex-direction: column;
   align-items: center;
