@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle/*css*/ `
     --shadow-Button-back: 0px 4px 10px 0px rgba(0,0,0,0.3);
     --shadow-Modal: 0px 4px 10px 0px rgba(0,0,0,0.5);
     --shadow-Vinyl: 4px 4px 10px 0px rgba(0,0,0,0.5);
-    --shadow-Background: inset 4px 0px 10px 0px rgba(0,0,0,0.15);
+    --shadow-Background: inset 4px 0px 10px rgba(0,0,0,0.15);
     --shadow-catchphrase: 0px 2px 8px 0px rgba(0,0,0,1);
 
     /* text size */
