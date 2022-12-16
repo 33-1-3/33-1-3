@@ -4,13 +4,16 @@ import styled, { css } from 'styled-components';
 import { useMemo } from 'react';
 
 import { useRecoilState } from 'recoil';
-import { dialogState } from '@/recoil/globalState';
-import { SelectCollectionForm } from '@/pages/Item/components';
-
+import {
+  dialogState,
+  addItemDialogState,
+  deleteItemDialogState,
+} from '@/recoil/globalState';
+import { TitleInfo, DetailInfo, IconButton } from '@/common/components';
 import { ProcessedResult, ProcessedTracklist } from '@/types/data';
 
 export interface ResultViewProps {
-  view: 'block' | 'list' | 'detail';
+  view: 'block' | 'list' | 'detail' | 'myitem';
 }
 export interface AlbumInfoProps extends ResultViewProps {
   searchResult: ProcessedResult;
@@ -57,52 +60,18 @@ function AlbumInfo({
               ))}
             </ListInfoWrapper>
           )}
+          
           <StyledIconButton
-            width={buttonSize}
-            height={buttonSize}
-            iconType={buttonType}
-            view={view}
-            clickHandler={() =>
-              page === 'all'
-                ? setDialog({
-                    isOpen: true,
-                    width: 480,
-                    height: 480,
-                    title: 'Add Items',
-                    children: (
-                      <SelectCollectionForm
-                        collectionList={[
-                          {
-                            isChecked: false,
-                            title: '소장 중 💼',
-                          },
-                          {
-                            isChecked: true,
-                            title: '갖고 싶다... 🤤',
-                          },
-                          {
-                            isChecked: false,
-                            title: '❤K-POP❤',
-                          },
-                          {
-                            isChecked: false,
-                            title:
-                              '엄청엄청긴타이트으으응으ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ일때',
-                          },
-                        ]}
-                      />
-                    ),
-                    confirm: () => console.log('아이템 추가'),
-                  })
-                : setDialog({
-                    isOpen: true,
-                    width: 480,
-                    height: 200,
-                    children: '아이템을 삭제하시겠습니까?',
-                    confirm: () => console.log('아이템 삭제'),
-                  })
-            }
-          />
+          width={buttonSize}
+          height={buttonSize}
+          iconType={buttonType}
+          view={view}
+          clickHandler={() =>
+            page === 'all'
+              ? setDialog(addItemDialogState)
+              : setDialog(deleteItemDialogState)
+          }
+        />
         </AlbumInfoWrapper>
         {view === 'detail' && (
           <DetailInfoWrapper>
@@ -120,6 +89,7 @@ function AlbumInfo({
       </>
     ),
     [searchResult, tracklist, page, view]
+
   );
 }
 
@@ -127,7 +97,7 @@ const WRAPPER_STYLE = {
   block: css`
     width: 150px;
     height: 76px;
-    padding: var(--space-md) var(--space-xs);
+    padding: var(--space-md) 4px;
   `,
   list: css`
     width: 618px;
@@ -138,12 +108,13 @@ const WRAPPER_STYLE = {
     height: 160px;
     padding: 36px var(--space-xs);
   `,
+  myitem: css``,
 };
 
 const BUTTON_STYLE = {
   block: css`
-    top: var(--space-lg);
-    right: var(--space-xs);
+    top: var(--space-bs);
+    right: 4px;
   `,
   list: css`
     top: 60px;
@@ -153,6 +124,7 @@ const BUTTON_STYLE = {
     top: 64px;
     right: var(--space-xs);
   `,
+  myitem: css``,
 };
 
 const AlbumInfoWrapper = styled.div<ResultViewProps>`

@@ -29,7 +29,7 @@ const DialogContainer = styled.div`
 `;
 
 const DialogTitle = styled.h2`
-  padding: 24px;
+  padding: 24px 24px 12px 24px;
   font-size: 32px;
   font-weight: 700;
   border-bottom: 1px solid var(--gray-100);
@@ -38,13 +38,13 @@ const DialogTitle = styled.h2`
 const DialogNodeContent = styled.div`
   flex-grow: 1;
   margin: 24px 24px 0 24px;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 const DialogStringContent = styled.span`
   flex-grow: 1;
   margin: 24px 24px 0 24px;
-  overflow-y: scroll;
+  overflow-y: auto;
   display: flex;
   justify-content: center;
   align-items: center;

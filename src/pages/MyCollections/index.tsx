@@ -7,12 +7,13 @@ import {
   PageTitle,
   AddCollectionButton,
   Footer,
-  TextInput,
 } from '@/common/components';
 import { Bookshelf } from './components';
 import { useRecoilState } from 'recoil';
-import { dialogState } from '@/recoil/globalState';
-import { mockUsersData } from '@/utils/mocks/mockInfo';
+import { dialogState, createCollectionDialogState } from '@/recoil/globalState';
+// import { mockUsersData } from '@/utils/mocks/mockInfo';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const MyCollectionsPageTitle = styled(PageTitle)`
   margin-top: 56px;
@@ -29,11 +30,30 @@ const CollectionsWrapper = styled.div`
 export default function MyCollections() {
   const params = useParams();
   const { userid } = params;
-  const [userData] = mockUsersData.filter(
-    (userData) => userData.id === +(userid as string)
-  );
-  const userCollections = userData.collections;
+
+  const [userCollections, setUserCollections] = useState([]);
+
+  // const [userData] = mockUsersData.filter(
+  //   (userData) => userData.id === +(userid as string)
+  // );
+  // const userCollections = userData.collections;
   const [_, setDialog] = useRecoilState(dialogState);
+
+  const url = `http://localhost:3313/collections/${userid}`;
+
+  useEffect(() => {
+    async function fetchResults() {
+      try {
+        const res = await axios.get(url);
+        const userCollections = res.data;
+        console.log(userCollections);
+        setUserCollections(userCollections);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchResults();
+  }, []);
 
   return (
     <>
@@ -42,37 +62,18 @@ export default function MyCollections() {
         <MyCollectionsPageTitle>My Collections</MyCollectionsPageTitle>
         <CollectionsWrapper style={{ width: '640px' }}>
           <AddCollectionButton
-            onClick={() =>
-              setDialog({
-                isOpen: true,
-                width: 480,
-                height: 300,
-                title: 'Create Collection',
-                children: (
-                  <TextInput
-                    errorMsg="최소 두 글자 이상 입력해주세요."
-                    height={36}
-                    label="Collection Name"
-                    placeholder="생성할 콜렉션의 이름을 입력해주세요."
-                    required
-                    validationTester={/^.{2,}$/}
-                    width={416}
-                  />
-                ),
-                confirm: () => console.log('콜렉션 생성'),
-              })
-            }
+            onClick={() => setDialog(createCollectionDialogState)}
             size="large"
           />
-          {userCollections.map((collection) => {
+          {userCollections.map(({ title, collectionId, vinylCount }) => {
             const newUuid = uuid();
             return (
               <Bookshelf
                 key={newUuid}
                 userId={+(userid as string)}
-                collectionId={collection.id}
-                title={collection.title}
-                count={collection.albums.length}
+                collectionId={collectionId}
+                title={title}
+                count={vinylCount}
               ></Bookshelf>
             );
           })}

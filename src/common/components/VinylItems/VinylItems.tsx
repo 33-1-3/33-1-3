@@ -34,6 +34,7 @@ const WRAPPER_STYLE = {
   detail: css`
     display: none;
   `,
+  myitem: css``,
 };
 
 const VinylItemsWrapper = styled.section<ResultViewProps>`

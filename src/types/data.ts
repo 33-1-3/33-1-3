@@ -59,3 +59,9 @@ export interface UserData {
   password: string;
   collections: CollectionData[];
 }
+
+export interface PurchaseData {
+  date: string;
+  price: string;
+  state: string;
+}

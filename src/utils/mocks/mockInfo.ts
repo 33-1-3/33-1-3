@@ -118,6 +118,13 @@ const mockUsersData = [
   },
 ];
 
+const mockPurchaseInfoContent = [
+  { date: '2020.10.12', price: '28,000원', state: 'NM' },
+  { date: '2022.12.04', price: '20,000원', state: 'Very Good' },
+];
+const mockMemo =
+  '- 내가 제일 좋아하는 LP 😊<br/> - 12월에 당근마켓에서 싸게 구입<br/> - 12월에 당근마켓에서 싸게 구입';
+
 export {
   mockTrackList,
   mockSearchResult_default,
@@ -125,4 +132,6 @@ export {
   mockImgUrl,
   mockSearchResults,
   mockUsersData,
+  mockPurchaseInfoContent,
+  mockMemo,
 };
