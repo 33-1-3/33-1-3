@@ -39,14 +39,26 @@ export default function MyCollection() {
   const [searchParams] = useSearchParams();
   // const [itemCount, setItemCount] = useState<number>(0);
   const [result, setResult] = useState<ProcessedResult[]>([]);
+  const [collectionTitle, setCollectionTitle] = useState('');
   const [count, setCount] = useState<number>();
   const [searchWord, setSearchWord] = useState<string>();
-  const { collections } = mockUsersData.find(
-    ({ id }) => id === +(userid as string)
-  ) as UserData;
-  const { title, albums } = collections.find(
-    ({ id }) => id === +(collectionid as string)
-  ) as CollectionData;
+  // const { collections } = mockUsersData.find(
+  //   ({ id }) => id === +(userid as string)
+  // ) as UserData;
+  // const { title, albums } = collections.find(
+  //   ({ id }) => id === +(collectionid as string)
+  // ) as CollectionData;
+
+  // console.log(collections, title, albums);
+  const validator = (data: string | Array<string>) => {
+    if (typeof data === 'string') {
+      return data !== '';
+    }
+    if (Array.isArray(data)) {
+      return data.length !== 0;
+    }
+    return false;
+  };
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -60,35 +72,49 @@ export default function MyCollection() {
     setCount(matchItems?.length);
     setSearchWord(e.target.value);
   }
+  const url = `http://localhost:3313/collection/${collectionid}`;
 
   useEffect(() => {
     async function fetchResults() {
       try {
-        const dataRes = await Promise.all(
-          albums.map((release_id: number) => {
-            const url = `https://api.discogs.com/database/search?&release_id=${release_id}&key=${KEY}&secret=${SECRET}`;
-            // const url = `https://api.discogs.com/database/search?&release_id=${release_id}&key=aaDvoScQTvvqyWzyQfvj&secret=FhkTdZaKNGjEscpVfZAQMhMOAXrcjgLr`;
-            return axios.get(url);
-          })
-        );
-        const datas = dataRes.map(
-          ({ data: { results } }: { data: { results: RawResult[] } }) => {
-            return results[0];
+        const res = await axios.get(url);
+        const result = res.data;
+        const { vinylsInfo, collectionTitle } = result;
+
+        const processedResult = vinylsInfo.map(
+          ({ imgUrl, title, artist, released, genre }) => {
+            return {
+              titleInfo: { title, artist },
+              detailInfo: [
+                {
+                  infoName: 'Released',
+                  infoContent: released,
+                  isValid: validator(released),
+                },
+                {
+                  infoName: 'Genre',
+                  infoContent: genre,
+                  isValid: validator(genre),
+                },
+              ],
+              imgUrl,
+            };
           }
         );
-
-        setResult(() => {
-          collectionItems = sortItems(
-            processResult(datas),
-            searchParams.get('sort') as
-              | 'title'
-              | 'artist'
-              | 'count'
-              | 'Released'
-              | 'update'
-          );
-          return collectionItems;
-        });
+        setCollectionTitle(collectionTitle);
+        setResult(processedResult);
+        // setResult(() => {
+        //   collectionItems = sortItems(
+        //     processResult(datas),
+        //     searchParams.get('sort') as
+        //       | 'title'
+        //       | 'artist'
+        //       | 'count'
+        //       | 'Released'
+        //       | 'update'
+        //   );
+        //   return collectionItems;
+        // });
       } catch (error) {
         console.error(error);
       }
@@ -99,12 +125,13 @@ export default function MyCollection() {
 
   const [_view, sort] = [searchParams.get('view'), searchParams.get('sort')];
   const view = _view ?? 'block';
+  console.log(result);
 
   return (
     <>
       <Header />
       <MainWrapper>
-        <PageTitle>{title}</PageTitle>
+        <PageTitle>{collectionTitle}</PageTitle>
         <CenterSearchInput
           page="나의 콜렉션"
           handleSubmit={(e) => {
