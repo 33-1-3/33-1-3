@@ -1,7 +1,7 @@
 import uuid from 'react-uuid';
-import { TitleInfo, IconButton } from '@/common/components';
-import DetailInfo from '../DetailInfo/DetailInfo';
+import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
 import styled, { css } from 'styled-components';
+import { useMemo } from 'react';
 
 import { useRecoilState } from 'recoil';
 import { dialogState } from '@/recoil/globalState';
@@ -36,87 +36,90 @@ function AlbumInfo({
 
   const [_, setDialog] = useRecoilState(dialogState);
 
-  return (
-    <>
-      <AlbumInfoWrapper view={view} {...props}>
-        <TitleInfo
-          title={titleInfo.title}
-          artist={titleInfo.artist}
-          view={view}
-        />
-        {view === 'list' && (
-          <ListInfoWrapper>
-            {listInfo.map(({ infoName, infoContent, isValid }) => (
+  return useMemo(
+    () => (
+      <>
+        <AlbumInfoWrapper view={view} {...props}>
+          <TitleInfo
+            title={titleInfo.title}
+            artist={titleInfo.artist}
+            view={view}
+          />
+          {view === 'list' && (
+            <ListInfoWrapper>
+              {listInfo.map(({ infoName, infoContent, isValid }) => (
+                <DetailInfo
+                  key={uuid()}
+                  infoName={infoName}
+                  infoContent={infoContent}
+                  isValid={isValid}
+                />
+              ))}
+            </ListInfoWrapper>
+          )}
+          <StyledIconButton
+            width={buttonSize}
+            height={buttonSize}
+            iconType={buttonType}
+            view={view}
+            clickHandler={() =>
+              page === 'all'
+                ? setDialog({
+                    isOpen: true,
+                    width: 480,
+                    height: 480,
+                    title: 'Add Items',
+                    children: (
+                      <SelectCollectionForm
+                        collectionList={[
+                          {
+                            isChecked: false,
+                            title: '소장 중 💼',
+                          },
+                          {
+                            isChecked: true,
+                            title: '갖고 싶다... 🤤',
+                          },
+                          {
+                            isChecked: false,
+                            title: '❤K-POP❤',
+                          },
+                          {
+                            isChecked: false,
+                            title:
+                              '엄청엄청긴타이트으으응으ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ일때',
+                          },
+                        ]}
+                      />
+                    ),
+                    confirm: () => console.log('아이템 추가'),
+                  })
+                : setDialog({
+                    isOpen: true,
+                    width: 480,
+                    height: 200,
+                    children: '아이템을 삭제하시겠습니까?',
+                    confirm: () => console.log('아이템 삭제'),
+                  })
+            }
+          />
+        </AlbumInfoWrapper>
+        {view === 'detail' && (
+          <DetailInfoWrapper>
+            {newDetailInfo.map(({ infoName, infoContent, isValid }) => (
               <DetailInfo
                 key={uuid()}
                 infoName={infoName}
                 infoContent={infoContent}
                 isValid={isValid}
+                // TODO: handler
               />
             ))}
-          </ListInfoWrapper>
+          </DetailInfoWrapper>
         )}
-        <StyledIconButton
-          width={buttonSize}
-          height={buttonSize}
-          iconType={buttonType}
-          view={view}
-          clickHandler={() =>
-            page === 'all'
-              ? setDialog({
-                  isOpen: true,
-                  width: 480,
-                  height: 480,
-                  title: 'Add Items',
-                  children: (
-                    <SelectCollectionForm
-                      collectionList={[
-                        {
-                          isChecked: false,
-                          title: '소장 중 💼',
-                        },
-                        {
-                          isChecked: true,
-                          title: '갖고 싶다... 🤤',
-                        },
-                        {
-                          isChecked: false,
-                          title: '❤K-POP❤',
-                        },
-                        {
-                          isChecked: false,
-                          title:
-                            '엄청엄청긴타이트으으응으ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ일때',
-                        },
-                      ]}
-                    />
-                  ),
-                  confirm: () => console.log('아이템 추가'),
-                })
-              : setDialog({
-                  isOpen: true,
-                  width: 480,
-                  height: 200,
-                  children: '아이템을 삭제하시겠습니까?',
-                  confirm: () => console.log('아이템 삭제'),
-                })
-          }
-        />
-      </AlbumInfoWrapper>
-      {view === 'detail' && (
-        <DetailInfoWrapper>
-          {newDetailInfo.map(({ infoName, infoContent, isValid }) => (
-            <DetailInfo
-              key={uuid()}
-              infoName={infoName}
-              infoContent={infoContent}
-              isValid={isValid}
-              // TODO: handler
-            />
-          ))}
-        </DetailInfoWrapper>
-      )}
-    </>
+      </>
+    ),
+    [searchResult, tracklist, page, view]
   );
 }
 

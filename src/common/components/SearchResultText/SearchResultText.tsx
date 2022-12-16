@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
+import { useMemo } from 'react';
 
 export interface SearchResultTextProps {
   resultCount: number;
@@ -12,11 +13,14 @@ function SearchResultText({
   ...props
 }: SearchResultTextProps) {
   const [searchParams] = useSearchParams();
-  return (
-    <SearchResultTextWrapper {...props}>
-      <KeyWord>{`"${searchWord ?? searchParams.get('query')}"`}</KeyWord>
-      <ResultInfo>{`검색 결과  ${resultCount} 건`}</ResultInfo>
-    </SearchResultTextWrapper>
+  return useMemo(
+    () => (
+      <SearchResultTextWrapper {...props}>
+        <KeyWord>{`"${searchWord ?? searchParams.get('query')}"`}</KeyWord>
+        <ResultInfo>{`검색 결과  ${resultCount} 건`}</ResultInfo>
+      </SearchResultTextWrapper>
+    ),
+    [resultCount, searchWord]
   );
 }
 

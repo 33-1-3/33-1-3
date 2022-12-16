@@ -1,8 +1,8 @@
-import LPCover from '../LPCover/LPCover';
-import { AlbumInfo } from '@/common/components';
+import { AlbumInfo, LPCover } from '@/common/components';
 import { ProcessedResult } from '@/types/data';
 import { ResultViewProps } from '../AlbumInfo/AlbumInfo';
 import styled, { css } from 'styled-components';
+import { useMemo, memo } from 'react';
 
 export interface VinylItemProps {
   searchResult: ProcessedResult;
@@ -11,18 +11,24 @@ export interface VinylItemProps {
 }
 
 function VinylItem({ searchResult, page, view, ...props }: VinylItemProps) {
-  const vinylSize = view === 'detail' ? 'large' : 'small';
-  const isHover = view !== 'detail';
+  const vinylSize = useMemo(
+    () => (view === 'detail' ? 'large' : 'small'),
+    [view]
+  );
+  const isHover = useMemo(() => view !== 'detail', [view]);
 
-  return (
-    <VinylItemWrapper view={view} {...props}>
-      <LPCover
-        searchResult={searchResult}
-        size={vinylSize}
-        hoverInteraction={isHover}
-      />
-      <AlbumInfo searchResult={searchResult} page={page} view={view} />
-    </VinylItemWrapper>
+  return useMemo(
+    () => (
+      <VinylItemWrapper view={view} {...props}>
+        <LPCover
+          searchResult={searchResult}
+          size={vinylSize}
+          hoverInteraction={isHover}
+        />
+        <AlbumInfo searchResult={searchResult} page={page} view={view} />
+      </VinylItemWrapper>
+    ),
+    [searchResult, page, view]
   );
 }
 
@@ -49,4 +55,4 @@ const VinylItemWrapper = styled.article<ResultViewProps>`
   ${({ view }) => WRAPPER_STYLE[view]}
 `;
 
-export default VinylItem;
+export default memo(VinylItem);
