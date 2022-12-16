@@ -31,7 +31,7 @@ const Label = styled.label`
 const Input = styled.input<InputProps>`
   padding-left: 10px;
   padding-right: 10px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: ${({ height }) => height}px;
   border: 1px solid ${({ borderColor }) => borderColor};
   border-radius: 4px;

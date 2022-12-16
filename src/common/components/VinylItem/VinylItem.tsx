@@ -7,7 +7,7 @@ import { useMemo, memo } from 'react';
 export interface VinylItemProps {
   searchResult: ProcessedResult;
   page: 'all' | 'collection';
-  view: 'block' | 'list' | 'detail';
+  view: 'block' | 'list' | 'detail' | 'myitem';
 }
 
 function VinylItem({ searchResult, page, view, ...props }: VinylItemProps) {
@@ -49,6 +49,7 @@ const WRAPPER_STYLE = {
     flex-flow: column wrap;
     width: 394px;
   `,
+  myitem: css``,
 };
 
 const VinylItemWrapper = styled.article<ResultViewProps>`

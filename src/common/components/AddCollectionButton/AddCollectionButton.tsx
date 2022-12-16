@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 import { ReactComponent as PlusIcon } from '@/assets/plus-circle.svg';
+import {
+  SMALL_BORDER_IMG,
+  LARGE_BORDER_IMG,
+} from '@/utils/constants/addCollectionButtonUrl';
 
 export interface AddCollectionButtonProps {
   size: 'small' | 'large';
@@ -17,16 +21,18 @@ export interface DashButtonProps {
 
 const buttonStyle = {
   small: {
-    width: '408px',
+    width: '432px',
     height: '48px',
     gap: 'var(--space-sm)',
     fontSize: 'var(--text-bs)',
+    iconSize: 16,
   },
   large: {
     width: '640px',
     height: '160px',
     gap: 'var(--space-xl)',
     fontSize: 'var(--text-xl)',
+    iconSize: 36,
   },
 };
 
@@ -36,14 +42,18 @@ const DashButton = styled.button<DashButtonProps>`
   align-items: center;
   gap: ${({ size }) => buttonStyle[size].gap};
 
-  border: 1px dashed ${({ $color }) => $color};
-  border-radius: 4px;
   color: ${({ $color }) => $color};
   font-size: ${({ size }) => buttonStyle[size].fontSize};
+  font-weight: ${({ size }) => (size === 'small' ? '400' : '700')};
+
+  background-image: ${({ size }) =>
+    size === 'small' ? SMALL_BORDER_IMG : LARGE_BORDER_IMG};
+  border-radius: ${({ size }) => (size === 'small' ? '4px' : '8px')};
 
   circle {
     fill: ${({ $color }) => $color};
   }
+
   path {
     fill: ${({ backgroundColor }) => backgroundColor};
     stroke: ${({ backgroundColor }) => backgroundColor};
@@ -84,7 +94,10 @@ const AddCollectionButton = ({
       onClick={onClick}
       {...args}
     >
-      <PlusIcon />
+      <PlusIcon
+        width={buttonStyle[size].iconSize}
+        height={buttonStyle[size].iconSize}
+      />
       <span>Add a Collection</span>
     </DashButton>
   );

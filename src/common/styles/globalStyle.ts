@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle/*css*/ `
     --black: #000000;
     --red: #fe2828;
     --purple-100: #ece2ff;
+    --purple-400: #CCB5FD;
     --purple-500: #a07cef;
     --purple-900: #6c33e8;
     --gray-100: #dadada;
@@ -21,7 +22,7 @@ export const GlobalStyle = createGlobalStyle/*css*/ `
     --shadow-Button-back: 0px 4px 10px 0px rgba(0,0,0,0.3);
     --shadow-Modal: 0px 4px 10px 0px rgba(0,0,0,0.5);
     --shadow-Vinyl: 4px 4px 10px 0px rgba(0,0,0,0.5);
-    --shadow-Background: inset 4px 0px 10px 0px rgba(0,0,0,0.15);
+    --shadow-Background: inset 4px 0px 10px rgba(0,0,0,0.15);
     --shadow-catchphrase: 0px 2px 8px 0px rgba(0,0,0,1);
 
     /* text size */

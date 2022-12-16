@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export interface ViewProps {
-  view: 'block' | 'list' | 'detail';
+  view: 'block' | 'list' | 'detail' | 'myitem';
 }
 
 export interface TitleInfoProps extends ViewProps {
@@ -24,24 +24,28 @@ const TEXT_WIDTH = {
   block: '118px',
   list: '587px',
   detail: '346px',
+  myitem: '400px',
 };
 
 const TITLE_FONT_SIZE = {
   block: 'var(--text-bs)',
   list: '24px',
   detail: '36px',
+  myitem: '28px',
 };
 
 const ARTIST_FONT_SIZE = {
   block: 'var(--text-xs)',
   list: 'var(--text-md)',
   detail: 'var(--text-lg)',
+  myitem: '20px',
 };
 
 const GAP_SIZE = {
   block: 'var(--space-xs)',
   list: 'var(--space-xs)',
   detail: 'var(--space-lg)',
+  myitem: 'var(--space-bs)',
 };
 
 const textMixin = css<ViewProps>`
@@ -71,8 +75,11 @@ const TitleText = styled.dd<ViewProps>`
 
 const ArtistText = styled.dd<ViewProps>`
   ${textMixin};
+  width: ${({ view }) => (view === 'myitem' ? '280px' : '')};
   font-weight: 400;
   font-size: ${({ view }) => ARTIST_FONT_SIZE[view]};
+  color: ${({ view }) =>
+    view === 'myitem' ? 'var(--gray-400)' : 'var(--black)'};
 `;
 
 export default TitleInfo;

@@ -7,11 +7,10 @@ import {
   PageTitle,
   AddCollectionButton,
   Footer,
-  TextInput,
 } from '@/common/components';
 import { Bookshelf } from './components';
 import { useRecoilState } from 'recoil';
-import { dialogState } from '@/recoil/globalState';
+import { dialogState, createCollectionDialogState } from '@/recoil/globalState';
 import { mockUsersData } from '@/utils/mocks/mockInfo';
 
 const MyCollectionsPageTitle = styled(PageTitle)`
@@ -42,40 +41,18 @@ export default function MyCollections() {
         <MyCollectionsPageTitle>My Collections</MyCollectionsPageTitle>
         <CollectionsWrapper style={{ width: '640px' }}>
           <AddCollectionButton
-            onClick={() =>
-              setDialog({
-                isOpen: true,
-                width: 480,
-                height: 300,
-                title: 'Create Collection',
-                children: (
-                  <TextInput
-                    errorMsg="최소 두 글자 이상 입력해주세요."
-                    height={36}
-                    label="Collection Name"
-                    placeholder="생성할 콜렉션의 이름을 입력해주세요."
-                    required
-                    validationTester={/^.{2,}$/}
-                    width={416}
-                  />
-                ),
-                confirm: () => console.log('콜렉션 생성'),
-              })
-            }
+            onClick={() => setDialog(createCollectionDialogState)}
             size="large"
           />
-          {userCollections.map((collection) => {
-            const newUuid = uuid();
-            return (
-              <Bookshelf
-                key={newUuid}
-                userId={+(userid as string)}
-                collectionId={collection.id}
-                title={collection.title}
-                count={collection.albums.length}
-              ></Bookshelf>
-            );
-          })}
+          {userCollections.map((collection) => (
+            <Bookshelf
+              key={uuid()}
+              userId={+(userid as string)}
+              collectionId={collection.id}
+              title={collection.title}
+              count={collection.albums.length}
+            ></Bookshelf>
+          ))}
         </CollectionsWrapper>
       </Main>
       <Footer />

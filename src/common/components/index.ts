@@ -16,6 +16,7 @@ import TitleInfo from './TitleInfo/TitleInfo';
 import WaveFooter from './WaveFooter/WaveFooter';
 import ImageLink from './ImageLink/ImageLink';
 import Header from './Header/Header';
+import DetailInfo from './DetailInfo/DetailInfo';
 import AlbumInfo from './AlbumInfo/AlbumInfo';
 import VinylItem from './VinylItem/VinylItem';
 import Footer from './Footer/Footer';
@@ -24,7 +25,9 @@ import Dropdown from './Dropdown/Dropdown';
 import VinylItems from './VinylItems/VinylItems';
 import Dialog from './Dialog/Dialog';
 import ScrollToTop from './ScrollToTop/ScrollToTop';
-import DetailInfo from './DetailInfo/DetailInfo';
+import ReadOnlyInfo from './ReadOnlyInfo/ReadOnlyInfo';
+import WritableInfo from './WritableInfo/WritableInfo';
+import BackVinyl from './BackVinyl/BackVinyl';
 
 export {
   AddCollectionButton,
@@ -45,6 +48,7 @@ export {
   WaveFooter,
   ImageLink,
   Header,
+  DetailInfo,
   AlbumInfo,
   VinylItem,
   Footer,
@@ -53,5 +57,7 @@ export {
   VinylItems,
   Dialog,
   ScrollToTop,
-  DetailInfo,
+  ReadOnlyInfo,
+  WritableInfo,
+  BackVinyl,
 };
