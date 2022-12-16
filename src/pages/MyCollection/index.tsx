@@ -129,7 +129,7 @@ export default function MyCollection() {
             result,
             sort as 'title' | 'artist' | 'count' | 'Released' | 'update'
           )}
-          page={'all'}
+          page={'collection'}
           view={view as ResultViewProps['view']}
         />
       </MainWrapper>

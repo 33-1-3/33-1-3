@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react';
+import uuid from 'react-uuid';
+import { useState, useEffect, Fragment } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { dialogState, editWritableInfoDialogState } from '@/recoil/globalState';
 import styled from 'styled-components';
 import axios from 'axios';
 import {
@@ -8,14 +11,20 @@ import {
   BackVinyl,
   WritableInfo,
 } from '@/common/components';
+import {
+  InfoName,
+  InfoContent,
+} from '@/common/components/WritableInfo/WritableInfo';
 import { ReactComponent as CloseIcon } from '@/assets/close.svg';
 import {
   ProcessedResult,
   RawTracklist,
   ProcessedTracklist,
+  PurchaseData,
 } from '@/types/data';
-import { mockPurchaseInfoContent, mockMemo } from '@/utils/mocks/mockInfo';
+import PURCHASE_INFO_NAME from '@/utils/constants/purchaseInfoName';
 import tracklistVaildator from '@/utils/functions/tracklistValidator';
+import { mockPurchaseInfoContent, mockMemo } from '@/utils/mocks/mockInfo';
 
 export interface DetailInfoProps {
   infoName: 'Country' | 'Genre' | 'Label' | 'Style' | 'Released' | 'Tracklist';
@@ -23,10 +32,29 @@ export interface DetailInfoProps {
   isValid: boolean;
 }
 
+const createModalContent = (
+  infoName: string[],
+  infoContent: PurchaseData[]
+) => (
+  <PurchaseInfo>
+    {infoName.map((name) => (
+      <InfoName key={uuid()}>{name}</InfoName>
+    ))}
+    {infoContent.map(({ date, price, state }) => (
+      <Fragment key={uuid()}>
+        <InfoContent>{date}</InfoContent>
+        <InfoContent>{price}</InfoContent>
+        <InfoContent>{state}</InfoContent>
+      </Fragment>
+    ))}
+  </PurchaseInfo>
+);
+
 export default function MyItem() {
   const [tracklist, setTracklist] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
+  const [_, setDialog] = useRecoilState(dialogState);
 
   const searchResult = location.state as ProcessedResult;
 
@@ -54,12 +82,23 @@ export default function MyItem() {
         searchResult={searchResult}
         tracklist={tracklist as ProcessedTracklist}
       />
-      <WritableInfo purchaseInfo={mockPurchaseInfoContent} memo={mockMemo} />
+      <WritableInfo
+        purchaseInfo={mockPurchaseInfoContent}
+        memoInfo={mockMemo}
+      />
       <StyledSquareButton
         fontSize={20}
         size="small"
         isFilled={true}
-        onClick={() => console.log('모달 연결 필요!')}
+        onClick={() =>
+          setDialog({
+            ...editWritableInfoDialogState,
+            children: createModalContent(
+              PURCHASE_INFO_NAME,
+              mockPurchaseInfoContent
+            ),
+          })
+        }
       >
         {'편집하기'}
       </StyledSquareButton>
@@ -78,6 +117,17 @@ const MyItemPageWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+`;
+
+const PurchaseInfo = styled.article`
+  display: grid;
+  grid-template-columns: repeat(3, 96px);
+  column-gap: 56px;
+  row-gap: var(--space-bs);
+  width: min-content;
+  margin: 0 auto;
+  text-align: center;
+  overflow-x: hidden;
 `;
 
 const StyledSquareButton = styled(SquareButton)`

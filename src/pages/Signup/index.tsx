@@ -7,7 +7,7 @@ import {
 } from '@/common/components';
 
 const HeaderLogo = styled(LogoLink)`
-  margin: 60px 0 24px;
+  margin-bottom: 24px;
 `;
 
 const FormContainer = styled.div`
@@ -16,6 +16,8 @@ const FormContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: var(--space-sm);
+  margin: auto;
+  margin-top: 15vh;
 `;
 
 export default function Signin() {

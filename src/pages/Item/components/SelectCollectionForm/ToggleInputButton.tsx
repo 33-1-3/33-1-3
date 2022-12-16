@@ -1,3 +1,4 @@
+import { ComponentProps } from 'react';
 import { AddCollectionButton, TextInput } from '@/common/components';
 import { Dispatch, SetStateAction, useState } from 'react';
 
@@ -9,11 +10,29 @@ export interface ToggleInputButtonProps {
 
 const ToggleInputButton = ({ setCollectionList }: ToggleInputButtonProps) => {
   const [isClicked, setIsClicked] = useState(false);
+
+  const handleKeyUp: ComponentProps<'input'>['onKeyUp'] = (e) => {
+    if (e.key !== 'Enter' && e.key !== 'Escape') return;
+    if (e.key === 'Enter') {
+      const target = e.target as HTMLInputElement;
+      const title = target.value;
+      if (title.trim() === '') {
+        setIsClicked(false);
+        return;
+      }
+      setCollectionList((state) => [
+        ...state,
+        { title: target.value, isChecked: false },
+      ]);
+    }
+    setIsClicked(false);
+  };
+
   return (
     <>
       {isClicked ? (
         <TextInput
-          width={408}
+          width={432}
           height={48}
           color="var(--purple-900)"
           borderColor="var(--purple-900)"
@@ -21,22 +40,7 @@ const ToggleInputButton = ({ setCollectionList }: ToggleInputButtonProps) => {
           required={true}
           validationTester={/^.{1,}$/}
           errorMsg="최소 한 글자 이상 입력해주세요."
-          onKeyUp={(e) => {
-            if (e.key !== 'Enter' && e.key !== 'Escape') return;
-            if (e.key === 'Enter') {
-              const target = e.target as HTMLInputElement;
-              const title = target.value;
-              if (title.trim() === '') {
-                setIsClicked(false);
-                return;
-              }
-              setCollectionList((state) => [
-                ...state,
-                { title: target.value, isChecked: false },
-              ]);
-            }
-            setIsClicked(false);
-          }}
+          onKeyUp={handleKeyUp}
         />
       ) : (
         <AddCollectionButton

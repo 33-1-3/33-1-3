@@ -22,9 +22,13 @@ const StyledMain = styled(Main)`
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 52px;
-  background: center/cover url('/assets/background_img.svg');
+  background: url('/assets/background_main.svg') center/cover;
   text-align: center;
+  padding-bottom: 0;
+
+  @media screen and (min-aspect-ratio: 4/3) {
+    min-height: 100vh;
+  }
 `;
 
 const Catchphrase = styled.h2`
