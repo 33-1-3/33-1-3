@@ -24,6 +24,7 @@ import Dropdown from './Dropdown/Dropdown';
 import VinylItems from './VinylItems/VinylItems';
 import Dialog from './Dialog/Dialog';
 import ScrollToTop from './ScrollToTop/ScrollToTop';
+import DetailInfo from './DetailInfo/DetailInfo';
 
 export {
   AddCollectionButton,
@@ -52,4 +53,5 @@ export {
   VinylItems,
   Dialog,
   ScrollToTop,
+  DetailInfo,
 };

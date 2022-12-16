@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import uuid from 'react-uuid';
+import { memo } from 'react';
 
 export interface TextInputProps {
   width: number;
@@ -113,4 +114,4 @@ TextInput.defaultProps = {
   borderColor: 'var(--black)',
 };
 
-export default TextInput;
+export default memo(TextInput);

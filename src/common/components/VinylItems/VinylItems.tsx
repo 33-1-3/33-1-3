@@ -3,6 +3,7 @@ import VinylItem from '../VinylItem/VinylItem';
 import { ResultViewProps } from '../AlbumInfo/AlbumInfo';
 import { ProcessedResult } from '@/types/data';
 import styled, { css } from 'styled-components';
+import { memo } from 'react';
 
 export interface VinylItemsProps extends ResultViewProps {
   searchResult: ProcessedResult[];
@@ -43,4 +44,4 @@ const VinylItemsWrapper = styled.section<ResultViewProps>`
   ${({ view }) => WRAPPER_STYLE[view]};
 `;
 
-export default VinylItems;
+export default memo(VinylItems);

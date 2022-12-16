@@ -1,5 +1,6 @@
 import { GlobalStyle } from '../../styles/globalStyle';
 import styled from 'styled-components';
+import { memo } from 'react';
 
 export interface SquareLinkProps {
   link: string;
@@ -91,4 +92,4 @@ SquareLink.defaultProps = {
   fontSize: 'var(--text-md)',
 };
 
-export default SquareLink;
+export default memo(SquareLink);
