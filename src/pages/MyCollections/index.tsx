@@ -11,7 +11,9 @@ import {
 import { Bookshelf } from './components';
 import { useRecoilState } from 'recoil';
 import { dialogState, createCollectionDialogState } from '@/recoil/globalState';
-import { mockUsersData } from '@/utils/mocks/mockInfo';
+// import { mockUsersData } from '@/utils/mocks/mockInfo';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const MyCollectionsPageTitle = styled(PageTitle)`
   margin-top: 56px;
@@ -28,11 +30,30 @@ const CollectionsWrapper = styled.div`
 export default function MyCollections() {
   const params = useParams();
   const { userid } = params;
-  const [userData] = mockUsersData.filter(
-    (userData) => userData.id === +(userid as string)
-  );
-  const userCollections = userData.collections;
+
+  const [userCollections, setUserCollections] = useState([]);
+
+  // const [userData] = mockUsersData.filter(
+  //   (userData) => userData.id === +(userid as string)
+  // );
+  // const userCollections = userData.collections;
   const [_, setDialog] = useRecoilState(dialogState);
+
+  const url = `http://localhost:3313/collections/${userid}`;
+
+  useEffect(() => {
+    async function fetchResults() {
+      try {
+        const res = await axios.get(url);
+        const userCollections = res.data;
+        console.log(userCollections);
+        setUserCollections(userCollections);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchResults();
+  }, []);
 
   return (
     <>
@@ -44,15 +65,18 @@ export default function MyCollections() {
             onClick={() => setDialog(createCollectionDialogState)}
             size="large"
           />
-          {userCollections.map((collection) => (
-            <Bookshelf
-              key={uuid()}
-              userId={+(userid as string)}
-              collectionId={collection.id}
-              title={collection.title}
-              count={collection.albums.length}
-            ></Bookshelf>
-          ))}
+          {userCollections.map(({ title, collectionId, vinylCount }) => {
+            const newUuid = uuid();
+            return (
+              <Bookshelf
+                key={newUuid}
+                userId={+(userid as string)}
+                collectionId={collectionId}
+                title={title}
+                count={vinylCount}
+              ></Bookshelf>
+            );
+          })}
         </CollectionsWrapper>
       </Main>
       <Footer />
