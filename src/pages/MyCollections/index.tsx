@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react';
 
 const MyCollectionsPageTitle = styled(PageTitle)`
   margin-top: 56px;
-  margin-bottom: 44px;
+  margin-bottom: 36px;
 `;
 
 const CollectionsWrapper = styled.div`
@@ -60,7 +60,7 @@ export default function MyCollections() {
       <Header />
       <Main>
         <MyCollectionsPageTitle>My Collections</MyCollectionsPageTitle>
-        <CollectionsWrapper style={{ width: '640px' }}>
+        <CollectionsWrapper style={{ width: '520px' }}>
           <AddCollectionButton
             onClick={() => setDialog(createCollectionDialogState)}
             size="large"
