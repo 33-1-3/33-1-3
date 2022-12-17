@@ -1,15 +1,13 @@
 import uuid from 'react-uuid';
+import { useMemo } from 'react';
 import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
 import styled, { css } from 'styled-components';
-import { useMemo } from 'react';
-
 import { useRecoilState } from 'recoil';
 import {
   dialogState,
   addItemDialogState,
   deleteItemDialogState,
 } from '@/recoil/globalState';
-import { TitleInfo, DetailInfo, IconButton } from '@/common/components';
 import { ProcessedResult, ProcessedTracklist } from '@/types/data';
 
 export interface ResultViewProps {
@@ -60,18 +58,18 @@ function AlbumInfo({
               ))}
             </ListInfoWrapper>
           )}
-          
+
           <StyledIconButton
-          width={buttonSize}
-          height={buttonSize}
-          iconType={buttonType}
-          view={view}
-          clickHandler={() =>
-            page === 'all'
-              ? setDialog(addItemDialogState)
-              : setDialog(deleteItemDialogState)
-          }
-        />
+            width={buttonSize}
+            height={buttonSize}
+            iconType={buttonType}
+            view={view}
+            clickHandler={() =>
+              page === 'all'
+                ? setDialog(addItemDialogState)
+                : setDialog(deleteItemDialogState)
+            }
+          />
         </AlbumInfoWrapper>
         {view === 'detail' && (
           <DetailInfoWrapper>
@@ -89,7 +87,6 @@ function AlbumInfo({
       </>
     ),
     [searchResult, tracklist, page, view]
-
   );
 }
 
@@ -100,7 +97,8 @@ const WRAPPER_STYLE = {
     padding: var(--space-md) 4px;
   `,
   list: css`
-    width: 618px;
+    min-width: 470px;
+    max-width: 618px;
     height: 152px;
   `,
   detail: css`
@@ -137,9 +135,10 @@ const AlbumInfoWrapper = styled.div<ResultViewProps>`
 
 const ListInfoWrapper = styled.dl`
   display: grid;
-  grid-template-columns: 103px 483px;
+  grid-template-columns: 103px 1fr;
   row-gap: 8px;
-  width: 394px;
+  min-width: 470px;
+  max-width: 618px;
   margin-top: var(--space-lg);
 `;
 

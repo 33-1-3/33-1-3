@@ -28,11 +28,11 @@ const buttonStyle = {
     iconSize: 16,
   },
   large: {
-    width: '640px',
-    height: '160px',
-    gap: 'var(--space-xl)',
-    fontSize: 'var(--text-xl)',
-    iconSize: 36,
+    width: '520px',
+    height: '130px',
+    gap: 'var(--space-bs)',
+    fontSize: 'var(--text-lg)',
+    iconSize: 28,
   },
 };
 
