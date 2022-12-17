@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { memo } from 'react';
+
 export interface LogoProps {
   width: string | number;
   height: string | number;
@@ -18,4 +20,4 @@ const LogoLink = ({ width, height, ...args }: LogoProps) => {
   );
 };
 
-export default LogoLink;
+export default memo(LogoLink);

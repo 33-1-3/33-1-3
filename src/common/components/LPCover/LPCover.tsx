@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ProcessedResult } from '@/types/data';
+import { useMemo, memo } from 'react';
 
 const HEIGHT_PX = {
   small: 150,
@@ -65,7 +66,8 @@ const LPCover = ({
   const heightNum = HEIGHT_PX[size];
   const { id, titleInfo, imgUrl } = searchResult;
 
-  return (
+  return useMemo(
+    () => (
     <Wrapper
       to={`${
         location.pathname === '/searchresult' ? `/item/${id}` : `/myitem/${id}`
@@ -75,23 +77,25 @@ const LPCover = ({
       style={{ width: `${heightNum}px`, height: `${heightNum}px` }}
       {...props}
     >
-      <Cover
-        src={imgUrl}
-        alt=""
-        data-title={titleInfo.title}
-        $heightNum={heightNum}
-        width={`${heightNum}`}
-        height={`${heightNum}`}
-      />
-      {hoverInteraction && (
-        <Vinyl
-          className="vinyl"
-          src="/assets/vinyl.svg"
+        <Cover
+          src={imgUrl}
           alt=""
-          style={{ width: `${heightNum}px`, height: `${heightNum}px` }}
+          data-title={titleInfo.title}
+          $heightNum={heightNum}
+          width={`${heightNum}`}
+          height={`${heightNum}`}
         />
-      )}
-    </Wrapper>
+        {hoverInteraction && (
+          <Vinyl
+            className="vinyl"
+            src="/assets/vinyl.svg"
+            alt=""
+            style={{ width: `${heightNum}px`, height: `${heightNum}px` }}
+          />
+        )}
+      </Wrapper>
+    ),
+    [searchResult, size, hoverInteraction]
   );
 };
 
@@ -100,4 +104,4 @@ LPCover.defaultProps = {
   hoverInteraction: true,
 };
 
-export default LPCover;
+export default memo(LPCover);
