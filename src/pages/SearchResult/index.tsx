@@ -139,10 +139,10 @@ export default function SearchResult() {
             ref={observerTarget}
             style={{
               width: '100vw',
-              height: '100px',
+              height: '50px',
+              marginTop: '20px',
               background:
                 'url(/assets/vinyl-spinner.gif) no-repeat center/contain',
-              backgroundSize: '6%',
             }}
           />
         </Main>
@@ -159,7 +159,7 @@ const SearchResultWrapper = styled.div`
   flex-flow: row nowrap;
   align-items: center;
   gap: var(--space-bs);
-  min-width: 680px;
+  min-width: 640px;
   max-width: 828px;
   width: 65vw;
   height: 34px;
