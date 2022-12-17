@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ImageLink } from '@/common/components';
+import { useMemo } from 'react';
 
 export interface FooterProps {
   backgroundColor: string;
@@ -42,39 +43,42 @@ const LinkContainer = styled.div`
 `;
 
 const Footer = ({ backgroundColor, color, ...props }: FooterProps) => {
-  return (
-    <StyledFooter
-      style={{ height: 200, width: '100vw' }}
-      backgroundColor={backgroundColor}
-      color={color}
-      {...props}
-    >
-      <p>Copyright © 2022 33-1/3 All rights reserved</p>
-      <p>
-        질문이 있으신가요?&nbsp;&nbsp;
-        <Adress>
-          <a href="mailto:33.1.3.contact@gmail.com">문의 사항 남기기</a>
-        </Adress>
-      </p>
-      <LinkContainer>
-        <ImageLink
-          height={40}
-          moveToLink={{
-            pathname: 'https://github.com/33-1-3',
-            site: 'github',
-          }}
-          width={40}
-        />
-        <ImageLink
-          height={40}
-          moveToLink={{
-            pathname: 'https://www.discogs.com/ko/',
-            site: 'discogs',
-          }}
-          width={108}
-        />
-      </LinkContainer>
-    </StyledFooter>
+  return useMemo(
+    () => (
+      <StyledFooter
+        style={{ height: 200, width: '100vw' }}
+        backgroundColor={backgroundColor}
+        color={color}
+        {...props}
+      >
+        <p>Copyright © 2022 33-1/3 All rights reserved</p>
+        <p>
+          질문이 있으신가요?&nbsp;&nbsp;
+          <Adress>
+            <a href="mailto:33.1.3.contact@gmail.com">문의 사항 남기기</a>
+          </Adress>
+        </p>
+        <LinkContainer>
+          <ImageLink
+            height={40}
+            moveToLink={{
+              pathname: 'https://github.com/33-1-3',
+              site: 'github',
+            }}
+            width={40}
+          />
+          <ImageLink
+            height={40}
+            moveToLink={{
+              pathname: 'https://www.discogs.com/ko/',
+              site: 'discogs',
+            }}
+            width={108}
+          />
+        </LinkContainer>
+      </StyledFooter>
+    ),
+    [backgroundColor, color]
   );
 };
 

@@ -1,5 +1,8 @@
 import uuid from 'react-uuid';
+import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
 import styled, { css } from 'styled-components';
+import { useMemo } from 'react';
+
 import { useRecoilState } from 'recoil';
 import {
   dialogState,
@@ -36,27 +39,29 @@ function AlbumInfo({
 
   const [_, setDialog] = useRecoilState(dialogState);
 
-  return (
-    <>
-      <AlbumInfoWrapper view={view} {...props}>
-        <TitleInfo
-          title={titleInfo.title}
-          artist={titleInfo.artist}
-          view={view}
-        />
-        {view === 'list' && (
-          <ListInfoWrapper>
-            {listInfo.map(({ infoName, infoContent, isValid }) => (
-              <DetailInfo
-                key={uuid()}
-                infoName={infoName}
-                infoContent={infoContent}
-                isValid={isValid}
-              />
-            ))}
-          </ListInfoWrapper>
-        )}
-        <StyledIconButton
+  return useMemo(
+    () => (
+      <>
+        <AlbumInfoWrapper view={view} {...props}>
+          <TitleInfo
+            title={titleInfo.title}
+            artist={titleInfo.artist}
+            view={view}
+          />
+          {view === 'list' && (
+            <ListInfoWrapper>
+              {listInfo.map(({ infoName, infoContent, isValid }) => (
+                <DetailInfo
+                  key={uuid()}
+                  infoName={infoName}
+                  infoContent={infoContent}
+                  isValid={isValid}
+                />
+              ))}
+            </ListInfoWrapper>
+          )}
+          
+          <StyledIconButton
           width={buttonSize}
           height={buttonSize}
           iconType={buttonType}
@@ -67,21 +72,24 @@ function AlbumInfo({
               : setDialog(deleteItemDialogState)
           }
         />
-      </AlbumInfoWrapper>
-      {view === 'detail' && (
-        <DetailInfoWrapper>
-          {newDetailInfo.map(({ infoName, infoContent, isValid }) => (
-            <DetailInfo
-              key={uuid()}
-              infoName={infoName}
-              infoContent={infoContent}
-              isValid={isValid}
-              // TODO: handler
-            />
-          ))}
-        </DetailInfoWrapper>
-      )}
-    </>
+        </AlbumInfoWrapper>
+        {view === 'detail' && (
+          <DetailInfoWrapper>
+            {newDetailInfo.map(({ infoName, infoContent, isValid }) => (
+              <DetailInfo
+                key={uuid()}
+                infoName={infoName}
+                infoContent={infoContent}
+                isValid={isValid}
+                // TODO: handler
+              />
+            ))}
+          </DetailInfoWrapper>
+        )}
+      </>
+    ),
+    [searchResult, tracklist, page, view]
+
   );
 }
 
