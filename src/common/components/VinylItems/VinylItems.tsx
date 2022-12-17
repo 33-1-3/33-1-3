@@ -22,13 +22,18 @@ function VinylItems({ searchResult, page, view, ...props }: VinylItemsProps) {
 
 const WRAPPER_STYLE = {
   block: css`
-    flex-flow: row wrap;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(4, 150px);
+    justify-content: center;
     column-gap: 76px;
-    row-gap: 12px;
+
+    @media screen and (max-width: 1100px) {
+      grid-template-columns: repeat(3, 150px);
+    }
   `,
   list: css`
     flex-flow: column wrap;
+    justify-content: center;
     row-gap: 60px;
   `,
   detail: css`
@@ -39,7 +44,8 @@ const WRAPPER_STYLE = {
 
 const VinylItemsWrapper = styled.section<ResultViewProps>`
   display: flex;
-  width: 828px;
+  min-width: 680px;
+  max-width: 828px;
   margin: 0 auto;
   margin-top: 52px;
   ${({ view }) => WRAPPER_STYLE[view]};
