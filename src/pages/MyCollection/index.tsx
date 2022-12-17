@@ -82,7 +82,19 @@ export default function MyCollection() {
         const { vinylsInfo, collectionTitle } = result;
 
         const processedResult = vinylsInfo.map(
-          ({ imgUrl, title, artist, released, genre }) => {
+          ({
+            imgUrl,
+            title,
+            artist,
+            released,
+            genre,
+          }: {
+            imgUrl: string;
+            title: string;
+            artist: string;
+            released: string;
+            genre: string[];
+          }) => {
             return {
               titleInfo: { title, artist },
               detailInfo: [
