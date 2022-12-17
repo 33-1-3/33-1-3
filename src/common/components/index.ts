@@ -28,6 +28,7 @@ import ScrollToTop from './ScrollToTop/ScrollToTop';
 import ReadOnlyInfo from './ReadOnlyInfo/ReadOnlyInfo';
 import WritableInfo from './WritableInfo/WritableInfo';
 import BackVinyl from './BackVinyl/BackVinyl';
+import GoToTop from './GoToTop/GoToTop';
 
 export {
   AddCollectionButton,
@@ -60,4 +61,5 @@ export {
   ReadOnlyInfo,
   WritableInfo,
   BackVinyl,
+  GoToTop,
 };
