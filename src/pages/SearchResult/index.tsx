@@ -9,6 +9,7 @@ import {
   Dropdown,
   SearchResultText,
   VinylItems,
+  GoToTop,
 } from '@/common/components';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
 import {
@@ -140,6 +141,7 @@ export default function SearchResult() {
             ref={observerTarget}
             style={{ width: '100vw', height: '50px' }}
           />
+          <GoToTop />
         </Main>
         <Footer />
       </>
