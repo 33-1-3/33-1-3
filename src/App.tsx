@@ -9,7 +9,8 @@ import SearchResult from './pages/SearchResult';
 import Item from './pages/Item';
 import MyCollections from '@/pages/MyCollections/index';
 import MyCollection from '@/pages/MyCollection/index';
-import MyItem from './pages/MyItem';
+import MyItem from '@/pages/MyItem';
+import NotFound from '@/pages/NotFound';
 import Dialog, { DialogProps } from './common/components/Dialog/Dialog';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           element={<MyCollection />}
         ></Route>
         <Route path="/myitem/:id" element={<MyItem />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Dialog
         isOpen={dialog.isOpen}

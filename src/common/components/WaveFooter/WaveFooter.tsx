@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ReactComponent as WaveIcon } from '@/assets/wave.svg';
 
 const FixedFooter = styled.footer`
-  position: absolute;
+  position: fixed;
   left: 0px;
   bottom: 0px;
   overflow: hidden;
