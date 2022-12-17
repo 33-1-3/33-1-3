@@ -1,13 +1,14 @@
 import uuid from 'react-uuid';
 import styled, { css } from 'styled-components';
 import { useMemo } from 'react';
+import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
+
 import { useRecoilState } from 'recoil';
 import {
   dialogState,
   addItemDialogState,
   deleteItemDialogState,
 } from '@/recoil/globalState';
-import { TitleInfo, DetailInfo, IconButton } from '@/common/components';
 import { ProcessedResult, ProcessedTracklist } from '@/types/data';
 
 export interface ResultViewProps {
@@ -58,6 +59,7 @@ function AlbumInfo({
               ))}
             </ListInfoWrapper>
           )}
+
           <StyledIconButton
             width={buttonSize}
             height={buttonSize}
