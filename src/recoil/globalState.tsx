@@ -89,13 +89,16 @@ export const editCollectionDialogState = {
   confirm: () => console.log('콜렉션 수정'),
 };
 
-export const deleteCollectionDialogState = {
-  isOpen: true,
-  width: 480,
-  height: 200,
-  children: '콜렉션을 삭제하시겠습니까?',
-  confirm: () => console.log('콜렉션 삭제'),
-};
+// export const deleteCollectionDialogState = (collectionId: number) => ({
+//   isOpen: true,
+//   width: 480,
+//   height: 200,
+//   children: '콜렉션을 삭제하시겠습니까?',
+//   confirm: async () => {
+//     await axios.delete(`http://localhost:3313/collections/${collectionId}`);
+
+//   },
+// });
 
 export const editWritableInfoDialogState = {
   isOpen: true,
@@ -113,5 +116,5 @@ export const dialogState = atom<DialogProps>({
 
 export const userState = atom<number | null>({
   key: 'userState',
-  default: 3,
+  default: 2,
 });

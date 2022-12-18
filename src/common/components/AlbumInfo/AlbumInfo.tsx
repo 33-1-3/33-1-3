@@ -14,7 +14,8 @@ import {
   userState,
   dialogState,
   setAddItemDialogState,
-  deleteItemDialogState,
+  // deleteItemDialogState,
+  initialDialogState,
 } from '@/recoil/globalState';
 import { ProcessedResult, ProcessedTracklist } from '@/types/data';
 
@@ -98,7 +99,6 @@ function AlbumInfo({
                     setAddItemDialogState(collectionList, userId, releasedId)
                   )
                 : setDialog(deleteItemDialogState);
->>>>>>> 4d940e2 (FEAT: Add Item 모달 내부 확인 버튼 처리 -ing)
             }}
           />
         </AlbumInfoWrapper>

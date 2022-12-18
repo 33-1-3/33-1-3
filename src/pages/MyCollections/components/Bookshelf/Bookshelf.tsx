@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { IconButton } from '@/common/components';
 import { useRecoilState } from 'recoil';
+import axios from 'axios';
+import { IconButton } from '@/common/components';
 import {
   dialogState,
   editCollectionDialogState,
-  deleteCollectionDialogState,
+  initialDialogState,
+  // deleteCollectionDialogState,
 } from '@/recoil/globalState';
 
 export interface BookshelfProps {
@@ -58,7 +60,21 @@ const Bookshelf = ({
           width={22}
           height={22}
           iconType="minus"
-          clickHandler={() => setDialog(deleteCollectionDialogState)}
+          clickHandler={() =>
+            setDialog({
+              isOpen: true,
+              width: 480,
+              height: 200,
+              children: '콜렉션을 삭제하시겠습니까?',
+              confirm: async () => {
+                await axios.delete(
+                  `http://localhost:3313/collections/${collectionId}`
+                );
+                setDialog(initialDialogState);
+                location.reload();
+              },
+            })
+          }
         />
       </IconButtons>
       <Link
