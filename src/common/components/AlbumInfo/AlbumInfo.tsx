@@ -1,5 +1,4 @@
 import uuid from 'react-uuid';
-import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
 import styled, { css } from 'styled-components';
 import { useMemo } from 'react';
 
@@ -60,18 +59,18 @@ function AlbumInfo({
               ))}
             </ListInfoWrapper>
           )}
-          
+
           <StyledIconButton
-          width={buttonSize}
-          height={buttonSize}
-          iconType={buttonType}
-          view={view}
-          clickHandler={() =>
-            page === 'all'
-              ? setDialog(addItemDialogState)
-              : setDialog(deleteItemDialogState)
-          }
-        />
+            width={buttonSize}
+            height={buttonSize}
+            iconType={buttonType}
+            view={view}
+            clickHandler={() =>
+              page === 'all'
+                ? setDialog(addItemDialogState)
+                : setDialog(deleteItemDialogState)
+            }
+          />
         </AlbumInfoWrapper>
         {view === 'detail' && (
           <DetailInfoWrapper>
@@ -89,7 +88,6 @@ function AlbumInfo({
       </>
     ),
     [searchResult, tracklist, page, view]
-
   );
 }
 

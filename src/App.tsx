@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { dialogState } from './recoil/globalState';
 
@@ -11,6 +11,7 @@ import MyCollections from '@/pages/MyCollections/index';
 import MyCollection from '@/pages/MyCollection/index';
 import MyItem from '@/pages/MyItem';
 import NotFound from '@/pages/NotFound';
+import Verification from '@/pages/Verification';
 import Dialog, { DialogProps } from './common/components/Dialog/Dialog';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           element={<MyCollection />}
         ></Route>
         <Route path="/myitem/:id" element={<MyItem />}></Route>
+        <Route path="/verification/:userId" element={<Verification />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Dialog
