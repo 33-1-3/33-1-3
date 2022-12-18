@@ -9,7 +9,6 @@ import {
   addItemDialogState,
   deleteItemDialogState,
 } from '@/recoil/globalState';
-import { TitleInfo, DetailInfo, IconButton } from '@/common/components';
 import { ProcessedResult, ProcessedTracklist } from '@/types/data';
 
 export interface ResultViewProps {
