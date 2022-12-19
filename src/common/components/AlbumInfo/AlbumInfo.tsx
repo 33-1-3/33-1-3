@@ -2,6 +2,9 @@ import uuid from 'react-uuid';
 import { useMemo } from 'react';
 import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
 import styled, { css } from 'styled-components';
+import { useMemo } from 'react';
+import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
+
 import { useRecoilState } from 'recoil';
 import {
   dialogState,

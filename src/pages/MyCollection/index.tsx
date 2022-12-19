@@ -92,8 +92,9 @@ export default function MyCollection() {
             imgUrl: string;
             title: string;
             artist: string;
-            released: string;
-            genre: string[];
+            released: string | string[];
+            genre: string | string[];
+
           }) => {
             return {
               titleInfo: { title, artist },
@@ -114,24 +115,14 @@ export default function MyCollection() {
           }
         );
         setCollectionTitle(collectionTitle);
-        setResult(processedResult);
-        // setResult(() => {
-        //   collectionItems = sortItems(
-        //     processResult(datas),
-        //     searchParams.get('sort') as
-        //       | 'title'
-        //       | 'artist'
-        //       | 'count'
-        //       | 'Released'
-        //       | 'update'
-        //   );
-        //   return collectionItems;
-        // });
+        setResult(() => {
+          collectionItems = processedResult;
+          return processedResult;
+        });
       } catch (error) {
         console.error(error);
       }
     }
-
     fetchResults();
   }, [userid, collectionid]);
 

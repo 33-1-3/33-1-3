@@ -19,7 +19,7 @@ export const GlobalStyle = createGlobalStyle/*css*/ `
     /* drop shadow */
     --shadow-Header: 0px 2px 10px 0px rgba(0,0,0,0.3);
     --shadow-Item: 2px 2px 3px rgba(0,0,0,0.25);
-    --shadow-Button-back: 0px 4px 10px 0px rgba(0,0,0,0.3);
+    --shadow-Button-back: 0px 4px 10px rgba(0,0,0,0.3);
     --shadow-Modal: 0px 4px 10px 0px rgba(0,0,0,0.5);
     --shadow-Vinyl: 4px 4px 10px 0px rgba(0,0,0,0.5);
     --shadow-Background: inset 4px 0px 10px rgba(0,0,0,0.15);
