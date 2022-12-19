@@ -10,6 +10,7 @@ import {
   SearchResultText,
   VinylItems,
   GoToTop,
+  FloatingButton,
 } from '@/common/components';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
 import {
@@ -141,6 +142,7 @@ export default function SearchResult() {
             ref={observerTarget}
             style={{ width: '100vw', height: '50px' }}
           />
+          <FloatingButton />
           <GoToTop />
         </Main>
         <Footer />
