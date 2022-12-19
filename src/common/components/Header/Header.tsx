@@ -23,6 +23,7 @@ const StyledHeader = styled.header`
   gap: 12px;
   box-shadow: var(--shadow-Header);
   z-index: 2000;
+
   > a:first-child {
     margin-right: auto;
   }
@@ -30,11 +31,12 @@ const StyledHeader = styled.header`
 
 const Header = ({ isLogin, ...props }: HeaderProps) => {
   const isMain: boolean = window.location.pathname === '/';
+  const minWidth = isMain ? '440px' : '680px';
 
   const SearchInputRender = useHandleSubmit();
 
   return (
-    <StyledHeader style={{ height: 64, width: '100vw' }} {...props}>
+    <StyledHeader style={{ height: 64, width: '100vw', minWidth }} {...props}>
       <LogoLink height="40px" width="74px" />
       {!isMain && <SearchInput size="small" handleSubmit={SearchInputRender} />}
       <SquareLink link="/mycollections/1" width={178}>

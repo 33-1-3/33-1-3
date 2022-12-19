@@ -22,7 +22,7 @@ function TitleInfo({ title, artist, view }: TitleInfoProps) {
 
 const TEXT_WIDTH = {
   block: '118px',
-  list: '587px',
+  list: '40vw',
   detail: '346px',
   myitem: '400px',
 };
@@ -59,7 +59,7 @@ const textMixin = css<ViewProps>`
 `;
 
 const TitleInfoWrapper = styled.dl<ViewProps>`
-  width: min-content;
+  width: ${({ view }) => (view === 'list' ? '48.2vw' : 'min-content')};
   display: flex;
   flex-flow: column wrap;
   gap: ${({ view }) => GAP_SIZE[view]};
@@ -68,6 +68,7 @@ const TitleInfoWrapper = styled.dl<ViewProps>`
 
 const TitleText = styled.dd<ViewProps>`
   ${textMixin};
+  ${({ view }) => view === 'list' && 'min-width: 432px'};
   /* padding: 4px 0; */
   font-weight: 700;
   font-size: ${({ view }) => TITLE_FONT_SIZE[view]};
@@ -75,6 +76,7 @@ const TitleText = styled.dd<ViewProps>`
 
 const ArtistText = styled.dd<ViewProps>`
   ${textMixin};
+  ${({ view }) => view === 'list' && 'min-width: 432px'};
   width: ${({ view }) => (view === 'myitem' ? '280px' : '')};
   font-weight: 400;
   font-size: ${({ view }) => ARTIST_FONT_SIZE[view]};

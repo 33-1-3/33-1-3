@@ -94,6 +94,7 @@ export default function MyCollection() {
             artist: string;
             released: string | string[];
             genre: string | string[];
+
           }) => {
             return {
               titleInfo: { title, artist },

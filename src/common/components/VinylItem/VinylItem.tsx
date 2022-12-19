@@ -41,8 +41,9 @@ const WRAPPER_STYLE = {
   list: css`
     display: flex;
     flex-flow: row nowrap;
+    justify-content: center;
     gap: 60px;
-    width: 828px;
+    min-width: 680px;
   `,
   detail: css`
     display: flex;
