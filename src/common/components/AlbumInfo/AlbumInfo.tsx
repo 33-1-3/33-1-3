@@ -1,6 +1,6 @@
 import uuid from 'react-uuid';
-import styled, { css } from 'styled-components';
 import { useMemo } from 'react';
+import styled, { css } from 'styled-components';
 import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
 import { useRecoilState } from 'recoil';
 import {
