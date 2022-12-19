@@ -68,15 +68,17 @@ const LPCover = ({
 
   return useMemo(
     () => (
-    <Wrapper
-      to={`${
-        location.pathname === '/searchresult' ? `/item/${id}` : `/myitem/${id}`
-      }`}
-      state={searchResult}
-      $heightNum={heightNum}
-      style={{ width: `${heightNum}px`, height: `${heightNum}px` }}
-      {...props}
-    >
+      <Wrapper
+        to={`${
+          location.pathname === '/searchresult'
+            ? `/item/${id}`
+            : `/myitem/${id}`
+        }`}
+        state={searchResult}
+        $heightNum={heightNum}
+        style={{ width: `${heightNum}px`, height: `${heightNum}px` }}
+        {...props}
+      >
         <Cover
           src={imgUrl}
           alt=""
