@@ -9,6 +9,7 @@ import {
   Dropdown,
   SearchResultText,
   VinylItems,
+  GoToTop,
 } from '@/common/components';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
 import {
@@ -145,6 +146,7 @@ export default function SearchResult() {
                 'url(/assets/vinyl-spinner.gif) no-repeat center/contain',
             }}
           />
+          <GoToTop />
         </Main>
         <Footer />
       </>

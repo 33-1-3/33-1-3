@@ -1,7 +1,7 @@
 import uuid from 'react-uuid';
+import styled, { css } from 'styled-components';
 import { useMemo } from 'react';
 import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
-import styled, { css } from 'styled-components';
 import { useRecoilState } from 'recoil';
 import {
   dialogState,

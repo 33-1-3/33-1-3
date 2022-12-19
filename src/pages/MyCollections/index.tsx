@@ -46,7 +46,6 @@ export default function MyCollections() {
       try {
         const res = await axios.get(url);
         const userCollections = res.data;
-        console.log(userCollections);
         setUserCollections(userCollections);
       } catch (error) {
         console.error(error);

@@ -9,7 +9,7 @@ const validateRgx = {
   pwd: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/,
 };
 
-const Form = styled.div`
+const Form = styled.form`
   width: min-content;
   text-align: center;
 `;
@@ -25,6 +25,7 @@ const SubmitBtn = styled(SqaureButton)`
 `;
 
 export interface SignInAndUpFormProps {
+  submitHandler: React.FormEventHandler<HTMLFormElement>;
   option: 'signin' | 'signup';
 }
 
@@ -35,7 +36,11 @@ export interface formState {
   pwdCheck: string;
 }
 
-const SignInAndUpForm = ({ option, ...props }: SignInAndUpFormProps) => {
+const SignInAndUpForm = ({
+  submitHandler,
+  option,
+  ...props
+}: SignInAndUpFormProps) => {
   const [formState, setFormState] = useState<formState>({
     id: '',
     nickname: '',
@@ -53,7 +58,7 @@ const SignInAndUpForm = ({ option, ...props }: SignInAndUpFormProps) => {
   };
 
   return (
-    <Form {...props}>
+    <Form onSubmit={submitHandler} {...props}>
       <InputSet>
         {option === 'signin' && (
           <>
@@ -83,6 +88,7 @@ const SignInAndUpForm = ({ option, ...props }: SignInAndUpFormProps) => {
         )}
       </InputSet>
       <SubmitBtn
+        type="submit"
         fontSize={20}
         size="small"
         isFilled={true}
