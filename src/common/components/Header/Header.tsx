@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import axios from 'axios';
 import {
   LogoLink,
   SearchInput,
@@ -6,10 +7,7 @@ import {
   ProfileLink,
 } from '@/common/components';
 import useHandleSubmit from '@/hooks/useHandleSubmit';
-
-export interface HeaderProps {
-  isLogin: boolean;
-}
+import { useEffect, useState } from 'react';
 
 const StyledHeader = styled.header`
   position: fixed;
@@ -29,21 +27,43 @@ const StyledHeader = styled.header`
   }
 `;
 
-const Header = ({ isLogin, ...props }: HeaderProps) => {
+const Header = ({ ...props }) => {
+  const [isLogin, setIsLogin] = useState(false);
+  const [userId, setUserId] = useState('');
+
   const isMain: boolean = window.location.pathname === '/';
   const minWidth = isMain ? '440px' : '680px';
 
   const SearchInputRender = useHandleSubmit();
 
+  useEffect(() => {
+    async function auth() {
+      try {
+        const res = await axios.get('http://localhost:3313/auth', {
+          withCredentials: true,
+        });
+        const {
+          data: { isLogin, userId },
+        } = res;
+
+        setIsLogin(isLogin);
+        setUserId(userId);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    auth();
+  }, [isLogin, userId]);
+
   return (
     <StyledHeader style={{ height: 64, width: '100vw', minWidth }} {...props}>
       <LogoLink height="40px" width="74px" />
       {!isMain && <SearchInput size="small" handleSubmit={SearchInputRender} />}
-      <SquareLink link="/mycollections/1" width={178}>
+      <SquareLink link={`/mycollections/${userId}`} width={178}>
         My Collections
       </SquareLink>
       {isLogin ? (
-        <ProfileLink userid="ulgoon" />
+        <ProfileLink setIsLogin={setIsLogin} />
       ) : (
         <SquareLink
           backgroundColor="var(--white)"
