@@ -92,8 +92,8 @@ export default function MyCollection() {
             imgUrl: string;
             title: string;
             artist: string;
-            released: string;
-            genre: string[];
+            released: string | string[];
+            genre: string | string[];
           }) => {
             return {
               titleInfo: { title, artist },
