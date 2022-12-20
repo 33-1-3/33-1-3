@@ -82,7 +82,19 @@ export default function MyCollection() {
         const { vinylsInfo, collectionTitle } = result;
 
         const processedResult = vinylsInfo.map(
-          ({ imgUrl, title, artist, released, genre }) => {
+          ({
+            imgUrl,
+            title,
+            artist,
+            released,
+            genre,
+          }: {
+            imgUrl: string;
+            title: string;
+            artist: string;
+            released: string | string[];
+            genre: string | string[];
+          }) => {
             return {
               titleInfo: { title, artist },
               detailInfo: [
@@ -102,24 +114,14 @@ export default function MyCollection() {
           }
         );
         setCollectionTitle(collectionTitle);
-        setResult(processedResult);
-        // setResult(() => {
-        //   collectionItems = sortItems(
-        //     processResult(datas),
-        //     searchParams.get('sort') as
-        //       | 'title'
-        //       | 'artist'
-        //       | 'count'
-        //       | 'Released'
-        //       | 'update'
-        //   );
-        //   return collectionItems;
-        // });
+        setResult(() => {
+          collectionItems = processedResult;
+          return processedResult;
+        });
       } catch (error) {
         console.error(error);
       }
     }
-
     fetchResults();
   }, [userid, collectionid]);
 

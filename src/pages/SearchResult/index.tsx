@@ -137,10 +137,15 @@ export default function SearchResult() {
             page={'all'}
             view={params.get('view') as ResultViewProps['view']}
           />
-          {isLoading && <div>로딩중</div>}
           <div
             ref={observerTarget}
-            style={{ width: '100vw', height: '50px' }}
+            style={{
+              width: '100vw',
+              height: '50px',
+              marginTop: '20px',
+              background:
+                'url(/assets/vinyl-spinner.gif) no-repeat center/contain',
+            }}
           />
           <FloatingButton />
           <GoToTop />
@@ -158,7 +163,9 @@ const SearchResultWrapper = styled.div`
   flex-flow: row nowrap;
   align-items: center;
   gap: var(--space-bs);
-  width: 828px;
+  min-width: 640px;
+  max-width: 828px;
+  width: 65vw;
   height: 34px;
   margin: 0 auto;
   margin-top: 36px;

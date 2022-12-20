@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { memo } from 'react';
+import { Link } from 'react-router-dom';
 
 export interface SquareLinkProps {
   link: string;
@@ -21,7 +22,7 @@ export interface StyledLinkProps {
   fontSize: string;
 }
 
-export const StyledLink = styled.a<StyledLinkProps>`
+export const StyledLink = styled.div<StyledLinkProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -66,17 +67,18 @@ const SquareLink = ({
 }: SquareLinkProps) => {
   return (
     <>
-      <StyledLink
-        href={link}
-        style={{ width, height }}
-        backgroundColor={backgroundColor}
-        color={color}
-        borderColor={borderColor}
-        transition={transition}
-        fontSize={fontSize}
-      >
-        {children}
-      </StyledLink>
+      <Link to={link}>
+        <StyledLink
+          style={{ width, height }}
+          backgroundColor={backgroundColor}
+          color={color}
+          borderColor={borderColor}
+          transition={transition}
+          fontSize={fontSize}
+        >
+          {children}
+        </StyledLink>
+      </Link>
     </>
   );
 };

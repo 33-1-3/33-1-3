@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { ComponentProps } from 'react';
 
-const fontSize = { small: '15px', large: '28px' };
+const fontSize = { small: '15px', large: '24px' };
 
 export interface SearchInputProps {
   placeholder: string;
@@ -52,9 +52,9 @@ const inputMixin = {
     border-radius: 20px;
   `,
   large: css`
-    width: 516px;
-    height: 72px;
-    padding: 22px 24px;
+    width: 400px;
+    height: 56px;
+    padding: 16px 20px;
     border: 3px solid var(--black);
     border-radius: 36px;
   `,
@@ -67,9 +67,33 @@ const buttonMixin = {
     margin: 6px;
   `,
   large: css`
-    width: 48px;
-    height: 48px;
-    margin: 12px;
+    width: 36px;
+    height: 36px;
+    margin: 10px;
+  `,
+};
+
+const responsiveMixin = {
+  input: css`
+    @media screen and (max-width: 768px) {
+      width: 52vw;
+      height: 7.3vw;
+      padding: 2vw 2.6vw;
+      border: 0.4vw solid var(--black);
+      border-radius: 4.7vw;
+      font-size: 3.1vw;
+
+      &::placeholder {
+        font-size: 3.1vw;
+      }
+    }
+  `,
+  button: css`
+    @media screen and (max-width: 768px) {
+      width: 4.7vw;
+      height: 4.7vw;
+      margin: 1.3vw;
+    }
   `,
 };
 
@@ -94,6 +118,8 @@ const Input = styled.input<formProps>`
     font-size: ${({ formSize }) => fontSize[formSize]};
     color: var(--black);
   }
+
+  ${({ formSize }) => formSize === 'large' && `${responsiveMixin.input}`}
 `;
 
 const SearchButton = styled.button<formProps>`
@@ -102,6 +128,8 @@ const SearchButton = styled.button<formProps>`
   ${({ formSize }) => buttonMixin[formSize]}
   background: url('/assets/searchButton.svg') no-repeat center/contain;
   border: none;
+
+  ${({ formSize }) => formSize === 'large' && `${responsiveMixin.button}`}
 `;
 
 export default SearchInput;

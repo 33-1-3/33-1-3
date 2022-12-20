@@ -1,8 +1,7 @@
 import uuid from 'react-uuid';
-import styled, { css } from 'styled-components';
 import { useMemo } from 'react';
+import styled, { css } from 'styled-components';
 import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
-
 import { useRecoilState } from 'recoil';
 import {
   dialogState,
@@ -98,7 +97,8 @@ const WRAPPER_STYLE = {
     padding: var(--space-md) 4px;
   `,
   list: css`
-    width: 618px;
+    min-width: 470px;
+    max-width: 618px;
     height: 152px;
   `,
   detail: css`
@@ -135,9 +135,10 @@ const AlbumInfoWrapper = styled.div<ResultViewProps>`
 
 const ListInfoWrapper = styled.dl`
   display: grid;
-  grid-template-columns: 103px 483px;
+  grid-template-columns: 103px 1fr;
   row-gap: 8px;
-  width: 394px;
+  min-width: 470px;
+  max-width: 618px;
   margin-top: var(--space-lg);
 `;
 

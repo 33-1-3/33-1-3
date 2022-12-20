@@ -11,7 +11,6 @@ const StyledFooter = styled.footer<FooterProps>`
   position: relative;
   left: 0;
   right: 0;
-  bottom: -64px;
   display: flex;
   flex-direction: column;
   align-items: center;

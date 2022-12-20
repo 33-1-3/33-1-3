@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 28px;
+  font-size: 22px;
   margin-left: 8px;
 `;
 
@@ -45,18 +45,18 @@ const Bookshelf = ({
   const [_, setDialog] = useRecoilState(dialogState);
   const imgIdx = Math.min(Math.ceil(count / step), 5);
   return (
-    <Wrapper style={{ width: '640px', height: 'fit-content' }}>
+    <Wrapper style={{ width: '520px', height: 'fit-content' }}>
       <Title>{title}</Title>
       <IconButtons>
         <IconButton
-          width={28}
-          height={28}
+          width={22}
+          height={22}
           iconType="pencil"
           clickHandler={() => setDialog(editCollectionDialogState)}
         />
         <IconButton
-          width={28}
-          height={28}
+          width={22}
+          height={22}
           iconType="minus"
           clickHandler={() => setDialog(deleteCollectionDialogState)}
         />
@@ -66,8 +66,8 @@ const Bookshelf = ({
         aria-label={`${title} 콜렉션으로 이동`}
       >
         <img
-          width="640px"
-          height="160px"
+          width="520px"
+          height="130px"
           src={`/assets/shelf${imgIdx}.svg`}
           alt=""
           {...props}
@@ -78,8 +78,8 @@ const Bookshelf = ({
 };
 
 Bookshelf.defaultProps = {
-  width: '640px',
-  height: '160px',
+  width: '520px',
+  height: '130px',
   step: 10,
 };
 

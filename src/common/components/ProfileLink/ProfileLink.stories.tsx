@@ -12,8 +12,6 @@ const Template: ComponentStory<typeof ProfileLink> = (args) => (
 
 export const User = Template.bind({});
 User.args = {
-  imgFileName: 'user.svg',
-  userid: 'ulgoon',
   width: 40,
   height: 40,
 };
@@ -25,7 +23,6 @@ User.parameters = {
 
 export const Default = Template.bind({});
 Default.args = {
-  userid: 'ulgoon',
   width: 40,
   height: 40,
 };
