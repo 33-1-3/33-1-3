@@ -19,8 +19,8 @@ export interface GoToTopProps extends GoToTopButtonProps {
 
 const GoToTopButton = styled.button<GoToTopButtonProps>`
   position: fixed;
-  right: 5%;
-  bottom: 5%;
+  right: 112px;
+  bottom: 48px;
   z-index: 1000;
   filter: drop-shadow(var(--shadow-Button-back));
   circle {

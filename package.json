@@ -79,6 +79,7 @@
     "vite-plugin-checker": "^0.5.1"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.10.0",
     "axios": "^1.2.0",
     "disconnect": "^1.2.2",
     "framer-motion": "^7.10.2",

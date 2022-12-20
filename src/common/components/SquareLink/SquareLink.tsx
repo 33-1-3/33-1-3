@@ -1,4 +1,3 @@
-import { GlobalStyle } from '../../styles/globalStyle';
 import styled from 'styled-components';
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
@@ -68,7 +67,6 @@ const SquareLink = ({
 }: SquareLinkProps) => {
   return (
     <>
-      <GlobalStyle />
       <Link to={link}>
         <StyledLink
           style={{ width, height }}

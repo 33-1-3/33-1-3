@@ -10,6 +10,7 @@ import {
   SearchResultText,
   VinylItems,
   GoToTop,
+  FloatingButton,
 } from '@/common/components';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
 import {
@@ -146,6 +147,7 @@ export default function SearchResult() {
                 'url(/assets/vinyl-spinner.gif) no-repeat center/contain',
             }}
           />
+          <FloatingButton />
           <GoToTop />
         </Main>
         <Footer />
