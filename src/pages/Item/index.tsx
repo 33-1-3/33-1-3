@@ -1,32 +1,50 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { Header, Main, Footer, LPCover, AlbumInfo } from '@/common/components';
 import {
+  Header,
+  Main,
+  Footer,
+  LPCover,
+  AlbumInfo,
+  LoadingSpinner,
+} from '@/common/components';
+import {
+  ProcessedResourceUrlResult,
   ProcessedResult,
   ProcessedTracklist,
-  RawTracklist,
 } from '@/types/data';
 import axios from 'axios';
-
-const vaildator = (tracklist: RawTracklist[]) =>
-  tracklist.length !== 0 && Array.isArray(tracklist);
+import {
+  processReleaseResult,
+  processMasterResult,
+} from '@/utils/functions/processResult';
 
 export default function Item() {
   const [tracklist, setTracklist] = useState({});
   const location = useLocation();
-  const searchResult = location.state as ProcessedResult;
+  const { resourceUrl } = location.state as ProcessedResult;
+  const [searchResult, setSearchResult] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchTrackList() {
       try {
-        const res = await axios.get(searchResult.resourceUrl);
-
-        setTracklist({
-          infoName: 'Tracklist',
-          infoContent: res.data.tracklist,
-          isValid: vaildator(res.data.tracklist),
-        });
+        const res = await axios.get(
+          `${resourceUrl}?&key=${import.meta.env.VITE_API_KEY}&secret=${
+            import.meta.env.VITE_API_SECRET
+          }`
+        );
+        if (resourceUrl.includes('releases')) {
+          const { tracklist, ...result } = processReleaseResult(res.data);
+          setSearchResult(result);
+          setTracklist(tracklist);
+        } else if (resourceUrl.includes('masters')) {
+          const { tracklist, ...result } = processMasterResult(res.data);
+          setSearchResult(result);
+          setTracklist(tracklist);
+        }
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -38,20 +56,26 @@ export default function Item() {
     <>
       <Header />
       <Main>
-        <h1 className="srOnly">LP 상세 정보</h1>
-        <DetailWrapper>
-          <LPCover
-            searchResult={searchResult}
-            size="large"
-            hoverInteraction={false}
-          ></LPCover>
-          <AlbumInfo
-            searchResult={searchResult}
-            tracklist={tracklist as ProcessedTracklist}
-            page="all"
-            view="detail"
-          />
-        </DetailWrapper>
+        {isLoading ? (
+          <LoadingSpinner isLastPage={!isLoading} height="20rem" />
+        ) : (
+          <>
+            <h1 className="srOnly">LP 상세 정보</h1>
+            <DetailWrapper>
+              <LPCover
+                searchResult={searchResult as ProcessedResourceUrlResult}
+                size="large"
+                hoverInteraction={false}
+              ></LPCover>
+              <AlbumInfo
+                searchResult={searchResult as ProcessedResourceUrlResult}
+                tracklist={tracklist as ProcessedTracklist}
+                page="all"
+                view="detail"
+              />
+            </DetailWrapper>
+          </>
+        )}
       </Main>
       <Footer />
     </>
