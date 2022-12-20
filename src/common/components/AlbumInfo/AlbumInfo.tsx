@@ -1,11 +1,19 @@
 import uuid from 'react-uuid';
+<<<<<<< HEAD
 import { useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
+=======
+import styled, { css } from 'styled-components';
+import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+>>>>>>> 3f30b72 (FEAT: Search Result 페이지, Item 페이지에서 + 버튼 클릭시 Add Item 모달 렌더링)
 import { useRecoilState } from 'recoil';
+import axios from 'axios';
 import {
+  userState,
   dialogState,
-  addItemDialogState,
+  setAddItemDialogState,
   deleteItemDialogState,
 } from '@/recoil/globalState';
 import { ProcessedResult, ProcessedTracklist } from '@/types/data';
@@ -35,7 +43,10 @@ function AlbumInfo({
   );
   const newDetailInfo = tracklist ? [...detailInfo, tracklist] : detailInfo;
 
-  const [_, setDialog] = useRecoilState(dialogState);
+  const [, setDialog] = useRecoilState(dialogState);
+  const [userId] = useRecoilState(userState);
+
+  const navigate = useNavigate();
 
   return useMemo(
     () => (
@@ -64,11 +75,20 @@ function AlbumInfo({
             height={buttonSize}
             iconType={buttonType}
             view={view}
-            clickHandler={() =>
-              page === 'all'
-                ? setDialog(addItemDialogState)
-                : setDialog(deleteItemDialogState)
-            }
+            clickHandler={async () => {
+              if (userId === null) {
+                navigate('/signin');
+                return;
+              }
+
+              const { data: collectionList } = await axios.get(
+                `http://localhost:3313/collections/${userId}/21021292`
+              );
+
+              // return page === 'all'
+              //   ? setDialog(setAddItemDialogState(collectionList, userId, releasedId))
+              //   : setDialog(deleteItemDialogState);
+            }}
           />
         </AlbumInfoWrapper>
         {view === 'detail' && (

@@ -12,35 +12,16 @@ export const initialDialogState = {
   confirm: () => console.log('Dialog confirm button clicked.'),
 };
 
-export const addItemDialogState = {
+export const setAddItemDialogState = (
+  collectionList: { title: string; isChecked: boolean }[]
+) => ({
   isOpen: true,
   width: 480,
   height: 480,
-  title: 'Add Items',
-  children: (
-    <SelectCollectionForm
-      collectionList={[
-        {
-          isChecked: false,
-          title: '소장 중 💼',
-        },
-        {
-          isChecked: true,
-          title: '갖고 싶다... 🤤',
-        },
-        {
-          isChecked: false,
-          title: '❤K-POP❤',
-        },
-        {
-          isChecked: false,
-          title: '엄청엄청긴타이트으으응으ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ일때',
-        },
-      ]}
-    />
-  ),
+  title: 'Add Item',
+  children: <SelectCollectionForm collectionList={collectionList} />,
   confirm: () => console.log('아이템 추가'),
-};
+});
 
 export const deleteItemDialogState = {
   isOpen: true,
@@ -108,4 +89,9 @@ export const editWritableInfoDialogState = {
 export const dialogState = atom<DialogProps>({
   key: 'dialogState',
   default: initialDialogState,
+});
+
+export const userState = atom<number | null>({
+  key: 'userState',
+  default: 3,
 });
