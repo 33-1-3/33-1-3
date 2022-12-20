@@ -14,7 +14,14 @@ function VinylItems({ searchResult, page, view, ...props }: VinylItemsProps) {
   return (
     <VinylItemsWrapper view={view} {...props}>
       {searchResult.map((result) => (
-        <VinylItem key={uuid()} searchResult={result} page={page} view={view} />
+        <VinylItem
+          key={uuid()}
+          searchResult={result}
+          page={page}
+          view={view}
+          data-releasedid={result.id}
+          className="infoContainer"
+        />
       ))}
     </VinylItemsWrapper>
   );

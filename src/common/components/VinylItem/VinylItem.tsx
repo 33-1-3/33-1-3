@@ -8,6 +8,7 @@ export interface VinylItemProps {
   searchResult: ProcessedResult;
   page: 'all' | 'collection';
   view: 'block' | 'list' | 'detail' | 'myitem';
+  [props: string]: unknown;
 }
 
 function VinylItem({ searchResult, page, view, ...props }: VinylItemProps) {

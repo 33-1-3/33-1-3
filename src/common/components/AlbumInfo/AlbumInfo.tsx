@@ -75,19 +75,30 @@ function AlbumInfo({
             height={buttonSize}
             iconType={buttonType}
             view={view}
-            clickHandler={async () => {
+            clickHandler={async (e: React.MouseEvent<HTMLButtonElement>) => {
               if (userId === null) {
                 navigate('/signin');
                 return;
               }
 
+              const releasedId = e.currentTarget.closest('.infoContainer')
+                ?.dataset?.releasedid as string;
+
               const { data: collectionList } = await axios.get(
-                `http://localhost:3313/collections/${userId}/21021292`
+                `http://localhost:3313/collections/${userId}/${releasedId}`
               );
 
+<<<<<<< HEAD
               // return page === 'all'
               //   ? setDialog(setAddItemDialogState(collectionList, userId, releasedId))
               //   : setDialog(deleteItemDialogState);
+=======
+              return page === 'all'
+                ? setDialog(
+                    setAddItemDialogState(collectionList, userId, releasedId)
+                  )
+                : setDialog(deleteItemDialogState);
+>>>>>>> 4d940e2 (FEAT: Add Item 모달 내부 확인 버튼 처리 -ing)
             }}
           />
         </AlbumInfoWrapper>

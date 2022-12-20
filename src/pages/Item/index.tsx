@@ -39,7 +39,10 @@ export default function Item() {
       <Header />
       <Main>
         <h1 className="srOnly">LP 상세 정보</h1>
-        <DetailWrapper>
+        <DetailWrapper
+          className="infoContainer"
+          data-releasedid={searchResult.id}
+        >
           <LPCover
             searchResult={searchResult}
             size="large"

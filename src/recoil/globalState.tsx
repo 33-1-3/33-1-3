@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import axios from 'axios';
 import { TextInput } from '@/common/components';
 import { SelectCollectionForm } from '@/pages/Item/components';
 import { DialogProps } from '@/common/components/Dialog/Dialog';
@@ -13,14 +14,33 @@ export const initialDialogState = {
 };
 
 export const setAddItemDialogState = (
-  collectionList: { title: string; isChecked: boolean }[]
+  collectionList: { title: string; isChecked: boolean }[],
+  userId: number,
+  releasedId: string
 ) => ({
   isOpen: true,
   width: 480,
   height: 480,
   title: 'Add Item',
   children: <SelectCollectionForm collectionList={collectionList} />,
-  confirm: () => console.log('아이템 추가'),
+  confirm: async () => {
+    const { data } = await axios.get(
+      `https://api.discogs.com/releases/${releasedId}`
+    );
+
+    const { title, artists_sort: artist, released, genres } = data;
+
+    // TODO: selectedCollectionIds, imgUrl 해결
+    await axios.post(`http://localhost:3313/vinyl/${userId}`, {
+      releasedId,
+      // selectedCollectionIds:
+      // imgUrl: '',
+      title,
+      artist,
+      released,
+      genres,
+    });
+  },
 });
 
 export const deleteItemDialogState = {
