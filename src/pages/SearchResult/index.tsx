@@ -11,6 +11,7 @@ import {
   VinylItems,
   GoToTop,
   LoadingSpinner,
+  FloatingButton,
 } from '@/common/components';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
 import {
@@ -145,6 +146,7 @@ export default function SearchResult() {
             }}
           />
           <LoadingSpinner isLastPage={pageNum === totalPageNum} />
+          <FloatingButton />
           <GoToTop />
         </Main>
         <Footer />
