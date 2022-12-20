@@ -29,6 +29,7 @@ import ReadOnlyInfo from './ReadOnlyInfo/ReadOnlyInfo';
 import WritableInfo from './WritableInfo/WritableInfo';
 import BackVinyl from './BackVinyl/BackVinyl';
 import GoToTop from './GoToTop/GoToTop';
+import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 
 export {
   AddCollectionButton,
@@ -62,4 +63,5 @@ export {
   WritableInfo,
   BackVinyl,
   GoToTop,
+  LoadingSpinner,
 };
