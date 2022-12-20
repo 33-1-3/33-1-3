@@ -37,6 +37,8 @@ const Dropdown = ({
   const select = (e: MouseEvent<HTMLDivElement>): void => {
     const target = e.target as HTMLTextAreaElement;
 
+    if (target.nodeName === 'DIV') return;
+
     if (!target.getAttribute) return;
 
     const value = target.getAttribute('value');

@@ -38,7 +38,9 @@ const WritableWrppaer = styled.section`
   display: flex;
   flex-flow: column nowrap;
   gap: var(--space-xxl);
-  width: 486px;
+  width: 36vw;
+  min-width: 360px;
+  max-width: 640px;
   margin: 200px 24px 96px;
 
   color: var(--gray-400);
@@ -62,13 +64,11 @@ const WritableWrppaer = styled.section`
 
 const PurchaseInfo = styled.article`
   display: grid;
-  grid-template-columns: repeat(3, 6.5vw);
-  column-gap: 5.3vw;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: stretch;
   row-gap: var(--space-bs);
-  min-width: min-content;
-  padding-right: 24px;
+  max-width: inherit;
   margin-top: auto;
-  margin-left: auto;
   text-align: center;
 `;
 
@@ -87,8 +87,10 @@ const Memo = styled.article`
   display: flex;
   flex-flow: column wrap;
   gap: var(--space-bs);
-  width: 31.9vw;
-  margin-left: auto;
+  width: 36vw;
+  min-width: 360px;
+  max-width: 640px;
+  margin-left: 3.2vw;
 `;
 
 export default WritableInfo;

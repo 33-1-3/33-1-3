@@ -10,6 +10,7 @@ import {
   SearchResultText,
   VinylItems,
   GoToTop,
+  LoadingSpinner,
   FloatingButton,
 } from '@/common/components';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
@@ -38,8 +39,8 @@ export default function SearchResult() {
   const [pageNum, setPageNum] = useState<number>(1);
   const [totalPageNum, setTotalPageNum] = useState<number>(1);
   const [result, setResult] = useState<ProcessedResult[]>([]);
-  const observerTarget = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const observerTarget = useRef<HTMLDivElement>(null);
 
   const params = new URLSearchParams(window.location.search);
   const value = params.get('query');
@@ -50,10 +51,10 @@ export default function SearchResult() {
   }&page=${pageNum}&per_page=24`;
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver(([entry]) => {
       if (pageNum === totalPageNum) return;
 
-      if (entries[0].isIntersecting) {
+      if (entry.isIntersecting) {
         setPageNum((pageNum) => (pageNum += 1));
       }
     });
@@ -141,12 +142,10 @@ export default function SearchResult() {
             ref={observerTarget}
             style={{
               width: '100vw',
-              height: '50px',
-              marginTop: '20px',
-              background:
-                'url(/assets/vinyl-spinner.gif) no-repeat center/contain',
+              height: '40px',
             }}
           />
+          <LoadingSpinner isLastPage={pageNum === totalPageNum} />
           <FloatingButton />
           <GoToTop />
         </Main>
