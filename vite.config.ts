@@ -26,4 +26,12 @@ export default defineConfig({
     }),
   ],
   logLevel: 'error',
+  build: {
+    rollupOptions: {
+      output: {
+        chunkFileNames: '[name]-[hash].js',
+        entryFileNames: '[name]-[hash].js',
+      },
+    },
+  },
 });
