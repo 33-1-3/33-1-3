@@ -39,7 +39,7 @@ export default function MyCollections() {
   // const userCollections = userData.collections;
   const [_, setDialog] = useRecoilState(dialogState);
 
-  const url = `http://localhost:3313/collections/${userid}`;
+  const url = `${import.meta.env.VITE_DB_SERVER}collections/${userid}`;
 
   useEffect(() => {
     async function fetchResults() {

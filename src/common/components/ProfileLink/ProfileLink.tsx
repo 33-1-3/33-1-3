@@ -11,17 +11,20 @@ export interface ProfileProps {
 const CircleWrapper = styled.div`
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  border: 1px solid var(--black);
+  border: 3px solid var(--black);
   overflow: hidden;
 `;
 
 const StyledButton = styled.button`
-  background: url('/assets/defaultUser.svg');
+  background: url('/assets/logout.svg');
+  background-repeat: no-repeat;
+  background-size: 32px;
+  background-position: center;
 `;
 
 const ProfileLink = ({ width, height, setIsLogin, ...props }: ProfileProps) => {
   const handleClick = async () => {
-    await axios.get('http://localhost:3313/logout', {
+    await axios.get(`${import.meta.env.VITE_DB_SERVER}logout`, {
       withCredentials: true,
     });
 

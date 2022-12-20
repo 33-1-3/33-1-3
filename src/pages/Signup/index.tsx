@@ -22,7 +22,7 @@ const FormContainer = styled.div`
   margin-top: 15vh;
 `;
 
-const url = `http://localhost:3313/signup`;
+const url = `${import.meta.env.VITE_DB_SERVER}signup`;
 
 export default function Signup() {
   const [checkEmail, setCheckEmail] = useState('');

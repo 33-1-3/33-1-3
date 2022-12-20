@@ -23,7 +23,7 @@ const FormContainer = styled.div`
   margin-top: 20vh;
 `;
 
-const url = `http://localhost:3313/signin`;
+const url = `${import.meta.env.VITE_DB_SERVER}signin`;
 
 export default function Signin() {
   const [checkEmail, setCheckEmail] = useState('');

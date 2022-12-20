@@ -72,7 +72,7 @@ export default function MyCollection() {
     setCount(matchItems?.length);
     setSearchWord(e.target.value);
   }
-  const url = `http://localhost:3313/collection/${collectionid}`;
+  const url = `${import.meta.env.VITE_DB_SERVER}collection/${collectionid}`;
 
   useEffect(() => {
     async function fetchResults() {
