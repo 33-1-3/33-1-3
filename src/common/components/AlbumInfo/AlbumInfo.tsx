@@ -1,20 +1,15 @@
 import uuid from 'react-uuid';
-<<<<<<< HEAD
 import { useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
-=======
-import styled, { css } from 'styled-components';
-import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
->>>>>>> 3f30b72 (FEAT: Search Result 페이지, Item 페이지에서 + 버튼 클릭시 Add Item 모달 렌더링)
 import { useRecoilState } from 'recoil';
 import axios from 'axios';
 import {
   userState,
   dialogState,
   setAddItemDialogState,
-  // deleteItemDialogState,
+  deleteItemDialogState,
   initialDialogState,
 } from '@/recoil/globalState';
 import { ProcessedResult, ProcessedTracklist } from '@/types/data';
@@ -89,11 +84,6 @@ function AlbumInfo({
                 `http://localhost:3313/collections/${userId}/${releasedId}`
               );
 
-<<<<<<< HEAD
-              // return page === 'all'
-              //   ? setDialog(setAddItemDialogState(collectionList, userId, releasedId))
-              //   : setDialog(deleteItemDialogState);
-=======
               return page === 'all'
                 ? setDialog(
                     setAddItemDialogState(collectionList, userId, releasedId)

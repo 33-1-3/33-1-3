@@ -41,7 +41,6 @@ const Header = ({ ...props }) => {
   const minWidth = isMain ? '440px' : '680px';
 
   const SearchInputRender = useHandleSubmit();
-  const [userId] = useRecoilState(userState);
 
   useEffect(() => {
     async function auth() {
