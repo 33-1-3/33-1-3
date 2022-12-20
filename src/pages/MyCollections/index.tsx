@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react';
 
 const MyCollectionsPageTitle = styled(PageTitle)`
   margin-top: 56px;
-  margin-bottom: 36px;
+  margin-bottom: 28px;
 `;
 
 const CollectionsWrapper = styled.div`
@@ -32,6 +32,7 @@ export default function MyCollections() {
   const { userid } = params;
 
   const [userCollections, setUserCollections] = useState([]);
+  const [userNickName, setUserNickName] = useState('');
 
   // const [userData] = mockUsersData.filter(
   //   (userData) => userData.id === +(userid as string)
@@ -45,8 +46,9 @@ export default function MyCollections() {
     async function fetchResults() {
       try {
         const res = await axios.get(url);
-        const userCollections = res.data;
-        setUserCollections(userCollections);
+
+        setUserCollections(res.data.collections);
+        setUserNickName(res.data.nickname);
       } catch (error) {
         console.error(error);
       }
@@ -58,7 +60,7 @@ export default function MyCollections() {
     <>
       <Header />
       <Main>
-        <MyCollectionsPageTitle>My Collections</MyCollectionsPageTitle>
+        <MyCollectionsPageTitle>{`${userNickName}'s Collections`}</MyCollectionsPageTitle>
         <CollectionsWrapper style={{ width: '520px' }}>
           <AddCollectionButton
             onClick={() => setDialog(createCollectionDialogState)}

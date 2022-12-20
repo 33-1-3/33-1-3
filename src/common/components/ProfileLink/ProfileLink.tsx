@@ -11,12 +11,12 @@ export interface ProfileProps {
 const CircleWrapper = styled.div`
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  border: 1px solid var(--black);
+  border: 1px solid var(--purple-900);
   overflow: hidden;
 `;
 
 const StyledButton = styled.button`
-  background: url('/assets/defaultUser.svg');
+  background: url('/assets/logout.svg') no-repeat center;
 `;
 
 const ProfileLink = ({ width, height, setIsLogin, ...props }: ProfileProps) => {

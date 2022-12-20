@@ -98,7 +98,7 @@ const AddCollectionButton = ({
         width={buttonStyle[size].iconSize}
         height={buttonStyle[size].iconSize}
       />
-      <span>Add a Collection</span>
+      <span>New Collection</span>
     </DashButton>
   );
 };
