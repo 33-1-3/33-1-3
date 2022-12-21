@@ -21,7 +21,7 @@ const StyledButton = styled.button`
 
 const ProfileLink = ({ width, height, setIsLogin, ...props }: ProfileProps) => {
   const handleClick = async () => {
-    await axios.get('http://localhost:3313/logout', {
+    await axios.get(`${import.meta.env.VITE_DB_SERVER}logout`, {
       withCredentials: true,
     });
 

@@ -30,7 +30,7 @@ function AlbumInfo({
   const buttonType = page === 'all' ? 'plus' : 'minus';
   const { titleInfo, detailInfo } = searchResult;
 
-  const listInfo = detailInfo.filter(
+  const listInfo = detailInfo?.filter(
     ({ infoName }) => infoName === 'Released' || infoName === 'Genre'
   );
   const newDetailInfo = tracklist ? [...detailInfo, tracklist] : detailInfo;
@@ -48,7 +48,7 @@ function AlbumInfo({
           />
           {view === 'list' && (
             <ListInfoWrapper>
-              {listInfo.map(({ infoName, infoContent, isValid }) => (
+              {listInfo?.map(({ infoName, infoContent, isValid }) => (
                 <DetailInfo
                   key={uuid()}
                   infoName={infoName}
@@ -73,7 +73,7 @@ function AlbumInfo({
         </AlbumInfoWrapper>
         {view === 'detail' && (
           <DetailInfoWrapper>
-            {newDetailInfo.map(({ infoName, infoContent, isValid }) => (
+            {newDetailInfo?.map(({ infoName, infoContent, isValid }) => (
               <DetailInfo
                 key={uuid()}
                 infoName={infoName}
