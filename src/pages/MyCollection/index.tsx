@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import {
   Header,
@@ -32,6 +32,25 @@ export default function MyCollection() {
   const [collectionTitle, setCollectionTitle] = useState('');
   const [count, setCount] = useState<number>();
   const [searchWord, setSearchWord] = useState<string>();
+  const [isUserCollections, setIsUserCollections] = useState<boolean>(false);
+
+  // const { collections } = mockUsersData.find(
+  //   ({ id }) => id === +(userid as string)
+  // ) as UserData;
+  // const { title, albums } = collections.find(
+  //   ({ id }) => id === +(collectionid as string)
+  // ) as CollectionData;
+
+  // console.log(collections, title, albums);
+  const validator = (data: string | Array<string>) => {
+    if (typeof data === 'string') {
+      return data !== '';
+    }
+    if (Array.isArray(data)) {
+      return data.length !== 0;
+    }
+    return false;
+  };
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -46,6 +65,26 @@ export default function MyCollection() {
     setSearchWord(e.target.value);
   }
   const url = `${import.meta.env.VITE_DB_SERVER}collection/${collectionid}`;
+
+  useLayoutEffect(() => {
+    async function checkAuth() {
+      try {
+        const res = await axios.get('http://localhost:3313/auth', {
+          withCredentials: true,
+        });
+        const {
+          data: { isLogin, userId },
+        } = res;
+
+        if (isLogin && userId === userid) {
+          setIsUserCollections(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    checkAuth();
+  }, [isUserCollections]);
 
   useEffect(() => {
     async function fetchResults() {
@@ -102,6 +141,7 @@ export default function MyCollection() {
           )}
           page={'collection'}
           view={view as ResultViewProps['view']}
+          isUserCollections={isUserCollections}
         />
       </MainWrapper>
       <Footer />

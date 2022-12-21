@@ -37,8 +37,7 @@ const CollectionsWrapper = styled.div`
 `;
 
 export default function MyCollections() {
-  const params = useParams();
-  const { userid } = params;
+  const { userid } = useParams();
 
   const [userCollections, setUserCollections] = useState([]);
   const [userNickName, setUserNickName] = useState('');
