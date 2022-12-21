@@ -2,11 +2,13 @@ import uuid from 'react-uuid';
 import { useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
+import axios from 'axios';
 import {
+  dialogContentState,
   dialogState,
-  addItemDialogState,
-  deleteItemDialogState,
+  userState,
 } from '@/recoil/globalState';
 import { ProcessedResult, ProcessedTracklist } from '@/types/data';
 
@@ -37,7 +39,11 @@ function AlbumInfo({
   );
   const newDetailInfo = tracklist ? [...detailInfo, tracklist] : detailInfo;
 
-  const [_, setDialog] = useRecoilState(dialogState);
+  const [userId] = useRecoilState(userState);
+  const [, setIsDialogOpen] = useRecoilState(dialogState);
+  const [dialogContent, setDialogContent] = useRecoilState(dialogContentState);
+
+  const navigate = useNavigate();
 
   return useMemo(
     () => (
@@ -66,12 +72,27 @@ function AlbumInfo({
             height={buttonSize}
             iconType={buttonType}
             view={view}
-            isUserCollections={isUserCollections}
-            clickHandler={() =>
-              page === 'all'
-                ? setDialog(addItemDialogState)
-                : setDialog(deleteItemDialogState)
-            }
+            clickHandler={async (e: React.MouseEvent<HTMLButtonElement>) => {
+              if (userId === null || userId === undefined) {
+                navigate('/signin');
+                return;
+              }
+
+              const releasedId = e.currentTarget.closest('.infoContainer')
+                ?.dataset?.releasedid as string;
+
+              const { data: collectionList } = await axios.get(
+                `http://localhost:3313/collections/${userId}/${releasedId}`
+              );
+
+              setDialogContent({
+                ...dialogContent,
+                releasedId: releasedId,
+                collectionList: collectionList,
+              });
+
+              setIsDialogOpen(true);
+            }}
           />
         </AlbumInfoWrapper>
         {view === 'detail' && (

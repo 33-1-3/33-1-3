@@ -16,7 +16,7 @@ AddItemDialog.args = {
   isOpen: true,
   width: 480,
   height: 480,
-  title: 'Add Items',
+  title: 'Add Item',
   children: (
     <SelectCollectionForm
       collectionList={[

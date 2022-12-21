@@ -1,6 +1,8 @@
+import { dialogContentState } from '@/recoil/globalState';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { CollectionCheckbox } from '../';
+import { CollectionCheckbox } from '../../../pages/Item/components';
 import ToggleInputButton from './ToggleInputButton';
 
 export interface FormProps {
@@ -16,25 +18,24 @@ const CollectionList = styled.ul`
   }
 `;
 
-const SelectCollectionForm = ({
-  collectionList: _collectionList,
-}: FormProps) => {
-  const [collectionList, setCollectionList] = useState(_collectionList);
+const SelectCollectionForm = () => {
+  // const [collectionList, setCollectionList] = useState(_collectionList);
+  const [dialogContent] = useRecoilState(dialogContentState);
 
   return (
     <>
       <CollectionList>
-        {collectionList.map(({ title, isChecked }) => (
+        {dialogContent.collectionList.map(({ title, isChecked }) => (
           <li key={title}>
             <CollectionCheckbox
               title={title}
               isChecked={isChecked}
-              setCollectionList={setCollectionList}
+              // setCollectionList={setCollectionList}
             />
           </li>
         ))}
       </CollectionList>
-      <ToggleInputButton setCollectionList={setCollectionList} />
+      <ToggleInputButton />
     </>
   );
 };

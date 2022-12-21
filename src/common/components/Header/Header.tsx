@@ -8,6 +8,12 @@ import {
 } from '@/common/components';
 import useHandleSubmit from '@/hooks/useHandleSubmit';
 import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { userState } from '@/recoil/globalState';
+
+export interface HeaderProps {
+  isLogin: boolean;
+}
 
 const StyledHeader = styled.header`
   position: fixed;
@@ -59,10 +65,7 @@ const Header = ({ ...props }) => {
     <StyledHeader style={{ height: 64, width: '100vw', minWidth }} {...props}>
       <LogoLink height="40px" width="74px" />
       {!isMain && <SearchInput size="small" handleSubmit={SearchInputRender} />}
-      <SquareLink
-        link={isLogin ? `/mycollections/${userId}` : '/signin'}
-        width={178}
-      >
+      <SquareLink link={`/mycollections/${userId}`} width={178}>
         My Collections
       </SquareLink>
       {isLogin ? (
