@@ -69,7 +69,7 @@ const IconButton = ({
 
   return (
     <>
-      {isUserCollections && (iconType === 'minus' || iconType === 'pencil') && (
+      {isUserCollections && (
         <IconButtonContainer
           type="button"
           style={{ width, height }}
