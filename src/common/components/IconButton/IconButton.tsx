@@ -16,6 +16,7 @@ export interface IconButtonProps {
   iconType: 'plus' | 'minus' | 'pencil';
   color: string;
   backgroundColor: string;
+  isUserCollections: boolean;
   clickHandler: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -60,28 +61,34 @@ const IconButton = ({
   iconType,
   color,
   backgroundColor,
+  isUserCollections,
   clickHandler,
   ...props
 }: IconButtonProps) => {
   const IconComponent = Icons[iconType];
 
   return (
-    <IconButtonContainer
-      type="button"
-      style={{ width, height }}
-      $color={color}
-      backgroundColor={backgroundColor}
-      onClick={clickHandler}
-      {...props}
-    >
-      <IconComponent width={width} height={height} />
-    </IconButtonContainer>
+    <>
+      {isUserCollections && (iconType === 'minus' || iconType === 'pencil') && (
+        <IconButtonContainer
+          type="button"
+          style={{ width, height }}
+          $color={color}
+          backgroundColor={backgroundColor}
+          onClick={clickHandler}
+          {...props}
+        >
+          <IconComponent width={width} height={height} />
+        </IconButtonContainer>
+      )}
+    </>
   );
 };
 
 IconButton.defaultProps = {
   color: 'var(--purple-900)',
   backgroundColor: 'var(--white)',
+  isUserCollections: true,
 };
 
 export default IconButton;

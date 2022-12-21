@@ -60,6 +60,7 @@ export default function Item() {
             tracklist={tracklist as ProcessedTracklist}
             page="all"
             view="detail"
+            isUserCollections={true}
           />
         </DetailWrapper>
       </Main>

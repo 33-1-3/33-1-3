@@ -27,11 +27,17 @@ const SECRET = import.meta.env.VITE_API_SECRET;
 const KEY = import.meta.env.VITE_API_KEY;
 
 // 옵저버 범위 설정값
-// interface IntersectionObserverInit {
-//   root?: Element | Document | null;
-//   rootMargin?: string;
-//   threshold?: number | number[];
-// }
+interface IntersectionObserverInit {
+  root?: Element | Document | null;
+  rootMargin?: string;
+  threshold?: number | number[];
+}
+
+const options: IntersectionObserverInit = {
+  root: null,
+  rootMargin: '180px',
+  threshold: 1.0,
+};
 
 export default function SearchResult() {
   const [searchParams] = useSearchParams();
@@ -57,7 +63,7 @@ export default function SearchResult() {
       if (entry.isIntersecting) {
         setPageNum((pageNum) => (pageNum += 1));
       }
-    });
+    }, options);
 
     observer.observe(observerTarget?.current as HTMLDivElement);
 
@@ -137,6 +143,7 @@ export default function SearchResult() {
             searchResult={result}
             page={'all'}
             view={params.get('view') as ResultViewProps['view']}
+            isUserCollections={true}
           />
           <div
             ref={observerTarget}

@@ -17,6 +17,7 @@ export interface AlbumInfoProps extends ResultViewProps {
   searchResult: ProcessedResult;
   tracklist?: ProcessedTracklist;
   page: 'all' | 'collection';
+  isUserCollections: boolean;
 }
 
 function AlbumInfo({
@@ -24,6 +25,7 @@ function AlbumInfo({
   tracklist,
   page,
   view,
+  isUserCollections,
   ...props
 }: AlbumInfoProps) {
   const buttonSize = view === 'block' ? 16 : 32;
@@ -64,6 +66,7 @@ function AlbumInfo({
             height={buttonSize}
             iconType={buttonType}
             view={view}
+            isUserCollections={isUserCollections}
             clickHandler={() =>
               page === 'all'
                 ? setDialog(addItemDialogState)
