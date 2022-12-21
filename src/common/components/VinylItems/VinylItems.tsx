@@ -8,13 +8,26 @@ import { memo } from 'react';
 export interface VinylItemsProps extends ResultViewProps {
   searchResult: ProcessedResult[];
   page: 'all' | 'collection';
+  isUserCollections: boolean;
 }
 
-function VinylItems({ searchResult, page, view, ...props }: VinylItemsProps) {
+function VinylItems({
+  searchResult,
+  page,
+  view,
+  isUserCollections,
+  ...props
+}: VinylItemsProps) {
   return (
     <VinylItemsWrapper view={view} {...props}>
       {searchResult.map((result) => (
-        <VinylItem key={uuid()} searchResult={result} page={page} view={view} />
+        <VinylItem
+          key={uuid()}
+          searchResult={result}
+          page={page}
+          view={view}
+          isUserCollections={isUserCollections}
+        />
       ))}
     </VinylItemsWrapper>
   );
