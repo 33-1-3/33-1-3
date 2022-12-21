@@ -13,14 +13,15 @@ const StyledFooter = styled.footer<FooterProps>`
   right: 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 40px 0;
+  padding: 28px 0;
   margin: 0 auto;
   background-color: ${({ backgroundColor }) => backgroundColor};
   > p {
     color: ${({ color }) => color};
     font-size: var(--text-xs);
-    margin-bottom: 24px;
+    margin-bottom: 8px;
   }
 `;
 
@@ -30,14 +31,14 @@ const Adress = styled.span`
 
 const LinkContainer = styled.div`
   display: flex;
-  gap: 24px;
-  height: 47px;
+  gap: 12px;
+  height: 36px;
   margin-top: 4px;
   > a:first-child {
     margin-bottom: 7px;
   }
   > a:last-child {
-    margin-top: 7px;
+    margin-top: 4px;
   }
 `;
 
@@ -45,7 +46,7 @@ const Footer = ({ backgroundColor, color, ...props }: FooterProps) => {
   return useMemo(
     () => (
       <StyledFooter
-        style={{ height: 200, width: '100vw' }}
+        style={{ height: 152, width: '100vw' }}
         backgroundColor={backgroundColor}
         color={color}
         {...props}
@@ -59,20 +60,20 @@ const Footer = ({ backgroundColor, color, ...props }: FooterProps) => {
         </p>
         <LinkContainer>
           <ImageLink
-            height={40}
+            height={32}
             moveToLink={{
               pathname: 'https://github.com/33-1-3',
               site: 'github',
             }}
-            width={40}
+            width={32}
           />
           <ImageLink
-            height={40}
+            height={32}
             moveToLink={{
               pathname: 'https://www.discogs.com/ko/',
               site: 'discogs',
             }}
-            width={108}
+            width={80}
           />
         </LinkContainer>
       </StyledFooter>

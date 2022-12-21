@@ -135,10 +135,11 @@ const StyledForm = styled.form`
   padding: 16px;
   right: 52px;
   bottom: 112px;
-  border-radius: 8px;
+  border-radius: 12px;
   box-sizing: border-box;
-  background: linear-gradient(180deg, #6c33e8 0%, #d8c6ff 100%);
+  background: linear-gradient(180deg, #b491ff 0%, #d8c6ff 100%);
   z-index: 2000;
+  box-shadow: var(--shadow-Button-back);
 `;
 
 const StyledTextarea = styled.textarea`
