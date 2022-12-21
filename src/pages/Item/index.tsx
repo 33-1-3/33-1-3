@@ -1,31 +1,24 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-  Header,
-  Main,
-  Footer,
-  LPCover,
-  AlbumInfo,
-  LoadingSpinner,
-} from '@/common/components';
-import {
-  ProcessedResourceUrlResult,
-  ProcessedResult,
-  ProcessedTracklist,
-} from '@/types/data';
+import { Header, Main, Footer, LPCover, AlbumInfo } from '@/common/components';
+import { ProcessedResourceUrlResult, ProcessedTracklist } from '@/types/data';
 import axios from 'axios';
 import {
   processReleaseResult,
   processMasterResult,
+  getResourceUrl,
 } from '@/utils/functions/processResult';
 
 export default function Item() {
+  const params = useParams();
+  const { id } = params;
+  const resourceUrl = getResourceUrl(id as string);
   const [tracklist, setTracklist] = useState({});
-  const location = useLocation();
-  const { resourceUrl } = location.state as ProcessedResult;
-  const [searchResult, setSearchResult] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [searchResult, setSearchResult] = useState({
+    titleInfo: { title: '', artist: '' },
+    detailInfo: [{}],
+  });
 
   useEffect(() => {
     async function fetchTrackList() {
@@ -44,7 +37,6 @@ export default function Item() {
           setSearchResult(result);
           setTracklist(tracklist);
         }
-        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -56,26 +48,20 @@ export default function Item() {
     <>
       <Header />
       <Main>
-        {isLoading ? (
-          <LoadingSpinner isLastPage={!isLoading} height="20rem" />
-        ) : (
-          <>
-            <h1 className="srOnly">LP 상세 정보</h1>
-            <DetailWrapper>
-              <LPCover
-                searchResult={searchResult as ProcessedResourceUrlResult}
-                size="large"
-                hoverInteraction={false}
-              ></LPCover>
-              <AlbumInfo
-                searchResult={searchResult as ProcessedResourceUrlResult}
-                tracklist={tracklist as ProcessedTracklist}
-                page="all"
-                view="detail"
-              />
-            </DetailWrapper>
-          </>
-        )}
+        <h1 className="srOnly">LP 상세 정보</h1>
+        <DetailWrapper>
+          <LPCover
+            searchResult={searchResult as ProcessedResourceUrlResult}
+            size="large"
+            hoverInteraction={false}
+          ></LPCover>
+          <AlbumInfo
+            searchResult={searchResult as ProcessedResourceUrlResult}
+            tracklist={tracklist as ProcessedTracklist}
+            page="all"
+            view="detail"
+          />
+        </DetailWrapper>
       </Main>
       <Footer />
     </>

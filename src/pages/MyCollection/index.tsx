@@ -17,48 +17,21 @@ import {
   VIEW_LABEL,
 } from '@/utils/constants/dropdown';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
-import { mockUsersData } from '@/utils/mocks/mockInfo';
 import styled from 'styled-components';
 import axios from 'axios';
 import { sortItems } from '@/utils/sortItems';
-import processResult from '@/utils/functions/processResult';
-import {
-  ProcessedResult,
-  RawResult,
-  CollectionData,
-  UserData,
-} from '@/types/data';
-
-const SECRET = import.meta.env.VITE_API_SECRET;
-const KEY = import.meta.env.VITE_API_KEY;
+import { processCommonVinyl } from '@/utils/functions/processResult';
+import { ProcessedResult } from '@/types/data';
 
 let collectionItems: undefined | ProcessedResult[];
 
 export default function MyCollection() {
   const { userid, collectionid } = useParams();
   const [searchParams] = useSearchParams();
-  // const [itemCount, setItemCount] = useState<number>(0);
   const [result, setResult] = useState<ProcessedResult[]>([]);
   const [collectionTitle, setCollectionTitle] = useState('');
   const [count, setCount] = useState<number>();
   const [searchWord, setSearchWord] = useState<string>();
-  // const { collections } = mockUsersData.find(
-  //   ({ id }) => id === +(userid as string)
-  // ) as UserData;
-  // const { title, albums } = collections.find(
-  //   ({ id }) => id === +(collectionid as string)
-  // ) as CollectionData;
-
-  // console.log(collections, title, albums);
-  const validator = (data: string | Array<string>) => {
-    if (typeof data === 'string') {
-      return data !== '';
-    }
-    if (Array.isArray(data)) {
-      return data.length !== 0;
-    }
-    return false;
-  };
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -81,38 +54,7 @@ export default function MyCollection() {
         const result = res.data;
         const { vinylsInfo, collectionTitle } = result;
 
-        const processedResult = vinylsInfo.map(
-          ({
-            imgUrl,
-            title,
-            artist,
-            released,
-            genre,
-          }: {
-            imgUrl: string;
-            title: string;
-            artist: string;
-            released: string | string[];
-            genre: string | string[];
-          }) => {
-            return {
-              titleInfo: { title, artist },
-              detailInfo: [
-                {
-                  infoName: 'Released',
-                  infoContent: released,
-                  isValid: validator(released),
-                },
-                {
-                  infoName: 'Genre',
-                  infoContent: genre,
-                  isValid: validator(genre),
-                },
-              ],
-              imgUrl,
-            };
-          }
-        );
+        const processedResult = processCommonVinyl(vinylsInfo);
         setCollectionTitle(collectionTitle);
         setResult(() => {
           collectionItems = processedResult;
