@@ -7,8 +7,9 @@ export default function Verification() {
   useEffect(() => {
     async function verify() {
       try {
-        const url = `http://localhost:3313/verification`;
-        const userId = window.location.pathname.split('/')[2];
+        const url = `${import.meta.env.VITE_DB_SERVER}verification`;
+        const urlArr = window.location.pathname.split('/');
+        const userId = urlArr[urlArr.length - 1];
         const { data } = await axios.post(url, { userId });
         if (data === 'success') setIsVerified(true);
       } catch (err) {
