@@ -41,9 +41,9 @@ export default function Signup() {
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const email = e.target[0].value;
-    const nickname = e.target[1].value;
-    const password = e.target[2].value;
+    const email = (e.currentTarget[0] as HTMLInputElement).value;
+    const nickname = (e.currentTarget[1] as HTMLInputElement).value;
+    const password = (e.currentTarget[2] as HTMLInputElement).value;
     const {
       data: { state },
     } = await axios.post(url, {

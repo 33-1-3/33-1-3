@@ -8,7 +8,8 @@ export default function Verification() {
     async function verify() {
       try {
         const url = `${import.meta.env.VITE_DB_SERVER}verification`;
-        const userId = window.location.pathname.split('/')[2];
+        const urlArr = window.location.pathname.split('/');
+        const userId = urlArr[urlArr.length - 1];
         const { data } = await axios.post(url, { userId });
         if (data === 'success') setIsVerified(true);
       } catch (err) {
