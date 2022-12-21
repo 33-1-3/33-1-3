@@ -1,4 +1,4 @@
-import { SelectCollectionForm } from '@/pages/Item/components';
+import { SelectCollectionForm } from '@/common/components';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import NewDialog from './NewDialog';
 

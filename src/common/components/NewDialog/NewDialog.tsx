@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { FormEvent, ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 import { SquareButton } from '..';
@@ -25,6 +25,12 @@ const Title = styled.h2`
   font-size: 32px;
   font-weight: 700;
   border-bottom: 1px solid var(--gray-100);
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
 `;
 
 const NodeContent = styled.div`
@@ -69,7 +75,7 @@ export interface NewDialogProps {
   height: number;
   title: string;
   children: ReactNode;
-  onConfirm: () => void;
+  onConfirm: (e: FormEvent) => void;
   onClose: () => void;
 }
 
@@ -93,9 +99,9 @@ const NewDialog = ({
     // openner.focus();
   };
 
-  const handleConfirm: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+  const handleConfirm = (e: FormEvent) => {
     e.preventDefault();
-    onConfirm();
+    onConfirm(e);
     handleClose();
   };
 
@@ -150,7 +156,7 @@ const NewDialog = ({
   //   });
   // };
 
-  isOpened = true;
+  // isOpened = true;
 
   return createPortal(
     <>
@@ -165,30 +171,27 @@ const NewDialog = ({
             style={{ width, height }}
           >
             {title && <Title>{title}</Title>}
-            {typeof children === 'string' ? (
-              <StringContent>{children}</StringContent>
-            ) : (
-              <NodeContent>{children}</NodeContent>
-            )}
-            <Buttons>
-              <SquareButton
-                type="submit"
-                fontSize={18}
-                size={'large'}
-                onClick={handleConfirm}
-              >
-                확인
-              </SquareButton>
-              <SquareButton
-                type="button"
-                fontSize={18}
-                size={'large'}
-                isFilled={false}
-                onClick={handleClose}
-              >
-                취소
-              </SquareButton>
-            </Buttons>
+            <Form onSubmit={handleConfirm}>
+              {typeof children === 'string' ? (
+                <StringContent>{children}</StringContent>
+              ) : (
+                <NodeContent>{children}</NodeContent>
+              )}
+              <Buttons>
+                <SquareButton type="submit" fontSize={18} size={'large'}>
+                  확인
+                </SquareButton>
+                <SquareButton
+                  type="button"
+                  fontSize={18}
+                  size={'large'}
+                  isFilled={false}
+                  onClick={handleClose}
+                >
+                  취소
+                </SquareButton>
+              </Buttons>
+            </Form>
           </Container>
           <Dim onClick={handleClose} />
         </>

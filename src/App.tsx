@@ -1,6 +1,4 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { dialogState } from './recoil/globalState';
+import { Routes, Route } from 'react-router-dom';
 
 import Home from '@/pages/Home/index';
 import Signin from '@/pages/Signin/index';
@@ -12,11 +10,8 @@ import MyCollection from '@/pages/MyCollection/index';
 import MyItem from '@/pages/MyItem';
 import NotFound from '@/pages/NotFound';
 import Verification from '@/pages/Verification';
-import Dialog, { DialogProps } from './common/components/Dialog/Dialog';
 
 function App() {
-  const [dialog] = useRecoilState<DialogProps>(dialogState);
-
   return (
     <>
       <Routes>
@@ -37,15 +32,6 @@ function App() {
         <Route path="/verification/:userId" element={<Verification />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
-      <Dialog
-        isOpen={dialog.isOpen}
-        width={dialog.width}
-        height={dialog.height}
-        title={dialog.title}
-        confirm={dialog.confirm}
-      >
-        {dialog.children}
-      </Dialog>
     </>
   );
 }
