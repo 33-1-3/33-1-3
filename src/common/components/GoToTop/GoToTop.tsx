@@ -78,16 +78,18 @@ const GoToTop = ({
   return useMemo(
     () => (
       <>
-        <GoToTopButton
-          type="button"
-          style={{ width, height }}
-          color={color}
-          backgroundColor={backgroundColor}
-          onClick={scrollToTop}
-          {...props}
-        >
-          {buttonStatus && <GoToTopIcon width={width} height={height} />}
-        </GoToTopButton>
+        {buttonStatus && (
+          <GoToTopButton
+            type="button"
+            style={{ width, height }}
+            color={color}
+            backgroundColor={backgroundColor}
+            onClick={scrollToTop}
+            {...props}
+          >
+            <GoToTopIcon width={width} height={height} />
+          </GoToTopButton>
+        )}
       </>
     ),
     [color, backgroundColor, buttonStatus]
