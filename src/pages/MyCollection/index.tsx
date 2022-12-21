@@ -20,8 +20,17 @@ import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
 import styled from 'styled-components';
 import axios from 'axios';
 import { sortItems } from '@/utils/sortItems';
-import { processCommonVinyl } from '@/utils/functions/processResult';
-import { ProcessedResult } from '@/types/data';
+import { processResult, processCommonVinyl } from '@/utils/functions/processResult';
+import {
+  ProcessedResult,
+  RawResult,
+  CollectionData,
+  UserData,
+} from '@/types/data';
+
+const SECRET = import.meta.env.VITE_API_SECRET;
+const KEY = import.meta.env.VITE_API_KEY;
+
 
 let collectionItems: undefined | ProcessedResult[];
 

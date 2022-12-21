@@ -1,13 +1,15 @@
-import { Dispatch, SetStateAction } from 'react';
+// import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { dialogContentState } from '@/recoil/globalState';
 
 export interface CollectionCheckboxProps {
   title: string;
   width: string;
   isChecked: boolean;
-  setCollectionList: Dispatch<
-    SetStateAction<{ title: string; isChecked: boolean }[]>
-  >;
+  // setCollectionList: Dispatch<
+  //   SetStateAction<{ title: string; isChecked: boolean }[]>
+  // >;
 }
 
 export interface CheckboxProps {
@@ -54,24 +56,27 @@ const CollectionCheckbox = ({
   title,
   width,
   isChecked,
-  setCollectionList,
   ...args
 }: CollectionCheckboxProps) => {
+  const [dialogContent, setDialogContent] = useRecoilState(dialogContentState);
+
   return (
     <CheckboxDiv
+      className={'collection-checkbox'}
       role="checkbox"
       aria-checked={isChecked}
       tabIndex={0}
       $width={width}
       style={{ width: 'fit-content' }}
       onClick={() => {
-        setCollectionList((state) => {
-          const newState = [...state].map(({ title: _title, isChecked }) =>
-            _title === title
-              ? { title: _title, isChecked: !isChecked }
-              : { title: _title, isChecked }
-          );
-          return newState;
+        setDialogContent({
+          ...dialogContent,
+          collectionList: [...dialogContent.collectionList].map(
+            ({ id, title: _title, isChecked }) =>
+              _title === title
+                ? { id, title: _title, isChecked: !isChecked }
+                : { id, title: _title, isChecked }
+          ),
         });
       }}
       {...args}

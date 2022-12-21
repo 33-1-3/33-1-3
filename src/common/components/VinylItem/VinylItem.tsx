@@ -9,6 +9,7 @@ export interface VinylItemProps {
   page: 'all' | 'collection';
   view: 'block' | 'list' | 'detail' | 'myitem';
   isUserCollections: boolean;
+  [props: string]: unknown;
 }
 
 function VinylItem({

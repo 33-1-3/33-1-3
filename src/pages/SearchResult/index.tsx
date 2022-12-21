@@ -12,6 +12,8 @@ import {
   GoToTop,
   LoadingSpinner,
   FloatingButton,
+  NewDialog,
+  SelectCollectionForm,
 } from '@/common/components';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
 import {
@@ -20,11 +22,20 @@ import {
   VIEW_CONTENT,
   VIEW_LABEL,
 } from '@/utils/constants/dropdown';
-import { processSearchResult } from '@/utils/functions/processResult';
+import {
+  getResourceUrl,
+  processResult,
+  commonRelease,
+  commonMaster,
+  processSearchResult,
+} from '@/utils/functions/processResult';
 import { ProcessedResult } from '@/types/data';
+import { useRecoilState } from 'recoil';
+import { dialogContentState, dialogState } from '@/recoil/globalState';
 
 const SECRET = import.meta.env.VITE_API_SECRET;
 const KEY = import.meta.env.VITE_API_KEY;
+import { userState } from '../../recoil/globalState';
 
 // 옵저버 범위 설정값
 interface IntersectionObserverInit {
@@ -46,6 +57,9 @@ export default function SearchResult() {
   const [totalPageNum, setTotalPageNum] = useState<number>(1);
   const [result, setResult] = useState<ProcessedResult[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [userId] = useRecoilState(userState);
+  const [isDialogOpen, setIsDialogOpen] = useRecoilState(dialogState);
+  const [dialogContent] = useRecoilState(dialogContentState);
   const observerTarget = useRef<HTMLDivElement>(null);
 
   const params = new URLSearchParams(window.location.search);
@@ -55,6 +69,8 @@ export default function SearchResult() {
   const url = `https://api.discogs.com/database/search?&q=${value}&key=${KEY}&secret=${SECRET}&format=vinyl&sort=${
     sort === 'date' ? 'date_added&sort_order=desc' : 'score'
   }&page=${pageNum}&per_page=24`;
+
+  useEffect(() => setIsDialogOpen(false), []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -157,6 +173,45 @@ export default function SearchResult() {
           <GoToTop />
         </Main>
         <Footer />
+        <NewDialog
+          isOpened={isDialogOpen}
+          width={480}
+          height={480}
+          title="Add Item"
+          onConfirm={async () => {
+            const resourceUrl = getResourceUrl(dialogContent.releasedId);
+            const splitedResourceUrl = resourceUrl.split('/');
+            const type = splitedResourceUrl[splitedResourceUrl.length - 2];
+            const { data: response } = await axios.get(resourceUrl);
+
+            let commonData;
+            if (type === 'releases') commonData = commonRelease(response);
+            if (type === 'masters') commonData = commonMaster(response);
+
+            console.log(
+              'selectedCollectionIds',
+              dialogContent.collectionList
+                .filter((collection) => collection.isChecked)
+                .map((collection) => collection.id)
+            );
+
+            await axios.post(`http://localhost:3313/vinyl/${userId}`, {
+              releasedId: commonData.id,
+              selectedCollectionIds: dialogContent.collectionList
+                .filter((collection) => collection.isChecked)
+                .map((collection) => collection.id),
+              imgUrl: commonData.imgUrl,
+              title: commonData.title,
+              artist: commonData.artist,
+              year: commonData.year,
+              genres: commonData.genre,
+              resourceUrl: commonData.resourceUrl,
+            });
+          }}
+          onClose={() => setIsDialogOpen(false)}
+        >
+          <SelectCollectionForm />
+        </NewDialog>
       </>
     ),
     [itemCount, result, SORT_LABEL, isLoading, observerTarget, params]

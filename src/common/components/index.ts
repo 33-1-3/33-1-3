@@ -32,6 +32,8 @@ import GoToTop from './GoToTop/GoToTop';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 import FloatingButton from './FloatingButton/FloatingButton';
 import Alert from './Alert/Alert';
+import SelectCollectionForm from './SelectCollectionForm/SelectCollectionForm';
+import NewDialog from './NewDialog/NewDialog';
 
 export {
   AddCollectionButton,
@@ -68,4 +70,6 @@ export {
   LoadingSpinner,
   FloatingButton,
   Alert,
+  SelectCollectionForm,
+  NewDialog,
 };

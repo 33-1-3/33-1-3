@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
-import SqaureButton from '../SquareButton/SquareButton';
+import { SquareButton } from '@/common/components';
 import { useRecoilState } from 'recoil';
 import { initialDialogState, dialogState } from '@/recoil/globalState';
 
@@ -93,17 +93,17 @@ const Dialog = ({
               <DialogNodeContent>{children}</DialogNodeContent>
             )}
             <DialogButtons>
-              <SqaureButton fontSize={18} size={'large'} onClick={confirm}>
+              <SquareButton fontSize={18} size={'large'} onClick={confirm}>
                 확인
-              </SqaureButton>
-              <SqaureButton
+              </SquareButton>
+              <SquareButton
                 fontSize={18}
                 size={'large'}
                 isFilled={false}
                 onClick={() => setDialog(initialDialogState)}
               >
                 취소
-              </SqaureButton>
+              </SquareButton>
             </DialogButtons>
           </DialogContainer>
         </DialogBackground>

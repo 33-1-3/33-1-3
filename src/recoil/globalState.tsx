@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
-import { TextInput } from '@/common/components';
-import { SelectCollectionForm } from '@/pages/Item/components';
+import axios from 'axios';
+import { TextInput, SelectCollectionForm } from '@/common/components';
 import { DialogProps } from '@/common/components/Dialog/Dialog';
 
 export const initialDialogState = {
@@ -12,35 +12,35 @@ export const initialDialogState = {
   confirm: () => console.log('Dialog confirm button clicked.'),
 };
 
-export const addItemDialogState = {
-  isOpen: true,
-  width: 480,
-  height: 480,
-  title: 'Add Items',
-  children: (
-    <SelectCollectionForm
-      collectionList={[
-        {
-          isChecked: false,
-          title: '소장 중 💼',
-        },
-        {
-          isChecked: true,
-          title: '갖고 싶다... 🤤',
-        },
-        {
-          isChecked: false,
-          title: '❤K-POP❤',
-        },
-        {
-          isChecked: false,
-          title: '엄청엄청긴타이트으으응으ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ일때',
-        },
-      ]}
-    />
-  ),
-  confirm: () => console.log('아이템 추가'),
-};
+// export const setAddItemDialogState = (
+//   collectionList: { title: string; isChecked: boolean }[],
+//   userId: number,
+//   releasedId: string
+// ) => ({
+//   isOpen: true,
+//   width: 480,
+//   height: 480,
+//   title: 'Add Item',
+//   children: <SelectCollectionForm collectionList={collectionList} />,
+//   confirm: async () => {
+//     const { data } = await axios.get(
+//       `https://api.discogs.com/releases/${releasedId}`
+//     );
+
+//     const { title, artists_sort: artist, released, genres } = data;
+
+//     // TODO: selectedCollectionIds, imgUrl 해결
+//     await axios.post(`http://localhost:3313/vinyl/${userId}`, {
+//       releasedId,
+//       // selectedCollectionIds:
+//       // imgUrl: '',
+//       title,
+//       artist,
+//       released,
+//       genres,
+//     });
+//   },
+// });
 
 export const deleteItemDialogState = {
   isOpen: true,
@@ -88,13 +88,16 @@ export const editCollectionDialogState = {
   confirm: () => console.log('콜렉션 수정'),
 };
 
-export const deleteCollectionDialogState = {
-  isOpen: true,
-  width: 480,
-  height: 200,
-  children: '콜렉션을 삭제하시겠습니까?',
-  confirm: () => console.log('콜렉션 삭제'),
-};
+// export const deleteCollectionDialogState = (collectionId: number) => ({
+//   isOpen: true,
+//   width: 480,
+//   height: 200,
+//   children: '콜렉션을 삭제하시겠습니까?',
+//   confirm: async () => {
+//     await axios.delete(`http://localhost:3313/collections/${collectionId}`);
+
+//   },
+// });
 
 export const editWritableInfoDialogState = {
   isOpen: true,
@@ -105,7 +108,22 @@ export const editWritableInfoDialogState = {
   confirm: () => console.log('소장 음반 정보 수정'),
 };
 
-export const dialogState = atom<DialogProps>({
+export const dialogState = atom<boolean>({
   key: 'dialogState',
-  default: initialDialogState,
+  default: false,
+});
+
+export interface dialogContentProps {
+  releasedId: string;
+  collectionList: { id?: string; title: string; isChecked: boolean }[];
+}
+
+export const dialogContentState = atom<dialogContentProps>({
+  key: 'dialogContentState',
+  default: { releasedId: '', collectionList: [] },
+});
+
+export const userState = atom<string | null | undefined>({
+  key: 'userState',
+  default: '63a28cd7e71fd88649c17ac8',
 });
