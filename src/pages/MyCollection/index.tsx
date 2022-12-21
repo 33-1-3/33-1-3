@@ -17,11 +17,11 @@ import {
   VIEW_LABEL,
 } from '@/utils/constants/dropdown';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
-import { mockUsersData } from '@/utils/mocks/mockInfo';
+// import { mockUsersData } from '@/utils/mocks/mockInfo';
 import styled from 'styled-components';
 import axios from 'axios';
 import { sortItems } from '@/utils/sortItems';
-import processResult from '@/utils/functions/processResult';
+// import { processResult } from '@/utils/functions/processResult';
 import {
   ProcessedResult,
   RawResult,

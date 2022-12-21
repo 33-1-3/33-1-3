@@ -1,6 +1,8 @@
 import { ComponentProps } from 'react';
 import { AddCollectionButton, TextInput } from '@/common/components';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { dialogContentState } from '@/recoil/globalState';
 
 export interface ToggleInputButtonProps {
   setCollectionList: Dispatch<
@@ -8,8 +10,9 @@ export interface ToggleInputButtonProps {
   >;
 }
 
-const ToggleInputButton = ({ setCollectionList }: ToggleInputButtonProps) => {
+const ToggleInputButton = () => {
   const [isClicked, setIsClicked] = useState(false);
+  const [dialogContent, setDialogContent] = useRecoilState(dialogContentState);
 
   const handleKeyUp: ComponentProps<'input'>['onKeyUp'] = (e) => {
     if (e.key !== 'Enter' && e.key !== 'Escape') return;
@@ -20,10 +23,13 @@ const ToggleInputButton = ({ setCollectionList }: ToggleInputButtonProps) => {
         setIsClicked(false);
         return;
       }
-      setCollectionList((state) => [
-        ...state,
-        { title: target.value, isChecked: false },
-      ]);
+      setDialogContent({
+        ...dialogContent,
+        collectionList: [
+          ...dialogContent.collectionList,
+          { title: target.value, isChecked: false },
+        ],
+      });
     }
     setIsClicked(false);
   };

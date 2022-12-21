@@ -1,7 +1,6 @@
 import { atom } from 'recoil';
 import axios from 'axios';
-import { TextInput } from '@/common/components';
-import { SelectCollectionForm } from '@/pages/Item/components';
+import { TextInput, SelectCollectionForm } from '@/common/components';
 import { DialogProps } from '@/common/components/Dialog/Dialog';
 
 export const initialDialogState = {
@@ -13,35 +12,35 @@ export const initialDialogState = {
   confirm: () => console.log('Dialog confirm button clicked.'),
 };
 
-export const setAddItemDialogState = (
-  collectionList: { title: string; isChecked: boolean }[],
-  userId: number,
-  releasedId: string
-) => ({
-  isOpen: true,
-  width: 480,
-  height: 480,
-  title: 'Add Item',
-  children: <SelectCollectionForm collectionList={collectionList} />,
-  confirm: async () => {
-    const { data } = await axios.get(
-      `https://api.discogs.com/releases/${releasedId}`
-    );
+// export const setAddItemDialogState = (
+//   collectionList: { title: string; isChecked: boolean }[],
+//   userId: number,
+//   releasedId: string
+// ) => ({
+//   isOpen: true,
+//   width: 480,
+//   height: 480,
+//   title: 'Add Item',
+//   children: <SelectCollectionForm collectionList={collectionList} />,
+//   confirm: async () => {
+//     const { data } = await axios.get(
+//       `https://api.discogs.com/releases/${releasedId}`
+//     );
 
-    const { title, artists_sort: artist, released, genres } = data;
+//     const { title, artists_sort: artist, released, genres } = data;
 
-    // TODO: selectedCollectionIds, imgUrl 해결
-    await axios.post(`http://localhost:3313/vinyl/${userId}`, {
-      releasedId,
-      // selectedCollectionIds:
-      // imgUrl: '',
-      title,
-      artist,
-      released,
-      genres,
-    });
-  },
-});
+//     // TODO: selectedCollectionIds, imgUrl 해결
+//     await axios.post(`http://localhost:3313/vinyl/${userId}`, {
+//       releasedId,
+//       // selectedCollectionIds:
+//       // imgUrl: '',
+//       title,
+//       artist,
+//       released,
+//       genres,
+//     });
+//   },
+// });
 
 export const deleteItemDialogState = {
   isOpen: true,
@@ -109,12 +108,22 @@ export const editWritableInfoDialogState = {
   confirm: () => console.log('소장 음반 정보 수정'),
 };
 
-export const dialogState = atom<DialogProps>({
+export const dialogState = atom<boolean>({
   key: 'dialogState',
-  default: initialDialogState,
+  default: false,
 });
 
-export const userState = atom<number | null>({
+export interface dialogContentProps {
+  releasedId: string;
+  collectionList: { id?: string; title: string; isChecked: boolean }[];
+}
+
+export const dialogContentState = atom<dialogContentProps>({
+  key: 'dialogContentState',
+  default: { releasedId: '', collectionList: [] },
+});
+
+export const userState = atom<string | null | undefined>({
   key: 'userState',
-  default: 2,
+  default: '63a28cd7e71fd88649c17ac8',
 });

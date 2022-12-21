@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import SelectCollectionForm from '../SelectCollectionForm/SelectCollectionForm';
+import SelectCollectionForm from './SelectCollectionForm';
 
 export default {
   title: 'pages/Item/SelectCollectionForm',

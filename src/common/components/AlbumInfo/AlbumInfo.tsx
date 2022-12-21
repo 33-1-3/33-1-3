@@ -6,11 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import axios from 'axios';
 import {
-  userState,
+  dialogContentState,
   dialogState,
-  setAddItemDialogState,
-  deleteItemDialogState,
-  initialDialogState,
+  userState,
 } from '@/recoil/globalState';
 import { ProcessedResult, ProcessedTracklist } from '@/types/data';
 
@@ -39,8 +37,9 @@ function AlbumInfo({
   );
   const newDetailInfo = tracklist ? [...detailInfo, tracklist] : detailInfo;
 
-  const [, setDialog] = useRecoilState(dialogState);
   const [userId] = useRecoilState(userState);
+  const [, setIsDialogOpen] = useRecoilState(dialogState);
+  const [dialogContent, setDialogContent] = useRecoilState(dialogContentState);
 
   const navigate = useNavigate();
 
@@ -72,7 +71,7 @@ function AlbumInfo({
             iconType={buttonType}
             view={view}
             clickHandler={async (e: React.MouseEvent<HTMLButtonElement>) => {
-              if (userId === null) {
+              if (userId === null || userId === undefined) {
                 navigate('/signin');
                 return;
               }
@@ -84,11 +83,13 @@ function AlbumInfo({
                 `http://localhost:3313/collections/${userId}/${releasedId}`
               );
 
-              return page === 'all'
-                ? setDialog(
-                    setAddItemDialogState(collectionList, userId, releasedId)
-                  )
-                : setDialog(deleteItemDialogState);
+              setDialogContent({
+                ...dialogContent,
+                releasedId: releasedId,
+                collectionList: collectionList,
+              });
+
+              setIsDialogOpen(true);
             }}
           />
         </AlbumInfoWrapper>

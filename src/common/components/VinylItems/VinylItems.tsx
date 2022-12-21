@@ -4,6 +4,7 @@ import { ResultViewProps } from '../AlbumInfo/AlbumInfo';
 import { ProcessedResult } from '@/types/data';
 import styled, { css } from 'styled-components';
 import { memo } from 'react';
+import { getId } from '@/utils/functions/processResult';
 
 export interface VinylItemsProps extends ResultViewProps {
   searchResult: ProcessedResult[];
@@ -19,7 +20,7 @@ function VinylItems({ searchResult, page, view, ...props }: VinylItemsProps) {
           searchResult={result}
           page={page}
           view={view}
-          data-releasedid={result.id}
+          data-releasedid={getId(result.resourceUrl)}
           className="infoContainer"
         />
       ))}
