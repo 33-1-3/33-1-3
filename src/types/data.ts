@@ -179,6 +179,16 @@ export interface ProcessedResourceUrlResult {
   tracklist: ProcessedTracklist;
 }
 
+export interface RawCommonVinyl {
+  id: string;
+  title: string;
+  artist: string;
+  genre: string[];
+  year: string;
+  imgUrl: string;
+  resourceUrl: string;
+}
+
 export interface RawTracklist {
   position: string;
   type_: string;

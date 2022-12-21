@@ -5,11 +5,12 @@ import {
   RawTracklist,
   ProcessedResult,
   ProcessedResourceUrlResult,
+  RawCommonVinyl,
 } from '@/types/data';
 
 const validator = (data: string | Array<string>) => {
   if (typeof data === 'string') {
-    return data !== '';
+    return data !== '' && data !== '0';
   }
   if (Array.isArray(data)) {
     return data.length !== 0;
@@ -20,7 +21,12 @@ const validator = (data: string | Array<string>) => {
 const getId = (resource_url: string): string => {
   const arr = resource_url.split('/');
   const { length } = arr;
-  return arr[length - 2] + arr[length - 1];
+  return arr[length - 2] + '-' + arr[length - 1];
+};
+
+const getResourceUrl = (Id: string): string => {
+  const _Id = Id.replace('-', '/');
+  return 'https://api.discogs.com/' + _Id;
 };
 
 // Search API 결과 처리
@@ -85,7 +91,7 @@ const processReleaseResult = ({
   images,
   genres,
   labels: _labels,
-  resource_url,
+  resource_url: resourceUrl,
   styles,
   year: _year,
   released: _released,
@@ -102,9 +108,8 @@ const processReleaseResult = ({
   }));
   const released = _released === undefined ? '' : _released;
   const year = released === '' ? _year ?? '' : released;
-
   return {
-    id: getId(resource_url),
+    id: getId(resourceUrl),
     titleInfo: { title, artist },
     detailInfo: [
       {
@@ -134,12 +139,38 @@ const processReleaseResult = ({
       },
     ],
     imgUrl,
-    resourceUrl: resource_url,
+    resourceUrl,
     tracklist: {
       infoName: 'Tracklist',
       infoContent: tracklist,
       isValid: tracklistVaildator(tracklist),
     },
+  };
+};
+
+// Release API 결과 commonVinyl 형식
+const commonRelease = ({
+  title,
+  artists,
+  images,
+  genres: genre,
+  resource_url,
+  year: _year,
+  released: _released,
+}: ReleaseRawResult): RawCommonVinyl => {
+  const artist = artists[0].name;
+  const imgUrl = images[0].resource_url;
+  const released = _released === undefined ? '' : _released;
+  const year = released === '' ? _year ?? '' : released;
+
+  return {
+    id: getId(resource_url),
+    title,
+    artist,
+    genre,
+    year,
+    imgUrl,
+    resourceUrl: resource_url,
   };
 };
 
@@ -151,7 +182,7 @@ const processMasterResult = ({
   images,
   genres,
   labels: _labels,
-  resource_url,
+  resource_url: resourceUrl,
   styles,
   year: _year,
   tracklist: _tracklist,
@@ -167,9 +198,8 @@ const processMasterResult = ({
     title,
     duration,
   }));
-
   return {
-    id: getId(resource_url),
+    id: getId(resourceUrl),
     titleInfo: { title, artist },
     detailInfo: [
       {
@@ -199,7 +229,7 @@ const processMasterResult = ({
       },
     ],
     imgUrl,
-    resourceUrl: resource_url,
+    resourceUrl: resourceUrl,
     tracklist: {
       infoName: 'Tracklist',
       infoContent: tracklist,
@@ -208,4 +238,61 @@ const processMasterResult = ({
   };
 };
 
-export { processSearchResult, processReleaseResult, processMasterResult };
+// Master API 결과 commonVinyl 형식
+const commonMaster = ({
+  title,
+  artists,
+  images,
+  genres: genre,
+  resource_url,
+  year: _year,
+}: MasterRawResult): RawCommonVinyl => {
+  const artist = artists[0].name;
+  const imgUrl = images[0].resource_url;
+  const year = _year ?? '';
+
+  return {
+    id: getId(resource_url),
+    title,
+    artist,
+    genre,
+    year,
+    imgUrl,
+    resourceUrl: resource_url,
+  };
+};
+
+// commonVinyl 처리(렌더링 형식)
+const processCommonVinyl = (result: RawCommonVinyl[]): ProcessedResult[] => {
+  return result.map(
+    ({ id, title, artist, genre, year, imgUrl, resourceUrl }) => ({
+      id,
+      titleInfo: { title, artist },
+      detailInfo: [
+        {
+          infoName: 'Released',
+          infoContent: year,
+          isValid: validator(year),
+        },
+        {
+          infoName: 'Genre',
+          infoContent: genre,
+          isValid: validator(genre),
+        },
+      ],
+      imgUrl,
+      resourceUrl,
+    })
+  );
+};
+
+export {
+  processSearchResult,
+  processReleaseResult,
+  processMasterResult,
+  processCommonVinyl,
+  commonRelease,
+  commonMaster,
+  getId,
+  getResourceUrl,
+};
