@@ -1,16 +1,22 @@
 import styled from 'styled-components';
 import { Header, SearchInput, Footer, Main } from '@/common/components';
 import useHandleSubmit from './../../hooks/useHandleSubmit';
+import { motion } from 'framer-motion';
+import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
 
 export default function Home() {
+  const { initial, animate, transition } = FLOATING_MOTION_VALUE;
+
   return (
     <>
       <Header />
       <StyledMain>
-        <Catchphrase>
-          Record your <HighLight>Records!</HighLight>
-        </Catchphrase>
-        <SearchInput handleSubmit={useHandleSubmit()} />
+        <motion.div initial={initial} animate={animate} transition={transition}>
+          <Catchphrase>
+            Record your <HighLight>Records!</HighLight>
+          </Catchphrase>
+          <SearchInput handleSubmit={useHandleSubmit()} />
+        </motion.div>
       </StyledMain>
       <Footer />
     </>
@@ -27,7 +33,7 @@ const StyledMain = styled(Main)`
   padding-bottom: 64px;
 `;
 
-const Catchphrase = styled.h2`
+const Catchphrase = styled(motion.h2)`
   margin-bottom: var(--space-xs);
   width: 100%;
   font-size: 2rem;

@@ -1,6 +1,6 @@
 import uuid from 'react-uuid';
-import { useState, useEffect, Fragment } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useState, useEffect, Fragment, useLayoutEffect } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { dialogState, editWritableInfoDialogState } from '@/recoil/globalState';
 import styled from 'styled-components';
@@ -17,14 +17,18 @@ import {
 } from '@/common/components/WritableInfo/WritableInfo';
 import { ReactComponent as CloseIcon } from '@/assets/close.svg';
 import {
-  ProcessedResult,
   RawTracklist,
   ProcessedTracklist,
   PurchaseData,
+  ProcessedResourceUrlResult,
 } from '@/types/data';
 import PURCHASE_INFO_NAME from '@/utils/constants/purchaseInfoName';
-import tracklistVaildator from '@/utils/functions/tracklistValidator';
-import { mockPurchaseInfoContent, mockMemo } from '@/utils/mocks/mockInfo';
+import {
+  getResourceUrl,
+  processMasterResult,
+  processReleaseResult,
+} from '@/utils/functions/processResult';
+import { mockMemo, mockPurchaseInfoContent } from '@/utils/mocks/mockInfo';
 
 export interface DetailInfoProps {
   infoName: 'Country' | 'Genre' | 'Label' | 'Style' | 'Released' | 'Tracklist';
@@ -51,23 +55,59 @@ const createModalContent = (
 );
 
 export default function MyItem() {
+  /* -------------------------------------------------------------------------- */
+  const params = useParams();
+  const { id } = params;
+  const { userid } = useParams();
+  const resourceUrl = getResourceUrl(id as string);
+  const [isUserItem, setIsUserItem] = useState<boolean>(false);
+  /* -------------------------------------------------------------------------- */
   const [tracklist, setTracklist] = useState({});
-  const location = useLocation();
   const navigate = useNavigate();
   const [_, setDialog] = useRecoilState(dialogState);
+  const [searchResult, setSearchResult] = useState({
+    titleInfo: { title: '', artist: '' },
+    detailInfo: [{}],
+    imgUrl: '',
+  });
 
-  const searchResult = location.state as ProcessedResult;
+  useLayoutEffect(() => {
+    async function checkAuth() {
+      try {
+        const res = await axios.get('http://localhost:3313/auth', {
+          withCredentials: true,
+        });
+        const {
+          data: { isLogin, userId },
+        } = res;
+
+        if (isLogin && userId === userid) {
+          setIsUserItem(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     async function fetchTrackList() {
       try {
-        const res = await axios.get(searchResult.resourceUrl);
-
-        setTracklist({
-          infoName: 'Tracklist',
-          infoContent: res.data.tracklist,
-          isValid: tracklistVaildator(res.data.tracklist),
-        });
+        const res = await axios.get(
+          `${resourceUrl}?&key=${import.meta.env.VITE_API_KEY}&secret=${
+            import.meta.env.VITE_API_SECRET
+          }`
+        );
+        if (resourceUrl.includes('releases')) {
+          const { tracklist, ...result } = processReleaseResult(res.data);
+          setSearchResult(result);
+          setTracklist(tracklist);
+        } else if (resourceUrl.includes('masters')) {
+          const { tracklist, ...result } = processMasterResult(res.data);
+          setSearchResult(result);
+          setTracklist(tracklist);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -75,38 +115,59 @@ export default function MyItem() {
     fetchTrackList();
   }, []);
 
+  useEffect(() => {
+    async function updateDB() {
+      try {
+        console.log(searchResult);
+        // const res = await axios.put(
+        //   `${import.meta.env.VITE_DB_SERVER}commonVinyl/${id}`
+        // );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    updateDB();
+  }, []);
+
   return (
-    <MyItemPageWrapper>
-      <h1 className="srOnly">{`${searchResult.titleInfo.title} 상세 정보`}</h1>
-      <ReadOnlyInfo
-        searchResult={searchResult}
-        tracklist={tracklist as ProcessedTracklist}
-      />
-      <WritableInfo
-        purchaseInfo={mockPurchaseInfoContent}
-        memoInfo={mockMemo}
-      />
-      <StyledSquareButton
-        fontSize={20}
-        size="small"
-        isFilled={true}
-        onClick={() =>
-          setDialog({
-            ...editWritableInfoDialogState,
-            children: createModalContent(
-              PURCHASE_INFO_NAME,
-              mockPurchaseInfoContent
-            ),
-          })
-        }
-      >
-        {'편집하기'}
-      </StyledSquareButton>
-      <CloseButton onClick={() => navigate(-1)}>
-        <CloseIcon />
-      </CloseButton>
-      <BackVinyl className="backVinyl" imgUrl={searchResult.imgUrl as string} />
-    </MyItemPageWrapper>
+    <>
+      <MyItemPageWrapper>
+        <h1 className="srOnly">{`${searchResult.titleInfo.title} 상세 정보`}</h1>
+        <ReadOnlyInfo
+          searchResult={searchResult as ProcessedResourceUrlResult}
+          tracklist={tracklist as ProcessedTracklist}
+        />
+        <WritableInfo
+          purchaseInfo={mockPurchaseInfoContent}
+          memoInfo={mockMemo}
+        />
+        {isUserItem && (
+          <StyledSquareButton
+            fontSize={20}
+            size="small"
+            isFilled={true}
+            onClick={() =>
+              setDialog({
+                ...editWritableInfoDialogState,
+                children: createModalContent(
+                  PURCHASE_INFO_NAME,
+                  mockPurchaseInfoContent
+                ),
+              })
+            }
+          >
+            {'편집하기'}
+          </StyledSquareButton>
+        )}
+        <CloseButton onClick={() => navigate(-1)}>
+          <CloseIcon />
+        </CloseButton>
+        <BackVinyl
+          className="backVinyl"
+          imgUrl={searchResult.imgUrl as string}
+        />
+      </MyItemPageWrapper>
+    </>
   );
 }
 

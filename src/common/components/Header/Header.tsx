@@ -45,7 +45,7 @@ const Header = ({ ...props }) => {
   useEffect(() => {
     async function auth() {
       try {
-        const res = await axios.get('http://localhost:3313/auth', {
+        const res = await axios.get(`${import.meta.env.VITE_DB_SERVER}auth`, {
           withCredentials: true,
         });
         const {

@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import axios from 'axios';
@@ -9,10 +10,11 @@ import {
   initialDialogState,
   // deleteCollectionDialogState,
 } from '@/recoil/globalState';
+import { useState, useLayoutEffect } from 'react';
 
 export interface BookshelfProps {
-  userId: number;
-  collectionId: number;
+  userId: string;
+  collectionId: string;
   title: string;
   count: number;
   step: number;
@@ -44,23 +46,47 @@ const Bookshelf = ({
   step,
   ...props
 }: BookshelfProps) => {
+  const [isUserCollections, setIsUserCollections] = useState<boolean>(false);
+  const { userid } = useParams();
   const [_, setDialog] = useRecoilState(dialogState);
   const imgIdx = Math.min(Math.ceil(count / step), 5);
+
+  useLayoutEffect(() => {
+    async function checkAuth() {
+      try {
+        const res = await axios.get('http://localhost:3313/auth', {
+          withCredentials: true,
+        });
+        const {
+          data: { isLogin, userId },
+        } = res;
+
+        if (isLogin && userId === userid) {
+          setIsUserCollections(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    checkAuth();
+  }, [isUserCollections]);
+
   return (
     <Wrapper style={{ width: '520px', height: 'fit-content' }}>
       <Title>{title}</Title>
-      <IconButtons>
-        <IconButton
-          width={22}
-          height={22}
-          iconType="pencil"
-          clickHandler={() => setDialog(editCollectionDialogState)}
-        />
-        <IconButton
-          width={22}
-          height={22}
-          iconType="minus"
-          clickHandler={() =>
+      {isUserCollections && (
+        <IconButtons>
+          <IconButton
+            width={22}
+            height={22}
+            iconType="pencil"
+            clickHandler={() => setDialog(editCollectionDialogState)}
+          />
+          <IconButton
+            width={22}
+            height={22}
+            iconType="minus"
+            clickHandler={() =>
             setDialog({
               isOpen: true,
               width: 480,
@@ -75,8 +101,9 @@ const Bookshelf = ({
               },
             })
           }
-        />
-      </IconButtons>
+          />
+        </IconButtons>
+      )}
       <Link
         to={`/mycollection/${userId}/${collectionId}`}
         aria-label={`${title} 콜렉션으로 이동`}

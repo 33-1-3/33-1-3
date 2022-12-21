@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import {
   Header,
@@ -17,11 +17,10 @@ import {
   VIEW_LABEL,
 } from '@/utils/constants/dropdown';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
-// import { mockUsersData } from '@/utils/mocks/mockInfo';
 import styled from 'styled-components';
 import axios from 'axios';
 import { sortItems } from '@/utils/sortItems';
-// import { processResult } from '@/utils/functions/processResult';
+import { processResult, processCommonVinyl } from '@/utils/functions/processResult';
 import {
   ProcessedResult,
   RawResult,
@@ -32,16 +31,18 @@ import {
 const SECRET = import.meta.env.VITE_API_SECRET;
 const KEY = import.meta.env.VITE_API_KEY;
 
+
 let collectionItems: undefined | ProcessedResult[];
 
 export default function MyCollection() {
   const { userid, collectionid } = useParams();
   const [searchParams] = useSearchParams();
-  // const [itemCount, setItemCount] = useState<number>(0);
   const [result, setResult] = useState<ProcessedResult[]>([]);
   const [collectionTitle, setCollectionTitle] = useState('');
   const [count, setCount] = useState<number>();
   const [searchWord, setSearchWord] = useState<string>();
+  const [isUserCollections, setIsUserCollections] = useState<boolean>(false);
+
   // const { collections } = mockUsersData.find(
   //   ({ id }) => id === +(userid as string)
   // ) as UserData;
@@ -72,7 +73,27 @@ export default function MyCollection() {
     setCount(matchItems?.length);
     setSearchWord(e.target.value);
   }
-  const url = `http://localhost:3313/collection/${collectionid}`;
+  const url = `${import.meta.env.VITE_DB_SERVER}collection/${collectionid}`;
+
+  useLayoutEffect(() => {
+    async function checkAuth() {
+      try {
+        const res = await axios.get('http://localhost:3313/auth', {
+          withCredentials: true,
+        });
+        const {
+          data: { isLogin, userId },
+        } = res;
+
+        if (isLogin && userId === userid) {
+          setIsUserCollections(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    checkAuth();
+  }, [isUserCollections]);
 
   useEffect(() => {
     async function fetchResults() {
@@ -81,38 +102,7 @@ export default function MyCollection() {
         const result = res.data;
         const { vinylsInfo, collectionTitle } = result;
 
-        const processedResult = vinylsInfo.map(
-          ({
-            imgUrl,
-            title,
-            artist,
-            released,
-            genre,
-          }: {
-            imgUrl: string;
-            title: string;
-            artist: string;
-            released: string | string[];
-            genre: string | string[];
-          }) => {
-            return {
-              titleInfo: { title, artist },
-              detailInfo: [
-                {
-                  infoName: 'Released',
-                  infoContent: released,
-                  isValid: validator(released),
-                },
-                {
-                  infoName: 'Genre',
-                  infoContent: genre,
-                  isValid: validator(genre),
-                },
-              ],
-              imgUrl,
-            };
-          }
-        );
+        const processedResult = processCommonVinyl(vinylsInfo);
         setCollectionTitle(collectionTitle);
         setResult(() => {
           collectionItems = processedResult;
@@ -160,6 +150,7 @@ export default function MyCollection() {
           )}
           page={'collection'}
           view={view as ResultViewProps['view']}
+          isUserCollections={isUserCollections}
         />
       </MainWrapper>
       <Footer />

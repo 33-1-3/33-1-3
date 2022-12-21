@@ -29,57 +29,6 @@ const getResourceUrl = (Id: string): string => {
   return 'https://api.discogs.com/' + _Id;
 };
 
-const processResult = (result: RawResult[]): ProcessedResult[] =>
-  result.map(
-    ({
-      id,
-      country,
-      cover_image,
-      genre,
-      label,
-      resource_url,
-      style,
-      title,
-      year,
-    }: RawResult) => {
-      const [artist, albumTitle] = title.split(' - ');
-
-      return {
-        id: id,
-        titleInfo: { title: albumTitle, artist },
-        detailInfo: [
-          {
-            infoName: 'Released',
-            infoContent: year,
-            isValid: validator(year),
-          },
-          {
-            infoName: 'Genre',
-            infoContent: genre,
-            isValid: validator(genre),
-          },
-          {
-            infoName: 'Style',
-            infoContent: style,
-            isValid: validator(style),
-          },
-          {
-            infoName: 'Country',
-            infoContent: country,
-            isValid: validator(country),
-          },
-          {
-            infoName: 'Label',
-            infoContent: label,
-            isValid: validator(label),
-          },
-        ],
-        imgUrl: cover_image,
-        resourceUrl: resource_url,
-      };
-    }
-  );
-
 // Search API 결과 처리
 const processSearchResult = (result: RawResult[]): ProcessedResult[] =>
   result.map(
@@ -338,7 +287,6 @@ const processCommonVinyl = (result: RawCommonVinyl[]): ProcessedResult[] => {
 };
 
 export {
-  processResult,
   processSearchResult,
   processReleaseResult,
   processMasterResult,

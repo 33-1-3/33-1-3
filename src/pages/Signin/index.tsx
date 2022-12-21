@@ -7,7 +7,7 @@ import {
 } from '@/common/components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 
 const HeaderLogo = styled(LogoLink)`
   margin-bottom: 24px;
@@ -23,11 +23,25 @@ const FormContainer = styled.div`
   margin-top: 20vh;
 `;
 
-const url = `http://localhost:3313/signin`;
+const authRequestUrl = `${import.meta.env.VITE_DB_SERVER}auth`;
+const signinRequestUrl = `${import.meta.env.VITE_DB_SERVER}signin`;
 
 export default function Signin() {
   const [checkEmail, setCheckEmail] = useState('');
   const navigate = useNavigate();
+
+  useLayoutEffect(() => {
+    async function auth() {
+      const {
+        data: { isLogin },
+      } = await axios.get(authRequestUrl, {
+        withCredentials: true,
+      });
+
+      isLogin && navigate('/');
+    }
+    auth();
+  }, []);
 
   useEffect(() => {
     checkEmail === 'needAuth' &&
@@ -42,11 +56,15 @@ export default function Signin() {
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const email = e.target[0].value;
-    const password = e.target[1].value;
+    const email = (e.currentTarget[0] as HTMLInputElement).value;
+    const password = (e.currentTarget[1] as HTMLInputElement).value;
     const {
       data: { userId, state },
-    } = await axios.post(url, { email, password }, { withCredentials: true });
+    } = await axios.post(
+      signinRequestUrl,
+      { email, password },
+      { withCredentials: true }
+    );
     if (userId) navigate('/');
     else setCheckEmail(state);
   };

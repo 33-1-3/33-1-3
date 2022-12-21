@@ -1,25 +1,14 @@
 import uuid from 'react-uuid';
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
-
-export interface MotionValueType {
-  [key: number]: { x: string; y: string; scale: number };
-}
-
-const MOTION_VALUE: MotionValueType = {
-  1: { x: '-5px', y: '-5px', scale: 1 },
-  2: { x: '8px', y: '-5px', scale: 1 },
-  3: { x: '8px', y: '8px', scale: 1 },
-  4: { x: '-12px', y: '16px', scale: 1 },
-  5: { x: '-2px', y: '10px', scale: 1 },
-};
+import { BROKEN_MOTION_VALUE } from '@/utils/constants/motion';
 
 export default function BrokenVinyls() {
   return (
     <BrokenVinylsWrapper>
       {Array.from({ length: 5 }).map((_, index) => {
         const path = `/assets/broken_vinyl_${index + 1}.svg`;
-        const { x, y, scale } = MOTION_VALUE[index + 1];
+        const { x, y, scale } = BROKEN_MOTION_VALUE[index + 1];
 
         return (
           <BrokenVinyl

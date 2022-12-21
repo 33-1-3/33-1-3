@@ -1,9 +1,12 @@
 import styled from 'styled-components';
+import axios from 'axios';
 import { ReactComponent as PlusIcon } from '@/assets/plus-circle.svg';
 import {
   SMALL_BORDER_IMG,
   LARGE_BORDER_IMG,
 } from '@/utils/constants/addCollectionButtonUrl';
+import { useState, useLayoutEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 export interface AddCollectionButtonProps {
   size: 'small' | 'large';
@@ -83,23 +86,50 @@ const AddCollectionButton = ({
   onClick,
   ...args
 }: AddCollectionButtonProps) => {
+  const [isUserCollections, setIsUserCollections] = useState<boolean>(false);
+  const { userid } = useParams();
   const { width, height } = buttonStyle[size];
+
+  useLayoutEffect(() => {
+    async function checkAuth() {
+      try {
+        const res = await axios.get('http://localhost:3313/auth', {
+          withCredentials: true,
+        });
+        const {
+          data: { isLogin, userId },
+        } = res;
+
+        if (isLogin && userId === userid) {
+          setIsUserCollections(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    checkAuth();
+  }, [isUserCollections]);
+
   return (
-    <DashButton
-      type="button"
-      style={{ width, height }}
-      size={size}
-      $color={color}
-      backgroundColor={backgroundColor}
-      onClick={onClick}
-      {...args}
-    >
-      <PlusIcon
-        width={buttonStyle[size].iconSize}
-        height={buttonStyle[size].iconSize}
-      />
-      <span>Add a Collection</span>
-    </DashButton>
+    <>
+      {isUserCollections && (
+        <DashButton
+          type="button"
+          style={{ width, height }}
+          size={size}
+          $color={color}
+          backgroundColor={backgroundColor}
+          onClick={onClick}
+          {...args}
+        >
+          <PlusIcon
+            width={buttonStyle[size].iconSize}
+            height={buttonStyle[size].iconSize}
+          />
+          <span>New Collection</span>
+        </DashButton>
+      )}
+    </>
   );
 };
 
