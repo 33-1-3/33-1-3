@@ -17,7 +17,12 @@ import {
   RawTracklist,
 } from '@/types/data';
 import axios from 'axios';
-import { getId, processReleaseResult, processMasterResult, getResourceUrl } from '@/utils/functions/processResult';
+import {
+  getId,
+  processReleaseResult,
+  processMasterResult,
+  getResourceUrl,
+} from '@/utils/functions/processResult';
 import { useRecoilState } from 'recoil';
 import { dialogContentState, dialogState } from '@/recoil/globalState';
 
@@ -31,8 +36,6 @@ export default function Item() {
   const [tracklist, setTracklist] = useState({});
   const [isDialogOpen, setIsDialogOpen] = useRecoilState(dialogState);
   const [dialogContent] = useRecoilState(dialogContentState);
-  const location = useLocation();
-  const searchResult = location.state as ProcessedResult;
   const [searchResult, setSearchResult] = useState({
     titleInfo: { title: '', artist: '' },
     detailInfo: [{}],
