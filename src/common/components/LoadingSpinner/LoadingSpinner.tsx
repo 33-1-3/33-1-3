@@ -12,6 +12,5 @@ const Spinner = styled.div<LoadingSpinnerProps>`
   display: ${({ isLastPage }) => (isLastPage ? 'none' : 'block')};
   width: 100vw;
   height: 50px;
-  margin-bottom: 40px;
   background: url(/assets/vinyl-spinner.gif) no-repeat center/contain;
 `;
