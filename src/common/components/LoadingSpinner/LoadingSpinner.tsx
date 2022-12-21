@@ -14,8 +14,8 @@ export default function LoadingSpinner({
 
 const Spinner = styled.div<LoadingSpinnerProps>`
   display: ${({ isLastPage }) => (isLastPage ? 'none' : 'block')};
-  height: ${({ height }) => height};
-  margin-bottom: 40px;
+  width: 100vw;
+  height: 50px;
   background: url(/assets/vinyl-spinner.gif) no-repeat center/contain;
 `;
 
