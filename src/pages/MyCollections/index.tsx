@@ -11,7 +11,6 @@ import {
 import { Bookshelf } from './components';
 import { useRecoilState } from 'recoil';
 import { dialogState, createCollectionDialogState } from '@/recoil/globalState';
-// import { mockUsersData } from '@/utils/mocks/mockInfo';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -33,13 +32,9 @@ export default function MyCollections() {
 
   const [userCollections, setUserCollections] = useState([]);
 
-  // const [userData] = mockUsersData.filter(
-  //   (userData) => userData.id === +(userid as string)
-  // );
-  // const userCollections = userData.collections;
   const [_, setDialog] = useRecoilState(dialogState);
 
-  const url = `http://localhost:3313/collections/${userid}`;
+  const url = `${import.meta.env.VITE_DB_SERVER}collections/${userid}`;
 
   useEffect(() => {
     async function fetchResults() {
@@ -69,7 +64,7 @@ export default function MyCollections() {
             return (
               <Bookshelf
                 key={newUuid}
-                userId={+(userid as string)}
+                userId={userid as string}
                 collectionId={collectionId}
                 title={title}
                 count={vinylCount}

@@ -9,8 +9,8 @@ import {
 } from '@/recoil/globalState';
 
 export interface BookshelfProps {
-  userId: number;
-  collectionId: number;
+  userId: string;
+  collectionId: string;
   title: string;
   count: number;
   step: number;

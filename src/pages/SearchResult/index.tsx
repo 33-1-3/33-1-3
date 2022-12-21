@@ -20,7 +20,7 @@ import {
   VIEW_CONTENT,
   VIEW_LABEL,
 } from '@/utils/constants/dropdown';
-import processResult from '@/utils/functions/processResult';
+import { processSearchResult } from '@/utils/functions/processResult';
 import { ProcessedResult } from '@/types/data';
 
 const SECRET = import.meta.env.VITE_API_SECRET;
@@ -83,7 +83,7 @@ export default function SearchResult() {
         setIsLoading(false);
         setTotalPageNum(res.data.pagination.pages);
         setItemCount(res.data.pagination.items);
-        setResult(processResult(res.data.results));
+        setResult(processSearchResult(res.data.results));
       } catch (error) {
         console.error(error);
       }
@@ -106,7 +106,7 @@ export default function SearchResult() {
         setIsLoading(false);
         setTotalPageNum(res.data.pagination.pages);
         setItemCount(res.data.pagination.items);
-        setResult([...result, ...processResult(res.data.results)]);
+        setResult([...result, ...processSearchResult(res.data.results)]);
       } catch (error) {
         console.error(error);
       }

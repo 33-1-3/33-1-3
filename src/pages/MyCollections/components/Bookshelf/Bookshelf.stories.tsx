@@ -22,8 +22,8 @@ const Template: ComponentStory<typeof Bookshelf> = (args) => (
 
 export const Empty = Template.bind({});
 Empty.args = {
-  userId: 1,
-  collectionId: 1,
+  userId: '1',
+  collectionId: '1',
   title: 'My Vinyls',
   count: 0,
   step: 10,
@@ -31,8 +31,8 @@ Empty.args = {
 
 export const BelowTen = Template.bind({});
 BelowTen.args = {
-  userId: 1,
-  collectionId: 1,
+  userId: '1',
+  collectionId: '1',
   title: 'My Vinyls',
   count: 10,
   step: 10,
@@ -40,8 +40,8 @@ BelowTen.args = {
 
 export const BelowTwenty = Template.bind({});
 BelowTwenty.args = {
-  userId: 1,
-  collectionId: 1,
+  userId: '1',
+  collectionId: '1',
   title: 'My Vinyls',
   count: 20,
   step: 10,
@@ -49,24 +49,24 @@ BelowTwenty.args = {
 
 export const BelowThirty = Template.bind({});
 BelowThirty.args = {
-  userId: 1,
-  collectionId: 1,
+  userId: '1',
+  collectionId: '1',
   title: 'My Vinyls',
   count: 30,
 };
 
 export const BelowForty = Template.bind({});
 BelowForty.args = {
-  userId: 1,
-  collectionId: 1,
+  userId: '1',
+  collectionId: '1',
   title: 'My Vinyls',
   count: 40,
 };
 
 export const AboveForty = Template.bind({});
 AboveForty.args = {
-  userId: 1,
-  collectionId: 1,
+  userId: '1',
+  collectionId: '1',
   title: 'My Vinyls',
   count: 50,
 };

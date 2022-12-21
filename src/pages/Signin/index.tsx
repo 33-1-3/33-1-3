@@ -23,7 +23,7 @@ const FormContainer = styled.div`
   margin-top: 20vh;
 `;
 
-const url = `http://localhost:3313/signin`;
+const url = `${import.meta.env.VITE_DB_SERVER}signin`;
 
 export default function Signin() {
   const [checkEmail, setCheckEmail] = useState('');
@@ -42,8 +42,8 @@ export default function Signin() {
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const email = e.target[0].value;
-    const password = e.target[1].value;
+    const email = (e.currentTarget[0] as HTMLInputElement).value;
+    const password = (e.currentTarget[1] as HTMLInputElement).value;
     const {
       data: { userId, state },
     } = await axios.post(url, { email, password }, { withCredentials: true });
