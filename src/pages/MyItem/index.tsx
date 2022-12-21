@@ -1,6 +1,6 @@
 import uuid from 'react-uuid';
-import { useState, useEffect, Fragment } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect, Fragment, useLayoutEffect } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { dialogState, editWritableInfoDialogState } from '@/recoil/globalState';
 import styled from 'styled-components';
@@ -55,9 +55,13 @@ const createModalContent = (
 );
 
 export default function MyItem() {
+  /* -------------------------------------------------------------------------- */
   const params = useParams();
   const { id } = params;
+  const { userid } = useParams();
   const resourceUrl = getResourceUrl(id as string);
+  const [isUserItem, setIsUserItem] = useState<boolean>(false);
+  /* -------------------------------------------------------------------------- */
   const [tracklist, setTracklist] = useState({});
   const navigate = useNavigate();
   const [_, setDialog] = useRecoilState(dialogState);
@@ -66,6 +70,26 @@ export default function MyItem() {
     detailInfo: [{}],
     imgUrl: '',
   });
+
+  useLayoutEffect(() => {
+    async function checkAuth() {
+      try {
+        const res = await axios.get('http://localhost:3313/auth', {
+          withCredentials: true,
+        });
+        const {
+          data: { isLogin, userId },
+        } = res;
+
+        if (isLogin && userId === userid) {
+          setIsUserItem(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     async function fetchTrackList() {
@@ -117,22 +141,24 @@ export default function MyItem() {
           purchaseInfo={mockPurchaseInfoContent}
           memoInfo={mockMemo}
         />
-        <StyledSquareButton
-          fontSize={20}
-          size="small"
-          isFilled={true}
-          onClick={() =>
-            setDialog({
-              ...editWritableInfoDialogState,
-              children: createModalContent(
-                PURCHASE_INFO_NAME,
-                mockPurchaseInfoContent
-              ),
-            })
-          }
-        >
-          {'편집하기'}
-        </StyledSquareButton>
+        {isUserItem && (
+          <StyledSquareButton
+            fontSize={20}
+            size="small"
+            isFilled={true}
+            onClick={() =>
+              setDialog({
+                ...editWritableInfoDialogState,
+                children: createModalContent(
+                  PURCHASE_INFO_NAME,
+                  mockPurchaseInfoContent
+                ),
+              })
+            }
+          >
+            {'편집하기'}
+          </StyledSquareButton>
+        )}
         <CloseButton onClick={() => navigate(-1)}>
           <CloseIcon />
         </CloseButton>
