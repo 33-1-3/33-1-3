@@ -23,7 +23,6 @@ import Footer from './Footer/Footer';
 import Main from './Main/Main';
 import Dropdown from './Dropdown/Dropdown';
 import VinylItems from './VinylItems/VinylItems';
-import Dialog from './Dialog/Dialog';
 import ScrollToTop from './ScrollToTop/ScrollToTop';
 import ReadOnlyInfo from './ReadOnlyInfo/ReadOnlyInfo';
 import WritableInfo from './WritableInfo/WritableInfo';
@@ -61,7 +60,6 @@ export {
   Main,
   Dropdown,
   VinylItems,
-  Dialog,
   ScrollToTop,
   ReadOnlyInfo,
   WritableInfo,
