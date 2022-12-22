@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 import { SquareButton } from '..';
 // import { getTabbableElements } from '@/utils/functions/focusTabbable';
+import { useRecoilState } from 'recoil';
+import { dialogState } from '@/recoil/globalState';
 
-// const { documentElement: htmlElement } = document;
+const { documentElement: htmlElement } = document;
 // const reactDomContainer = document.getElementById('root');
 
 const Container = styled.div`
@@ -105,13 +107,19 @@ const NewDialog = ({
   onClose,
   ...props
 }: NewDialogProps) => {
+  const [dialogType] = useRecoilState(dialogState);
+
   const containerRef = React.createRef();
   // let tabbableElements: HTMLElement[] = [];
-  // let unbindEscKeyEvents: (() => void) | null = null;
+
+  const keyupListener = (e: KeyboardEvent) => {
+    if (e.key.toLowerCase().includes('escape')) handleClose();
+  };
 
   const handleClose = () => {
     onClose();
     // openner.focus();
+    document.removeEventListener('keyup', keyupListener);
   };
 
   const handleConfirm = async (e: FormEvent) => {
@@ -120,36 +128,25 @@ const NewDialog = ({
     handleClose();
   };
 
-  // const bindEscKeyEvents = () => {
-  //   const handler = (e: KeyboardEvent) => {
-  //     if (e.key.toLowerCase().includes('escape')) {
-  //       console.log('pressed esc key');
-  //       handleClose();
-  //     }
-  //   };
+  useEffect(() => {
+    if (dialogType === '') {
+      document.removeEventListener('keyup', keyupListener);
+    } else document.addEventListener('keyup', keyupListener);
 
-  //   document.addEventListener('keyup', handler);
+    console.log('userEffect');
+    // (containerRef.current as HTMLElement)?.focus();
+    // tabbableElements = getTabbableElements(containerRef.current as HTMLElement);
+    // settingKeyboardTrap();
 
-  //   return () => document.removeEventListener('keyup', handler);
-  // };
+    // htmlElement.style.overflowY = 'hidden';
+    // reactDomContainer?.setAttribute('aria-hidden', 'true');
 
-  // useEffect(() => {
-  //   (containerRef.current as HTMLElement)?.focus();
-  //   tabbableElements = getTabbableElements(containerRef.current as HTMLElement);
-  //   settingKeyboardTrap();
+    // return () => {
+    //   htmlElement.style.overflowY = 'visible';
+    //   reactDomContainer?.setAttribute('aria-hidden', 'false');
 
-  //   htmlElement.style.overflowY = 'hidden';
-  //   reactDomContainer?.setAttribute('aria-hidden', 'true');
-
-  //   unbindEscKeyEvents = bindEscKeyEvents();
-
-  //   return () => {
-  //     htmlElement.style.overflowY = 'visible';
-  //     reactDomContainer?.setAttribute('aria-hidden', 'false');
-
-  //     unbindEscKeyEvents?.();
-  //   };
-  // }, []);
+    // };
+  }, [dialogType]);
 
   // const settingKeyboardTrap = () => {
   //   const tabbles = tabbableElements;
@@ -170,8 +167,6 @@ const NewDialog = ({
   //     }
   //   });
   // };
-
-  // isOpened = true;
 
   return createPortal(
     <>
