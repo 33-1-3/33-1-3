@@ -22,6 +22,7 @@ const InputSet = styled.div`
 
 const SubmitBtn = styled(SqaureButton)`
   margin-top: 50px;
+  margin-bottom: 12px;
 `;
 
 export interface SignInAndUpFormProps {
