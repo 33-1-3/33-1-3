@@ -37,7 +37,21 @@ const Form = styled.form`
 const NodeContent = styled.div`
   flex-grow: 1;
   margin: 24px 24px 0 24px;
-  overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--gray-100);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
 `;
 
 const StringContent = styled.span`
