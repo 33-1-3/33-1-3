@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil';
 import { dialogState } from '@/recoil/globalState';
 
 const { documentElement: htmlElement } = document;
-// const reactDomContainer = document.getElementById('root');
+const reactDomContainer = document.getElementById('root');
 
 const Container = styled.div`
   display: flex;
@@ -131,21 +131,17 @@ const NewDialog = ({
   useEffect(() => {
     if (dialogType === '') {
       document.removeEventListener('keyup', keyupListener);
-    } else document.addEventListener('keyup', keyupListener);
+      htmlElement.style.overflowY = 'visible';
+      reactDomContainer?.setAttribute('aria-hidden', 'false');
+    } else {
+      document.addEventListener('keyup', keyupListener);
+      htmlElement.style.overflowY = 'hidden';
+      reactDomContainer?.setAttribute('aria-hidden', 'true');
+    }
 
-    console.log('userEffect');
     // (containerRef.current as HTMLElement)?.focus();
     // tabbableElements = getTabbableElements(containerRef.current as HTMLElement);
     // settingKeyboardTrap();
-
-    // htmlElement.style.overflowY = 'hidden';
-    // reactDomContainer?.setAttribute('aria-hidden', 'true');
-
-    // return () => {
-    //   htmlElement.style.overflowY = 'visible';
-    //   reactDomContainer?.setAttribute('aria-hidden', 'false');
-
-    // };
   }, [dialogType]);
 
   // const settingKeyboardTrap = () => {
