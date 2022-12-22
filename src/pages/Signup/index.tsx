@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
 import {
   LogoLink,
   MoveLink,
@@ -73,6 +75,8 @@ export default function Signup() {
     setCheckEmail(state);
   };
 
+  const { initial, animate, transition } = FLOATING_MOTION_VALUE;
+
   return (
     <>
       {checkEmail === 'duplicate' && showAlert && (
@@ -86,11 +90,13 @@ export default function Signup() {
           완료해주세요.
         </Alert>
       )}
-      <FormContainer>
-        <HeaderLogo height="72px" width="132px" />
-        <SignInAndUpForm submitHandler={submitHandler} option="signup" />
-        <MoveLink moveTarget="signin" />
-      </FormContainer>
+      <motion.div initial={initial} animate={animate} transition={transition}>
+        <FormContainer>
+          <HeaderLogo height="72px" width="132px" />
+          <SignInAndUpForm submitHandler={submitHandler} option="signup" />
+          <MoveLink moveTarget="signin" />
+        </FormContainer>
+      </motion.div>
       <WaveFooter />
     </>
   );

@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
 import {
   LogoLink,
   MoveLink,
@@ -98,6 +100,8 @@ export default function Signin() {
     }
   };
 
+  const { initial, animate, transition } = FLOATING_MOTION_VALUE;
+
   return (
     <>
       {checkEmail === 'needAuth' && showAlert && (
@@ -110,11 +114,13 @@ export default function Signin() {
           이메일 혹은 비밀번호가 일치하지 않습니다.
         </Alert>
       )}
-      <FormContainer>
-        <HeaderLogo height="72px" width="132px" />
-        <SignInAndUpForm submitHandler={submitHandler} option="signin" />
-        <MoveLink moveTarget="signup" />
-      </FormContainer>
+      <motion.div initial={initial} animate={animate} transition={transition}>
+        <FormContainer>
+          <HeaderLogo height="72px" width="132px" />
+          <SignInAndUpForm submitHandler={submitHandler} option="signin" />
+          <MoveLink moveTarget="signup" />
+        </FormContainer>
+      </motion.div>
       <WaveFooter />
     </>
   );
