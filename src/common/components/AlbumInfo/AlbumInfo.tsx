@@ -83,7 +83,9 @@ function AlbumInfo({
 
                 if (buttonType === 'plus') {
                   const { data: collectionList } = await axios.get(
-                    `http://localhost:3313/collections/${userId}/${releasedId}`
+                    `${
+                      import.meta.env.VITE_DB_SERVER
+                    }/collections/${userId}/${releasedId}`
                   );
 
                   setDialogContent({
