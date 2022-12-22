@@ -42,8 +42,12 @@ const MyCollectionsPageTitle = styled(PageTitle)`
 const CollectionsWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 40px;
+  min-width: 680px;
+  max-width: 828px;
   margin: 0 auto;
+  text-align: center;
 `;
 
 export default function MyCollections() {
