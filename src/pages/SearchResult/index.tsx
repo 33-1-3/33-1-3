@@ -195,7 +195,7 @@ export default function SearchResult() {
             console.log(dialogContent.collectionList);
 
             await axios.post(
-              `${import.meta.env.VITE_DB_SERVER}/vinyl/${userId}`,
+              `${import.meta.env.VITE_DB_SERVER}vinyl/${userId}`,
               {
                 releasedId: commonData?.id,
                 // selectedCollectionIds: dialogContent.collectionList

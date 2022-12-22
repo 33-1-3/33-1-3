@@ -115,7 +115,7 @@ export default function MyCollections() {
         onConfirm={async (e) => {
           const title = (e.target as HTMLElement).querySelector('input')?.value;
           await axios.post(
-            `${import.meta.env.VITE_DB_SERVER}/collections/${userId}`,
+            `${import.meta.env.VITE_DB_SERVER}collections/${userId}`,
             {
               title: title,
             }
@@ -141,7 +141,7 @@ export default function MyCollections() {
         onConfirm={async (e) => {
           const title = (e.target as HTMLElement).querySelector('input')?.value;
           await axios.put(
-            `${import.meta.env.VITE_DB_SERVER}/collections/${
+            `${import.meta.env.VITE_DB_SERVER}collections/${
               dialogContent.collectionId
             }`,
             {
@@ -168,7 +168,7 @@ export default function MyCollections() {
         height={200}
         onConfirm={async () => {
           await axios.delete(
-            `${import.meta.env.VITE_DB_SERVER}/collections/${
+            `${import.meta.env.VITE_DB_SERVER}collections/${
               dialogContent.collectionId
             }`
           );

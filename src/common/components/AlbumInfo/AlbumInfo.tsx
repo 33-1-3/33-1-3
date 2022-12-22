@@ -85,7 +85,7 @@ function AlbumInfo({
                   const { data: collectionList } = await axios.get(
                     `${
                       import.meta.env.VITE_DB_SERVER
-                    }/collections/${userId}/${releasedId}`
+                    }collections/${userId}/${releasedId}`
                   );
 
                   setDialogContent({
