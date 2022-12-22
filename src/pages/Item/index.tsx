@@ -9,9 +9,10 @@ import {
   AlbumInfo,
   NewDialog,
   SelectCollectionForm,
+  FloatingButton,
+  GoToTop,
 } from '@/common/components';
 import {
-  ProcessedResult,
   ProcessedResourceUrlResult,
   ProcessedTracklist,
   RawTracklist,
@@ -22,9 +23,15 @@ import {
   processReleaseResult,
   processMasterResult,
   getResourceUrl,
+  commonRelease,
+  commonMaster,
 } from '@/utils/functions/processResult';
 import { useRecoilState } from 'recoil';
-import { dialogContentState, dialogState } from '@/recoil/globalState';
+import {
+  dialogContentState,
+  dialogState,
+  userState,
+} from '@/recoil/globalState';
 
 const vaildator = (tracklist: RawTracklist[]) =>
   tracklist.length !== 0 && Array.isArray(tracklist);
@@ -34,14 +41,15 @@ export default function Item() {
   const { id } = params;
   const resourceUrl = getResourceUrl(id as string);
   const [tracklist, setTracklist] = useState({});
-  const [isDialogOpen, setIsDialogOpen] = useRecoilState(dialogState);
+  const [userId] = useRecoilState(userState);
+  const [dialogType, setDialogType] = useRecoilState(dialogState);
   const [dialogContent] = useRecoilState(dialogContentState);
   const [searchResult, setSearchResult] = useState({
     titleInfo: { title: '', artist: '' },
     detailInfo: [{}],
   });
 
-  useEffect(() => setIsDialogOpen(false), []);
+  useEffect(() => setDialogType(''), []);
 
   useEffect(() => {
     async function fetchTrackList() {
@@ -74,7 +82,7 @@ export default function Item() {
         <h1 className="srOnly">LP 상세 정보</h1>
         <DetailWrapper
           className="infoContainer"
-          data-releasedid={getId(searchResult.resourceUrl)}
+          data-releasedid={getId(resourceUrl)}
         >
           <LPCover
             searchResult={searchResult as ProcessedResourceUrlResult}
@@ -86,20 +94,52 @@ export default function Item() {
             tracklist={tracklist as ProcessedTracklist}
             page="all"
             view="detail"
-            isUserCollections={true}
           />
         </DetailWrapper>
+        <FloatingButton />
+        <GoToTop />
       </Main>
       <Footer />
       <NewDialog
-        isOpened={isDialogOpen}
+        isOpened={dialogType === 'add-item'}
         width={480}
         height={480}
         title="Add Item"
-        onConfirm={(e) => console.log(dialogContent.collectionList)}
-        onClose={() => setIsDialogOpen(false)}
+        onConfirm={async () => {
+          const resourceUrl = getResourceUrl(dialogContent.releasedId);
+          const resourceUrlWithAuth =
+            resourceUrl +
+            `?key=${import.meta.env.VITE_API_KEY}&secret=${
+              import.meta.env.VITE_API_SECRET
+            }`;
+          const splitedResourceUrl = resourceUrl.split('/');
+          const type = splitedResourceUrl[splitedResourceUrl.length - 2];
+          const { data: response } = await axios.get(resourceUrlWithAuth);
+
+          let commonData;
+          if (type === 'releases') commonData = commonRelease(response);
+          if (type === 'masters') commonData = commonMaster(response);
+
+          console.log('COMMON', commonData);
+          console.log(dialogContent.collectionList);
+
+          await axios.post(`http://localhost:3313/vinyl/${userId}`, {
+            releasedId: commonData.id,
+            // selectedCollectionIds: dialogContent.collectionList
+            //   .filter((collection) => collection.isChecked)
+            //   .map((collection) => collection.id),
+            collectionList: dialogContent.collectionList,
+            imgUrl: commonData.imgUrl,
+            title: commonData.title,
+            artist: commonData.artist,
+            year: commonData.year,
+            genres: commonData.genre,
+            resourceUrl: commonData.resourceUrl,
+          });
+        }}
+        onClose={() => setDialogType('')}
       >
-        <SelectCollectionForm collectionList={dialogContent.collectionList} />
+        <SelectCollectionForm />
       </NewDialog>
     </>
   );

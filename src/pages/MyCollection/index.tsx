@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import {
   Header,
@@ -9,6 +9,9 @@ import {
   Dropdown,
   SearchResultText,
   VinylItems,
+  FloatingButton,
+  GoToTop,
+  NewDialog,
 } from '@/common/components';
 import {
   Collection_SORT_CONTENT,
@@ -20,17 +23,14 @@ import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
 import styled from 'styled-components';
 import axios from 'axios';
 import { sortItems } from '@/utils/sortItems';
-import { processResult, processCommonVinyl } from '@/utils/functions/processResult';
+import { processCommonVinyl } from '@/utils/functions/processResult';
+import { ProcessedResult } from '@/types/data';
 import {
-  ProcessedResult,
-  RawResult,
-  CollectionData,
-  UserData,
-} from '@/types/data';
-
-const SECRET = import.meta.env.VITE_API_SECRET;
-const KEY = import.meta.env.VITE_API_KEY;
-
+  userState,
+  dialogContentState,
+  dialogState,
+} from '@/recoil/globalState';
+import { useRecoilState } from 'recoil';
 
 let collectionItems: undefined | ProcessedResult[];
 
@@ -41,25 +41,21 @@ export default function MyCollection() {
   const [collectionTitle, setCollectionTitle] = useState('');
   const [count, setCount] = useState<number>();
   const [searchWord, setSearchWord] = useState<string>();
-  const [isUserCollections, setIsUserCollections] = useState<boolean>(false);
 
-  // const { collections } = mockUsersData.find(
-  //   ({ id }) => id === +(userid as string)
-  // ) as UserData;
-  // const { title, albums } = collections.find(
-  //   ({ id }) => id === +(collectionid as string)
-  // ) as CollectionData;
+  const [isLogin, setIsLogin] = useRecoilState(userState);
+  const [dialogType, setDialogType] = useRecoilState(dialogState);
+  const [dialogContent, setDialogContent] = useRecoilState(dialogContentState);
+  // const [isUserCollections, setIsUserCollections] = useState<boolean>(false);
 
-  // console.log(collections, title, albums);
-  const validator = (data: string | Array<string>) => {
-    if (typeof data === 'string') {
-      return data !== '';
-    }
-    if (Array.isArray(data)) {
-      return data.length !== 0;
-    }
-    return false;
-  };
+  // const validator = (data: string | Array<string>) => {
+  //   if (typeof data === 'string') {
+  //     return data !== '';
+  //   }
+  //   if (Array.isArray(data)) {
+  //     return data.length !== 0;
+  //   }
+  //   return false;
+  // };
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -75,25 +71,26 @@ export default function MyCollection() {
   }
   const url = `${import.meta.env.VITE_DB_SERVER}collection/${collectionid}`;
 
-  useLayoutEffect(() => {
-    async function checkAuth() {
-      try {
-        const res = await axios.get('http://localhost:3313/auth', {
-          withCredentials: true,
-        });
-        const {
-          data: { isLogin, userId },
-        } = res;
+  // useLayoutEffect(() => {
+  //   async function checkAuth() {
+  //     try {
+  //       const res = await axios.get('http://localhost:3313/auth', {
+  //         withCredentials: true,
+  //       });
+  //       const {
+  //         data: { isLogin, userId },
+  //       } = res;
 
-        if (isLogin && userId === userid) {
-          setIsUserCollections(true);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    checkAuth();
-  }, [isUserCollections]);
+  //       if (isLogin && userId === userid) {
+  //         setIsUserCollections(true);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   checkAuth();
+  // }, [isUserCollections]);
+  useEffect(() => setDialogType(''), []);
 
   useEffect(() => {
     async function fetchResults() {
@@ -113,11 +110,10 @@ export default function MyCollection() {
       }
     }
     fetchResults();
-  }, [userid, collectionid]);
+  }, [userid, collectionid, dialogType]);
 
   const [_view, sort] = [searchParams.get('view'), searchParams.get('sort')];
   const view = _view ?? 'block';
-  console.log(result);
 
   return (
     <>
@@ -142,7 +138,6 @@ export default function MyCollection() {
           />
           <Dropdown content={VIEW_CONTENT} dropKind="view" label={VIEW_LABEL} />
         </SearchResultWrapper>
-
         <VinylItems
           searchResult={sortItems(
             result,
@@ -150,10 +145,24 @@ export default function MyCollection() {
           )}
           page={'collection'}
           view={view as ResultViewProps['view']}
-          isUserCollections={isUserCollections}
         />
+        <FloatingButton />
+        <GoToTop />
       </MainWrapper>
       <Footer />
+      <NewDialog
+        isOpened={dialogType === 'delete-item'}
+        width={480}
+        height={200}
+        onConfirm={async () => {
+          await axios.put(
+            `http://localhost:3313/userVinyl/${collectionid}/${dialogContent.releasedId}`
+          );
+        }}
+        onClose={() => setDialogType('')}
+      >
+        아이템을 삭제하시겠습니까?
+      </NewDialog>
     </>
   );
 }
