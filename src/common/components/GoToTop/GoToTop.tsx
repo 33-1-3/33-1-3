@@ -5,7 +5,7 @@ import {
   useMemo,
   MouseEvent,
   MouseEventHandler,
-  useEffect,
+  useLayoutEffect,
   useState,
 } from 'react';
 
@@ -45,14 +45,14 @@ const GoToTop = ({
 
   const checkScrollY = () => {
     setScrollY(window.pageYOffset);
-    if (scrollY > 1000) {
+    if (scrollY > 800) {
       setButtonStatus(true);
     } else {
       setButtonStatus(false);
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const watch = () => {
       window.addEventListener('scroll', checkScrollY);
     };
@@ -71,11 +71,9 @@ const GoToTop = ({
       top: 0,
       behavior: 'smooth',
     });
-
-    setScrollY(0);
-    setButtonStatus(false);
   };
 
+  console.log(scrollY, buttonStatus);
   return useMemo(
     () => (
       <>

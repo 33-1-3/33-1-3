@@ -31,12 +31,6 @@ const FloatingButton = ({
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const form = useRef<HTMLFormElement>(null);
 
-  useEffect(() => {
-    if (showAlert) {
-      setTimeout(() => setShowAlert(false), 3000);
-    }
-  }, [showAlert]);
-
   const sendEmail = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
@@ -58,6 +52,7 @@ const FloatingButton = ({
 
   const toggleInput = (): void => {
     setIsClicked(!isClicked);
+    setShowAlert(false);
   };
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -108,7 +103,7 @@ const FloatingButton = ({
             </label>
             <StyledTextarea
               style={{ width: 168, height: 189 }}
-              placeholder="의견 환영"
+              placeholder="답변을 원하시면 메일주소를 함께 남겨주세요"
               name="message"
               value={inputValue}
               onChange={handleInput}

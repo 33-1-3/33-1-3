@@ -76,12 +76,12 @@ export default function Signup() {
   return (
     <>
       {checkEmail === 'duplicate' && showAlert && (
-        <Alert width="fit-content" height="fit-content" type="top">
+        <Alert width="100vw" height="fit-content" type="top">
           이미 등록된 이메일입니다.
         </Alert>
       )}
       {checkEmail !== 'duplicate' && checkEmail !== '' && showAlert && (
-        <Alert width="fit-content" height="fit-content" type="top">
+        <Alert width="100vw" height="fit-content" type="top">
           등록한 이메일로 인증 메일이 발송되었습니다. 이메일 인증을
           완료해주세요.
         </Alert>

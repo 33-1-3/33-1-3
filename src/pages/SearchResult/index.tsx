@@ -107,6 +107,7 @@ export default function SearchResult() {
         setTotalPageNum(res.data.pagination.pages);
         setItemCount(res.data.pagination.items);
         setResult(processSearchResult(res.data.results));
+        window.scrollTo({ top: 0 });
       } catch (error) {
         console.error(error);
       }
@@ -147,11 +148,6 @@ export default function SearchResult() {
           <h1 className="srOnly">Search Result</h1>
           <SearchResultWrapper>
             <SearchResultText resultCount={itemCount} />
-            <Dropdown
-              content={SORT_CONTENT}
-              dropKind="sort"
-              label={SORT_LABEL}
-            />
             <Dropdown
               content={VIEW_CONTENT}
               dropKind="view"
