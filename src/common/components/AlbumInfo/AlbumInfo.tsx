@@ -142,7 +142,8 @@ const WRAPPER_STYLE = {
   detail: css`
     width: 394px;
     height: 160px;
-    padding: 36px var(--space-xs);
+    padding: 60px var(--space-xs);
+    margin-bottom: 12px;
   `,
   myitem: css``,
 };
@@ -157,7 +158,7 @@ const BUTTON_STYLE = {
     right: 0px;
   `,
   detail: css`
-    top: 64px;
+    top: 36px;
     right: var(--space-xs);
   `,
   myitem: css``,

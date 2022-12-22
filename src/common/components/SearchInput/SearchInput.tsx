@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 import { ComponentProps } from 'react';
 
 const fontSize = { small: '15px', large: '24px' };
@@ -32,7 +33,11 @@ function SearchInput({
         formSize={size}
         onChange={handleChange}
       />
-      <SearchButton type="submit" formSize={size}></SearchButton>
+      <SearchButton
+        type="submit"
+        formSize={size}
+        whileHover={{ rotate: '30deg' }}
+      ></SearchButton>
     </InputWrapper>
   );
 }
@@ -121,7 +126,7 @@ const Input = styled.input<formProps>`
   }
 `;
 
-const SearchButton = styled.button<formProps>`
+const SearchButton = styled(motion.button)<formProps>`
   position: absolute;
   right: 0;
   ${({ formSize }) => buttonMixin[formSize]}

@@ -34,6 +34,7 @@ const MOTION_VALUE = {
 };
 
 const MyCollectionsPageTitle = styled(PageTitle)`
+  margin: 0 auto;
   margin-top: 56px;
   margin-bottom: 28px;
 `;
