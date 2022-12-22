@@ -1,5 +1,6 @@
 import { ReactComponent as GoToTopIcon } from '@/assets/gototop.svg';
 import styled from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   useMemo,
   MouseEvent,
@@ -17,9 +18,9 @@ export interface GoToTopProps extends GoToTopButtonProps {
   height: number | string;
 }
 
-const GoToTopButton = styled.button<GoToTopButtonProps>`
+const GoToTopButton = styled(motion.button)<GoToTopButtonProps>`
   position: fixed;
-  right: 112px;
+  right: 108px;
   bottom: 48px;
   z-index: 1000;
   filter: drop-shadow(var(--shadow-Button-back));
@@ -78,18 +79,28 @@ const GoToTop = ({
   return useMemo(
     () => (
       <>
-        {buttonStatus && (
-          <GoToTopButton
-            type="button"
-            style={{ width, height }}
-            color={color}
-            backgroundColor={backgroundColor}
-            onClick={scrollToTop}
-            {...props}
-          >
-            <GoToTopIcon width={width} height={height} />
-          </GoToTopButton>
-        )}
+        <AnimatePresence>
+          {buttonStatus && (
+            <GoToTopButton
+              type="button"
+              style={{ width, height }}
+              color={color}
+              backgroundColor={backgroundColor}
+              onClick={scrollToTop}
+              initial={{ y: '20px', opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              whileHover={{ scale: 1.2 }}
+              transition={{
+                duration: 0.3,
+                ease: 'easeOut',
+              }}
+              exit={{ y: '20px', opacity: 0 }}
+              {...props}
+            >
+              <GoToTopIcon width={width} height={height} />
+            </GoToTopButton>
+          )}
+        </AnimatePresence>
       </>
     ),
     [color, backgroundColor, buttonStatus]
