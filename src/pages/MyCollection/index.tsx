@@ -125,6 +125,7 @@ export default function MyCollection() {
           <PageTitle style={{ height: '53px' }}>{collectionTitle}</PageTitle>
           <CenterSearchInput
             page="나의 콜렉션"
+            placeholder="콜렉션 내에서 검색해 보세요."
             handleSubmit={(e) => {
               e.preventDefault();
             }}
@@ -214,10 +215,11 @@ const SearchResultWrapper = styled.div`
   margin-top: 36px;
 
   > div:first-child {
+    margin-top: 4px;
     margin-right: auto;
   }
 
-  > div:nth-last-of-type(2) {
+  > div:nth-of-type(2) {
     position: absolute;
     top: 0;
     right: 134px;

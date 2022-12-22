@@ -57,8 +57,7 @@ const inputMixin = {
     border-radius: 20px;
   `,
   large: css`
-    min-width: 356px;
-    max-width: 400px;
+    min-width: 400px;
     height: 56px;
     padding: 16px 20px;
     border: 3px solid var(--black);
