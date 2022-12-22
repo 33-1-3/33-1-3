@@ -42,7 +42,7 @@ const IconButtonContainer = styled.button<IconButtonContainerProps>`
     rect {
       transition: 0.3s ease-out;
       fill: ${({ $color }) => $color};
-      rx: 3;
+      rx: 3.4;
     }
     path {
       transition: 0.3s ease-out;
