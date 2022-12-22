@@ -89,7 +89,7 @@ const FloatingButton = ({
           </label>
           <StyledTextarea
             style={{ width: 168, height: 189 }}
-            placeholder="답변의 원하시면 메일주소를 함께 남겨주세요"
+            placeholder="답변을 원하시면 메일주소를 함께 남겨주세요"
             name="message"
             value={inputValue}
             onChange={handleInput}
