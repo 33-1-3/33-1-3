@@ -1,5 +1,6 @@
 import React, { FormEvent, ReactNode, RefObject, useEffect } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
 import { SquareButton } from '..';
 // import { getTabbableElements } from '@/utils/functions/focusTabbable';
@@ -7,7 +8,7 @@ import { SquareButton } from '..';
 // const { documentElement: htmlElement } = document;
 // const reactDomContainer = document.getElementById('root');
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -183,6 +184,12 @@ const NewDialog = ({
             role="dialog"
             aria-modal={isOpened}
             style={{ width, height }}
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{
+              duration: 0.5,
+              ease: 'easeOut',
+            }}
           >
             {title && <Title>{title}</Title>}
             <Form onSubmit={handleConfirm}>
