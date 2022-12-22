@@ -123,22 +123,19 @@ export default function Item() {
           console.log('COMMON', commonData);
           console.log(dialogContent.collectionList);
 
-          await axios.post(
-            `${import.meta.env.VITE_DB_SERVER}/vinyl/${userId}`,
-            {
-              releasedId: commonData?.id,
-              // selectedCollectionIds: dialogContent.collectionList
-              //   .filter((collection) => collection.isChecked)
-              //   .map((collection) => collection.id),
-              collectionList: dialogContent.collectionList,
-              imgUrl: commonData?.imgUrl,
-              title: commonData?.title,
-              artist: commonData?.artist,
-              year: commonData?.year,
-              genres: commonData?.genre,
-              resourceUrl: commonData?.resourceUrl,
-            }
-          );
+          await axios.post(`${import.meta.env.VITE_DB_SERVER}vinyl/${userId}`, {
+            releasedId: commonData?.id,
+            // selectedCollectionIds: dialogContent.collectionList
+            //   .filter((collection) => collection.isChecked)
+            //   .map((collection) => collection.id),
+            collectionList: dialogContent.collectionList,
+            imgUrl: commonData?.imgUrl,
+            title: commonData?.title,
+            artist: commonData?.artist,
+            year: commonData?.year,
+            genres: commonData?.genre,
+            resourceUrl: commonData?.resourceUrl,
+          });
         }}
         onClose={() => setDialogType('')}
       >
