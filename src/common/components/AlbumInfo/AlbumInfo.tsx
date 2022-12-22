@@ -2,7 +2,7 @@ import uuid from 'react-uuid';
 import { useMemo } from 'react';
 import styled, { css } from 'styled-components';
 import { TitleInfo, IconButton, DetailInfo } from '@/common/components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import axios from 'axios';
 import {
@@ -19,7 +19,6 @@ export interface AlbumInfoProps extends ResultViewProps {
   searchResult: ProcessedResult;
   tracklist?: ProcessedTracklist;
   page: 'all' | 'collection';
-  isUserCollections: boolean;
 }
 
 function AlbumInfo({
@@ -27,7 +26,6 @@ function AlbumInfo({
   tracklist,
   page,
   view,
-  isUserCollections,
   ...props
 }: AlbumInfoProps) {
   const buttonSize = view === 'block' ? 16 : 32;
@@ -39,9 +37,11 @@ function AlbumInfo({
   );
   const newDetailInfo = tracklist ? [...detailInfo, tracklist] : detailInfo;
 
-  const [userId] = useRecoilState(userState);
-  const [, setIsDialogOpen] = useRecoilState(dialogState);
+  const { userid: collectionOwnerId } = useParams();
+
+  const [, setDialogType] = useRecoilState(dialogState);
   const [dialogContent, setDialogContent] = useRecoilState(dialogContentState);
+  const [userId] = useRecoilState(userState);
 
   const navigate = useNavigate();
 
@@ -66,34 +66,46 @@ function AlbumInfo({
               ))}
             </ListInfoWrapper>
           )}
+          {(buttonType === 'plus' || userId === collectionOwnerId) && (
+            <StyledIconButton
+              width={buttonSize}
+              height={buttonSize}
+              iconType={buttonType}
+              view={view}
+              clickHandler={async (e: React.MouseEvent<HTMLButtonElement>) => {
+                if (userId === null || userId === undefined) {
+                  navigate('/signin');
+                  return;
+                }
 
-          <StyledIconButton
-            width={buttonSize}
-            height={buttonSize}
-            iconType={buttonType}
-            view={view}
-            clickHandler={async (e: React.MouseEvent<HTMLButtonElement>) => {
-              if (userId === null || userId === undefined) {
-                navigate('/signin');
-                return;
-              }
+                const releasedId = e.currentTarget.closest('.infoContainer')
+                  ?.dataset?.releasedid as string;
 
-              const releasedId = e.currentTarget.closest('.infoContainer')
-                ?.dataset?.releasedid as string;
+                if (buttonType === 'plus') {
+                  const { data: collectionList } = await axios.get(
+                    `http://localhost:3313/collections/${userId}/${releasedId}`
+                  );
 
-              const { data: collectionList } = await axios.get(
-                `http://localhost:3313/collections/${userId}/${releasedId}`
-              );
+                  setDialogContent({
+                    ...dialogContent,
+                    releasedId: releasedId,
+                    collectionList: collectionList,
+                  });
 
-              setDialogContent({
-                ...dialogContent,
-                releasedId: releasedId,
-                collectionList: collectionList,
-              });
+                  setDialogType('add-item');
+                }
 
-              setIsDialogOpen(true);
-            }}
-          />
+                if (buttonType === 'minus') {
+                  setDialogContent({
+                    ...dialogContent,
+                    releasedId: releasedId,
+                  });
+
+                  setDialogType('delete-item');
+                }
+              }}
+            />
+          )}
         </AlbumInfoWrapper>
         {view === 'detail' && (
           <DetailInfoWrapper>

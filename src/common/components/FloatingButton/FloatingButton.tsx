@@ -108,7 +108,7 @@ const FloatingButton = ({
           />
         </StyledForm>
       )}
-      {showAlert && <Alert />}
+      {showAlert && <Alert type="bottom" />}
     </>
   );
 };

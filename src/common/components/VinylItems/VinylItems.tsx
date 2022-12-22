@@ -9,16 +9,9 @@ import { getId } from '@/utils/functions/processResult';
 export interface VinylItemsProps extends ResultViewProps {
   searchResult: ProcessedResult[];
   page: 'all' | 'collection';
-  isUserCollections: boolean;
 }
 
-function VinylItems({
-  searchResult,
-  page,
-  view,
-  isUserCollections,
-  ...props
-}: VinylItemsProps) {
+function VinylItems({ searchResult, page, view, ...props }: VinylItemsProps) {
   return (
     <VinylItemsWrapper view={view} {...props}>
       {searchResult.map((result) => (
@@ -29,7 +22,6 @@ function VinylItems({
           view={view}
           data-releasedid={getId(result.resourceUrl)}
           className="infoContainer"
-          isUserCollections={isUserCollections}
         />
       ))}
     </VinylItemsWrapper>

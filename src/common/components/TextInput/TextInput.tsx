@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import uuid from 'react-uuid';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 export interface TextInputProps {
   width: number;
@@ -12,7 +12,8 @@ export interface TextInputProps {
   required: boolean;
   validationTester: RegExp;
   errorMsg: string;
-  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
+  value?: string;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
 export interface InputProps {
@@ -74,10 +75,12 @@ const TextInput = ({
   required,
   validationTester,
   errorMsg,
-  onKeyUp,
+  value,
+  onKeyDown,
   ...props
 }: TextInputProps) => {
   const newId = uuid();
+  const [inputValue, setInputValue] = useState(value);
   return (
     <>
       {label && label.trim() && <Label htmlFor={newId}>{label}</Label>}
@@ -93,12 +96,12 @@ const TextInput = ({
         style={{ width: `${width}px`, height: `${height}px` }}
         color={color}
         borderColor={borderColor}
-        onKeyUp={onKeyUp}
-        onInput={
-          validationTester &&
-          ((e: React.ChangeEvent<HTMLInputElement>) =>
-            validateTest(e, validationTester))
-        }
+        value={inputValue}
+        onKeyDown={onKeyDown}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setInputValue(e.target.value);
+          validationTester && validateTest(e, validationTester);
+        }}
         {...props}
       />
       {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}

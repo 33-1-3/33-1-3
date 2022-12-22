@@ -14,7 +14,9 @@ const ToggleInputButton = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [dialogContent, setDialogContent] = useRecoilState(dialogContentState);
 
-  const handleKeyUp: ComponentProps<'input'>['onKeyUp'] = (e) => {
+  const handleKeyUp: ComponentProps<'input'>['onKeyDown'] = (e) => {
+    e.stopPropagation();
+
     if (e.key !== 'Enter' && e.key !== 'Escape') return;
     if (e.key === 'Enter') {
       const target = e.target as HTMLInputElement;
@@ -27,7 +29,7 @@ const ToggleInputButton = () => {
         ...dialogContent,
         collectionList: [
           ...dialogContent.collectionList,
-          { title: target.value, isChecked: false },
+          { id: '', title: target.value, isChecked: false },
         ],
       });
     }
@@ -46,7 +48,7 @@ const ToggleInputButton = () => {
           required={true}
           validationTester={/^.{1,}$/}
           errorMsg="최소 한 글자 이상 입력해주세요."
-          onKeyUp={handleKeyUp}
+          onKeyDown={handleKeyUp}
         />
       ) : (
         <AddCollectionButton
