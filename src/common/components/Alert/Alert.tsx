@@ -71,10 +71,12 @@ const TopAlert = styled.div<{ backgroundColor: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 36px 60px;
   border-radius: 8px;
   background-color: ${({ backgroundColor }) => backgroundColor};
   color: var(--purple-900);
+  text-align: center;
+  word-break: break-all;
   animation: move 0.8s both;
   z-index: 3000;
 
