@@ -66,6 +66,7 @@ export default function Signin() {
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setShowAlert(false);
 
     const email = (e.currentTarget[0] as HTMLInputElement).value;
     const password = (e.currentTarget[1] as HTMLInputElement).value;
