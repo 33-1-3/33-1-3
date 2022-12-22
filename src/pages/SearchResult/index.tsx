@@ -195,17 +195,17 @@ export default function SearchResult() {
             console.log(dialogContent.collectionList);
 
             await axios.post(`http://localhost:3313/vinyl/${userId}`, {
-              releasedId: commonData.id,
+              releasedId: commonData?.id,
               // selectedCollectionIds: dialogContent.collectionList
               //   .filter((collection) => collection.isChecked)
               //   .map((collection) => collection.id),
               collectionList: dialogContent.collectionList,
-              imgUrl: commonData.imgUrl,
-              title: commonData.title,
-              artist: commonData.artist,
-              year: commonData.year,
-              genres: commonData.genre,
-              resourceUrl: commonData.resourceUrl,
+              imgUrl: commonData?.imgUrl,
+              title: commonData?.title,
+              artist: commonData?.artist,
+              year: commonData?.year,
+              genres: commonData?.genre,
+              resourceUrl: commonData?.resourceUrl,
             });
           }}
           onClose={() => setDialogType('')}

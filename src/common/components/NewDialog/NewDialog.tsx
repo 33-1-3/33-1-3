@@ -1,4 +1,4 @@
-import React, { FormEvent, ReactNode, useEffect } from 'react';
+import React, { FormEvent, ReactNode, RefObject, useEffect } from 'react';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 import { SquareButton } from '..';
@@ -164,7 +164,7 @@ const NewDialog = ({
       {isOpened && (
         <>
           <Container
-            ref={containerRef}
+            ref={containerRef as RefObject<HTMLDivElement>}
             tabIndex={-1}
             role="dialog"
             aria-modal={isOpened}

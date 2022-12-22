@@ -13,7 +13,7 @@ export interface TextInputProps {
   validationTester: RegExp;
   errorMsg: string;
   value?: string;
-  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
 export interface InputProps {
@@ -76,7 +76,7 @@ const TextInput = ({
   validationTester,
   errorMsg,
   value,
-  onKeyUp,
+  onKeyDown,
   ...props
 }: TextInputProps) => {
   const newId = uuid();
@@ -97,7 +97,7 @@ const TextInput = ({
         color={color}
         borderColor={borderColor}
         value={inputValue}
-        onKeyUp={onKeyUp}
+        onKeyDown={onKeyDown}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setInputValue(e.target.value);
           validationTester && validateTest(e, validationTester);
