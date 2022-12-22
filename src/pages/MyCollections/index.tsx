@@ -114,9 +114,12 @@ export default function MyCollections() {
         title="Create Collection"
         onConfirm={async (e) => {
           const title = (e.target as HTMLElement).querySelector('input')?.value;
-          await axios.post(`http://localhost:3313/collections/${userId}`, {
-            title: title,
-          });
+          await axios.post(
+            `${import.meta.env.VITE_DB_SERVER}/collections/${userId}`,
+            {
+              title: title,
+            }
+          );
         }}
         onClose={() => setDialogType('')}
       >
@@ -138,7 +141,9 @@ export default function MyCollections() {
         onConfirm={async (e) => {
           const title = (e.target as HTMLElement).querySelector('input')?.value;
           await axios.put(
-            `http://localhost:3313/collections/${dialogContent.collectionId}`,
+            `${import.meta.env.VITE_DB_SERVER}/collections/${
+              dialogContent.collectionId
+            }`,
             {
               title: title,
             }
@@ -163,7 +168,9 @@ export default function MyCollections() {
         height={200}
         onConfirm={async () => {
           await axios.delete(
-            `http://localhost:3313/collections/${dialogContent.collectionId}`
+            `${import.meta.env.VITE_DB_SERVER}/collections/${
+              dialogContent.collectionId
+            }`
           );
         }}
         onClose={() => setDialogType('')}

@@ -156,7 +156,9 @@ export default function MyCollection() {
         height={200}
         onConfirm={async () => {
           await axios.put(
-            `http://localhost:3313/userVinyl/${collectionid}/${dialogContent.releasedId}`
+            `${import.meta.env.VITE_DB_SERVER}/userVinyl/${collectionid}/${
+              dialogContent.releasedId
+            }`
           );
         }}
         onClose={() => setDialogType('')}
