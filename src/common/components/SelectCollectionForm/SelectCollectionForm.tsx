@@ -1,13 +1,13 @@
 import { dialogContentState } from '@/recoil/globalState';
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { CollectionCheckbox } from '../../../pages/Item/components';
 import ToggleInputButton from './ToggleInputButton';
 
-export interface FormProps {
-  collectionList: { title: string; isChecked: boolean }[];
-}
+// export interface FormProps {
+//   collectionList: { id?: string; title: string; isChecked: boolean }[];
+// }
 
 const CollectionList = styled.ul`
   display: flex;

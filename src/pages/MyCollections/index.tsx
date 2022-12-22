@@ -4,7 +4,12 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useRecoilState } from 'recoil';
-import { dialogState, createCollectionDialogState } from '@/recoil/globalState';
+import {
+  dialogContentState,
+  dialogState,
+  loginState,
+  userState,
+} from '@/recoil/globalState';
 import axios from 'axios';
 import {
   Header,
@@ -12,6 +17,10 @@ import {
   PageTitle,
   AddCollectionButton,
   Footer,
+  FloatingButton,
+  GoToTop,
+  NewDialog,
+  TextInput,
 } from '@/common/components';
 import { Bookshelf } from './components';
 
@@ -42,9 +51,14 @@ export default function MyCollections() {
   const [userCollections, setUserCollections] = useState([]);
   const [userNickName, setUserNickName] = useState('');
 
-  const [_, setDialog] = useRecoilState(dialogState);
+  const [isLogin] = useRecoilState(loginState);
+  const [userId] = useRecoilState(userState);
+  const [dialogType, setDialogType] = useRecoilState(dialogState);
+  const [dialogContent] = useRecoilState(dialogContentState);
 
   const url = `${import.meta.env.VITE_DB_SERVER}collections/${userid}`;
+
+  useEffect(() => setDialogType(''), []);
 
   useEffect(() => {
     async function fetchResults() {
@@ -58,7 +72,7 @@ export default function MyCollections() {
       }
     }
     fetchResults();
-  }, []);
+  }, [dialogType]);
 
   const { initial, animate, transition } = MOTION_VALUE;
 
@@ -69,10 +83,12 @@ export default function MyCollections() {
         <motion.div initial={initial} animate={animate} transition={transition}>
           <MyCollectionsPageTitle>{`${userNickName}'s Collections`}</MyCollectionsPageTitle>
           <CollectionsWrapper style={{ width: '520px' }}>
-            <AddCollectionButton
-              onClick={() => setDialog(createCollectionDialogState)}
-              size="large"
-            />
+            {isLogin && (
+              <AddCollectionButton
+                onClick={() => setDialogType('create-collection')}
+                size="large"
+              />
+            )}
             {userCollections.map(({ title, collectionId, vinylCount }) => {
               const newUuid = uuid();
               return (
@@ -87,8 +103,73 @@ export default function MyCollections() {
             })}
           </CollectionsWrapper>
         </motion.div>
+        <FloatingButton />
+        <GoToTop />
       </Main>
       <Footer />
+      <NewDialog
+        isOpened={dialogType === 'create-collection'}
+        width={480}
+        height={300}
+        title="Create Collection"
+        onConfirm={async (e) => {
+          const title = (e.target as HTMLElement).querySelector('input')?.value;
+          await axios.post(`http://localhost:3313/collections/${userId}`, {
+            title: title,
+          });
+        }}
+        onClose={() => setDialogType('')}
+      >
+        <TextInput
+          width={416}
+          height={36}
+          label="Collection Name"
+          placeholder="생성할 콜렉션의 이름을 입력해주세요."
+          required={true}
+          validationTester={/^.{2,}$/}
+          errorMsg="최소 한 글자 이상 입력해주세요."
+        ></TextInput>
+      </NewDialog>
+      <NewDialog
+        isOpened={dialogType === 'edit-collection'}
+        width={480}
+        height={300}
+        title="Edit Collection Name"
+        onConfirm={async (e) => {
+          const title = (e.target as HTMLElement).querySelector('input')?.value;
+          await axios.put(
+            `http://localhost:3313/collections/${dialogContent.collectionId}`,
+            {
+              title: title,
+            }
+          );
+        }}
+        onClose={() => setDialogType('')}
+      >
+        <TextInput
+          width={416}
+          height={36}
+          label="Collection Name"
+          placeholder="수정할 콜렉션의 이름을 입력해주세요."
+          required={true}
+          validationTester={/^.{2,}$/}
+          errorMsg="최소 한 글자 이상 입력해주세요."
+          value={dialogContent.collectionTitle}
+        ></TextInput>
+      </NewDialog>
+      <NewDialog
+        isOpened={dialogType === 'delete-collection'}
+        width={480}
+        height={200}
+        onConfirm={async () => {
+          await axios.delete(
+            `http://localhost:3313/collections/${dialogContent.collectionId}`
+          );
+        }}
+        onClose={() => setDialogType('')}
+      >
+        콜렉션을 삭제하시겠습니까?
+      </NewDialog>
     </>
   );
 }

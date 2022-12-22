@@ -28,6 +28,7 @@ const Title = styled.h2`
 `;
 
 const Form = styled.form`
+  height: calc(100% - 98px);
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -36,7 +37,7 @@ const Form = styled.form`
 const NodeContent = styled.div`
   flex-grow: 1;
   margin: 24px 24px 0 24px;
-  overflow-y: auto;
+  overflow-y: scroll;
 `;
 
 const StringContent = styled.span`
@@ -73,8 +74,8 @@ export interface NewDialogProps {
   // openner: HTMLElement;
   width: number;
   height: number;
-  title: string;
-  children: ReactNode;
+  title?: string;
+  children?: ReactNode;
   onConfirm: (e: FormEvent) => void;
   onClose: () => void;
 }
@@ -99,9 +100,9 @@ const NewDialog = ({
     // openner.focus();
   };
 
-  const handleConfirm = (e: FormEvent) => {
+  const handleConfirm = async (e: FormEvent) => {
     e.preventDefault();
-    onConfirm(e);
+    await onConfirm(e);
     handleClose();
   };
 
@@ -162,7 +163,6 @@ const NewDialog = ({
     <>
       {isOpened && (
         <>
-          {' '}
           <Container
             ref={containerRef}
             tabIndex={-1}
