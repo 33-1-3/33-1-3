@@ -8,17 +8,10 @@ export interface VinylItemProps {
   searchResult: ProcessedResult;
   page: 'all' | 'collection';
   view: 'block' | 'list' | 'detail' | 'myitem';
-  isUserCollections: boolean;
   [props: string]: unknown;
 }
 
-function VinylItem({
-  searchResult,
-  page,
-  view,
-  isUserCollections,
-  ...props
-}: VinylItemProps) {
+function VinylItem({ searchResult, page, view, ...props }: VinylItemProps) {
   const vinylSize = useMemo(
     () => (view === 'detail' ? 'large' : 'small'),
     [view]
@@ -33,12 +26,7 @@ function VinylItem({
           size={vinylSize}
           hoverInteraction={isHover}
         />
-        <AlbumInfo
-          searchResult={searchResult}
-          page={page}
-          view={view}
-          isUserCollections={isUserCollections}
-        />
+        <AlbumInfo searchResult={searchResult} page={page} view={view} />
       </VinylItemWrapper>
     ),
     [searchResult, page, view]

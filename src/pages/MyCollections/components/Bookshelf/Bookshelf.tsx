@@ -4,10 +4,9 @@ import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { IconButton } from '@/common/components';
 import {
+  dialogContentState,
   dialogState,
-  editCollectionDialogState,
-  initialDialogState,
-  // deleteCollectionDialogState,
+  userState,
 } from '@/recoil/globalState';
 import { useState, useLayoutEffect } from 'react';
 
@@ -45,61 +44,63 @@ const Bookshelf = ({
   step,
   ...props
 }: BookshelfProps) => {
-  const [isUserCollections, setIsUserCollections] = useState<boolean>(false);
+  // const [isUserCollections, setIsUserCollections] = useState<boolean>(false);
   const { userid } = useParams();
-  const [_, setDialog] = useRecoilState(dialogState);
+
+  const [isLogin, setIsLogin] = useRecoilState(userState);
+  const [, setDialogType] = useRecoilState(dialogState);
+  const [dialogContent, setDialogContent] = useRecoilState(dialogContentState);
   const imgIdx = Math.min(Math.ceil(count / step), 5);
 
-  useLayoutEffect(() => {
-    async function checkAuth() {
-      try {
-        const res = await axios.get('http://localhost:3313/auth', {
-          withCredentials: true,
-        });
-        const {
-          data: { isLogin, userId },
-        } = res;
+  // useLayoutEffect(() => {
+  //   async function checkAuth() {
+  //     try {
+  //       const res = await axios.get('http://localhost:3313/auth', {
+  //         withCredentials: true,
+  //       });
+  //       const {
+  //         data: { isLogin, userId },
+  //       } = res;
 
-        if (isLogin && userId === userid) {
-          setIsUserCollections(true);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    checkAuth();
-  }, [isUserCollections]);
+  //       if (isLogin && userId === userid) {
+  //         setIsUserCollections(true);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   checkAuth();
+  // }, [isUserCollections]);
 
   return (
     <Wrapper style={{ width: '520px', height: 'fit-content' }}>
       <Title>{title}</Title>
-      {isUserCollections && (
+      {isLogin && (
         <IconButtons>
           <IconButton
             width={22}
             height={22}
             iconType="pencil"
-            clickHandler={() => setDialog(editCollectionDialogState)}
+            clickHandler={() => {
+              setDialogContent({
+                ...dialogContent,
+                collectionId: collectionId,
+                collectionTitle: title,
+              });
+              setDialogType('edit-collection');
+            }}
           />
           <IconButton
             width={22}
             height={22}
             iconType="minus"
-            // clickHandler={() =>
-            //   setDialog({
-            //     isOpen: true,
-            //     width: 480,
-            //     height: 200,
-            //     children: '콜렉션을 삭제하시겠습니까?',
-            //     confirm: async () => {
-            //       await axios.delete(
-            //         `http://localhost:3313/collections/${collectionId}`
-            //       );
-            //       setDialog(initialDialogState);
-            //       location.reload();
-            //     },
-            //   })
-            // }
+            clickHandler={() => {
+              setDialogContent({
+                ...dialogContent,
+                collectionId: collectionId,
+              });
+              setDialogType('delete-collection');
+            }}
           />
         </IconButtons>
       )}

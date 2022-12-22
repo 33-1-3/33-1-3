@@ -1,11 +1,14 @@
+// import { authState } from '@/recoil/globalState';
 import axios from 'axios';
 import { Dispatch, SetStateAction } from 'react';
+import { useRecoilState } from 'recoil';
+import { loginState, userState } from '@/recoil/globalState';
 import styled from 'styled-components';
 
 export interface ProfileProps {
   width: string | number;
   height: string | number;
-  setIsLogin: Dispatch<SetStateAction<boolean>>;
+  // setIsLogin: Dispatch<SetStateAction<boolean>>;
 }
 
 const CircleWrapper = styled.div`
@@ -19,13 +22,13 @@ const StyledButton = styled.button`
   background: url('/assets/logout.svg') no-repeat center;
 `;
 
-const ProfileLink = ({ width, height, setIsLogin, ...props }: ProfileProps) => {
+const ProfileLink = ({ width, height, ...props }: ProfileProps) => {
   const handleClick = async () => {
     await axios.get(`${import.meta.env.VITE_DB_SERVER}logout`, {
       withCredentials: true,
     });
 
-    setIsLogin(false);
+    location.reload();
   };
 
   return (

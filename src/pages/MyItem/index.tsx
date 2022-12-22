@@ -1,8 +1,7 @@
-import uuid from 'react-uuid';
 import { useState, useEffect, Fragment, useLayoutEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { dialogState, editWritableInfoDialogState } from '@/recoil/globalState';
+import { userState } from '@/recoil/globalState';
 import styled from 'styled-components';
 import axios from 'axios';
 import {
@@ -11,10 +10,7 @@ import {
   BackVinyl,
   WritableInfo,
 } from '@/common/components';
-import {
-  InfoName,
-  InfoContent,
-} from '@/common/components/WritableInfo/WritableInfo';
+
 import { ReactComponent as CloseIcon } from '@/assets/close.svg';
 import {
   RawTracklist,
@@ -22,7 +18,7 @@ import {
   PurchaseData,
   ProcessedResourceUrlResult,
 } from '@/types/data';
-import PURCHASE_INFO_NAME from '@/utils/constants/purchaseInfoName';
+// import PURCHASE_INFO_NAME from '@/utils/constants/purchaseInfoName';
 import {
   getResourceUrl,
   processMasterResult,
@@ -36,60 +32,62 @@ export interface DetailInfoProps {
   isValid: boolean;
 }
 
-const createModalContent = (
-  infoName: string[],
-  infoContent: PurchaseData[]
-) => (
-  <PurchaseInfo>
-    {infoName.map((name) => (
-      <InfoName key={uuid()}>{name}</InfoName>
-    ))}
-    {infoContent.map(({ date, price, state }) => (
-      <Fragment key={uuid()}>
-        <InfoContent>{date}</InfoContent>
-        <InfoContent>{price}</InfoContent>
-        <InfoContent>{state}</InfoContent>
-      </Fragment>
-    ))}
-  </PurchaseInfo>
-);
+// const createModalContent = (
+//   infoName: string[],
+//   infoContent: PurchaseData[]
+// ) => (
+//   <PurchaseInfo>
+//     {infoName.map((name) => (
+//       <InfoName key={uuid()}>{name}</InfoName>
+//     ))}
+//     {infoContent.map(({ date, price, state }) => (
+//       <Fragment key={uuid()}>
+//         <InfoContent>{date}</InfoContent>
+//         <InfoContent>{price}</InfoContent>
+//         <InfoContent>{state}</InfoContent>
+//       </Fragment>
+//     ))}
+//   </PurchaseInfo>
+// );
 
 export default function MyItem() {
   /* -------------------------------------------------------------------------- */
   const params = useParams();
   const { id } = params;
-  const { userid } = useParams();
+  // const { userid } = useParams();
   const resourceUrl = getResourceUrl(id as string);
-  const [isUserItem, setIsUserItem] = useState<boolean>(false);
+  // const [isUserItem, setIsUserItem] = useState<boolean>(false);
   /* -------------------------------------------------------------------------- */
   const [tracklist, setTracklist] = useState({});
   const navigate = useNavigate();
-  const [_, setDialog] = useRecoilState(dialogState);
+
+  const [isLogin, setIsLogin] = useRecoilState(userState);
+  // const [_, setDialog] = useRecoilState(dialogState);
   const [searchResult, setSearchResult] = useState({
     titleInfo: { title: '', artist: '' },
     detailInfo: [{}],
     imgUrl: '',
   });
 
-  useLayoutEffect(() => {
-    async function checkAuth() {
-      try {
-        const res = await axios.get('http://localhost:3313/auth', {
-          withCredentials: true,
-        });
-        const {
-          data: { isLogin, userId },
-        } = res;
+  // useLayoutEffect(() => {
+  //   async function checkAuth() {
+  //     try {
+  //       const res = await axios.get('http://localhost:3313/auth', {
+  //         withCredentials: true,
+  //       });
+  //       const {
+  //         data: { isLogin, userId },
+  //       } = res;
 
-        if (isLogin && userId === userid) {
-          setIsUserItem(true);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    checkAuth();
-  }, []);
+  //       if (isLogin && userId === userid) {
+  //         setIsUserItem(true);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   checkAuth();
+  // }, []);
 
   useEffect(() => {
     async function fetchTrackList() {
@@ -118,7 +116,7 @@ export default function MyItem() {
   useEffect(() => {
     async function updateDB() {
       try {
-        console.log(searchResult);
+        // console.log(searchResult);
         // const res = await axios.put(
         //   `${import.meta.env.VITE_DB_SERVER}commonVinyl/${id}`
         // );
@@ -141,20 +139,20 @@ export default function MyItem() {
           purchaseInfo={mockPurchaseInfoContent}
           memoInfo={mockMemo}
         />
-        {isUserItem && (
+        {isLogin && (
           <StyledSquareButton
             fontSize={20}
             size="small"
             isFilled={true}
-            onClick={() =>
-              setDialog({
-                ...editWritableInfoDialogState,
-                children: createModalContent(
-                  PURCHASE_INFO_NAME,
-                  mockPurchaseInfoContent
-                ),
-              })
-            }
+            // onClick={() =>
+            //   setDialog({
+            //     ...editWritableInfoDialogState,
+            //     children: createModalContent(
+            //       PURCHASE_INFO_NAME,
+            //       mockPurchaseInfoContent
+            //     ),
+            //   })
+            // }
           >
             {'편집하기'}
           </StyledSquareButton>

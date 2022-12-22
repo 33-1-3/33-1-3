@@ -1,5 +1,6 @@
-import styled from 'styled-components';
 import axios from 'axios';
+import { useEffect } from 'react';
+import styled from 'styled-components';
 import {
   LogoLink,
   SearchInput,
@@ -7,9 +8,8 @@ import {
   ProfileLink,
 } from '@/common/components';
 import useHandleSubmit from '@/hooks/useHandleSubmit';
-import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { userState } from '@/recoil/globalState';
+import { loginState, userState } from '@/recoil/globalState';
 
 export interface HeaderProps {
   isLogin: boolean;
@@ -34,8 +34,12 @@ const StyledHeader = styled.header`
 `;
 
 const Header = ({ ...props }) => {
-  const [isLogin, setIsLogin] = useState(false);
-  const [userId, setUserId] = useState('');
+  // const [isLogin, setIsLogin] = useState(false);
+  // const [userId, setUserId] = useState('');
+
+  // const [auth, setAuth] = useRecoilState(authState);
+  const [isLogIn, setIsLogIn] = useRecoilState(loginState);
+  const [userId, setUserId] = useRecoilState(userState);
 
   const isMain: boolean = window.location.pathname === '/';
   const minWidth = isMain ? '440px' : '680px';
@@ -52,24 +56,27 @@ const Header = ({ ...props }) => {
           data: { isLogin, userId },
         } = res;
 
-        setIsLogin(isLogin);
+        setIsLogIn(isLogin);
         setUserId(userId);
       } catch (error) {
         console.log(error);
       }
     }
     auth();
-  }, [isLogin, userId]);
+  }, [isLogIn, userId]);
 
   return (
     <StyledHeader style={{ height: 64, width: '100vw', minWidth }} {...props}>
       <LogoLink height="40px" width="74px" />
       {!isMain && <SearchInput size="small" handleSubmit={SearchInputRender} />}
-      <SquareLink link={`/mycollections/${userId}`} width={178}>
+      <SquareLink
+        link={isLogIn ? `/mycollections/${userId}` : '/signin'}
+        width={178}
+      >
         My Collections
       </SquareLink>
-      {isLogin ? (
-        <ProfileLink setIsLogin={setIsLogin} />
+      {isLogIn ? (
+        <ProfileLink />
       ) : (
         <SquareLink
           backgroundColor="var(--white)"
@@ -85,8 +92,8 @@ const Header = ({ ...props }) => {
   );
 };
 
-Header.defaultProps = {
-  isLogin: false,
-};
+// Header.defaultProps = {
+//   isLogin: false,
+// };
 
 export default Header;
