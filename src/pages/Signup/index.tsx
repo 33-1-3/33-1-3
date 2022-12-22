@@ -41,12 +41,6 @@ export default function Signup() {
   //   setCheckEmail('');
   // }, [checkEmail]);
 
-  useEffect(() => {
-    if (showAlert) {
-      setTimeout(() => setShowAlert(false), 4000);
-    }
-  }, [showAlert]);
-
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
