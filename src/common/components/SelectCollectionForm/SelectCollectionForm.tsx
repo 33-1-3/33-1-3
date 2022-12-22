@@ -10,12 +10,10 @@ import ToggleInputButton from './ToggleInputButton';
 // }
 
 const CollectionList = styled.ul`
+  margin-top: var(--space-xl);
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  li:last-child {
-    margin-bottom: var(--space-xl);
-  }
 `;
 
 const SelectCollectionForm = () => {
@@ -24,6 +22,7 @@ const SelectCollectionForm = () => {
 
   return (
     <>
+      <ToggleInputButton />
       <CollectionList>
         {dialogContent.collectionList.map(({ title, isChecked }) => (
           <li key={title}>
@@ -35,7 +34,6 @@ const SelectCollectionForm = () => {
           </li>
         ))}
       </CollectionList>
-      <ToggleInputButton />
     </>
   );
 };

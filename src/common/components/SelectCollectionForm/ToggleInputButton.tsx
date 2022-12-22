@@ -28,8 +28,8 @@ const ToggleInputButton = () => {
       setDialogContent({
         ...dialogContent,
         collectionList: [
-          ...dialogContent.collectionList,
           { id: '', title: target.value, isChecked: false },
+          ...dialogContent.collectionList,
         ],
       });
     }
