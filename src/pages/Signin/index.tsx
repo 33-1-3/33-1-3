@@ -101,12 +101,12 @@ export default function Signin() {
   return (
     <>
       {checkEmail === 'needAuth' && showAlert && (
-        <Alert width="400px" height="80px" type="top">
+        <Alert width="fit-content" height="fit-content" type="top">
           인증이 되지 않은 이메일입니다. 이메일 인증을 완료해주세요.
         </Alert>
       )}
       {checkEmail === 'notExist' && showAlert && (
-        <Alert width="400px" height="80px" type="top">
+        <Alert width="fit-content" height="fit-content" type="top">
           이메일 혹은 비밀번호가 일치하지 않습니다.
         </Alert>
       )}
