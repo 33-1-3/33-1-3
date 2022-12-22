@@ -1,13 +1,32 @@
-import { atom } from 'recoil';
+import axios from 'axios';
+import { atom, selector } from 'recoil';
 
-export const loginState = atom<boolean>({
-  key: 'loginState',
-  default: false,
+const asyncLoginState = selector({
+  key: 'asyncIsLogin',
+  get: async ({ get }) => {
+    const res = await axios.get(`${import.meta.env.VITE_DB_SERVER}auth`, {
+      withCredentials: true,
+    });
+    const {
+      data: { isLogin, userid },
+    } = res;
+    return { isLogin, userid };
+  },
 });
+
+export const loginState = atom({
+  key: 'loginState',
+  default: asyncLoginState.isLogin,
+});
+
+// export const loginState = atom<boolean>({
+//   key: 'loginState',
+//   default: false,
+// });
 
 export const userState = atom<string>({
   key: 'userState',
-  default: '',
+  default: asyncLoginState.userid,
 });
 
 export const dialogState = atom<

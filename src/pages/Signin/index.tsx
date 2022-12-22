@@ -10,7 +10,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useLayoutEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { loginState } from '@/recoil/globalState';
+import { loginState, userState } from '@/recoil/globalState';
 // import { authState } from '@/recoil/globalState';
 
 const HeaderLogo = styled(LogoLink)`
@@ -34,7 +34,7 @@ const signinRequestUrl = `${import.meta.env.VITE_DB_SERVER}signin`;
 export default function Signin() {
   const [isLogIn, setIsLogIn] = useRecoilState(loginState);
   const [showAlert, setShowAlert] = useState<boolean>(false);
-  // const [userId, setUserId] = useRecoilState(userState);
+  const [userId, setUserId] = useRecoilState(userState);
   // const [auth, setAuth] = useRecoilState(authState);
   const [checkEmail, setCheckEmail] = useState('');
   const navigate = useNavigate();
@@ -91,6 +91,8 @@ export default function Signin() {
     );
 
     if (userId) {
+      setIsLogIn(true);
+      setUserId(userId);
       navigate('/');
     } else {
       setCheckEmail(state);

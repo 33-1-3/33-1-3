@@ -10,8 +10,35 @@ import MyCollection from '@/pages/MyCollection/index';
 import MyItem from '@/pages/MyItem';
 import NotFound from '@/pages/NotFound';
 import Verification from '@/pages/Verification';
+import { loginState, userState } from '@/recoil/globalState';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { useRecoilState } from 'recoil';
 
 function App() {
+  const [isLogIn, setIsLogIn] = useRecoilState(loginState);
+  const [userId, setUserId] = useRecoilState(userState);
+
+  useEffect(() => {
+    async function auth() {
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_DB_SERVER}auth`, {
+          withCredentials: true,
+        });
+        const {
+          data: { isLogin, userId },
+        } = res;
+
+        setIsLogIn(isLogin);
+        setUserId(userId);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    auth();
+  }, [isLogIn, userId]);
+
+  console.log('@@@@');
   return (
     <>
       <Routes>
