@@ -42,6 +42,7 @@ const IconButtonContainer = styled.button<IconButtonContainerProps>`
     rect {
       transition: 0.3s ease-out;
       fill: ${({ $color }) => $color};
+      rx: 3;
     }
     path {
       transition: 0.3s ease-out;
@@ -52,6 +53,8 @@ const IconButtonContainer = styled.button<IconButtonContainerProps>`
       transition: 0.3s ease-out;
       stroke: ${({ backgroundColor }) => backgroundColor};
     }
+    transform: scale(1.2);
+    transition: 0.2s ease-out;
   }
 `;
 
