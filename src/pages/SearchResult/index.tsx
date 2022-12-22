@@ -241,6 +241,7 @@ const SearchResultWrapper = styled.div`
   margin-top: 36px;
 
   > div:first-child {
+    margin-top: 4px;
     margin-right: auto;
   }
 
