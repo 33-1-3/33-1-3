@@ -132,11 +132,11 @@ export default function MyCollection() {
             {count !== undefined && searchWord !== '' && (
               <SearchResultText searchWord={searchWord} resultCount={count} />
             )}
-            <Dropdown
+            {/* <Dropdown
               content={Collection_SORT_CONTENT}
               dropKind="sort"
               label={SORT_LABEL}
-            />
+            /> */}
             <Dropdown
               content={VIEW_CONTENT}
               dropKind="view"

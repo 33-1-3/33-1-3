@@ -145,11 +145,6 @@ export default function SearchResult() {
           <SearchResultWrapper>
             <SearchResultText resultCount={itemCount} />
             <Dropdown
-              content={SORT_CONTENT}
-              dropKind="sort"
-              label={SORT_LABEL}
-            />
-            <Dropdown
               content={VIEW_CONTENT}
               dropKind="view"
               label={VIEW_LABEL}
