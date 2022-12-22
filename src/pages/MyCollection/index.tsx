@@ -119,25 +119,31 @@ export default function MyCollection() {
     <>
       <Header />
       <MainWrapper>
-        <PageTitle>{collectionTitle}</PageTitle>
-        <CenterSearchInput
-          page="나의 콜렉션"
-          handleSubmit={(e) => {
-            e.preventDefault();
-          }}
-          handleChange={handleChange}
-        />
-        <SearchResultWrapper>
-          {count !== undefined && searchWord !== '' && (
-            <SearchResultText searchWord={searchWord} resultCount={count} />
-          )}
-          <Dropdown
-            content={Collection_SORT_CONTENT}
-            dropKind="sort"
-            label={SORT_LABEL}
+        <TitleWrapper>
+          <PageTitle>{collectionTitle}</PageTitle>
+          <CenterSearchInput
+            page="나의 콜렉션"
+            handleSubmit={(e) => {
+              e.preventDefault();
+            }}
+            handleChange={handleChange}
           />
-          <Dropdown content={VIEW_CONTENT} dropKind="view" label={VIEW_LABEL} />
-        </SearchResultWrapper>
+          <SearchResultWrapper>
+            {count !== undefined && searchWord !== '' && (
+              <SearchResultText searchWord={searchWord} resultCount={count} />
+            )}
+            <Dropdown
+              content={Collection_SORT_CONTENT}
+              dropKind="sort"
+              label={SORT_LABEL}
+            />
+            <Dropdown
+              content={VIEW_CONTENT}
+              dropKind="view"
+              label={VIEW_LABEL}
+            />
+          </SearchResultWrapper>
+        </TitleWrapper>
         <VinylItems
           searchResult={sortItems(
             result,
@@ -174,6 +180,12 @@ const MainWrapper = styled(Main)`
   margin-top: 56px;
 `;
 
+const TitleWrapper = styled.div`
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+`;
+
 const CenterSearchInput = styled(SearchInput)`
   width: fit-content;
   align-self: center;
@@ -186,7 +198,9 @@ const SearchResultWrapper = styled.div`
   flex-flow: row nowrap;
   align-items: center;
   gap: var(--space-bs);
-  width: 828px;
+  min-width: 680px;
+  max-width: 828px;
+  width: 65vw;
   height: 34px;
   margin: 0 auto;
   margin-top: 36px;

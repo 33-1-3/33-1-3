@@ -224,7 +224,7 @@ const SearchResultWrapper = styled.div`
   flex-flow: row nowrap;
   align-items: center;
   gap: var(--space-bs);
-  min-width: 640px;
+  min-width: 680px;
   max-width: 828px;
   width: 65vw;
   height: 34px;
