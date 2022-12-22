@@ -23,6 +23,7 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   background-color: var(--white);
+  min-width: 680px;
   padding: 12px 16px;
   gap: 12px;
   box-shadow: var(--shadow-Header);
@@ -42,7 +43,6 @@ const Header = ({ ...props }) => {
   const [userId, setUserId] = useRecoilState(userState);
 
   const isMain: boolean = window.location.pathname === '/';
-  const minWidth = isMain ? '440px' : '680px';
 
   const SearchInputRender = useHandleSubmit();
 
@@ -66,7 +66,7 @@ const Header = ({ ...props }) => {
   }, [isLogIn, userId]);
 
   return (
-    <StyledHeader style={{ height: 64, width: '100vw', minWidth }} {...props}>
+    <StyledHeader style={{ height: 64, width: '100vw' }} {...props}>
       <LogoLink height="40px" width="74px" />
       {!isMain && <SearchInput size="small" handleSubmit={SearchInputRender} />}
       <SquareLink

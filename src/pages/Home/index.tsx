@@ -28,6 +28,7 @@ const StyledMain = styled(Main)`
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
+  min-width: 680px;
   background: url('/assets/background_main.svg') center/cover;
   text-align: center;
   padding-bottom: 64px;
@@ -39,10 +40,6 @@ const Catchphrase = styled(motion.h2)`
   font-size: 2rem;
   text-shadow: 0px 2px 8px rgba(0, 0, 0, 1);
   color: var(--white);
-
-  @media screen and (max-width: 768px) {
-    font-size: 4.1vw;
-  }
 `;
 
 const HighLight = styled.span`
@@ -50,8 +47,4 @@ const HighLight = styled.span`
   font-size: 52px;
   font-weight: 700;
   color: var(--purple-900);
-
-  @media screen and (max-width: 768px) {
-    font-size: 6.8vw;
-  }
 `;
