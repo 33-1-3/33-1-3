@@ -15,6 +15,7 @@ const StyledFooter = styled.footer<FooterProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 680px;
   padding: 28px 0;
   margin: 0 auto;
   background-color: ${({ backgroundColor }) => backgroundColor};
