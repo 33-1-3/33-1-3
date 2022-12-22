@@ -6,45 +6,34 @@ export interface SqaureButtonProps {
   fontSize: number;
   size: 'small' | 'large';
   isFilled?: boolean;
-  disabled?: boolean;
   children: string;
 }
 
 const SqaureButton = styled.button<SqaureButtonProps>`
   padding: ${({ size }) => PADDING_VALUE[size]};
-  background-color: ${({ disabled, isFilled }) => {
-    if (disabled) {
-      return 'var(--gray-100)';
-    } else {
-      return isFilled ? 'var(--purple-900)' : 'var(--white)';
-    }
-  }};
-  border: ${({ disabled, isFilled }) => {
-    if (disabled) {
-      return 'none';
-    } else {
-      return isFilled ? 'none' : '1px solid var(--purple-900)';
-    }
-  }};
+  background-color: ${({ isFilled }) =>
+    isFilled ? 'var(--purple-900)' : 'var(--white)'};
+  border: ${({ isFilled }) =>
+    isFilled ? 'none' : '1px solid var(--purple-900)'};
   border-radius: 6px;
   font-weight: 700;
   text-align: center;
   font-size: ${({ fontSize }) => fontSize}px;
-  color: ${({ disabled, isFilled }) => {
-    if (disabled) {
-      return 'var(--gray-300)';
-    } else {
-      return isFilled ? 'var(--white)' : 'var(--purple-900)';
-    }
-  }};
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  color: ${({ isFilled }) => (isFilled ? 'var(--white)' : 'var(--purple-900)')};
+  cursor: pointer;
+
+  &:disabled {
+    background-color: var(--gray-100);
+    border: none;
+    color: var(--gray-300);
+    cursor: not-allowed;
+  }
 `;
 
 SqaureButton.defaultProps = {
   fontSize: 20,
   size: 'small',
   isFilled: true,
-  disabled: false,
   children: '버튼',
 };
 
