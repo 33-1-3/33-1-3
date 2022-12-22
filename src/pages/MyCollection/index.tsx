@@ -21,6 +21,8 @@ import {
 } from '@/utils/constants/dropdown';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
 import axios from 'axios';
 import { sortItems } from '@/utils/sortItems';
 import { processCommonVinyl } from '@/utils/functions/processResult';
@@ -42,7 +44,6 @@ export default function MyCollection() {
   const [count, setCount] = useState<number>();
   const [searchWord, setSearchWord] = useState<string>();
 
-  const [isLogin, setIsLogin] = useRecoilState(userState);
   const [dialogType, setDialogType] = useRecoilState(dialogState);
   const [dialogContent, setDialogContent] = useRecoilState(dialogContentState);
   // const [isUserCollections, setIsUserCollections] = useState<boolean>(false);
@@ -114,13 +115,14 @@ export default function MyCollection() {
 
   const [_view, sort] = [searchParams.get('view'), searchParams.get('sort')];
   const view = _view ?? 'block';
+  const { initial, animate, transition } = FLOATING_MOTION_VALUE;
 
   return (
     <>
       <Header />
       <MainWrapper>
         <TitleWrapper>
-          <PageTitle>{collectionTitle}</PageTitle>
+          <PageTitle style={{ height: '53px' }}>{collectionTitle}</PageTitle>
           <CenterSearchInput
             page="나의 콜렉션"
             handleSubmit={(e) => {
@@ -144,14 +146,16 @@ export default function MyCollection() {
             />
           </SearchResultWrapper>
         </TitleWrapper>
-        <VinylItems
-          searchResult={sortItems(
-            result,
-            sort as 'title' | 'artist' | 'count' | 'Released' | 'update'
-          )}
-          page={'collection'}
-          view={view as ResultViewProps['view']}
-        />
+        <motion.div initial={initial} animate={animate} transition={transition}>
+          <VinylItems
+            searchResult={sortItems(
+              result,
+              sort as 'title' | 'artist' | 'count' | 'Released' | 'update'
+            )}
+            page={'collection'}
+            view={view as ResultViewProps['view']}
+          />
+        </motion.div>
         <FloatingButton />
         <GoToTop />
       </MainWrapper>
@@ -183,7 +187,9 @@ const MainWrapper = styled(Main)`
 `;
 
 const TitleWrapper = styled.div`
-  width: fit-content;
+  min-width: 680px;
+  max-width: 828px;
+  width: 65vw;
   margin: 0 auto;
   text-align: center;
 `;

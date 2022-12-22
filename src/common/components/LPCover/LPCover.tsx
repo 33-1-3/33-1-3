@@ -18,6 +18,21 @@ const Wrapper = styled(Link)<{ $heightNum: number }>`
 
 const Cover = styled.img<{ $heightNum: number }>`
   box-shadow: var(--shadow-Item);
+  background-color: var(--gray-100);
+
+  @keyframes skeleton-gradient {
+    0% {
+      background-color: #cacaca;
+    }
+    50% {
+      background-color: var(--gray-100);
+    }
+    100% {
+      background-color: #cacaca;
+    }
+  }
+
+  animation: skeleton-gradient 1.5s infinite ease-in-out;
 
   // img가 제대로 불러와지지 않았을 때 보일 가상 요소
   &::before {
@@ -33,6 +48,11 @@ const Cover = styled.img<{ $heightNum: number }>`
     line-height: ${({ $heightNum }) => $heightNum}px;
     background-color: var(--gray-100);
     box-shadow: var(--shadow-Item);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-indent: 12px;
+    word-break: break-all;
   }
 `;
 
@@ -75,7 +95,6 @@ const LPCover = ({
         style={{
           width: `${heightNum}px`,
           height: `${heightNum}px`,
-          backgroundColor: 'var(--gray-100)',
         }}
         {...props}
       >

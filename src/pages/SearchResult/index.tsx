@@ -1,6 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
 import axios from 'axios';
 import {
   Header,
@@ -136,6 +138,8 @@ export default function SearchResult() {
     fetchResults();
   }, [pageNum]);
 
+  const { initial, animate, transition } = FLOATING_MOTION_VALUE;
+
   return useMemo(
     () => (
       <>
@@ -150,11 +154,17 @@ export default function SearchResult() {
               label={VIEW_LABEL}
             />
           </SearchResultWrapper>
-          <VinylItems
-            searchResult={result}
-            page={'all'}
-            view={params.get('view') as ResultViewProps['view']}
-          />
+          <motion.div
+            initial={initial}
+            animate={animate}
+            transition={transition}
+          >
+            <VinylItems
+              searchResult={result}
+              page={'all'}
+              view={params.get('view') as ResultViewProps['view']}
+            />
+          </motion.div>
           <div
             ref={observerTarget}
             style={{

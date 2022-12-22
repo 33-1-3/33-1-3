@@ -1,14 +1,10 @@
 // import { authState } from '@/recoil/globalState';
 import axios from 'axios';
-import { Dispatch, SetStateAction } from 'react';
-import { useRecoilState } from 'recoil';
-import { loginState, userState } from '@/recoil/globalState';
 import styled from 'styled-components';
 
 export interface ProfileProps {
   width: string | number;
   height: string | number;
-  // setIsLogin: Dispatch<SetStateAction<boolean>>;
 }
 
 const CircleWrapper = styled.div`
@@ -20,6 +16,10 @@ const CircleWrapper = styled.div`
 
 const StyledButton = styled.button`
   background: url('/assets/logout.svg') no-repeat center;
+
+  &:hover {
+    background: url('/assets/dead.svg') no-repeat center;
+  }
 `;
 
 const ProfileLink = ({ width, height, ...props }: ProfileProps) => {
