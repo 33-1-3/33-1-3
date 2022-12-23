@@ -8,7 +8,7 @@ import {
   ProfileLink,
 } from '@/common/components';
 import useHandleSubmit from '@/hooks/useHandleSubmit';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { loginState, userState } from '@/recoil/globalState';
 
 export interface HeaderProps {
@@ -49,56 +49,62 @@ const Header = ({ ...props }) => {
   // const [userId, setUserId] = useState('');
 
   // const [auth, setAuth] = useRecoilState(authState);
-  const [isLogIn, setIsLogIn] = useRecoilState(loginState);
-  const [userId, setUserId] = useRecoilState(userState);
+  const isLogIn = useRecoilValue(loginState);
+  const userId = useRecoilValue(userState);
 
   const isMain: boolean = window.location.pathname === '/';
 
   const SearchInputRender = useHandleSubmit();
 
-  useEffect(() => {
-    async function auth() {
-      try {
-        const res = await axios.get(`${import.meta.env.VITE_DB_SERVER}auth`, {
-          withCredentials: true,
-        });
-        const {
-          data: { isLogin, userId },
-        } = res;
+  // useEffect(() => {
+  //   async function auth() {
+  //     try {
+  //       const res = await axios.get(`${import.meta.env.VITE_DB_SERVER}auth`, {
+  //         withCredentials: true,
+  //       });
+  //       const {
+  //         data: { isLogin, userId },
+  //       } = res;
 
-        setIsLogIn(isLogin);
-        setUserId(userId);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    auth();
-  }, [isLogIn, userId]);
+  //       setIsLogIn(isLogin);
+  //       setUserId(userId);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   auth();
+  // }, [isLogIn, userId]);
+
+  console.log('****', isLogIn);
 
   return (
     <StyledHeader style={{ height: 64, width: '100vw' }} {...props}>
       <LogoLink height="40px" width="74px" />
       <BetaText>Beta</BetaText>
-      {!isMain && <SearchInput size="small" handleSubmit={SearchInputRender} />}
+      {!isMain && isLogIn !== undefined && (
+        <SearchInput size="small" handleSubmit={SearchInputRender} />
+      )}
+      {isLogIn !== undefined && (
       <SquareLink
         link={isLogIn ? `/mycollections/${userId}` : '/signin'}
         width={178}
       >
         My Collections
       </SquareLink>
-      {isLogIn ? (
-        <ProfileLink />
-      ) : (
-        <SquareLink
-          backgroundColor="var(--white)"
-          color="var(--purple-900)"
-          link="/signin"
-          transition
-          width={97}
-        >
-          Sign In
-        </SquareLink>
-      )}
+      {isLogIn !== undefined &&
+        (isLogIn === true ? (
+          <ProfileLink />
+        ) : (
+          <SquareLink
+            backgroundColor="var(--white)"
+            color="var(--purple-900)"
+            link={isLogIn ? `/mycollections/${userId}` : '/signin'}
+            transition
+            width={97}
+          >
+            Sign In
+          </SquareLink>
+        ))}
     </StyledHeader>
   );
 };

@@ -6,7 +6,7 @@ import SignInAndUpInput from '../SignInAndUpInput/SignInAndUpInput';
 const validateRgx = {
   id: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   nickname: /^[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣_-]{2,10}$/,
-  pwd: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,12}$/,
+  pwd: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d~!@#$%^&*()\-_=+|<>?:;{}'",./]{6,12}$/,
 };
 
 const Form = styled.form`
