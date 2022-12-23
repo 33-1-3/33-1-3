@@ -28,6 +28,7 @@ const SubmitBtn = styled(SqaureButton)`
 export interface SignInAndUpFormProps {
   submitHandler: React.FormEventHandler<HTMLFormElement>;
   option: 'signin' | 'signup';
+  isLoading: boolean;
 }
 
 export interface formState {
@@ -40,6 +41,7 @@ export interface formState {
 const SignInAndUpForm = ({
   submitHandler,
   option,
+  isLoading,
   ...props
 }: SignInAndUpFormProps) => {
   const [formState, setFormState] = useState<formState>({
@@ -88,32 +90,41 @@ const SignInAndUpForm = ({
           </>
         )}
       </InputSet>
-      <SubmitBtn
-        type="submit"
-        fontSize={20}
-        size="small"
-        isFilled={true}
-        disabled={
-          (option === 'signin' &&
-            (formState.id === '' ||
-              formState.pwd === '' ||
-              !IS_VALID.id ||
-              !IS_VALID.pwd)) ||
-          (option === 'signup' &&
-            (formState.id === '' ||
-              formState.nickname === '' ||
-              formState.pwd === '' ||
-              formState.pwdCheck === '' ||
-              !IS_VALID.id ||
-              !IS_VALID.nickname ||
-              !IS_VALID.pwd ||
-              !IS_VALID.pwdCheck))
-        }
-      >
-        {option === 'signin' ? 'Sign In' : 'Sign Up'}
-      </SubmitBtn>
+
+      {isLoading ? (
+        <button>테스트 로딩</button>
+      ) : (
+        <SubmitBtn
+          type="submit"
+          fontSize={20}
+          size="small"
+          isFilled={true}
+          disabled={
+            (option === 'signin' &&
+              (formState.id === '' ||
+                formState.pwd === '' ||
+                !IS_VALID.id ||
+                !IS_VALID.pwd)) ||
+            (option === 'signup' &&
+              (formState.id === '' ||
+                formState.nickname === '' ||
+                formState.pwd === '' ||
+                formState.pwdCheck === '' ||
+                !IS_VALID.id ||
+                !IS_VALID.nickname ||
+                !IS_VALID.pwd ||
+                !IS_VALID.pwdCheck))
+          }
+        >
+          {option === 'signin' ? 'Sign In' : 'Sign Up'}
+        </SubmitBtn>
+      )}
     </Form>
   );
+};
+
+SignInAndUpForm.defaultProps = {
+  isLoading: false,
 };
 
 export default SignInAndUpForm;
