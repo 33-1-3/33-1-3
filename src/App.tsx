@@ -38,7 +38,6 @@ function App() {
     auth();
   }, [isLogIn, userId]);
 
-  console.log('@@@@');
   return (
     <>
       <Routes>

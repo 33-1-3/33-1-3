@@ -75,8 +75,6 @@ const Header = ({ ...props }) => {
   //   auth();
   // }, [isLogIn, userId]);
 
-  console.log('****', isLogIn);
-
   return (
     <StyledHeader style={{ height: 64, width: '100vw' }} {...props}>
       <LogoLink height="40px" width="74px" />
@@ -85,12 +83,13 @@ const Header = ({ ...props }) => {
         <SearchInput size="small" handleSubmit={SearchInputRender} />
       )}
       {isLogIn !== undefined && (
-      <SquareLink
-        link={isLogIn ? `/mycollections/${userId}` : '/signin'}
-        width={178}
-      >
-        My Collections
-      </SquareLink>
+        <SquareLink
+          link={isLogIn ? `/mycollections/${userId}` : '/signin'}
+          width={178}
+        >
+          My Collections
+        </SquareLink>
+      )}
       {isLogIn !== undefined &&
         (isLogIn === true ? (
           <ProfileLink />

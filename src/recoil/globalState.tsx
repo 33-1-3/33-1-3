@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { atom, selector } from 'recoil';
 
-const asyncLoginState = selector({
-  key: 'asyncIsLogin',
+const asyncIsLoginState = selector({
+  key: 'asyncIsLoginState',
   get: async ({ get }) => {
     const res = await axios.get(`${import.meta.env.VITE_DB_SERVER}auth`, {
       withCredentials: true,
@@ -10,13 +10,25 @@ const asyncLoginState = selector({
     const {
       data: { isLogin, userid },
     } = res;
-    return { isLogin, userid };
+    return isLogin;
+  },
+});
+const asyncUseridState = selector({
+  key: 'asyncUseridState',
+  get: async ({ get }) => {
+    const res = await axios.get(`${import.meta.env.VITE_DB_SERVER}auth`, {
+      withCredentials: true,
+    });
+    const {
+      data: { isLogin, userid },
+    } = res;
+    return userid;
   },
 });
 
 export const loginState = atom({
   key: 'loginState',
-  default: asyncLoginState.isLogin,
+  default: asyncIsLoginState,
 });
 
 // export const loginState = atom<boolean>({
@@ -26,7 +38,7 @@ export const loginState = atom({
 
 export const userState = atom<string>({
   key: 'userState',
-  default: asyncLoginState.userid,
+  default: asyncUseridState,
 });
 
 export const dialogState = atom<
