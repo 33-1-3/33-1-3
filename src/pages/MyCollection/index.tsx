@@ -27,11 +27,7 @@ import axios from 'axios';
 import { sortItems } from '@/utils/sortItems';
 import { processCommonVinyl } from '@/utils/functions/processResult';
 import { ProcessedResult } from '@/types/data';
-import {
-  userState,
-  dialogContentState,
-  dialogState,
-} from '@/recoil/globalState';
+import { dialogContentState, dialogState } from '@/recoil/globalState';
 import { useRecoilState } from 'recoil';
 
 let collectionItems: undefined | ProcessedResult[];
@@ -45,18 +41,7 @@ export default function MyCollection() {
   const [searchWord, setSearchWord] = useState<string>();
 
   const [dialogType, setDialogType] = useRecoilState(dialogState);
-  const [dialogContent, setDialogContent] = useRecoilState(dialogContentState);
-  // const [isUserCollections, setIsUserCollections] = useState<boolean>(false);
-
-  // const validator = (data: string | Array<string>) => {
-  //   if (typeof data === 'string') {
-  //     return data !== '';
-  //   }
-  //   if (Array.isArray(data)) {
-  //     return data.length !== 0;
-  //   }
-  //   return false;
-  // };
+  const [dialogContent] = useRecoilState(dialogContentState);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -72,25 +57,6 @@ export default function MyCollection() {
   }
   const url = `${import.meta.env.VITE_DB_SERVER}collection/${collectionid}`;
 
-  // useLayoutEffect(() => {
-  //   async function checkAuth() {
-  //     try {
-  //       const res = await axios.get('http://localhost:3313/auth', {
-  //         withCredentials: true,
-  //       });
-  //       const {
-  //         data: { isLogin, userId },
-  //       } = res;
-
-  //       if (isLogin && userId === userid) {
-  //         setIsUserCollections(true);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   checkAuth();
-  // }, [isUserCollections]);
   useEffect(() => setDialogType(''), []);
 
   useEffect(() => {

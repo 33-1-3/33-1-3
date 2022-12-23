@@ -19,7 +19,6 @@ import {
 } from '@/common/components';
 import { ResultViewProps } from '@/common/components/AlbumInfo/AlbumInfo';
 import {
-  SORT_CONTENT,
   SORT_LABEL,
   VIEW_CONTENT,
   VIEW_LABEL,
@@ -93,15 +92,11 @@ export default function SearchResult() {
       setIsLoading(true);
 
       try {
-        console.log('처음');
-
         const res = await axios.get(
           `https://api.discogs.com/database/search?&q=${value}&key=${KEY}&secret=${SECRET}&format=vinyl&sort=${
             sort === 'date' ? 'date_added&sort_order=desc' : 'score'
           }&page=1&per_page=24`
         );
-
-        console.log('처음 끝');
 
         setIsLoading(false);
         setTotalPageNum(res.data.pagination.pages);
@@ -120,12 +115,9 @@ export default function SearchResult() {
 
     async function fetchResults() {
       try {
-        console.log('추가시작');
         setIsLoading(true);
 
         const res = await axios.get(url);
-
-        console.log('추가끝');
 
         setIsLoading(false);
         setTotalPageNum(res.data.pagination.pages);
@@ -197,16 +189,10 @@ export default function SearchResult() {
             if (type === 'releases') commonData = commonRelease(response);
             if (type === 'masters') commonData = commonMaster(response);
 
-            console.log('COMMON', commonData);
-            console.log(dialogContent.collectionList);
-
             await axios.post(
               `${import.meta.env.VITE_DB_SERVER}vinyl/${userId}`,
               {
                 releasedId: commonData?.id,
-                // selectedCollectionIds: dialogContent.collectionList
-                //   .filter((collection) => collection.isChecked)
-                //   .map((collection) => collection.id),
                 collectionList: dialogContent.collectionList,
                 imgUrl: commonData?.imgUrl,
                 title: commonData?.title,

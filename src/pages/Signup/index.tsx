@@ -9,7 +9,7 @@ import {
   Alert,
 } from '@/common/components';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const HeaderLogo = styled(LogoLink)`
   margin-bottom: 24px;
@@ -32,18 +32,6 @@ export default function Signup() {
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   checkEmail === 'duplicate' && alert('이미 등록된 이메일입니다.');
-
-  //   checkEmail !== 'duplicate' &&
-  //     checkEmail !== '' &&
-  //     alert(
-  //       '등록한 이메일로 인증 메일이 발송되었습니다. 이메일 인증을 완료해주세요.'
-  //     );
-
-  //   setCheckEmail('');
-  // }, [checkEmail]);
-
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -54,7 +42,6 @@ export default function Signup() {
     const password = (e.currentTarget[2] as HTMLInputElement).value;
 
     (e.target as HTMLFormElement).reset();
-    console.log(e.currentTarget[e.currentTarget.length - 1]);
     (
       e.currentTarget[e.currentTarget.length - 1] as HTMLButtonElement
     ).disabled = true;
@@ -91,7 +78,11 @@ export default function Signup() {
       <motion.div initial={initial} animate={animate} transition={transition}>
         <FormContainer>
           <HeaderLogo height="72px" width="132px" />
-          <SignInAndUpForm submitHandler={submitHandler} option="signup" isLoading={isLoading}/>
+          <SignInAndUpForm
+            submitHandler={submitHandler}
+            option="signup"
+            isLoading={isLoading}
+          />
           <MoveLink moveTarget="signin" />
         </FormContainer>
       </motion.div>

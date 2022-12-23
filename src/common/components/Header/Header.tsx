@@ -1,5 +1,3 @@
-import axios from 'axios';
-import { useEffect } from 'react';
 import styled from 'styled-components';
 import {
   LogoLink,
@@ -8,7 +6,7 @@ import {
   ProfileLink,
 } from '@/common/components';
 import useHandleSubmit from '@/hooks/useHandleSubmit';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { loginState, userState } from '@/recoil/globalState';
 
 export interface HeaderProps {
@@ -45,35 +43,12 @@ const BetaText = styled.span`
 `;
 
 const Header = ({ ...props }) => {
-  // const [isLogin, setIsLogin] = useState(false);
-  // const [userId, setUserId] = useState('');
-
-  // const [auth, setAuth] = useRecoilState(authState);
   const isLogIn = useRecoilValue(loginState);
   const userId = useRecoilValue(userState);
 
   const isMain: boolean = window.location.pathname === '/';
 
   const SearchInputRender = useHandleSubmit();
-
-  // useEffect(() => {
-  //   async function auth() {
-  //     try {
-  //       const res = await axios.get(`${import.meta.env.VITE_DB_SERVER}auth`, {
-  //         withCredentials: true,
-  //       });
-  //       const {
-  //         data: { isLogin, userId },
-  //       } = res;
-
-  //       setIsLogIn(isLogin);
-  //       setUserId(userId);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   auth();
-  // }, [isLogIn, userId]);
 
   return (
     <StyledHeader style={{ height: 64, width: '100vw' }} {...props}>
@@ -107,9 +82,5 @@ const Header = ({ ...props }) => {
     </StyledHeader>
   );
 };
-
-// Header.defaultProps = {
-//   isLogin: false,
-// };
 
 export default Header;
