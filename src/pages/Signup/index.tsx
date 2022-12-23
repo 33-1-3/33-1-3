@@ -28,6 +28,7 @@ const url = `${import.meta.env.VITE_DB_SERVER}signup`;
 export default function Signup() {
   const [checkEmail, setCheckEmail] = useState('');
   const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // useEffect(() => {
   //   checkEmail === 'duplicate' && alert('이미 등록된 이메일입니다.');
@@ -41,14 +42,10 @@ export default function Signup() {
   //   setCheckEmail('');
   // }, [checkEmail]);
 
-  useEffect(() => {
-    if (showAlert) {
-      setTimeout(() => setShowAlert(false), 4000);
-    }
-  }, [showAlert]);
-
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+    setShowAlert(false);
 
     const email = (e.currentTarget[0] as HTMLInputElement).value;
     const nickname = (e.currentTarget[1] as HTMLInputElement).value;
@@ -69,6 +66,7 @@ export default function Signup() {
       password,
     });
 
+    setIsLoading(false);
     setShowAlert(true);
     setCheckEmail(state);
   };
@@ -88,7 +86,11 @@ export default function Signup() {
       )}
       <FormContainer>
         <HeaderLogo height="72px" width="132px" />
-        <SignInAndUpForm submitHandler={submitHandler} option="signup" />
+        <SignInAndUpForm
+          submitHandler={submitHandler}
+          option="signup"
+          isLoading={isLoading}
+        />
         <MoveLink moveTarget="signin" />
       </FormContainer>
       <WaveFooter />

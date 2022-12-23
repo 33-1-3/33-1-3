@@ -31,8 +31,10 @@ const Dropdown = ({
   ...props
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [picker, setPicker] = useState<string | null>(null);
   const [_, setSearchParams] = useSearchParams();
+  const params = new URLSearchParams(window.location.search);
+  const view = params.get('view');
+  const picker = view === 'block' || view === null ? '블록' : '리스트';
 
   const select = (e: MouseEvent<HTMLDivElement>): void => {
     const target = e.target as HTMLTextAreaElement;
@@ -42,7 +44,6 @@ const Dropdown = ({
     if (!target.getAttribute) return;
 
     const value = target.getAttribute('value');
-    const content = target.textContent;
 
     const param = new URLSearchParams(window.location.search);
     if (value !== null) {
@@ -50,7 +51,6 @@ const Dropdown = ({
     }
 
     setSearchParams(param);
-    setPicker(content);
     setIsOpen(!isOpen);
   };
 

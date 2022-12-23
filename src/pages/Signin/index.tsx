@@ -39,12 +39,6 @@ export default function Signin() {
   const [checkEmail, setCheckEmail] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (showAlert) {
-      setTimeout(() => setShowAlert(false), 4000);
-    }
-  }, [showAlert]);
-
   useLayoutEffect(() => {
     //   async function auth() {
     //     const {
@@ -72,6 +66,7 @@ export default function Signin() {
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setShowAlert(false);
 
     const email = (e.currentTarget[0] as HTMLInputElement).value;
     const password = (e.currentTarget[1] as HTMLInputElement).value;
