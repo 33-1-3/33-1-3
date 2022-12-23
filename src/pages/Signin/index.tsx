@@ -10,10 +10,9 @@ import {
 } from '@/common/components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { loginState, userState } from '@/recoil/globalState';
-// import { authState } from '@/recoil/globalState';
 
 const HeaderLogo = styled(LogoLink)`
   margin-bottom: 24px;
@@ -29,15 +28,12 @@ const FormContainer = styled.div`
   margin-top: 20vh;
 `;
 
-// const authRequestUrl = `${import.meta.env.VITE_DB_SERVER}auth`;
 const signinRequestUrl = `${import.meta.env.VITE_DB_SERVER}signin`;
-// import { userState } from '../../recoil/globalState';
 
 export default function Signin() {
   const [isLogIn, setIsLogIn] = useRecoilState(loginState);
   const [showAlert, setShowAlert] = useState<boolean>(false);
-  const [userId, setUserId] = useRecoilState(userState);
-  // const [auth, setAuth] = useRecoilState(authState);
+  const [, setUserId] = useRecoilState(userState);
   const [checkEmail, setCheckEmail] = useState('');
   const navigate = useNavigate();
 
@@ -55,16 +51,6 @@ export default function Signin() {
     // TODO: 오류?
     isLogIn && navigate('/');
   }, []);
-
-  // useEffect(() => {
-  //   checkEmail === 'needAuth' &&
-  //     alert('인증이 되지 않은 이메일입니다. 이메일 인증을 완료해주세요.');
-
-  //   checkEmail === 'notExist' &&
-  //     alert('이메일 혹은 비밀번호가 일치하지 않습니다.');
-
-  //   setCheckEmail('');
-  // }, [checkEmail]);
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

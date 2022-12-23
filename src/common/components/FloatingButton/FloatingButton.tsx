@@ -1,6 +1,6 @@
 import { ReactComponent as CSButton } from '@/assets/csbutton.svg';
 import styled from 'styled-components';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { Alert } from '@/common/components';
 import emailjs from '@emailjs/browser';
 import { motion, AnimatePresence } from 'framer-motion';

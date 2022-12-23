@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { IconButton } from '@/common/components';
@@ -8,7 +7,6 @@ import {
   dialogState,
   userState,
 } from '@/recoil/globalState';
-import { useState, useLayoutEffect } from 'react';
 
 export interface BookshelfProps {
   userId: string;
@@ -49,33 +47,10 @@ const Bookshelf = ({
   step,
   ...props
 }: BookshelfProps) => {
-  // const [isUserCollections, setIsUserCollections] = useState<boolean>(false);
-  const { userid } = useParams();
-
-  const [isLogin, setIsLogin] = useRecoilState(userState);
+  const [isLogin] = useRecoilState(userState);
   const [, setDialogType] = useRecoilState(dialogState);
   const [dialogContent, setDialogContent] = useRecoilState(dialogContentState);
   const imgIdx = Math.min(Math.ceil(count / step), 5);
-
-  // useLayoutEffect(() => {
-  //   async function checkAuth() {
-  //     try {
-  //       const res = await axios.get('http://localhost:3313/auth', {
-  //         withCredentials: true,
-  //       });
-  //       const {
-  //         data: { isLogin, userId },
-  //       } = res;
-
-  //       if (isLogin && userId === userid) {
-  //         setIsUserCollections(true);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   checkAuth();
-  // }, [isUserCollections]);
 
   return (
     <Wrapper style={{ width: '520px', height: 'fit-content' }}>

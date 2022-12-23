@@ -19,7 +19,6 @@ const sortItems = (
       return +releasedB - +releasedA;
     });
   }
-  // console.log(processedResult);
 
   // count
 

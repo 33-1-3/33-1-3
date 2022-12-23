@@ -7,9 +7,6 @@ export interface CollectionCheckboxProps {
   title: string;
   width: string;
   isChecked: boolean;
-  // setCollectionList: Dispatch<
-  //   SetStateAction<{ title: string; isChecked: boolean }[]>
-  // >;
 }
 
 export interface CheckboxProps {

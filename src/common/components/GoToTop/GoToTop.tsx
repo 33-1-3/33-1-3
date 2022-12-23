@@ -73,7 +73,6 @@ const GoToTop = ({
     });
   };
 
-  console.log(scrollY, buttonStatus);
   return useMemo(
     () => (
       <>

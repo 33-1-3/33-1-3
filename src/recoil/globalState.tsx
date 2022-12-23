@@ -8,7 +8,7 @@ const asyncIsLoginState = selector({
       withCredentials: true,
     });
     const {
-      data: { isLogin, userid },
+      data: { isLogin },
     } = res;
     return isLogin;
   },
@@ -20,7 +20,7 @@ const asyncUseridState = selector({
       withCredentials: true,
     });
     const {
-      data: { isLogin, userid },
+      data: { userid },
     } = res;
     return userid;
   },
@@ -30,11 +30,6 @@ export const loginState = atom({
   key: 'loginState',
   default: asyncIsLoginState,
 });
-
-// export const loginState = atom<boolean>({
-//   key: 'loginState',
-//   default: false,
-// });
 
 export const userState = atom<string>({
   key: 'userState',

@@ -14,11 +14,7 @@ import {
   FloatingButton,
   GoToTop,
 } from '@/common/components';
-import {
-  ProcessedResourceUrlResult,
-  ProcessedTracklist,
-  RawTracklist,
-} from '@/types/data';
+import { ProcessedResourceUrlResult, ProcessedTracklist } from '@/types/data';
 import axios from 'axios';
 import {
   getId,
@@ -123,14 +119,8 @@ export default function Item() {
           if (type === 'releases') commonData = commonRelease(response);
           if (type === 'masters') commonData = commonMaster(response);
 
-          console.log('COMMON', commonData);
-          console.log(dialogContent.collectionList);
-
           await axios.post(`${import.meta.env.VITE_DB_SERVER}vinyl/${userId}`, {
             releasedId: commonData?.id,
-            // selectedCollectionIds: dialogContent.collectionList
-            //   .filter((collection) => collection.isChecked)
-            //   .map((collection) => collection.id),
             collectionList: dialogContent.collectionList,
             imgUrl: commonData?.imgUrl,
             title: commonData?.title,

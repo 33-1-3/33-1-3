@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 export interface ImageLinkProps {
   width: string | number;
   height: string | number;
