@@ -75,8 +75,6 @@ const Header = ({ ...props }) => {
   //   auth();
   // }, [isLogIn, userId]);
 
-  console.log('****', isLogIn);
-
   return (
     <StyledHeader style={{ height: 64, width: '100vw' }} {...props}>
       <LogoLink height="40px" width="74px" />
