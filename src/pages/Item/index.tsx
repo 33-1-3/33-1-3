@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
 import {
   Header,
   Main,
@@ -32,9 +34,6 @@ import {
   dialogState,
   userState,
 } from '@/recoil/globalState';
-
-const vaildator = (tracklist: RawTracklist[]) =>
-  tracklist.length !== 0 && Array.isArray(tracklist);
 
 export default function Item() {
   const params = useParams();
@@ -75,27 +74,31 @@ export default function Item() {
     fetchTrackList();
   }, []);
 
+  const { initial, animate, transition } = FLOATING_MOTION_VALUE;
+
   return (
     <>
       <Header />
       <Main>
         <h1 className="srOnly">LP 상세 정보</h1>
-        <DetailWrapper
-          className="infoContainer"
-          data-releasedid={getId(resourceUrl)}
-        >
-          <LPCover
-            searchResult={searchResult as ProcessedResourceUrlResult}
-            size="large"
-            hoverInteraction={false}
-          ></LPCover>
-          <AlbumInfo
-            searchResult={searchResult as ProcessedResourceUrlResult}
-            tracklist={tracklist as ProcessedTracklist}
-            page="all"
-            view="detail"
-          />
-        </DetailWrapper>
+        <motion.div initial={initial} animate={animate} transition={transition}>
+          <DetailWrapper
+            className="infoContainer"
+            data-releasedid={getId(resourceUrl)}
+          >
+            <LPCover
+              searchResult={searchResult as ProcessedResourceUrlResult}
+              size="large"
+              hoverInteraction={false}
+            ></LPCover>
+            <AlbumInfo
+              searchResult={searchResult as ProcessedResourceUrlResult}
+              tracklist={tracklist as ProcessedTracklist}
+              page="all"
+              view="detail"
+            />
+          </DetailWrapper>
+        </motion.div>
         <FloatingButton />
         <GoToTop />
       </Main>

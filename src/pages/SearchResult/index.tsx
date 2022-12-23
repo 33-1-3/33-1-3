@@ -1,6 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
 import axios from 'axios';
 import {
   Header,
@@ -105,6 +107,7 @@ export default function SearchResult() {
         setTotalPageNum(res.data.pagination.pages);
         setItemCount(res.data.pagination.items);
         setResult(processSearchResult(res.data.results));
+        window.scrollTo({ top: 0 });
       } catch (error) {
         console.error(error);
       }
@@ -135,6 +138,8 @@ export default function SearchResult() {
     fetchResults();
   }, [pageNum]);
 
+  const { initial, animate, transition } = FLOATING_MOTION_VALUE;
+
   return useMemo(
     () => (
       <>
@@ -144,21 +149,22 @@ export default function SearchResult() {
           <SearchResultWrapper>
             <SearchResultText resultCount={itemCount} />
             <Dropdown
-              content={SORT_CONTENT}
-              dropKind="sort"
-              label={SORT_LABEL}
-            />
-            <Dropdown
               content={VIEW_CONTENT}
               dropKind="view"
               label={VIEW_LABEL}
             />
           </SearchResultWrapper>
-          <VinylItems
-            searchResult={result}
-            page={'all'}
-            view={params.get('view') as ResultViewProps['view']}
-          />
+          <motion.div
+            initial={initial}
+            animate={animate}
+            transition={transition}
+          >
+            <VinylItems
+              searchResult={result}
+              page={'all'}
+              view={params.get('view') as ResultViewProps['view']}
+            />
+          </motion.div>
           <div
             ref={observerTarget}
             style={{
@@ -235,6 +241,7 @@ const SearchResultWrapper = styled.div`
   margin-top: 36px;
 
   > div:first-child {
+    margin-top: 4px;
     margin-right: auto;
   }
 

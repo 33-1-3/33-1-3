@@ -34,6 +34,16 @@ const StyledHeader = styled.header`
   }
 `;
 
+const BetaText = styled.span`
+  position: absolute;
+  left: 96px;
+  bottom: 10px;
+  font-style: italic;
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--purple-900);
+`;
+
 const Header = ({ ...props }) => {
   // const [isLogin, setIsLogin] = useState(false);
   // const [userId, setUserId] = useState('');
@@ -70,6 +80,7 @@ const Header = ({ ...props }) => {
   return (
     <StyledHeader style={{ height: 64, width: '100vw' }} {...props}>
       <LogoLink height="40px" width="74px" />
+      <BetaText>Beta</BetaText>
       {!isMain && isLogIn !== undefined && (
         <SearchInput size="small" handleSubmit={SearchInputRender} />
       )}
@@ -88,7 +99,7 @@ const Header = ({ ...props }) => {
           <SquareLink
             backgroundColor="var(--white)"
             color="var(--purple-900)"
-            link="/signin"
+            link={isLogIn ? `/mycollections/${userId}` : '/signin'}
             transition
             width={97}
           >

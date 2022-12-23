@@ -33,11 +33,16 @@ const SearchResultTextWrapper = styled.div`
   display: flex;
   flex-flow: row nowrap;
   gap: var(--space-xs);
+  max-width: 408px;
 `;
 
 const KeyWord = styled.span`
   ${fontStyle};
   color: var(--purple-900);
+  max-width: 284px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const ResultInfo = styled.span`

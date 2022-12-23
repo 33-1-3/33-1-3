@@ -34,6 +34,7 @@ const MOTION_VALUE = {
 };
 
 const MyCollectionsPageTitle = styled(PageTitle)`
+  margin: 0 auto;
   margin-top: 56px;
   margin-bottom: 28px;
 `;
@@ -41,8 +42,12 @@ const MyCollectionsPageTitle = styled(PageTitle)`
 const CollectionsWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 40px;
+  min-width: 680px;
+  max-width: 828px;
   margin: 0 auto;
+  text-align: center;
 `;
 
 export default function MyCollections() {

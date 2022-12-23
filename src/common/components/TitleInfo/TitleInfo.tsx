@@ -44,7 +44,7 @@ const ARTIST_FONT_SIZE = {
 const GAP_SIZE = {
   block: 'var(--space-xs)',
   list: 'var(--space-xs)',
-  detail: 'var(--space-lg)',
+  detail: 'var(--space-bs)',
   myitem: 'var(--space-bs)',
 };
 
