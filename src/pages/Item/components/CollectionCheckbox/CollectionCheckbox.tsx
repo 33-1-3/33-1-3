@@ -81,7 +81,7 @@ const CollectionCheckbox = ({
       }}
       {...args}
     >
-      <span>{title}</span>
+      <span title={title}>{title}</span>
     </CheckboxDiv>
   );
 };
