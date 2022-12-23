@@ -79,7 +79,7 @@ const Bookshelf = ({
 
   return (
     <Wrapper style={{ width: '520px', height: 'fit-content' }}>
-      <Title>{title}</Title>
+      <Title title={title}>{title}</Title>
       {isLogin && (
         <IconButtons>
           <IconButton

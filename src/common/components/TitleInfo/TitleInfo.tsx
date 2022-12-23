@@ -13,9 +13,13 @@ function TitleInfo({ title, artist, view }: TitleInfoProps) {
   return (
     <TitleInfoWrapper view={view}>
       <dt className="srOnly">{'앨범 제목'}</dt>
-      <TitleText view={view}>{title}</TitleText>
+      <TitleText title={title} view={view}>
+        {title}
+      </TitleText>
       <dt className="srOnly">{'가수 이름'}</dt>
-      <ArtistText view={view}>{artist}</ArtistText>
+      <ArtistText title={artist} view={view}>
+        {artist}
+      </ArtistText>
     </TitleInfoWrapper>
   );
 }
