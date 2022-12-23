@@ -21,7 +21,7 @@ const OPTION_INFO = {
     inputType: 'password',
     label: '비밀번호',
     placeholder: '비밀번호를 입력해주세요.',
-    errorMsg: '영문, 숫자를 조합하여 6~12자여야 합니다.',
+    errorMsg: '영문, 숫자, 특수문자를 조합하여 6~12자여야 합니다.',
   },
   pwdCheck: {
     inputType: 'password',
