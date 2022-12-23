@@ -23,13 +23,18 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
+  max-width: 432px;
   font-size: 22px;
   margin-left: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: start;
+  text-overflow: ellipsis;
 `;
 
 const IconButtons = styled.div`
   position: absolute;
-  top: 0;
+  top: 2px;
   right: 0;
   display: flex;
   gap: 8px;

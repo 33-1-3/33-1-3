@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
 import {
   LogoLink,
   MoveLink,
@@ -39,12 +41,6 @@ export default function Signin() {
   const [checkEmail, setCheckEmail] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (showAlert) {
-      setTimeout(() => setShowAlert(false), 4000);
-    }
-  }, [showAlert]);
-
   useLayoutEffect(() => {
     //   async function auth() {
     //     const {
@@ -72,6 +68,7 @@ export default function Signin() {
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setShowAlert(false);
 
     const email = (e.currentTarget[0] as HTMLInputElement).value;
     const password = (e.currentTarget[1] as HTMLInputElement).value;
@@ -100,23 +97,27 @@ export default function Signin() {
     }
   };
 
+  const { initial, animate, transition } = FLOATING_MOTION_VALUE;
+
   return (
     <>
       {checkEmail === 'needAuth' && showAlert && (
-        <Alert width="fit-content" height="fit-content" type="top">
+        <Alert width="100vw" height="fit-content" type="top">
           인증이 되지 않은 이메일입니다. 이메일 인증을 완료해주세요.
         </Alert>
       )}
       {checkEmail === 'notExist' && showAlert && (
-        <Alert width="fit-content" height="fit-content" type="top">
+        <Alert width="100vw" height="fit-content" type="top">
           이메일 혹은 비밀번호가 일치하지 않습니다.
         </Alert>
       )}
-      <FormContainer>
-        <HeaderLogo height="72px" width="132px" />
-        <SignInAndUpForm submitHandler={submitHandler} option="signin" />
-        <MoveLink moveTarget="signup" />
-      </FormContainer>
+      <motion.div initial={initial} animate={animate} transition={transition}>
+        <FormContainer>
+          <HeaderLogo height="72px" width="132px" />
+          <SignInAndUpForm submitHandler={submitHandler} option="signin" />
+          <MoveLink moveTarget="signup" />
+        </FormContainer>
+      </motion.div>
       <WaveFooter />
     </>
   );

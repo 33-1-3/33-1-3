@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 // import axios from 'axios';
 import { ReactComponent as PlusIcon } from '@/assets/plus-circle.svg';
 import {
@@ -39,7 +40,7 @@ const buttonStyle = {
   },
 };
 
-const DashButton = styled.button<DashButtonProps>`
+const DashButton = styled(motion.button)<DashButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,7 +68,6 @@ const DashButton = styled.button<DashButtonProps>`
   }
 
   :hover {
-    background-color: ${({ $color }) => $color};
     color: ${({ backgroundColor }) => backgroundColor};
     circle {
       fill: ${({ backgroundColor }) => backgroundColor};
@@ -118,6 +118,8 @@ const AddCollectionButton = ({
       $color={color}
       backgroundColor={backgroundColor}
       onClick={onClick}
+      whileHover={{ backgroundColor: 'var(--purple-900)' }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
       {...args}
     >
       <PlusIcon

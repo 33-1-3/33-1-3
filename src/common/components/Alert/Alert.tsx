@@ -45,17 +45,21 @@ const BottomAlert = styled.div<{ backgroundColor: string }>`
   align-items: center;
   justify-content: center;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 4px 0 0 4px;
   background-color: ${({ backgroundColor }) => backgroundColor};
-  animation: move 0.8s both;
+  animation: move 3s both;
   z-index: 3000;
 
   @keyframes move {
-    from {
+    0% {
       transform: translate3D(100%, 0, 0);
     }
-    to {
+    15%,
+    85% {
       transform: translate3D(0, 0, 0);
+    }
+    100% {
+      transform: translate3D(100%, 0, 0);
     }
   }
 
@@ -71,21 +75,25 @@ const TopAlert = styled.div<{ backgroundColor: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 36px 60px;
-  border-radius: 8px;
+  padding: 25px 60px;
+  border-radius: 0 0 8px 8px;
   background-color: ${({ backgroundColor }) => backgroundColor};
   color: var(--purple-900);
   text-align: center;
   word-break: break-all;
-  animation: move 0.8s both;
+  animation: move 3s both;
   z-index: 3000;
 
   @keyframes move {
-    from {
-      transform: translate3D(-50%, -100px, 0);
+    0% {
+      transform: translate3D(-50%, -100%, 0);
     }
-    to {
+    15%,
+    85% {
       transform: translate3D(-50%, 0, 0);
+    }
+    100% {
+      transform: translate3D(-50%, -100%, 0);
     }
   }
 
@@ -98,7 +106,7 @@ Alert.defaultProps = {
   width: '260px',
   height: '68px',
   backgroundColor: 'var(--purple-100)',
-  children: '❤️ 의견 감사합니다 :) ❤️',
+  children: '의견 감사합니다 ❤️',
 };
 
 export default Alert;
