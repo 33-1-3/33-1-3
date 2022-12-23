@@ -52,11 +52,13 @@ const Footer = ({ backgroundColor, color, ...props }: FooterProps) => {
         color={color}
         {...props}
       >
-        <p>Copyright © 2022 33-1/3 All rights reserved</p>
+        <p>Copyright © 2022 33.3 All rights reserved</p>
         <p>
-          질문이 있으신가요?&nbsp;&nbsp;
+          Contact: &nbsp;&nbsp;
           <Adress>
-            <a href="mailto:33.1.3.contact@gmail.com">문의 사항 남기기</a>
+            <a href="mailto:33.1.3.contact@gmail.com">
+              33.1.3.contact@gmail.com
+            </a>
           </Adress>
         </p>
         <LinkContainer>
