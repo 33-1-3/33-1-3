@@ -1,21 +1,21 @@
 import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-import ReactDOM from 'react-dom/client';
+import { ScrollToTop } from '@/components';
+import { GlobalStyle } from '@/styles/globalStyle';
+import { NormalizeStyle } from '@/styles/normalizeStyle';
 import App from '@/App';
-import { GlobalStyle } from '@/common/styles/globalStyle';
-import { NormalizeStyle } from '@/common/styles/normalizeStyle';
-import { ScrollToTop } from '@/common/components';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
-    <RecoilRoot>
-      <Router>
-        <NormalizeStyle />
-        <GlobalStyle />
+    <Router>
+      <RecoilRoot>
         <ScrollToTop />
+        <GlobalStyle />
+        <NormalizeStyle />
         <App />
-      </Router>
-    </RecoilRoot>
+      </RecoilRoot>
+    </Router>
   </StrictMode>
 );

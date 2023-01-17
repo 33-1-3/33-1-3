@@ -1,4 +1,4 @@
-import { DetailInfoProps } from '@/common/components/DetailInfo/DetailInfo';
+import { DetailInfoProps } from '@/components/features/DetailInfo/DetailInfo';
 
 const ellipsisString = '가나다라마바사아자차카타파하ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
