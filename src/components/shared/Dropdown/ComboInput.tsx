@@ -1,59 +1,50 @@
+import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
+import { flexContainer, absolute } from '@/styles/mixin';
 
-export interface ComboInputProps {
-  width?: string | number;
-  height?: string | number;
-  content: string;
-  isOpen: boolean;
-  backgroundColor?: string;
-  color?: string;
-  onClick: () => void;
+export interface ComboInputProps extends InputProps {
+  width: string | number;
+  height: string | number;
+  children: string;
+  onClick: MouseEventHandler<HTMLDivElement>;
+  [key: string]: unknown;
 }
 
 export interface InputProps {
-  backgroundColor?: string;
-  color?: string;
   isOpen: boolean;
 }
 
 function ComboInput({
   width,
   height,
-  content,
   isOpen,
-  color,
-  backgroundColor,
   onClick,
+  children,
   ...props
 }: ComboInputProps) {
   return (
     <Input
-      onClick={onClick}
       role="combobox"
       id="dropdown"
       tabIndex={0}
-      style={{ width, height }}
-      color={color}
-      backgroundColor={backgroundColor}
       isOpen={isOpen}
+      onClick={onClick}
+      style={{ width, height }}
       {...props}
     >
-      {content}
+      {children}
     </Input>
   );
 }
 
 const Input = styled.div<InputProps>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${flexContainer({ jc: 'center', ai: 'center' })}
   position: relative;
-  padding-right: 24px;
+  padding-right: var(--space-lg);
+  color: var(--black);
+  background-color: var(--white);
+  border: 1px solid var(--black);
   border-radius: 4px;
-  background-color: ${({ backgroundColor }) => backgroundColor};
-  color: ${({ color }) => color};
-  border: 1px solid ${({ color }) => color};
-  font-weight: 400;
 
   &:hover {
     cursor: pointer;
@@ -61,10 +52,9 @@ const Input = styled.div<InputProps>`
 
   &::after {
     content: '';
-    position: absolute;
+    ${absolute({ r: 0 })}
     width: 100%;
     height: 100%;
-    right: 0;
     background: no-repeat url('/assets/arrow.svg');
     background-position: center right 12px;
     ${({ isOpen }) => {
