@@ -2,19 +2,67 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import SquareButton from './SquareButton';
 
 export default {
-  title: 'common/components/SqaureButton',
+  title: 'components/shared/SqaureButton',
+  parameters: {
+    docs: {
+      description: {
+        component: '서비스 내에서 주로 사용되는 사각형 버튼 컴포넌트입니다.',
+      },
+    },
+  },
   args: {
     fontSize: 20,
     size: 'small',
     isFilled: true,
   },
   argTypes: {
+    fontSize: {
+      description: '내부 텍스트 크기 지정',
+      table: {
+        type: {
+          summary: 'number',
+        },
+        defaultValue: {
+          summary: '20',
+        },
+      },
+    },
     size: {
+      description: '컴포넌트 자체의 크기 지정',
+      table: {
+        type: {
+          summary: `'small' | 'large'`,
+        },
+        defaultValue: {
+          summary: `'small'`,
+        },
+      },
       options: ['small', 'large'],
       control: { type: 'radio' },
     },
+    isFilled: {
+      description: '배경 색 여부 지정',
+      table: {
+        type: {
+          summary: 'boolean',
+        },
+        defaultValue: {
+          summary: 'true',
+        },
+      },
+    },
+    children: {
+      description: '내부 텍스트 내용 지정',
+      table: {
+        type: {
+          summary: 'string',
+        },
+        defaultValue: {
+          summary: `'버튼'`,
+        },
+      },
+    },
   },
-  component: SquareButton,
 } as ComponentMeta<typeof SquareButton>;
 
 const Template: ComponentStory<typeof SquareButton> = (args) => (
