@@ -14,7 +14,7 @@ import {
   NewDialog,
 } from '@/components';
 import {
-  Collection_SORT_CONTENT,
+  COLLECTION_SORT_CONTENT,
   SORT_LABEL,
   VIEW_CONTENT,
   VIEW_LABEL,
@@ -102,14 +102,14 @@ function MyCollection() {
               <SearchResultText searchWord={searchWord} resultCount={count} />
             )}
             {/* <Dropdown
-              content={Collection_SORT_CONTENT}
               dropKind="sort"
               label={SORT_LABEL}
+              content={COLLECTION_SORT_CONTENT}
             /> */}
             <Dropdown
-              content={VIEW_CONTENT}
               dropKind="view"
               label={VIEW_LABEL}
+              content={VIEW_CONTENT}
             />
           </SearchResultWrapper>
         </TitleWrapper>
