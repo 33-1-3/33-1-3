@@ -1,84 +1,71 @@
-import styled from 'styled-components';
-import { memo } from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 
-export interface SquareLinkProps extends StyledLinkProps {
-  link: string;
-  width: string | number;
-  height: string | number;
-  children: string;
+export interface StyledLinkPorps {
+  $fontSize?: number;
+  $isFilled?: boolean;
+  $isTransition?: boolean;
 }
 
-export interface StyledLinkProps {
-  backgroundColor: string;
-  borderColor: string;
-  transition: boolean;
-  color: string;
-  fontSize: string;
+export interface SquareLinkProps extends StyledLinkPorps {
+  link: string;
+  children: string;
 }
 
 function SquareLink({
   link,
-  width,
-  height,
+  $fontSize,
+  $isFilled,
+  $isTransition,
   children,
-  backgroundColor,
-  color,
-  borderColor,
-  transition,
-  fontSize,
 }: SquareLinkProps) {
   return (
-    <>
-      <Link to={link}>
-        <StyledLink
-          style={{ width, height }}
-          backgroundColor={backgroundColor}
-          color={color}
-          borderColor={borderColor}
-          transition={transition}
-          fontSize={fontSize}
-        >
-          {children}
-        </StyledLink>
-      </Link>
-    </>
+    <StyledLink
+      to={link}
+      $fontSize={$fontSize}
+      $isFilled={$isFilled}
+      $isTransition={$isTransition}
+    >
+      {children}
+    </StyledLink>
   );
 }
 
-SquareLink.defaultProps = {
-  height: 40,
-  backgroundColor: 'var(--purple-900)',
-  color: 'var(--white)',
-  borderColor: 'var(--purple-900)',
-  transition: false,
-  fontSize: 'var(--text-md)',
-};
-
-export const StyledLink = styled.div<StyledLinkProps>`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: ${({ backgroundColor }) => backgroundColor};
-  color: ${({ color }) => color};
-  border: 1px solid ${({ borderColor }) => borderColor};
-  border-radius: 0.3125rem;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: ${({ fontSize }) => fontSize};
-
-  ${({ transition, backgroundColor, color }) => {
-    return transition
-      ? /*css*/ `
+const LINK_STYLE = Object.freeze({
+  isFilled: css`
+    background-color: var(--purple-900);
+    border: none;
+    color: var(--white);
+  `,
+  isNotFilled: css`
+    background-color: var(--white);
+    border: 1px solid var(--purple-900);
+    color: var(--purple-900);
+  `,
+  isTransition: css`
     &:hover,
     &:focus {
-    transition: color 0.3s ease-out, background-color 0.3s ease-out;
-    color: ${backgroundColor};
-    background-color: ${color};
-  }`
-      : null;
-  }}
+      color: var(--white);
+      background-color: var(--purple-900);
+      transition: color 0.3s ease-out, background-color 0.3s ease-out;
+    }
+  `,
+});
+
+export const StyledLink = styled(Link)<StyledLinkPorps>`
+  ${({ $isFilled }) =>
+    $isFilled ? LINK_STYLE.isFilled : LINK_STYLE.isNotFilled}
+  width: fit-content;
+  padding: ${({ $fontSize }) =>
+    `${($fontSize as number) * 0.35}px ${($fontSize as number) * 0.8}px`};
+  border-radius: 0.3125rem;
+  font-size: ${({ $fontSize }) => $fontSize}px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+
+  ${({ $isTransition }) => ($isTransition ? LINK_STYLE.isTransition : null)};
 
   &:focus {
     cursor: pointer;
@@ -86,5 +73,11 @@ export const StyledLink = styled.div<StyledLinkProps>`
     outline-offset: 0.2em;
   }
 `;
+
+SquareLink.defaultProps = Object.freeze({
+  $fontSize: 20,
+  $isFilled: true,
+  $isTransition: false,
+});
 
 export default memo(SquareLink);
