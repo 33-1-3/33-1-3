@@ -1,8 +1,9 @@
+import React from 'react';
+import { useRecoilValue } from 'recoil';
+import { loginState, userState } from '@/recoil/globalState';
 import styled from 'styled-components';
 import { LogoLink, SearchInput, SquareLink, ProfileLink } from '@/components';
 import useHandleSubmit from '@/hooks/useHandleSubmit';
-import { useRecoilValue } from 'recoil';
-import { loginState, userState } from '@/recoil/globalState';
 
 function Header({ ...props }) {
   const isLogIn = useRecoilValue(loginState);
@@ -20,10 +21,7 @@ function Header({ ...props }) {
         <SearchInput inputSize="small" handleSubmit={SearchInputRender} />
       )}
       {isLogIn !== undefined && (
-        <SquareLink
-          link={isLogIn ? `/mycollections/${userId}` : '/signin'}
-          width={178}
-        >
+        <SquareLink link={isLogIn ? `/mycollections/${userId}` : '/signin'}>
           My Collections
         </SquareLink>
       )}
@@ -32,11 +30,9 @@ function Header({ ...props }) {
           <ProfileLink />
         ) : (
           <SquareLink
-            backgroundColor="var(--white)"
-            color="var(--purple-900)"
             link={isLogIn ? `/mycollections/${userId}` : '/signin'}
-            transition
-            width={97}
+            $isFilled={false}
+            $isTransition={true}
           >
             Sign In
           </SquareLink>

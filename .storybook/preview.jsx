@@ -1,6 +1,6 @@
 import { RecoilRoot } from 'recoil';
-import { GlobalStyle } from '../src/common/styles/globalStyle';
-import { NormalizeStyle } from '../src/common/styles/normalizeStyle';
+import { GlobalStyle } from '../src/styles/globalStyle';
+import { NormalizeStyle } from '../src/styles/normalizeStyle';
 import { withRouter } from 'storybook-addon-react-router-v6';
 import ko from 'axe-core/locales/ko.json';
 
