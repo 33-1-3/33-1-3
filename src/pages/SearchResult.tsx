@@ -21,6 +21,7 @@ import {
   SORT_LABEL,
   VIEW_CONTENT,
   VIEW_LABEL,
+  SORT_CONTENT,
 } from '@/utils/constants/dropdown';
 import {
   getResourceUrl,
@@ -140,10 +141,15 @@ function SearchResult() {
           <h1 className="srOnly">Search Result</h1>
           <SearchResultWrapper>
             <SearchResultText resultCount={itemCount} />
+            {/* <Dropdown
+              dropKind="sort"
+              label={SORT_LABEL}
+              content={SORT_CONTENT}
+            /> */}
             <Dropdown
-              content={VIEW_CONTENT}
               dropKind="view"
               label={VIEW_LABEL}
+              content={VIEW_CONTENT}
             />
           </SearchResultWrapper>
           <motion.div
