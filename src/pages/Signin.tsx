@@ -72,14 +72,12 @@ function Signin() {
   return (
     <>
       {checkEmail === 'needAuth' && showAlert && (
-        <Alert width="100vw" height="fit-content" type="top">
-          인증이 되지 않은 이메일입니다. 이메일 인증을 완료해주세요.
+        <Alert type="top">
+          인증되지 않은 이메일입니다. 이메일 인증을 완료해주세요.
         </Alert>
       )}
       {checkEmail === 'notExist' && showAlert && (
-        <Alert width="100vw" height="fit-content" type="top">
-          이메일 혹은 비밀번호가 일치하지 않습니다.
-        </Alert>
+        <Alert type="top">이메일 혹은 비밀번호가 일치하지 않습니다.</Alert>
       )}
       <motion.div initial={initial} animate={animate} transition={transition}>
         <FormContainer>
