@@ -5,11 +5,7 @@ export interface DropdownContentType {
 
 export const SORT_CONTENT: DropdownContentType[] = [
   {
-    key: 'default',
-    value: '정확도순',
-  },
-  {
-    key: 'default',
+    key: 'accuracy',
     value: '정확도순',
   },
   {
@@ -18,11 +14,7 @@ export const SORT_CONTENT: DropdownContentType[] = [
   },
 ];
 
-export const Collection_SORT_CONTENT: DropdownContentType[] = [
-  {
-    key: 'default',
-    value: '정렬 방식',
-  },
+export const COLLECTION_SORT_CONTENT: DropdownContentType[] = [
   {
     key: 'title',
     value: '앨범 제목 순',
@@ -36,7 +28,7 @@ export const Collection_SORT_CONTENT: DropdownContentType[] = [
     value: '소장 개수 순',
   },
   {
-    key: 'Released',
+    key: 'released',
     value: '발매일 순',
   },
   {
@@ -48,10 +40,6 @@ export const Collection_SORT_CONTENT: DropdownContentType[] = [
 export const SORT_LABEL = '정렬 방식 선택';
 
 export const VIEW_CONTENT: DropdownContentType[] = [
-  {
-    key: 'block',
-    value: '블록',
-  },
   {
     key: 'block',
     value: '블록',
