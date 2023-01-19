@@ -17,12 +17,12 @@ export default {
   },
   argTypes: {
     width: {
-      description: '로고의 너비 지정',
+      description: '너비 지정',
       control: 'select',
       options: ['74px', '100px', '132px'],
     },
     height: {
-      description: '로고의 높이 지정',
+      description: '높이 지정',
       control: 'select',
       options: ['40px', '54px', '72px'],
     },
