@@ -2,44 +2,38 @@ import { useState, MouseEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import ComboInput from './ComboInput';
-import ListBox from './ListBox';
+import ComboMenu from './ComboMenu';
 import Option from './Option';
 
 export interface DropdownProps {
-  width: string | number;
-  height: string | number;
-  dropKind: string;
-  content: { key: string; value: string }[];
-  backgroundColor?: string;
-  color?: string;
+  width?: string | number;
+  height?: string | number;
+  dropKind: 'view' | 'sort';
   label: string;
+  content: { key: string; value: string }[];
+  [key: string]: unknown;
 }
 
 function Dropdown({
   width,
   height,
   dropKind,
-  content,
-  backgroundColor,
-  color,
   label,
+  content,
   ...props
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [, setSearchParams] = useSearchParams();
   const params = new URLSearchParams(window.location.search);
-  const view = params.get('view');
-  const picker = view === 'block' || view === null ? '블록' : '리스트';
+  const dropKey = params.get(dropKind);
+  const dropValue = content.find(({ key }) => key === dropKey)?.value;
 
-  const select = (e: MouseEvent<HTMLDivElement>): void => {
-    const target = e.target as HTMLTextAreaElement;
-
-    if (target.nodeName === 'DIV') return;
+  const selectOption = (e: MouseEvent<HTMLUListElement>) => {
+    const target = e.target as HTMLUListElement;
 
     if (!target.getAttribute) return;
 
     const value = target.getAttribute('value');
-
     const param = new URLSearchParams(window.location.search);
     if (value !== null) {
       param.set(`${dropKind}`, value);
@@ -49,7 +43,7 @@ function Dropdown({
     setIsOpen(!isOpen);
   };
 
-  const handleVisible = (): void => {
+  const toggleMenu = (): void => {
     setIsOpen(!isOpen);
   };
 
@@ -58,31 +52,28 @@ function Dropdown({
       <label className="srOnly" htmlFor="dropdown">
         {label}
       </label>
-      <div className="combo">
+      <div>
         <ComboInput
-          onClick={handleVisible}
-          width={width}
-          height={height}
+          width={width as string | number}
+          height={height as string | number}
           isOpen={isOpen}
-          backgroundColor={backgroundColor}
-          color={color}
-          content={picker ?? content[0].value}
+          onClick={toggleMenu}
           {...props}
-        />
-        <ListContainer
-          onClick={select}
-          isOpen={isOpen}
-          width={width}
+        >
+          {dropValue ?? content[0].value}
+        </ComboInput>
+        <ComboMenuContainer
           height={height}
-          color={color}
-          backgroundColor={backgroundColor}
-          content={content.slice(1).map(({ key, value }, index) => (
+          isOpen={isOpen}
+          onClick={selectOption}
+          {...props}
+        >
+          {content.map(({ key, value }, index) => (
             <Option key={index} value={key}>
               {value}
             </Option>
           ))}
-          {...props}
-        />
+        </ComboMenuContainer>
       </div>
     </>
   );
@@ -91,11 +82,9 @@ function Dropdown({
 Dropdown.defaultProps = {
   width: 120,
   height: 36,
-  backgroundColor: 'var(--white)',
-  color: 'var(--black)',
 };
 
-const ListContainer = styled(ListBox)`
+const ComboMenuContainer = styled(ComboMenu)`
   margin-top: 4px;
   z-index: 1000;
 `;
