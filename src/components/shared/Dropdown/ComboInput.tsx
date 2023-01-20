@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { flexContainer, absolute } from '@/styles/mixin';
 
 export interface ComboInputProps extends InputProps {
-  width: string | number;
-  height: string | number;
   children: string;
   onClick: MouseEventHandler<HTMLDivElement>;
   [key: string]: unknown;
@@ -14,14 +12,7 @@ export interface InputProps {
   isOpen: boolean;
 }
 
-function ComboInput({
-  width,
-  height,
-  isOpen,
-  onClick,
-  children,
-  ...props
-}: ComboInputProps) {
+function ComboInput({ isOpen, onClick, children, ...props }: ComboInputProps) {
   return (
     <Input
       role="combobox"
@@ -29,7 +20,7 @@ function ComboInput({
       tabIndex={0}
       isOpen={isOpen}
       onClick={onClick}
-      style={{ width, height }}
+      style={{ width: '100%', height: '100%' }}
       {...props}
     >
       {children}
