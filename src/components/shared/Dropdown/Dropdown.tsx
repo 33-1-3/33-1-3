@@ -52,14 +52,8 @@ function Dropdown({
       <label className="srOnly" htmlFor="dropdown">
         {label}
       </label>
-      <div>
-        <ComboInput
-          width={width as string | number}
-          height={height as string | number}
-          isOpen={isOpen}
-          onClick={toggleMenu}
-          {...props}
-        >
+      <div style={{ width, height }}>
+        <ComboInput isOpen={isOpen} onClick={toggleMenu} {...props}>
           {dropValue ?? content[0].value}
         </ComboInput>
         <ComboMenuContainer
