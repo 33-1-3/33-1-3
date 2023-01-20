@@ -69,7 +69,10 @@ function MyCollections() {
       <Header />
       <Main>
         <motion.div initial={initial} animate={animate} transition={transition}>
-          <MyCollectionsPageTitle>{`${userNickName}'s Collections`}</MyCollectionsPageTitle>
+          <PageTitle
+            marginTop={'64px'}
+            marginBottom={'48px'}
+          >{`${userNickName}'s Collections`}</PageTitle>
           <CollectionsWrapper style={{ width: '520px' }}>
             {isLogin && (
               <AddCollectionButton
@@ -168,12 +171,6 @@ function MyCollections() {
     </>
   );
 }
-
-const MyCollectionsPageTitle = styled(PageTitle)`
-  margin: 0 auto;
-  margin-top: 56px;
-  margin-bottom: 28px;
-`;
 
 const CollectionsWrapper = styled.div`
   display: flex;

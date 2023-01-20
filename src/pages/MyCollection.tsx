@@ -88,7 +88,9 @@ function MyCollection() {
       <Header />
       <MainWrapper>
         <TitleWrapper>
-          <PageTitle style={{ height: '53px' }}>{collectionTitle}</PageTitle>
+          <PageTitle marginTop={'64px'} marginBottom={'32px'}>
+            {collectionTitle}
+          </PageTitle>
           <CenterSearchInput
             page="나의 콜렉션"
             placeholder="콜렉션 내에서 검색해 보세요."
@@ -150,7 +152,6 @@ const MainWrapper = styled(Main)`
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
-  margin-top: 56px;
 `;
 
 const TitleWrapper = styled.div`
@@ -164,7 +165,6 @@ const TitleWrapper = styled.div`
 const CenterSearchInput = styled(SearchInput)`
   width: fit-content;
   align-self: center;
-  margin-top: var(--space-xxl);
 `;
 
 const SearchResultWrapper = styled.div`

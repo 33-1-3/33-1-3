@@ -1,15 +1,27 @@
 import styled from 'styled-components';
 
 export interface PageTitleProps {
+  marginTop?: string;
+  marginBottom?: string;
   children: string;
-  [key: string]: unknown;
 }
 
-function PageTitle({ children, ...props }: PageTitleProps) {
-  return <H2 {...props}>{children}</H2>;
+function PageTitle({ marginTop, marginBottom, children }: PageTitleProps) {
+  return (
+    <H2 marginTop={marginTop} marginBottom={marginBottom}>
+      {children}
+    </H2>
+  );
 }
 
-const H2 = styled.h2`
+PageTitle.defaultProps = {
+  marginTop: '0px',
+  marginBottom: '0px',
+};
+
+const H2 = styled.h2<PageTitleProps>`
+  margin: ${({ marginTop, marginBottom }) =>
+    `${marginTop} auto ${marginBottom}`};
   min-width: 680px;
   max-width: 828px;
   font-size: 40px;
@@ -17,7 +29,6 @@ const H2 = styled.h2`
   text-align: center;
   overflow: hidden;
   white-space: nowrap;
-  text-align: center;
   text-overflow: ellipsis;
   word-break: break-all;
 `;
