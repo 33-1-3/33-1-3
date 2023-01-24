@@ -43,7 +43,7 @@ const Input = styled.div<InputProps>`
 
   &::after {
     content: '';
-    ${absolute({ r: 0 })}
+    ${absolute({ t: 0, r: 0 })}
     width: 100%;
     height: 100%;
     background: no-repeat url('/assets/arrow.svg');

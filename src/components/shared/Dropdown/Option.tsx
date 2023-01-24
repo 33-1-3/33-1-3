@@ -12,7 +12,7 @@ export interface OptionProps {
 function Option({ value, children, ...props }: OptionProps) {
   const { fastTransition, changeMauve } = DROPDOWN_HOVER_VALUE;
   return (
-    <Li
+    <StyledLi
       role="option"
       value={value}
       style={{ width: '100%', height: '100%' }}
@@ -21,11 +21,11 @@ function Option({ value, children, ...props }: OptionProps) {
       {...props}
     >
       {children}
-    </Li>
+    </StyledLi>
   );
 }
 
-const Li = styled(motion.li)`
+const StyledLi = styled(motion.li)`
   ${flexContainer({ jc: 'center', ai: 'center' })}
   border-radius: 2px;
   &:not(:last-child) {

@@ -41,7 +41,7 @@ function ComboMenu({
   // };
 
   return (
-    <Ul
+    <StyledUl
       role="listbox"
       aria-labelledby="dropdown"
       tabIndex={-1}
@@ -54,11 +54,11 @@ function ComboMenu({
       {...props}
     >
       {children}
-    </Ul>
+    </StyledUl>
   );
 }
 
-const Ul = styled.ul<ListProps>`
+const StyledUl = styled.ul<ListProps>`
   ${flexContainer({ d: 'column', jc: 'center', ai: 'center' })}
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   position: relative;
