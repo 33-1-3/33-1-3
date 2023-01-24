@@ -35,8 +35,6 @@ function ToggleInputButton() {
         <TextInput
           width={432}
           height={48}
-          color="var(--purple-900)"
-          borderColor="var(--purple-900)"
           placeholder="생성할 콜렉션의 이름을 입력해주세요."
           required={true}
           validationTester={/^.{1,}$/}

@@ -118,7 +118,11 @@ function InquiryButton({
           </StyledForm>
         )}
       </AnimatePresence>
-      {showAlert && <Alert type="bottom" />}
+      {showAlert && (
+        <Alert type="bottomRight" width="200px">
+          감사합니다 : )
+        </Alert>
+      )}
     </>
   );
 }
