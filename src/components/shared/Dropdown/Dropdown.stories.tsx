@@ -26,15 +26,15 @@ const Template: ComponentStory<typeof Dropdown> = (args) => (
   <Dropdown {...args} />
 );
 
-export const SearchResult_Sort = Template.bind({});
-SearchResult_Sort.args = {
+export const SearchResultSort = Template.bind({});
+SearchResultSort.args = {
   label: SORT_LABEL,
   dropKind: 'sort',
   content: SORT_CONTENT,
 };
 
-export const MyCollection_Sort = Template.bind({});
-MyCollection_Sort.args = {
+export const MyCollectionSort = Template.bind({});
+MyCollectionSort.args = {
   label: SORT_LABEL,
   dropKind: 'sort',
   content: COLLECTION_SORT_CONTENT,
