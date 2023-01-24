@@ -120,7 +120,7 @@ function MyCollections() {
           label="Collection Name"
           placeholder="생성할 콜렉션의 이름을 입력해주세요."
           required={true}
-          validationTester={/^.{2,}$/}
+          validationTester={/^.{1,}$/}
           errorMsg="최소 한 글자 이상 입력해주세요."
         ></TextInput>
       </NewDialog>
@@ -148,7 +148,7 @@ function MyCollections() {
           label="Collection Name"
           placeholder="수정할 콜렉션의 이름을 입력해주세요."
           required={true}
-          validationTester={/^.{2,}$/}
+          validationTester={/^.{1,}$/}
           errorMsg="최소 한 글자 이상 입력해주세요."
           value={dialogContent.collectionTitle}
         ></TextInput>
