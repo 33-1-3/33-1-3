@@ -1,45 +1,36 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { flexContainer } from '@/styles/mixin';
+import { DROPDOWN_HOVER_VALUE } from '@/utils/constants/motion';
 
 export interface OptionProps {
   value: string;
   children: string;
+  [key: string]: unknown;
 }
 
 function Option({ value, children, ...props }: OptionProps) {
+  const { fastTransition, changeMauve } = DROPDOWN_HOVER_VALUE;
   return (
-    <Li
+    <StyledLi
       role="option"
-      style={{ width: '100%', height: '100%' }}
       value={value}
-      whileHover={{
-        backgroundColor: 'var(--purple-100)',
-        color: 'var(--black)',
-      }}
-      transition={{
-        duration: 0.3,
-        ease: 'easeOut',
-      }}
+      whileHover={changeMauve}
+      transition={fastTransition}
       {...props}
     >
       {children}
-    </Li>
+    </StyledLi>
   );
 }
 
-const Li = styled(motion.li)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
+const StyledLi = styled(motion.li)`
+  ${flexContainer({ jc: 'center', ai: 'center' })}
+  width: 100%;
+  height: 100%;
   border-radius: 2px;
-
   &:not(:last-child) {
     border-bottom: 1px solid var(--gray-200);
-  }
-
-  &:hover {
-    cursor: pointer;
   }
 `;
 

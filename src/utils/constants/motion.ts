@@ -18,3 +18,14 @@ export const FLOATING_MOTION_VALUE = {
     ease: 'easeOut',
   },
 };
+
+export const DROPDOWN_HOVER_VALUE = {
+  fastTransition: {
+    duration: 0.3,
+    ease: 'easeOut',
+  },
+  changeMauve: {
+    backgroundColor: 'var(--purple-100)',
+    cursor: 'pointer',
+  },
+};

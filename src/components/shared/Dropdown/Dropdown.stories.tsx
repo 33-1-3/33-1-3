@@ -1,8 +1,15 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Dropdown from './Dropdown';
+import {
+  SORT_CONTENT,
+  COLLECTION_SORT_CONTENT,
+  SORT_LABEL,
+  VIEW_CONTENT,
+  VIEW_LABEL,
+} from '@/utils/constants/dropdown';
 
 export default {
-  title: 'common/components/Dropdown',
+  title: 'shared/Dropdown',
   conponent: Dropdown,
   parameters: {
     reactRouter: {
@@ -15,27 +22,23 @@ const Template: ComponentStory<typeof Dropdown> = (args) => (
   <Dropdown {...args} />
 );
 
-export const Sort = Template.bind({});
-Sort.args = {
-  label: '정렬방식 선택',
+export const SearchResultSort = Template.bind({});
+SearchResultSort.args = {
+  label: SORT_LABEL,
   dropKind: 'sort',
-  content: [
-    { key: 'default', value: '정렬방식' },
-    { key: 'title', value: '앨범 제목' },
-    { key: 'name', value: '가수 이름' },
-    { key: 'date', value: '발매일' },
-    { key: 'update', value: '업데이트' },
-    { key: 'price', value: '가격' },
-  ],
+  content: SORT_CONTENT,
 };
 
-export const Show = Template.bind({});
-Show.args = {
-  label: '보기방식 선택',
+export const MyCollectionSort = Template.bind({});
+MyCollectionSort.args = {
+  label: SORT_LABEL,
+  dropKind: 'sort',
+  content: COLLECTION_SORT_CONTENT,
+};
+
+export const View = Template.bind({});
+View.args = {
+  label: VIEW_LABEL,
   dropKind: 'view',
-  content: [
-    { key: 'default', value: '보기방식' },
-    { key: 'block', value: '블록' },
-    { key: 'list', value: '리스트' },
-  ],
+  content: VIEW_CONTENT,
 };
