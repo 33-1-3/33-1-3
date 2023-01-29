@@ -9,16 +9,12 @@ import {
 } from '@/utils/constants/dropdown';
 
 export default {
-  title: 'components/shared/Dropdown',
+  title: 'shared/Dropdown',
   conponent: Dropdown,
   parameters: {
     reactRouter: {
       routePath: '/searchresults',
     },
-  },
-  args: {
-    width: 120,
-    height: 36,
   },
 } as ComponentMeta<typeof Dropdown>;
 

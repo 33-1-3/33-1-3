@@ -1,25 +1,21 @@
 import { ReactNode, MouseEventHandler } from 'react';
 import styled from 'styled-components';
 import { flexContainer } from '@/styles/mixin';
+import { calcLength } from 'framer-motion';
 
-export interface ComboMenuProps extends ListProps {
-  height: string | number;
+export interface ComboMenuProps {
   children: ReactNode[];
   onClick: MouseEventHandler<HTMLUListElement>;
+  isOpen: boolean;
   [key: string]: unknown;
 }
 
 export interface ListProps {
+  length: number;
   isOpen: boolean;
 }
 
-function ComboMenu({
-  height,
-  children,
-  isOpen,
-  onClick,
-  ...props
-}: ComboMenuProps) {
+function ComboMenu({ children, isOpen, onClick, ...props }: ComboMenuProps) {
   // 유틸관련 1차 배포 후 수정 및 업로드
   // const containerRef = useRef(null);
 
@@ -47,10 +43,7 @@ function ComboMenu({
       tabIndex={-1}
       isOpen={isOpen}
       onClick={onClick}
-      style={{
-        width: '100%',
-        height: +height * children.length,
-      }}
+      length={children.length}
       {...props}
     >
       {children}
@@ -59,6 +52,8 @@ function ComboMenu({
 }
 
 const StyledUl = styled.ul<ListProps>`
+  width: 100%;
+  height: ${({ length }) => 36 * length + 'px'};
   ${flexContainer({ d: 'column', jc: 'center', ai: 'center' })}
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   position: relative;

@@ -15,7 +15,6 @@ function Option({ value, children, ...props }: OptionProps) {
     <StyledLi
       role="option"
       value={value}
-      style={{ width: '100%', height: '100%' }}
       whileHover={changeMauve}
       transition={fastTransition}
       {...props}
@@ -27,6 +26,8 @@ function Option({ value, children, ...props }: OptionProps) {
 
 const StyledLi = styled(motion.li)`
   ${flexContainer({ jc: 'center', ai: 'center' })}
+  width: 100%;
+  height: 100%;
   border-radius: 2px;
   &:not(:last-child) {
     border-bottom: 1px solid var(--gray-200);
