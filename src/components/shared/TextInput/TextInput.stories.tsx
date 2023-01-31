@@ -1,9 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-
 import TextInput from './TextInput';
 
 export default {
-  title: 'common/components/TextInput',
+  title: 'shared/TextInput',
   component: TextInput,
   parameters: {
     design: {
@@ -16,27 +15,47 @@ const Template: ComponentStory<typeof TextInput> = (args) => (
   <TextInput {...args} />
 );
 
-export const CollectionNameInput = Template.bind({});
-CollectionNameInput.args = {
+export const TextInputWithLabel = Template.bind({});
+TextInputWithLabel.args = {
   width: 416,
   height: 36,
-  label: 'Collection Name',
-  placeholder: '생성할 콜렉션의 이름을 입력해주세요.',
+  label: 'Label',
+  placeholder: 'placeholder',
   required: true,
   validationTester: /^.{1,}$/,
   errorMsg: '최소 한 글자 이상 입력해주세요.',
 };
 
-export const ModalCollectionNameInput = Template.bind({});
-ModalCollectionNameInput.args = {
-  width: 408,
-  height: 48,
-  color: 'var(--purple-900)',
-  borderColor: 'var(--purple-900)',
-  placeholder: '생성할 콜렉션의 이름을 입력해주세요.',
+export const TextInputWithoutLabel = Template.bind({});
+TextInputWithoutLabel.args = {
+  width: 416,
+  height: 36,
+  placeholder: 'placeholder',
   required: true,
   validationTester: /^.{1,}$/,
   errorMsg: '최소 한 글자 이상 입력해주세요.',
+};
+
+export const TextInputWithoutPlaceholder = Template.bind({});
+TextInputWithoutPlaceholder.args = {
+  width: 416,
+  height: 36,
+  label: 'Label',
+  required: true,
+  validationTester: /^.{1,}$/,
+  errorMsg: '최소 한 글자 이상 입력해주세요.',
+};
+
+export const TextInputWithInitialValue = Template.bind({});
+TextInputWithInitialValue.args = {
+  width: 416,
+  height: 36,
+  label: 'Label',
+  placeholder: 'placeholder',
+  required: true,
+  validationTester: /^.{1,}$/,
+  errorMsg: '최소 한 글자 이상 입력해주세요.',
+  value: 'collection',
 };
 
 export const EmailInput = Template.bind({});
