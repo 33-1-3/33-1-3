@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { flexContainer } from '@/styles/mixin';
-import widthHeightToPx from '@/utils/functions/widthHeightToPx';
+import lengthToPxStr from '@/utils/functions/lengthToPxStr';
 
 export interface AlertProps {
   $type: 'top' | 'bottomRight';
@@ -73,7 +73,7 @@ const StyledAlert = styled.div<AlertProps>`
   ${flexContainer({ jc: 'center', ai: 'center' })}
   padding: 20px;
   /* TODO: default props 타입 단언 말고 다른 방법은? */
-  width: ${({ $width }) => widthHeightToPx($width as number | string)};
+  width: ${({ $width }) => lengthToPxStr($width as number | string)};
   height: fit-content;
   color: ${({ textColor }) => textColor};
   background-color: ${({ backgroundColor }) => backgroundColor};
