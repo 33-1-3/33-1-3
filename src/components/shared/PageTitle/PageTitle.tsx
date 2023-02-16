@@ -6,20 +6,19 @@ export interface PageTitleProps {
   children: string;
 }
 
-function PageTitle({ marginTop, marginBottom, children }: PageTitleProps) {
+function PageTitle({
+  marginTop = '0px',
+  marginBottom = '0px',
+  children,
+}: PageTitleProps) {
   return (
-    <H2 marginTop={marginTop} marginBottom={marginBottom}>
+    <StyledH2 marginTop={marginTop} marginBottom={marginBottom}>
       {children}
-    </H2>
+    </StyledH2>
   );
 }
 
-PageTitle.defaultProps = {
-  marginTop: '0px',
-  marginBottom: '0px',
-};
-
-const H2 = styled.h2<PageTitleProps>`
+const StyledH2 = styled.h2<PageTitleProps>`
   margin: ${({ marginTop, marginBottom }) =>
     `${marginTop} auto ${marginBottom}`};
   min-width: 680px;
