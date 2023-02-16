@@ -69,4 +69,8 @@ export const NormalizeStyle = createGlobalStyle/*css*/ `
     text-decoration: none;
     color: inherit; 
   }
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s;
+  }
 `;
