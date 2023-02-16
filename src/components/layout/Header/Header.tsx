@@ -1,8 +1,8 @@
-import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { loginState, userState } from '@/recoil/globalState';
-import styled from 'styled-components';
 import { LogoLink, SearchInput, SquareLink, ProfileLink } from '@/components';
+import styled from 'styled-components';
+import { absolute, flexContainer } from '@/styles/mixin';
 import useHandleSubmit from '@/hooks/useHandleSubmit';
 
 function Header({ ...props }) {
@@ -18,7 +18,7 @@ function Header({ ...props }) {
       <LogoLink height="40px" width="74px" />
       <BetaText>Beta</BetaText>
       {!isMain && isLogIn !== undefined && (
-        <SearchInput inputSize="small" handleSubmit={SearchInputRender} />
+        <SearchInput inputSize="small" onSubmit={SearchInputRender} />
       )}
       {isLogIn !== undefined && (
         <SquareLink link={isLogIn ? `/mycollections/${userId}` : '/signin'}>
@@ -42,16 +42,14 @@ function Header({ ...props }) {
 }
 
 const StyledHeader = styled.header`
+  ${flexContainer({ ai: 'center', g: '12px' })}
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  display: flex;
-  align-items: center;
   background-color: var(--white);
   min-width: 680px;
   padding: 12px 16px;
-  gap: 12px;
   box-shadow: var(--shadow-Header);
   z-index: 2000;
 
@@ -61,9 +59,7 @@ const StyledHeader = styled.header`
 `;
 
 const BetaText = styled.span`
-  position: absolute;
-  left: 96px;
-  bottom: 10px;
+  ${absolute({ l: 96, b: 10 })}
   font-style: italic;
   font-size: var(--text-sm);
   font-weight: 400;

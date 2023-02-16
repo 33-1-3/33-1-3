@@ -2,11 +2,11 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import SignInAndUpLink from './SignInAndUpLink';
 
 export default {
-  title: 'common/components/SignInAndUpLink',
+  title: 'features/SignInAndUpLink',
   component: SignInAndUpLink,
   argTypes: {
     moveTarget: {
-      options: ['signin', 'signup', 'github'],
+      options: ['signin', 'signup'],
       control: { type: 'radio' },
     },
   },
