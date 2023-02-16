@@ -76,6 +76,7 @@ const buttonMixin = {
 
 const InputWrapper = styled.form`
   display: inline-block;
+  width: fit-content;
   position: relative;
 `;
 
@@ -97,8 +98,8 @@ const StyledInput = styled.input<InputProps>`
 `;
 
 const SearchButton = styled(motion.button)<InputProps>`
-  ${absolute({ r: 0 })}
-  ${({ inputSize }) => buttonMixin[inputSize]}
+  ${absolute({ r: 0 })};
+  ${({ inputSize }) => buttonMixin[inputSize]};
   background: url('/assets/searchButton.svg') no-repeat center/contain;
   border: none;
 `;

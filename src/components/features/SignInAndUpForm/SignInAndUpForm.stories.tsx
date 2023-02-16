@@ -1,9 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-
 import SignInAndUpForm from './SignInAndUpForm';
 
 export default {
-  title: 'common/components/SignInAndUpForm',
+  title: 'features/SignInAndUpForm',
   component: SignInAndUpForm,
 } as ComponentMeta<typeof SignInAndUpForm>;
 
