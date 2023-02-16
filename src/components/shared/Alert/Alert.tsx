@@ -1,25 +1,27 @@
 import styled, { css } from 'styled-components';
+import { flexContainer } from '@/styles/mixin';
+import widthHeightToPx from '@/utils/functions/widthHeightToPx';
 
 export interface AlertProps {
-  type: 'top' | 'bottomRight';
-  width?: string | number;
+  $type: 'top' | 'bottomRight';
+  $width?: string | number;
   textColor?: string;
   backgroundColor?: string;
   children: string;
 }
 
 function Alert({
-  type,
-  width,
-  textColor,
-  backgroundColor,
+  $type,
+  $width = '100vw',
+  textColor = 'var(--purple-900)',
+  backgroundColor = 'var(--purple-100)',
   children,
 }: AlertProps) {
   return (
     <StyledAlert
-      type={type}
       role="alert"
-      style={{ width }}
+      $type={$type}
+      $width={$width}
       textColor={textColor}
       backgroundColor={backgroundColor}
     >
@@ -27,12 +29,6 @@ function Alert({
     </StyledAlert>
   );
 }
-
-Alert.defaultProps = {
-  width: '100vw',
-  textColor: 'var(--purple-900)',
-  backgroundColor: 'var(--purple-100)',
-};
 
 const ALERT_STYLE = {
   top: css`
@@ -74,18 +70,18 @@ const ALERT_STYLE = {
 
 const StyledAlert = styled.div<AlertProps>`
   position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${flexContainer({ jc: 'center', ai: 'center' })}
   padding: 20px;
+  /* TODO: default props 타입 단언 말고 다른 방법은? */
+  width: ${({ $width }) => widthHeightToPx($width as number | string)};
   height: fit-content;
   color: ${({ textColor }) => textColor};
   background-color: ${({ backgroundColor }) => backgroundColor};
   word-break: break-all;
   z-index: 3000;
 
-  ${({ type }) => ALERT_STYLE[type]}
-  animation: ${({ type }) => `${type} 3s both`};
+  ${({ $type }) => ALERT_STYLE[$type]}
+  animation: ${({ $type }) => `${$type} 3s both`};
 
   &:empty {
     display: none;
