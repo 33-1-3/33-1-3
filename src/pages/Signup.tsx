@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import axios from 'axios';
 import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
 import {
   LogoLink,
@@ -8,8 +8,9 @@ import {
   WaveFooter,
   Alert,
 } from '@/components';
-import axios from 'axios';
-import { useState } from 'react';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { flexContainer } from '@/styles/mixin';
 
 function Signup() {
   const [checkEmail, setCheckEmail] = useState('');
@@ -60,7 +61,7 @@ function Signup() {
         <FormContainer>
           <HeaderLogo height="72px" width="132px" />
           <SignInAndUpForm
-            submitHandler={submitHandler}
+            onSubmit={submitHandler}
             option="signup"
             isLoading={isLoading}
           />
@@ -77,11 +78,12 @@ const HeaderLogo = styled(LogoLink)`
 `;
 
 const FormContainer = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-sm);
+  ${flexContainer({
+    d: 'column',
+    ai: 'center',
+    jc: 'center',
+    g: 'var(--space-sm)',
+  })}
   margin: auto;
   margin-top: 15vh;
 `;
