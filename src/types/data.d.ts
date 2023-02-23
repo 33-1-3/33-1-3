@@ -162,7 +162,7 @@ export interface ProcessedResult {
     infoContent: string | string[];
     isValid: boolean;
   }[];
-  imgUrl: string;
+  imgUrl: string | undefined;
   resourceUrl: string;
 }
 

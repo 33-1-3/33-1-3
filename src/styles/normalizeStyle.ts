@@ -48,7 +48,7 @@ export const NormalizeStyle = createGlobalStyle/*css*/ `
     border-collapse: collapse;
     border-spacing: 0;
   }
-  * {
+  *, *::before, *::after {
     box-sizing: border-box;
   }
   body {
