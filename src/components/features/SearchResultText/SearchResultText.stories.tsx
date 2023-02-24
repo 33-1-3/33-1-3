@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import SearchResultText from './SearchResultText';
 
 export default {
-  title: 'common/components/SearchResultText',
+  title: 'features/SearchResultText',
   component: SearchResultText,
   args: {
     resultCount: 0,
@@ -26,11 +26,29 @@ const Template: ComponentStory<typeof SearchResultText> = (args) => (
   <SearchResultText {...args} />
 );
 
-export const Example = Template.bind({});
-Example.story = {
+export const QueryFromSearchParams = Template.bind({});
+QueryFromSearchParams.story = {
   parameters: {
     reactRouter: {
       searchParams: { query: 'IU' },
     },
   },
+};
+
+export const QueryFromProps = Template.bind({});
+QueryFromProps.args = {
+  searchWord: '아이유',
+};
+
+export const QueryIsEmptyString = Template.bind({});
+QueryIsEmptyString.args = {
+  searchWord: '',
+};
+
+export const QueryIsUndefined = Template.bind({});
+QueryIsUndefined.args = {};
+
+export const QueryIsLong = Template.bind({});
+QueryIsLong.args = {
+  searchWord: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 };
