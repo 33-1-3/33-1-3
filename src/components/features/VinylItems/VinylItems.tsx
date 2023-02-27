@@ -13,16 +13,19 @@ export interface VinylItemsProps extends ViewProps, PageProps {
 function VinylItems({ searchResult, page, view, ...props }: VinylItemsProps) {
   return (
     <VinylItemsWrapper view={view} {...props}>
-      {searchResult.map((result) => (
-        <VinylItem
-          key={uuid()}
-          searchResult={result}
-          page={page}
-          view={view}
-          data-releasedid={getId(result.resourceUrl)}
-          className="infoContainer"
-        />
-      ))}
+      {searchResult.map((result) => {
+        const releasedId = getId(result.resourceUrl);
+        return (
+          <VinylItem
+            key={releasedId}
+            searchResult={result}
+            page={page}
+            view={view}
+            data-releasedid={releasedId}
+            className="infoContainer"
+          />
+        );
+      })}
     </VinylItemsWrapper>
   );
 }

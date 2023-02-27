@@ -49,7 +49,7 @@ function DetailInfo({
       ) : (
         <InfoContent>
           {isMyItem && <span aria-hidden={true}>{' ㆍ '}</span>}
-          {infoString}
+          <span>{infoString}</span>
         </InfoContent>
       )}
     </>
