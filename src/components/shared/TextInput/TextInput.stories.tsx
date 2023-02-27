@@ -17,8 +17,8 @@ const Template: ComponentStory<typeof TextInput> = (args) => (
 
 export const TextInputWithLabel = Template.bind({});
 TextInputWithLabel.args = {
-  width: 416,
-  height: 36,
+  $width: 416,
+  $height: 36,
   label: 'Label',
   placeholder: 'placeholder',
   required: true,
@@ -28,8 +28,8 @@ TextInputWithLabel.args = {
 
 export const TextInputWithoutLabel = Template.bind({});
 TextInputWithoutLabel.args = {
-  width: 416,
-  height: 36,
+  $width: 416,
+  $height: 36,
   placeholder: 'placeholder',
   required: true,
   validationTester: /^.{1,}$/,
@@ -38,8 +38,8 @@ TextInputWithoutLabel.args = {
 
 export const TextInputWithoutPlaceholder = Template.bind({});
 TextInputWithoutPlaceholder.args = {
-  width: 416,
-  height: 36,
+  $width: 416,
+  $height: 36,
   label: 'Label',
   required: true,
   validationTester: /^.{1,}$/,
@@ -48,8 +48,8 @@ TextInputWithoutPlaceholder.args = {
 
 export const TextInputWithInitialValue = Template.bind({});
 TextInputWithInitialValue.args = {
-  width: 416,
-  height: 36,
+  $width: 416,
+  $height: 36,
   label: 'Label',
   placeholder: 'placeholder',
   required: true,
@@ -60,12 +60,11 @@ TextInputWithInitialValue.args = {
 
 export const EmailInput = Template.bind({});
 EmailInput.args = {
-  width: 416,
-  height: 36,
+  $width: 416,
+  $height: 36,
   label: 'Email',
   placeholder: '이메일을 입력해주세요.',
   required: true,
-  validationTester:
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  validationTester: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
   errorMsg: '이메일 형식에 맞게 입력해주세요.',
 };

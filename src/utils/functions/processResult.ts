@@ -98,7 +98,7 @@ const processReleaseResult = ({
   tracklist: _tracklist,
 }: ReleaseRawResult): ProcessedResourceUrlResult => {
   const artist = artists[0].name;
-  const imgUrl = images[0].resource_url;
+  const imgUrl = images && images[0].resource_url;
   const labels = _labels.map(({ name }) => name);
   const tracklist = _tracklist.map(({ position, type_, title, duration }) => ({
     position,
@@ -108,6 +108,7 @@ const processReleaseResult = ({
   }));
   const released = _released === undefined ? '' : _released;
   const year = released === '' ? _year ?? '' : released;
+  // console.log(artist, imgUrl, labels, tracklist, released, year);
   return {
     id: getId(resourceUrl),
     titleInfo: { title, artist },
@@ -159,10 +160,10 @@ const commonRelease = ({
   released: _released,
 }: ReleaseRawResult): RawCommonVinyl => {
   const artist = artists[0].name;
-  const imgUrl = images[0].resource_url;
+  const imgUrl = images && images[0].resource_url;
   const released = _released === undefined ? '' : _released;
   const year = released === '' ? _year ?? '' : released;
-
+  // console.log(artist, imgUrl, released, year);
   return {
     id: getId(resource_url),
     title,
@@ -189,7 +190,7 @@ const processMasterResult = ({
 }: MasterRawResult): ProcessedResourceUrlResult => {
   const country = _country ?? '';
   const artist = artists[0].name;
-  const imgUrl = images[0].resource_url;
+  const imgUrl = images && images[0].resource_url;
   const year = _year ?? '';
   const labels = _labels?.map(({ name }) => name) ?? [];
   const tracklist = _tracklist.map(({ position, type_, title, duration }) => ({
@@ -198,6 +199,7 @@ const processMasterResult = ({
     title,
     duration,
   }));
+  // console.log(country, artist, imgUrl, year, labels, tracklist);
   return {
     id: getId(resourceUrl),
     titleInfo: { title, artist },
@@ -250,7 +252,6 @@ const commonMaster = ({
   const artist = artists[0].name;
   const imgUrl = images[0].resource_url;
   const year = _year ?? '';
-
   return {
     id: getId(resource_url),
     title,

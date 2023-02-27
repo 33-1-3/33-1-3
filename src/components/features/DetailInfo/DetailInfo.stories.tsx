@@ -19,16 +19,22 @@ export const Released = Template.bind({});
 Released.args = {
   infoName: 'Released',
   infoContent: 'Aug 2014',
+  isValid: true,
+  isMyItem: false,
 };
 
 export const Genre = Template.bind({});
 Genre.args = {
   infoName: 'Genre',
   infoContent: 'Pop, Folk, World, & Country',
+  isValid: true,
+  isMyItem: false,
 };
 
 export const Style = Template.bind({});
-Genre.args = {
-  infoName: 'Genre',
-  infoContent: 'Pop, Folk, World, & Country',
+Style.args = {
+  infoName: 'Style',
+  infoContent: 'Folk, Ballad, K-pop',
+  isValid: true,
+  isMyItem: false,
 };

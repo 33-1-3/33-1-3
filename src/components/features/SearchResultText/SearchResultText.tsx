@@ -1,52 +1,50 @@
-import styled, { css } from 'styled-components';
-import { useSearchParams } from 'react-router-dom';
 import { useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 export interface SearchResultTextProps {
   resultCount: number;
   searchWord?: string;
 }
 
-function SearchResultText({
-  resultCount,
-  searchWord,
-  ...props
-}: SearchResultTextProps) {
+function SearchResultText({ resultCount, searchWord }: SearchResultTextProps) {
   const [searchParams] = useSearchParams();
+  const query = searchWord || searchParams.get('query') || '';
+  const formattedQuery =
+    '"' + (query.length > 20 ? query.substring(0, 20) + '… ' : query) + '"';
+
   return useMemo(
     () => (
-      <SearchResultTextWrapper {...props}>
-        <KeyWord>{`"${searchWord ?? searchParams.get('query')}"`}</KeyWord>
-        <ResultInfo>{`검색 결과  ${resultCount} 건`}</ResultInfo>
+      <SearchResultTextWrapper>
+        {/* TODO: 임시방편으로 이렇게 구현해두긴 했지만..
+        빈 문자열이 검색되었을 경우 허수 검색결과가 많아서 아예 다른 뷰를 보여주는 게 나을듯.. */}
+        {query ? (
+          <>
+            <PurpleText>{formattedQuery}</PurpleText>
+            <NormalText>
+              &nbsp;&nbsp;검색 결과&nbsp;&nbsp;{resultCount} 건
+            </NormalText>
+          </>
+        ) : (
+          <NormalText>전체 LP&nbsp;&nbsp;{resultCount} 건</NormalText>
+        )}
       </SearchResultTextWrapper>
     ),
-    [resultCount, searchWord]
+    [resultCount, query]
   );
 }
 
-const fontStyle = css`
+const SearchResultTextWrapper = styled.span`
   font-weight: 700;
   font-size: var(--text-md);
-`;
-
-const SearchResultTextWrapper = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  gap: var(--space-xs);
-  max-width: 408px;
-`;
-
-const KeyWord = styled.span`
-  ${fontStyle};
-  color: var(--purple-900);
-  max-width: 284px;
-  overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
 `;
 
-const ResultInfo = styled.span`
-  ${fontStyle};
+const PurpleText = styled.span`
+  color: var(--purple-900);
+`;
+
+const NormalText = styled.span`
   color: var(--black);
 `;
 

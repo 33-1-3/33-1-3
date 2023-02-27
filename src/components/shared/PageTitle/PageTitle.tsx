@@ -1,27 +1,30 @@
 import styled from 'styled-components';
+import lengthToPxStr from '@/utils/functions/lengthToPxStr';
 
 export interface PageTitleProps {
-  marginTop?: string;
-  marginBottom?: string;
+  marginTop?: number | string;
+  marginBottom?: number | string;
   children: string;
 }
 
-function PageTitle({ marginTop, marginBottom, children }: PageTitleProps) {
+function PageTitle({
+  marginTop = '0px',
+  marginBottom = '0px',
+  children,
+}: PageTitleProps) {
   return (
-    <H2 marginTop={marginTop} marginBottom={marginBottom}>
+    <StyledH2 marginTop={marginTop} marginBottom={marginBottom}>
       {children}
-    </H2>
+    </StyledH2>
   );
 }
 
-PageTitle.defaultProps = {
-  marginTop: '0px',
-  marginBottom: '0px',
-};
-
-const H2 = styled.h2<PageTitleProps>`
+const StyledH2 = styled.h2<PageTitleProps>`
+  /* TODO: default props 타입 단언 말고 다른 방법은? */
   margin: ${({ marginTop, marginBottom }) =>
-    `${marginTop} auto ${marginBottom}`};
+    `${lengthToPxStr(marginTop as number | string)} auto ${lengthToPxStr(
+      marginBottom as number | string
+    )}`};
   min-width: 680px;
   max-width: 828px;
   font-size: 40px;

@@ -36,18 +36,16 @@ function IconButton({
   const IconComponent = ICONS[iconType];
 
   return (
-    <>
-      <IconButtonContainer
-        type="button"
-        style={{ width, height }}
-        $color={color}
-        backgroundColor={backgroundColor}
-        onClick={clickHandler}
-        {...props}
-      >
-        <IconComponent width={width} height={height} />
-      </IconButtonContainer>
-    </>
+    <IconButtonContainer
+      type="button"
+      style={{ width, height }}
+      $color={color}
+      backgroundColor={backgroundColor}
+      onClick={clickHandler}
+      {...props}
+    >
+      <IconComponent width={width} height={height} />
+    </IconButtonContainer>
   );
 }
 

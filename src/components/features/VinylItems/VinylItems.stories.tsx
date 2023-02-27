@@ -1,9 +1,10 @@
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { mockSearchResults } from '@/utils/mocks/mockInfo';
 import VinylItems from './VinylItems';
+import { mockSearchResults } from '@/utils/mocks/mockInfo';
 
+// TODO: 스토리북 새로고침 해야만 보이는 에러 해결(Album Info 컴포넌트 확인 필요)
 export default {
-  title: 'common/components/VinylItems',
+  title: 'features/VinylItems',
   component: VinylItems,
   args: {
     searchResults: mockSearchResults,
@@ -11,7 +12,7 @@ export default {
 } as ComponentMeta<typeof VinylItems>;
 
 const Template: ComponentStory<typeof VinylItems> = (args) => (
-  <VinylItems {...args}></VinylItems>
+  <VinylItems {...args} />
 );
 
 export const AllBlock = Template.bind({});
@@ -32,7 +33,7 @@ AllList.args = {
 };
 AllList.parameters = {
   design: {
-    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=133%3A344&t=klXldng2oaYkGL1Z-4',
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=181%3A622&t=WViOsk1J5WsWdz9q-4',
   },
 };
 
@@ -43,7 +44,7 @@ CollectionBlock.args = {
 };
 CollectionBlock.parameters = {
   design: {
-    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=133%3A344&t=klXldng2oaYkGL1Z-4',
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=181%3A3054&t=WViOsk1J5WsWdz9q-4',
   },
 };
 
@@ -54,6 +55,6 @@ CollectionList.args = {
 };
 CollectionList.parameters = {
   design: {
-    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=133%3A344&t=klXldng2oaYkGL1Z-4',
+    url: 'https://www.figma.com/file/y5dq4m439YJKRTrKw5ZsZV/33-1%2F3?node-id=181%3A4470&t=WViOsk1J5WsWdz9q-4',
   },
 };
