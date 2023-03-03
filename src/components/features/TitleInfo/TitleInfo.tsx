@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { flexContainer, textEllipsis } from '@/styles/mixin';
 import { ViewProps } from '@/types/render';
 
 export interface TitleInfoProps extends ViewProps {
@@ -21,48 +22,44 @@ function TitleInfo({ title, artist, view }: TitleInfoProps) {
   );
 }
 
-const TEXT_WIDTH = {
+const TEXT_WIDTH = Object.freeze({
   block: '118px',
   list: '40vw',
   detail: '346px',
   myitem: '400px',
-};
+});
 
-const TITLE_FONT_SIZE = {
+const TITLE_FONT_SIZE = Object.freeze({
   block: 'var(--text-bs)',
   list: '24px',
   detail: '36px',
   myitem: '28px',
-};
+});
 
-const ARTIST_FONT_SIZE = {
+const ARTIST_FONT_SIZE = Object.freeze({
   block: 'var(--text-xs)',
   list: 'var(--text-md)',
   detail: 'var(--text-lg)',
   myitem: '20px',
-};
+});
 
-const GAP_SIZE = {
+const GAP_SIZE = Object.freeze({
   block: 'var(--space-xs)',
   list: 'var(--space-xs)',
   detail: 'var(--space-bs)',
   myitem: 'var(--space-bs)',
-};
+});
 
-const textMixin = css<ViewProps>`
+const textMixin = Object.freeze(css<ViewProps>`
+  ${textEllipsis};
   width: ${({ view }) => TEXT_WIDTH[view]};
-  overflow: hidden;
-  white-space: nowrap;
   text-align: start;
-  text-overflow: ellipsis;
-  word-break: break-all;
   line-height: normal;
-`;
+`);
 
 const TitleInfoWrapper = styled.dl<ViewProps>`
   width: ${({ view }) => (view === 'list' ? '48.2vw' : 'min-content')};
-  display: flex;
-  flex-flow: column wrap;
+  ${flexContainer({ d: 'column', w: 'wrap' })}
   gap: ${({ view }) => GAP_SIZE[view]};
   color: var(--black);
 `;
@@ -70,7 +67,6 @@ const TitleInfoWrapper = styled.dl<ViewProps>`
 const TitleText = styled.dd<ViewProps>`
   ${textMixin};
   ${({ view }) => view === 'list' && 'min-width: 432px'};
-  /* padding: 4px 0; */
   font-weight: 700;
   font-size: ${({ view }) => TITLE_FONT_SIZE[view]};
 `;

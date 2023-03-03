@@ -1,4 +1,3 @@
-import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { loginState, userState } from '@/recoil/globalState';
 import styled from 'styled-components';
@@ -21,7 +20,12 @@ function Header({ ...props }) {
         <SearchInput inputSize="small" handleSubmit={SearchInputRender} />
       )}
       {isLogIn !== undefined && (
-        <SquareLink link={isLogIn ? `/mycollections/${userId}` : '/signin'}>
+        <SquareLink
+          $width={178}
+          $height={40}
+          $fontSize={20}
+          link={isLogIn ? `/mycollections/${userId}` : '/signin'}
+        >
           My Collections
         </SquareLink>
       )}
@@ -30,9 +34,12 @@ function Header({ ...props }) {
           <ProfileLink />
         ) : (
           <SquareLink
-            link={isLogIn ? `/mycollections/${userId}` : '/signin'}
+            $width={100}
+            $height={40}
+            $fontSize={20}
             $isFilled={false}
             $isTransition={true}
+            link={isLogIn ? `/mycollections/${userId}` : '/signin'}
           >
             Sign In
           </SquareLink>

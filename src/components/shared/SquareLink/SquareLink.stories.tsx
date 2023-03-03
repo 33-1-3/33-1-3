@@ -1,9 +1,9 @@
-import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SquareLink from './SquareLink';
 
 export default {
-  title: 'components/shared/SquareLink',
+  title: 'shared/SquareLink',
+  component: SquareLink,
   parameters: {
     docs: {
       description: {
@@ -13,10 +13,6 @@ export default {
   },
   args: {
     link: '/',
-    children: '',
-    $fontSize: 20,
-    $isFilled: true,
-    $isTransition: false,
   },
   argTypes: {
     link: {
@@ -27,6 +23,22 @@ export default {
         },
         defaultValue: {
           summary: `'/'`,
+        },
+      },
+    },
+    $width: {
+      description: '컴포넌트의 너비 지정',
+      table: {
+        type: {
+          summary: `string | number`,
+        },
+      },
+    },
+    $height: {
+      description: '컴포넌트의 높이 지정',
+      table: {
+        type: {
+          summary: `string | number`,
         },
       },
     },
@@ -84,6 +96,9 @@ const Template: ComponentStory<typeof SquareLink> = (args) => (
 export const MyCollections = Template.bind({});
 MyCollections.args = {
   link: '/',
+  $width: 178,
+  $height: 40,
+  $fontSize: 20,
   children: 'My Collections',
 };
 MyCollections.parameters = {
@@ -95,6 +110,9 @@ MyCollections.parameters = {
 export const SignIn = Template.bind({});
 SignIn.args = {
   link: '/signin',
+  $width: 100,
+  $height: 40,
+  $fontSize: 20,
   children: 'Sign In',
   $isFilled: false,
   $isTransition: true,

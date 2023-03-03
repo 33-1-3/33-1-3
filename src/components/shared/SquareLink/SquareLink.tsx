@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { widthHeight } from '@/types/style';
 
-export interface StyledLinkPorps {
+export interface StyledLinkPorps extends widthHeight {
   $fontSize?: number;
   $isFilled?: boolean;
   $isTransition?: boolean;
@@ -15,6 +15,8 @@ export interface SquareLinkProps extends StyledLinkPorps {
 
 function SquareLink({
   link,
+  $width,
+  $height,
   $fontSize,
   $isFilled,
   $isTransition,
@@ -23,6 +25,8 @@ function SquareLink({
   return (
     <StyledLink
       to={link}
+      $width={$width}
+      $height={$height}
       $fontSize={$fontSize}
       $isFilled={$isFilled}
       $isTransition={$isTransition}
@@ -56,7 +60,10 @@ const LINK_STYLE = Object.freeze({
 export const StyledLink = styled(Link)<StyledLinkPorps>`
   ${({ $isFilled }) =>
     $isFilled ? LINK_STYLE.isFilled : LINK_STYLE.isNotFilled}
-  width: fit-content;
+  width: ${({ $width }) =>
+    typeof $width === 'number' ? `${$width}px` : $width};
+  height: ${({ $height }) =>
+    typeof $height === 'number' ? `${$height}px` : $height};
   padding: ${({ $fontSize }) =>
     `${($fontSize as number) * 0.35}px ${($fontSize as number) * 0.8}px`};
   border-radius: 0.3125rem;
@@ -75,9 +82,8 @@ export const StyledLink = styled(Link)<StyledLinkPorps>`
 `;
 
 SquareLink.defaultProps = Object.freeze({
-  $fontSize: 20,
   $isFilled: true,
   $isTransition: false,
 });
 
-export default memo(SquareLink);
+export default SquareLink;
