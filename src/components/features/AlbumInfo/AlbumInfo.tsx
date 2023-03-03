@@ -1,15 +1,16 @@
 import { useMemo } from 'react';
 import uuid from 'react-uuid';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import styled, { css } from 'styled-components';
-import { TitleInfo, IconButton, DetailInfo } from '@/components';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
 import {
   dialogContentState,
   dialogState,
   userState,
 } from '@/recoil/globalState';
+import { TitleInfo, IconButton, DetailInfo } from '@/components';
+import styled, { css } from 'styled-components';
+import { flexContainer, gridContainer } from '@/styles/mixin';
 import { ViewProps, PageProps } from '@/types/render';
 import { ProcessedResult, ProcessedTracklist } from '@/types/data';
 
@@ -27,8 +28,8 @@ function AlbumInfo({
 }: AlbumInfoProps) {
   const buttonSize = view === 'block' ? 16 : 32;
   const buttonType = page === 'all' ? 'plus' : 'minus';
-  const { titleInfo, detailInfo } = searchResult;
 
+  const { titleInfo, detailInfo } = searchResult;
   const listInfo = detailInfo?.filter(
     ({ infoName }) => infoName === 'Released' || infoName === 'Genre'
   );
@@ -69,6 +70,7 @@ function AlbumInfo({
               height={buttonSize}
               iconType={buttonType}
               view={view}
+              // TODO: 모달 개편
               clickHandler={async (e: React.MouseEvent<HTMLButtonElement>) => {
                 if (userId === null || userId === undefined) {
                   navigate('/signin');
@@ -125,7 +127,7 @@ function AlbumInfo({
   );
 }
 
-const WRAPPER_STYLE = {
+const WRAPPER_STYLE = Object.freeze({
   block: css`
     width: 150px;
     height: 76px;
@@ -143,9 +145,9 @@ const WRAPPER_STYLE = {
     margin-bottom: 12px;
   `,
   myitem: css``,
-};
+});
 
-const BUTTON_STYLE = {
+const BUTTON_STYLE = Object.freeze({
   block: css`
     top: var(--space-bs);
     right: 4px;
@@ -159,29 +161,23 @@ const BUTTON_STYLE = {
     right: var(--space-xs);
   `,
   myitem: css``,
-};
+});
 
 const AlbumInfoWrapper = styled.div<ViewProps>`
   position: relative;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
+  ${flexContainer({ d: 'column', w: 'wrap', jc: 'center' })};
   ${({ view }) => WRAPPER_STYLE[view]};
 `;
 
 const ListInfoWrapper = styled.dl`
-  display: grid;
-  grid-template-columns: 103px 1fr;
-  row-gap: 8px;
+  ${gridContainer({ gtc: '103px 1fr', rg: '8px' })}
   min-width: 470px;
   max-width: 618px;
   margin-top: var(--space-lg);
 `;
 
 const DetailInfoWrapper = styled.dl`
-  display: grid;
-  grid-template-columns: 107px 267px;
-  row-gap: var(--space-bs);
+  ${gridContainer({ gtc: '107px 267px', rg: '16px' })}
   width: 394px;
   padding: 0px var(--space-xs);
 `;
