@@ -141,8 +141,9 @@ function MyItem() {
         />
         {isLogin && (
           <StyledSquareButton
-            fontSize={20}
-            size="small"
+            $width={97}
+            $height={46}
+            $fontSize={20}
             isFilled={true}
             // onClick={() =>
             //   setDialog({
