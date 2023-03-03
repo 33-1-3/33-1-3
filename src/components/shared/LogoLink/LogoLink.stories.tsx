@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import LogoLink from './LogoLink';
 
 export default {
-  title: 'components/shared/LogoLink',
+  title: 'shared/LogoLink',
   component: LogoLink,
   parameters: {
     docs: {
