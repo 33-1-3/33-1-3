@@ -1,23 +1,16 @@
-import uuid from 'react-uuid';
 import { Fragment } from 'react';
+import uuid from 'react-uuid';
 import styled, { css } from 'styled-components';
+import checkTracklist from '@/utils/functions/checkTracklist';
+import { gridContainer } from '@/styles/mixin';
 import { RawTracklist } from '@/types/data';
 
-export interface InfoNameProps {
+export interface DetailInfoProps {
   infoName: 'Country' | 'Genre' | 'Label' | 'Style' | 'Released' | 'Tracklist';
-}
-
-export interface InfoContentProps {
   infoContent: string | string[] | RawTracklist[];
-}
-
-export interface DetailInfoProps extends InfoNameProps, InfoContentProps {
   isValid: boolean;
   isMyItem?: boolean;
 }
-
-const checkTracklist = ({ infoName }: InfoNameProps) =>
-  infoName === 'Tracklist';
 
 function DetailInfo({
   infoName,
@@ -49,19 +42,19 @@ function DetailInfo({
       ) : (
         <InfoContent>
           {isMyItem && <span aria-hidden={true}>{' ㆍ '}</span>}
-          {infoString}
+          <span>{infoString}</span>
         </InfoContent>
       )}
     </>
   );
 }
 
-const commonInfoStyle = css`
+const commonInfoStyle = Object.freeze(css`
   font-size: var(--text-bs);
   text-align: start;
   line-height: normal;
   color: var(--gray-400);
-`;
+`);
 
 const InfoName = styled.dt`
   font-weight: 700;
@@ -75,10 +68,7 @@ const InfoContent = styled.dd`
 `;
 
 const Tracklist = styled.div`
-  display: grid;
-  grid-template-columns: 23px 152px 36px;
-  column-gap: var(--space-xl);
-  row-gap: var(--space-bs);
+  ${gridContainer({ gtc: '23px 152px 36px', rg: '16px', cg: '28px' })}
 `;
 
 export default DetailInfo;
