@@ -1,21 +1,25 @@
-import { DetailInfoProps } from '@/components/features/DetailInfo/DetailInfo';
+import { DetailInfoProps } from '@/types/render';
 
 const ellipsisString = '가나다라마바사아자차카타파하ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-const mockTrackList = [
-  {
-    position: 'A1',
-    title: ellipsisString,
-    duration: '3:33',
-  },
-  { position: 'A2', title: '꽃', duration: '2:59' },
-  { position: 'A3', title: '삐에로는 우릴 보고 웃지', duration: '3:53' },
-  { position: 'A4', title: '사랑이 지나가면', duration: '4:00' },
-  { position: 'B1', title: '너의 의미', duration: '3:15' },
-  { position: 'B2', title: '여름밤의 꿈', duration: '3:56' },
-  { position: 'B3', title: '꿍따리 샤바라', duration: '3:48' },
-  { position: 'B4', title: '어허야 둥기둥기', duration: '2:34' },
-];
+const mockTrackList = {
+  infoName: 'Tracklist',
+  infoContent: [
+    {
+      position: 'A1',
+      title: ellipsisString,
+      duration: '3:33',
+    },
+    { position: 'A2', title: '꽃', duration: '2:59' },
+    { position: 'A3', title: '삐에로는 우릴 보고 웃지', duration: '3:53' },
+    { position: 'A4', title: '사랑이 지나가면', duration: '4:00' },
+    { position: 'B1', title: '너의 의미', duration: '3:15' },
+    { position: 'B2', title: '여름밤의 꿈', duration: '3:56' },
+    { position: 'B3', title: '꿍따리 샤바라', duration: '3:48' },
+    { position: 'B4', title: '어허야 둥기둥기', duration: '2:34' },
+  ],
+  isValid: true,
+};
 
 const mockTitleInfo_default = { title: '꽃갈피', artist: 'IU' };
 
@@ -67,7 +71,7 @@ const mockDetailInfo_ellipsis: DetailInfoProps[] = [
 const mockId = 112313213;
 
 const mockImgUrl =
-  'https://i.discogs.com/jgaM3Iwz2t05Whh7VHfdtqYtIseHo3mRqk1PQNIUsF0/rs:fit/g:sm/q:90/h:398/w:400/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTYwMDg0/MDEtMTQwODY5NzMw/MS0zMzE2LmpwZWc.jpeg';
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/220px-Cat03.jpg';
 
 const mockResourceUrl = 'https://www.naver.com';
 
