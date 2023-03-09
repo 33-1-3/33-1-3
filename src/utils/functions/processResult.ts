@@ -108,7 +108,7 @@ const processReleaseResult = ({
   }));
   const released = _released === undefined ? '' : _released;
   const year = released === '' ? _year ?? '' : released;
-  // console.log(artist, imgUrl, labels, tracklist, released, year);
+  
   return {
     id: getId(resourceUrl),
     titleInfo: { title, artist },
@@ -163,7 +163,7 @@ const commonRelease = ({
   const imgUrl = images && images[0].resource_url;
   const released = _released === undefined ? '' : _released;
   const year = released === '' ? _year ?? '' : released;
-  // console.log(artist, imgUrl, released, year);
+
   return {
     id: getId(resource_url),
     title,
@@ -199,7 +199,7 @@ const processMasterResult = ({
     title,
     duration,
   }));
-  // console.log(country, artist, imgUrl, year, labels, tracklist);
+
   return {
     id: getId(resourceUrl),
     titleInfo: { title, artist },
