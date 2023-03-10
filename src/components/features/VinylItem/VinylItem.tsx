@@ -12,7 +12,6 @@ export interface VinylItemProps extends PageProps, ViewProps {
 
 function VinylItem({ searchResult, page, view, ...props }: VinylItemProps) {
   const vinylSize = view === 'detail' ? 'large' : 'small';
-  const hasHoverInteraction = view !== 'detail';
 
   return useMemo(
     () => (
@@ -20,7 +19,7 @@ function VinylItem({ searchResult, page, view, ...props }: VinylItemProps) {
         <LPCover
           searchResult={searchResult}
           size={vinylSize}
-          hoverInteraction={hasHoverInteraction}
+          hoverInteraction={view !== 'detail'}
         />
         <AlbumInfo searchResult={searchResult} page={page} view={view} />
       </VinylItemWrapper>
