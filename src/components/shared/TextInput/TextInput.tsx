@@ -1,49 +1,40 @@
-import { useState, memo } from 'react';
+import { useState, memo, KeyboardEventHandler, ChangeEvent } from 'react';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
+import lengthToPxStr from '@/utils/functions/lengthToPxStr';
+import { widthHeight } from '@/types/style';
 
-export interface TextInputProps {
-  width: number | string;
-  height: number | string;
+export interface TextInputProps extends widthHeight {
   label?: string;
   placeholder?: string;
   required?: boolean;
   validationTester?: RegExp;
   errorMsg?: string;
   value?: string;
-  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
   [key: string]: unknown;
 }
 
-const validateTest = (
-  e: React.ChangeEvent<HTMLInputElement>,
-  regex: RegExp
-) => {
-  // TODO: nextElementSibling 대신 다른 좋은 방법은?
-  e.target.nextElementSibling?.classList.toggle(
-    'show',
-    e.target.value !== '' && !regex.test(e.target.value.trim())
-  );
-};
-
 function TextInput({
-  width,
-  height,
+  $width,
+  $height,
   label,
-  placeholder,
-  required,
+  placeholder = '',
+  required = false,
   validationTester,
   errorMsg,
-  value,
+  value = '',
   onKeyDown,
   ...props
 }: TextInputProps) {
   const newId = uuid();
   const [inputValue, setInputValue] = useState(value);
+  const isValid = inputValue === '' || (validationTester && validationTester.test(inputValue.trim()));
+
   return (
     <>
-      {label && label.trim() && <Label htmlFor={newId}>{label}</Label>}
-      <Input
+      {label?.trim() && <Label htmlFor={newId}>{label}</Label>}
+      <StyledInput
         type="text"
         id={newId}
         name={label}
@@ -52,23 +43,18 @@ function TextInput({
         value={inputValue}
         autoComplete="off"
         autoFocus={true}
-        style={{ width, height }}
+        $width={$width}
+        $height={$height}
         onKeyDown={onKeyDown}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setInputValue(e.target.value);
-          validationTester && validateTest(e, validationTester);
-        }}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setInputValue(e.target.value)
+        }
         {...props}
       />
-      {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
+      <ErrorMsg>{(errorMsg && !isVaild) ? errorMsg : ''}</ErrorMsg>
     </>
   );
 }
-
-TextInput.defaultProps = {
-  placeholder: '',
-  required: false,
-};
 
 const Label = styled.label`
   display: block;
@@ -77,11 +63,13 @@ const Label = styled.label`
   margin-bottom: 4px;
 `;
 
-const Input = styled.input<TextInputProps>`
+const StyledInput = styled.input<TextInputProps>`
+  width: ${({ $width }) => lengthToPxStr($width)};
+  height: ${({ $height }) => lengthToPxStr($height)};
   padding-left: 10px;
   padding-right: 10px;
   font-size: 14px;
-  line-height: ${({ height }) => height}px;
+  line-height: ${({ $height }) => lengthToPxStr($height)};
   border: 1px solid var(--black);
   border-radius: 4px;
 
@@ -91,15 +79,11 @@ const Input = styled.input<TextInputProps>`
 `;
 
 const ErrorMsg = styled.span`
-  display: none;
-  margin-top: 4px;
-  margin-left: 10px;
-  font-size: 12px;
+  display: block;
+  height: 16px;
+  margin: 4px 10px;
+  font-size: 14px;
   color: var(--red);
-
-  &.show {
-    display: block;
-  }
 `;
 
 export default memo(TextInput);

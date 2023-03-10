@@ -86,7 +86,7 @@ function Item() {
               searchResult={searchResult as ProcessedResourceUrlResult}
               size="large"
               hoverInteraction={false}
-            ></LPCover>
+            />
             <AlbumInfo
               searchResult={searchResult as ProcessedResourceUrlResult}
               tracklist={tracklist as ProcessedTracklist}

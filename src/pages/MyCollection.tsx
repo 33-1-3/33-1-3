@@ -117,7 +117,7 @@ function MyCollection() {
         </TitleWrapper>
         <motion.div initial={initial} animate={animate} transition={transition}>
           <VinylItems
-            searchResult={sortItems(
+            searchResults={sortItems(
               result,
               sort as 'title' | 'artist' | 'count' | 'Released' | 'update'
             )}
