@@ -42,7 +42,7 @@ function Bookshelf({
             width={22}
             height={22}
             iconType="pencil"
-            clickHandler={() => {
+            handleClick={() => {
               setDialogContent({
                 ...dialogContent,
                 collectionId: collectionId,
@@ -55,7 +55,7 @@ function Bookshelf({
             width={22}
             height={22}
             iconType="minus"
-            clickHandler={() => {
+            handleClick={() => {
               setDialogContent({
                 ...dialogContent,
                 collectionId: collectionId,

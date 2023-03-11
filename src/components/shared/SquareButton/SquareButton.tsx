@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components';
+import { widthHeight } from '@/types/style';
 
-export interface SquareButtonProps {
-  fontSize: number;
-  size: 'small' | 'large';
+export interface SquareButtonProps extends widthHeight {
+  $fontSize: string;
   isFilled?: boolean;
+  disabled?: boolean;
   children: string;
 }
 
-const PADDING_VALUE = Object.freeze({ small: '10px 16px', large: '12px 24px' });
 const BUTTON_STYLE = Object.freeze({
   isFilled: css`
     background-color: var(--purple-900);
@@ -28,14 +28,15 @@ const BUTTON_STYLE = Object.freeze({
 
 const SquareButton = styled.button<SquareButtonProps>`
   ${({ isFilled }) =>
-    isFilled ? BUTTON_STYLE.isFilled : BUTTON_STYLE.isNotFilled}
-  width: fit-content;
-  padding: ${({ size }) => PADDING_VALUE[size]};
+    isFilled ? BUTTON_STYLE.isFilled : BUTTON_STYLE.isNotFilled};
+  width: ${({ $width }) =>
+    typeof $width === 'number' ? `${$width}px` : $width};
+  height: ${({ $height }) =>
+    typeof $height === 'number' ? `${$height}px` : $height};
   border-radius: 6px;
-  font-size: ${({ fontSize }) => fontSize}px;
+  font-size: ${({ $fontSize }) => $fontSize};
   font-weight: 700;
   text-align: center;
-  cursor: pointer;
 
   &:disabled {
     ${BUTTON_STYLE.disabled}
@@ -44,10 +45,8 @@ const SquareButton = styled.button<SquareButtonProps>`
 `;
 
 SquareButton.defaultProps = Object.freeze({
-  fontSize: 20,
-  size: 'small',
   isFilled: true,
-  children: '버튼',
+  diabled: false,
 });
 
 export default SquareButton;

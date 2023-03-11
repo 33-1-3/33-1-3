@@ -61,7 +61,7 @@ interface Artist {
 
 export interface Tracklist {
   position: string;
-  type_: string;
+  type_?: string;
   title: string;
   duration: string;
   extraartists?: Artist[];
@@ -191,7 +191,7 @@ export interface RawCommonVinyl {
 
 export interface RawTracklist {
   position: string;
-  type_: string;
+  type_?: string;
   title: string;
   duration: string;
 }

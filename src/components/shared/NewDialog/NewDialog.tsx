@@ -113,13 +113,19 @@ function NewDialog({
                 <NodeContent>{children}</NodeContent>
               )}
               <Buttons>
-                <SquareButton type="submit" fontSize={18} size={'large'}>
+                <SquareButton
+                  type="submit"
+                  $width={80}
+                  $height={40}
+                  $fontSize={'18px'}
+                >
                   확인
                 </SquareButton>
                 <SquareButton
                   type="button"
-                  fontSize={18}
-                  size={'large'}
+                  $width={80}
+                  $height={40}
+                  $fontSize={'18px'}
                   isFilled={false}
                   onClick={handleClose}
                 >
