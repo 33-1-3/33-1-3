@@ -16,7 +16,7 @@ export interface IconButtonProps {
   iconType: 'plus' | 'minus' | 'pencil';
   color: string;
   backgroundColor?: string;
-  clickHandler: MouseEventHandler<HTMLButtonElement>;
+  handleClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 export interface IconButtonContainerProps {
@@ -30,7 +30,7 @@ function IconButton({
   iconType,
   color,
   backgroundColor,
-  clickHandler,
+  handleClick,
   ...props
 }: IconButtonProps) {
   const IconComponent = ICONS[iconType];
@@ -42,7 +42,7 @@ function IconButton({
         style={{ width, height }}
         $color={color}
         backgroundColor={backgroundColor}
-        onClick={clickHandler}
+        onClick={handleClick}
         {...props}
       >
         <IconComponent width={width} height={height} />
