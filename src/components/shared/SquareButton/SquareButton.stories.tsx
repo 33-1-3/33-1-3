@@ -66,9 +66,6 @@ export default {
         type: {
           summary: 'string',
         },
-        defaultValue: {
-          summary: `'버튼'`,
-        },
       },
     },
   },
