@@ -1,8 +1,7 @@
 import { Fragment } from 'react';
-import uuid from 'react-uuid';
 import styled, { css } from 'styled-components';
-import checkTracklist from '@/utils/functions/checkTracklist';
 import { gridContainer } from '@/styles/mixin';
+import checkTracklist from '@/utils/functions/checkTracklist';
 import { RawTracklist } from '@/types/data';
 
 export interface DetailInfoProps {
@@ -16,7 +15,7 @@ function DetailInfo({
   infoName,
   infoContent,
   isValid,
-  isMyItem,
+  isMyItem = false,
 }: DetailInfoProps) {
   if (!isValid) return null;
 
@@ -30,8 +29,8 @@ function DetailInfo({
       {isTracklist ? (
         <InfoContent>
           <Tracklist>
-            {(infoContent as RawTracklist[]).map((track) => (
-              <Fragment key={uuid()}>
+            {(infoContent as RawTracklist[]).map((track, idx) => (
+              <Fragment key={idx}>
                 <span>{track.position}</span>
                 <span>{track.title}</span>
                 <span>{track.duration}</span>
