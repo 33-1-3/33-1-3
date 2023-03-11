@@ -143,7 +143,7 @@ function MyItem() {
           <StyledSquareButton
             $width={97}
             $height={46}
-            $fontSize={20}
+            $fontSize={'20px'}
             isFilled={true}
             // onClick={() =>
             //   setDialog({

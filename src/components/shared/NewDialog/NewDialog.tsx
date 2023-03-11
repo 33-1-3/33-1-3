@@ -117,7 +117,7 @@ function NewDialog({
                   type="submit"
                   $width={80}
                   $height={40}
-                  $fontSize={18}
+                  $fontSize={'18px'}
                 >
                   확인
                 </SquareButton>
@@ -125,7 +125,7 @@ function NewDialog({
                   type="button"
                   $width={80}
                   $height={40}
-                  $fontSize={18}
+                  $fontSize={'18px'}
                   isFilled={false}
                   onClick={handleClose}
                 >

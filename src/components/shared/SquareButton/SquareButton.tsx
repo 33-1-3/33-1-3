@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { widthHeight } from '@/types/style';
 
 export interface SquareButtonProps extends widthHeight {
-  $fontSize: number;
+  $fontSize: string;
   isFilled?: boolean;
   disabled?: boolean;
   children: string;
@@ -34,10 +34,9 @@ const SquareButton = styled.button<SquareButtonProps>`
   height: ${({ $height }) =>
     typeof $height === 'number' ? `${$height}px` : $height};
   border-radius: 6px;
-  font-size: ${({ $fontSize }) => $fontSize}px;
+  font-size: ${({ $fontSize }) => $fontSize};
   font-weight: 700;
   text-align: center;
-  cursor: pointer;
 
   &:disabled {
     ${BUTTON_STYLE.disabled}
@@ -48,7 +47,6 @@ const SquareButton = styled.button<SquareButtonProps>`
 SquareButton.defaultProps = Object.freeze({
   isFilled: true,
   diabled: false,
-  children: '버튼',
 });
 
 export default SquareButton;

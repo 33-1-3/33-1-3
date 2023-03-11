@@ -46,10 +46,10 @@ export default {
       description: '내부 텍스트 크기 지정',
       table: {
         type: {
-          summary: 'number',
+          summary: 'string',
         },
         defaultValue: {
-          summary: 20,
+          summary: '20px',
         },
       },
       control: { type: 'number', min: 20, max: 60 },
@@ -98,7 +98,7 @@ MyCollections.args = {
   link: '/',
   $width: 178,
   $height: 40,
-  $fontSize: 20,
+  $fontSize: '20px',
   children: 'My Collections',
 };
 MyCollections.parameters = {
@@ -112,10 +112,10 @@ SignIn.args = {
   link: '/signin',
   $width: 100,
   $height: 40,
-  $fontSize: 20,
+  $fontSize: '20px',
   children: 'Sign In',
   $isFilled: false,
-  $isTransition: true,
+  $hasTransition: true,
 };
 SignIn.parameters = {
   design: {

@@ -1,5 +1,4 @@
-import { useMemo } from 'react';
-import uuid from 'react-uuid';
+import { useMemo, MouseEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
@@ -43,6 +42,39 @@ function AlbumInfo({
 
   const navigate = useNavigate();
 
+  const handleClick = async (e: MouseEvent<HTMLButtonElement>) => {
+    if (userId === null || userId === undefined) {
+      navigate('/signin');
+      return;
+    }
+
+    const releasedId = e.currentTarget.closest('.infoContainer')?.dataset
+      ?.releasedid as string;
+
+    if (buttonType === 'plus') {
+      const { data: collectionList } = await axios.get(
+        `${import.meta.env.VITE_DB_SERVER}collections/${userId}/${releasedId}`
+      );
+
+      setDialogContent({
+        ...dialogContent,
+        releasedId: releasedId,
+        collectionList: collectionList,
+      });
+
+      setDialogType('add-item');
+    }
+
+    if (buttonType === 'minus') {
+      setDialogContent({
+        ...dialogContent,
+        releasedId: releasedId,
+      });
+
+      setDialogType('delete-item');
+    }
+  };
+
   return useMemo(
     () => (
       <>
@@ -56,7 +88,7 @@ function AlbumInfo({
             <ListInfoWrapper>
               {listInfo?.map(({ infoName, infoContent, isValid }) => (
                 <DetailInfo
-                  key={uuid()}
+                  key={infoName}
                   infoName={infoName}
                   infoContent={infoContent}
                   isValid={isValid}
@@ -71,40 +103,7 @@ function AlbumInfo({
               iconType={buttonType}
               view={view}
               // TODO: 모달 개편
-              clickHandler={async (e: React.MouseEvent<HTMLButtonElement>) => {
-                if (userId === null || userId === undefined) {
-                  navigate('/signin');
-                  return;
-                }
-
-                const releasedId = e.currentTarget.closest('.infoContainer')
-                  ?.dataset?.releasedid as string;
-
-                if (buttonType === 'plus') {
-                  const { data: collectionList } = await axios.get(
-                    `${
-                      import.meta.env.VITE_DB_SERVER
-                    }collections/${userId}/${releasedId}`
-                  );
-
-                  setDialogContent({
-                    ...dialogContent,
-                    releasedId: releasedId,
-                    collectionList: collectionList,
-                  });
-
-                  setDialogType('add-item');
-                }
-
-                if (buttonType === 'minus') {
-                  setDialogContent({
-                    ...dialogContent,
-                    releasedId: releasedId,
-                  });
-
-                  setDialogType('delete-item');
-                }
-              }}
+              handleClick={handleClick}
             />
           )}
         </AlbumInfoWrapper>
@@ -112,7 +111,7 @@ function AlbumInfo({
           <DetailInfoWrapper>
             {newDetailInfo?.map(({ infoName, infoContent, isValid }) => (
               <DetailInfo
-                key={uuid()}
+                key={infoName}
                 infoName={infoName}
                 infoContent={infoContent}
                 isValid={isValid}
