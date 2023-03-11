@@ -29,27 +29,6 @@ const TEXT_WIDTH = Object.freeze({
   myitem: '400px',
 });
 
-const TITLE_FONT_SIZE = Object.freeze({
-  block: 'var(--text-bs)',
-  list: '24px',
-  detail: '36px',
-  myitem: '28px',
-});
-
-const ARTIST_FONT_SIZE = Object.freeze({
-  block: 'var(--text-xs)',
-  list: 'var(--text-md)',
-  detail: 'var(--text-lg)',
-  myitem: '20px',
-});
-
-const GAP_SIZE = Object.freeze({
-  block: 'var(--space-xs)',
-  list: 'var(--space-xs)',
-  detail: 'var(--space-bs)',
-  myitem: 'var(--space-bs)',
-});
-
 const textMixin = Object.freeze(css<ViewProps>`
   ${textEllipsis};
   width: ${({ view }) => TEXT_WIDTH[view]};
@@ -57,28 +36,78 @@ const textMixin = Object.freeze(css<ViewProps>`
   line-height: normal;
 `);
 
+const TITLE_INFO_WRAPPER_STYLE = Object.freeze({
+  block: css`
+    gap: var(--space-xs);
+    width: min-content;
+  `,
+  list: css`
+    gap: var(--space-xs);
+    width: 48.2vw;
+  `,
+  detail: css`
+    gap: var(--space-bs);
+    width: min-content;
+  `,
+  myitem: css`
+    gap: var(--space-bs);
+    width: min-content;
+  `,
+});
+
+const TITLE_TEXT_STYLE = Object.freeze({
+  block: css`
+    font-size: var(--text-bs);
+  `,
+  list: css`
+    min-width: '432px';
+    font-size: var(--text-md);
+  `,
+  detail: css`
+    font-size: var(--text-lg);
+  `,
+  myitem: css`
+    font-size: 20px;
+  `,
+});
+
+const ARTIST_TEXT_STYLE = Object.freeze({
+  block: css`
+    font-size: var(--text-xs);
+    color: var(--black);
+  `,
+  list: css`
+    min-width: '432px';
+    font-size: var(--text-md);
+    color: var(--black);
+  `,
+  detail: css`
+    font-size: var(--text-lg);
+    color: var(--black);
+  `,
+  myitem: css`
+    width: 280px;
+    font-size: 20px;
+    color: var(--gray-400);
+  `,
+});
+
 const TitleInfoWrapper = styled.dl<ViewProps>`
-  width: ${({ view }) => (view === 'list' ? '48.2vw' : 'min-content')};
   ${flexContainer({ d: 'column', w: 'wrap' })}
-  gap: ${({ view }) => GAP_SIZE[view]};
+  ${({ view }) => TITLE_INFO_WRAPPER_STYLE[view]}
   color: var(--black);
 `;
 
 const TitleText = styled.dd<ViewProps>`
   ${textMixin};
-  ${({ view }) => view === 'list' && 'min-width: 432px'};
+  ${({ view }) => TITLE_TEXT_STYLE[view]};
   font-weight: 700;
-  font-size: ${({ view }) => TITLE_FONT_SIZE[view]};
 `;
 
 const ArtistText = styled.dd<ViewProps>`
   ${textMixin};
-  ${({ view }) => view === 'list' && 'min-width: 432px'};
-  width: ${({ view }) => (view === 'myitem' ? '280px' : '')};
+  ${({ view }) => ARTIST_TEXT_STYLE[view]};
   font-weight: 400;
-  font-size: ${({ view }) => ARTIST_FONT_SIZE[view]};
-  color: ${({ view }) =>
-    view === 'myitem' ? 'var(--gray-400)' : 'var(--black)'};
 `;
 
 export default TitleInfo;
