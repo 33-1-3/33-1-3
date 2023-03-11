@@ -119,7 +119,7 @@ function InquiryButton({
         )}
       </AnimatePresence>
       {showAlert && (
-        <Alert type="bottomRight" width="200px">
+        <Alert $type="bottomRight" $width="200px">
           감사합니다 : )
         </Alert>
       )}

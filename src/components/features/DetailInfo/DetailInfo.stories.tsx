@@ -59,6 +59,7 @@ Released.args = {
   infoName: 'Released',
   infoContent: 'Aug 2014',
   isValid: true,
+  isMyItem: false,
 };
 
 export const Genre = Template.bind({});
@@ -66,6 +67,7 @@ Genre.args = {
   infoName: 'Genre',
   infoContent: 'Pop, Folk, World, & Country',
   isValid: true,
+  isMyItem: false,
 };
 
 export const Style = Template.bind({});
@@ -73,6 +75,7 @@ Style.args = {
   infoName: 'Style',
   infoContent: 'Folk, Ballad, K-pop',
   isValid: true,
+  isMyItem: false,
 };
 
 export const Country = Template.bind({});
@@ -80,6 +83,7 @@ Country.args = {
   infoName: 'Country',
   infoContent: 'South Korea',
   isValid: true,
+  isMyItem: false,
 };
 
 export const Label = Template.bind({});
@@ -87,6 +91,7 @@ Label.args = {
   infoName: 'Label',
   infoContent: 'Loen Entertainment',
   isValid: true,
+  isMyItem: false,
 };
 
 export const Tracklist = Template.bind({});
@@ -107,4 +112,5 @@ Tracklist.args = {
     { position: 'B4', title: '어허야 둥기둥기', duration: '2:34' },
   ],
   isValid: true,
+  isMyItem: false,
 };

@@ -92,7 +92,7 @@ const mockSearchResult_ellipsis = {
 };
 
 const mockSearchResults = Array.from({ length: 10 }).fill(
-  mockDetailInfo_default
+  mockSearchResult_default
 );
 
 const mockUsersData = [
