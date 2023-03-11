@@ -3,9 +3,9 @@ import styled, { css } from 'styled-components';
 import { widthHeight } from '@/types/style';
 
 export interface StyledLinkPorps extends widthHeight {
-  $fontSize?: number;
+  $fontSize?: string;
   $isFilled?: boolean;
-  $isTransition?: boolean;
+  $hasTransition?: boolean;
 }
 
 export interface SquareLinkProps extends StyledLinkPorps {
@@ -18,8 +18,8 @@ function SquareLink({
   $width,
   $height,
   $fontSize,
-  $isFilled,
-  $isTransition,
+  $isFilled = true,
+  $hasTransition = false,
   children,
 }: SquareLinkProps) {
   return (
@@ -29,7 +29,7 @@ function SquareLink({
       $height={$height}
       $fontSize={$fontSize}
       $isFilled={$isFilled}
-      $isTransition={$isTransition}
+      $hasTransition={$hasTransition}
     >
       {children}
     </StyledLink>
@@ -59,31 +59,24 @@ const LINK_STYLE = Object.freeze({
 
 export const StyledLink = styled(Link)<StyledLinkPorps>`
   ${({ $isFilled }) =>
-    $isFilled ? LINK_STYLE.isFilled : LINK_STYLE.isNotFilled}
+    $isFilled ? LINK_STYLE.isFilled : LINK_STYLE.isNotFilled};
   width: ${({ $width }) =>
     typeof $width === 'number' ? `${$width}px` : $width};
   height: ${({ $height }) =>
     typeof $height === 'number' ? `${$height}px` : $height};
-  padding: ${({ $fontSize }) =>
-    `${($fontSize as number) * 0.35}px ${($fontSize as number) * 0.8}px`};
   border-radius: 0.3125rem;
-  font-size: ${({ $fontSize }) => $fontSize}px;
+  font-size: ${({ $fontSize }) => $fontSize};
   font-weight: 700;
   text-align: center;
   text-decoration: none;
-
-  ${({ $isTransition }) => ($isTransition ? LINK_STYLE.isTransition : null)};
+  line-height: ${({ $height }) =>
+    typeof $height === 'number' ? `${$height}px` : $height};
+  ${({ $hasTransition }) => ($hasTransition ? LINK_STYLE.isTransition : null)};
 
   &:focus {
-    cursor: pointer;
     outline: 0.2em solid hsl(219deg 63% 44%);
     outline-offset: 0.2em;
   }
 `;
-
-SquareLink.defaultProps = Object.freeze({
-  $isFilled: true,
-  $isTransition: false,
-});
 
 export default SquareLink;
