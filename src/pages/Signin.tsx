@@ -81,7 +81,7 @@ function Signin() {
       )}
       <motion.div initial={initial} animate={animate} transition={transition}>
         <FormContainer>
-          <HeaderLogo height="72px" width="132px" />
+          <HeaderLogo $width="132px" $height="72px" />
           <SignInAndUpForm submitHandler={submitHandler} option="signin" />
           <SignInAndUpLink moveTarget="signup" />
         </FormContainer>

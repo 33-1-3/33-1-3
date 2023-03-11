@@ -8,7 +8,7 @@ function NotFound() {
       <NotFoundWrapper>
         <Title>404 Not Found</Title>
         <Content>잘못된 URL입니다 ㅠㅠ</Content>
-        <LogoLink width="100px" height="54px" />
+        <LogoLink $width="100px" $height="54px" />
       </NotFoundWrapper>
       <WaveFooter />
     </>
