@@ -114,9 +114,10 @@ function MyCollections() {
         }}
         onClose={() => setDialogType('')}
       >
+        {/* TODO: errorMsg가 표시되는 동안에는 모달 Confirm 불가능하도록 */}
         <TextInput
-          width={416}
-          height={36}
+          $width={416}
+          $height={36}
           label="Collection Name"
           placeholder="생성할 콜렉션의 이름을 입력해주세요."
           required={true}
@@ -142,9 +143,10 @@ function MyCollections() {
         }}
         onClose={() => setDialogType('')}
       >
+        {/* TODO: errorMsg가 표시되는 동안에는 모달 Confirm 불가능하도록 */}
         <TextInput
-          width={416}
-          height={36}
+          $width={416}
+          $height={36}
           label="Collection Name"
           placeholder="수정할 콜렉션의 이름을 입력해주세요."
           required={true}

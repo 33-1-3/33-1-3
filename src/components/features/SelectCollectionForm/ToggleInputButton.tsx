@@ -7,6 +7,7 @@ function ToggleInputButton() {
   const [isClicked, setIsClicked] = useState(false);
   const [dialogContent, setDialogContent] = useRecoilState(dialogContentState);
 
+  // TODO: errorMsg가 표시되는 동안에는 Enter 입력 그냥 Return 처리
   const handleKeyUp: ComponentProps<'input'>['onKeyDown'] = (e) => {
     e.stopPropagation();
 
@@ -33,8 +34,8 @@ function ToggleInputButton() {
     <>
       {isClicked ? (
         <TextInput
-          width={432}
-          height={48}
+          $width={432}
+          $height={48}
           placeholder="생성할 콜렉션의 이름을 입력해주세요."
           required={true}
           validationTester={/^.{1,}$/}

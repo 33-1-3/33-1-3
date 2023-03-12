@@ -161,7 +161,7 @@ function SearchResult() {
             transition={transition}
           >
             <VinylItems
-              searchResult={result}
+              searchResults={result}
               page={'all'}
               view={params.get('view') as ViewProps['view']}
             />

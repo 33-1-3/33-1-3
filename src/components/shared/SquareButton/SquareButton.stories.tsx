@@ -1,9 +1,8 @@
-import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import SquareButton from './SquareButton';
 
 export default {
-  title: 'components/shared/SqaureButton',
+  title: 'shared/SqaureButton',
   parameters: {
     docs: {
       description: {
@@ -12,34 +11,32 @@ export default {
     },
   },
   args: {
-    fontSize: 20,
-    size: 'small',
     isFilled: true,
   },
   argTypes: {
-    fontSize: {
+    $width: {
+      description: '컴포넌트의 너비 지정',
+      table: {
+        type: {
+          summary: `string | number`,
+        },
+      },
+    },
+    $height: {
+      description: '컴포넌트의 높이 지정',
+      table: {
+        type: {
+          summary: `string | number`,
+        },
+      },
+    },
+    $fontSize: {
       description: '내부 텍스트 크기 지정',
       table: {
         type: {
           summary: 'number',
         },
-        defaultValue: {
-          summary: '20',
-        },
       },
-    },
-    size: {
-      description: '컴포넌트 자체의 크기 지정',
-      table: {
-        type: {
-          summary: `'small' | 'large'`,
-        },
-        defaultValue: {
-          summary: `'small'`,
-        },
-      },
-      options: ['small', 'large'],
-      control: { type: 'radio' },
     },
     isFilled: {
       description: '배경 색 여부 지정',
@@ -52,14 +49,22 @@ export default {
         },
       },
     },
+    disabled: {
+      description: '비활성화 여부 지정',
+      table: {
+        type: {
+          summary: 'boolean',
+        },
+        defaultValue: {
+          summary: 'false',
+        },
+      },
+    },
     children: {
       description: '내부 텍스트 내용 지정',
       table: {
         type: {
           summary: 'string',
-        },
-        defaultValue: {
-          summary: `'버튼'`,
         },
       },
     },
@@ -72,6 +77,9 @@ const Template: ComponentStory<typeof SquareButton> = (args) => (
 
 export const SignIn = Template.bind({});
 SignIn.args = {
+  $width: 97,
+  $height: 46,
+  $fontSize: 20,
   children: 'Sign In',
 };
 SignIn.parameters = {
@@ -82,6 +90,9 @@ SignIn.parameters = {
 
 export const SignUp = Template.bind({});
 SignUp.args = {
+  $width: 107,
+  $height: 46,
+  $fontSize: 20,
   children: 'Sign Up',
 };
 SignUp.parameters = {
@@ -92,8 +103,9 @@ SignUp.parameters = {
 
 export const Approve = Template.bind({});
 Approve.args = {
-  fontSize: 18,
-  size: 'large',
+  $width: 80,
+  $height: 40,
+  $fontSize: 18,
   children: '확인',
 };
 Approve.parameters = {
@@ -104,8 +116,9 @@ Approve.parameters = {
 
 export const Cancel = Template.bind({});
 Cancel.args = {
-  fontSize: 18,
-  size: 'large',
+  $width: 80,
+  $height: 40,
+  $fontSize: 18,
   isFilled: false,
   children: '취소',
 };
@@ -117,6 +130,9 @@ Cancel.parameters = {
 
 export const Edit = Template.bind({});
 Edit.args = {
+  $width: 103,
+  $height: 40,
+  $fontSize: 20,
   children: '편집하기',
 };
 Edit.parameters = {
@@ -127,6 +143,9 @@ Edit.parameters = {
 
 export const Disabled = Template.bind({});
 Disabled.args = {
+  $width: 103,
+  $height: 40,
+  $fontSize: 20,
   isFilled: false,
   disabled: true,
   children: '비활성화',

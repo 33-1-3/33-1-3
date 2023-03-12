@@ -2,14 +2,47 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import TitleInfo from './TitleInfo';
 
 export default {
-  title: 'common/components/TitleInfo',
+  title: 'features/TitleInfo',
   component: TitleInfo,
+  parameters: {
+    docs: {
+      description: {
+        component: 'LP 제목과 가수 이름을 텍스트로 나타내는 컴포넌트입니다.',
+      },
+    },
+  },
   args: {
     title: '꽃갈피',
     artist: 'IU',
   },
   argTypes: {
+    title: {
+      description: 'LP 제목 텍스트 내용 지정',
+      table: {
+        type: {
+          summary: 'string',
+        },
+      },
+    },
+    artist: {
+      description: '가수 이름 텍스트 내용 지정',
+      table: {
+        type: {
+          summary: 'string',
+        },
+      },
+    },
     view: {
+      description:
+        '사용자의 dropdown 선택에 따라 어떤 크기와 모양으로 보여질지 지정',
+      table: {
+        type: {
+          summary: `'block' | 'list' | 'detail'`,
+        },
+        defaultValue: {
+          summary: `'block'`,
+        },
+      },
       options: ['block', 'list', 'detail'],
       control: { type: 'radio' },
     },

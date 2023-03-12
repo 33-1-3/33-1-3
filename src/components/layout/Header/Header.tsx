@@ -15,13 +15,18 @@ function Header({ ...props }) {
 
   return (
     <StyledHeader style={{ height: 64, width: '100vw' }} {...props}>
-      <LogoLink height="40px" width="74px" />
+      <LogoLink $width="74px" $height="40px" />
       <BetaText>Beta</BetaText>
       {!isMain && isLogIn !== undefined && (
         <SearchInput inputSize="small" onSubmit={showSearchResult} />
       )}
       {isLogIn !== undefined && (
-        <SquareLink link={isLogIn ? `/mycollections/${userId}` : '/signin'}>
+        <SquareLink
+          $width={178}
+          $height={40}
+          $fontSize={'20px'}
+          link={isLogIn ? `/mycollections/${userId}` : '/signin'}
+        >
           My Collections
         </SquareLink>
       )}
@@ -30,9 +35,12 @@ function Header({ ...props }) {
           <ProfileLink />
         ) : (
           <SquareLink
-            link={isLogIn ? `/mycollections/${userId}` : '/signin'}
+            $width={100}
+            $height={40}
+            $fontSize={'20px'}
             $isFilled={false}
-            $isTransition={true}
+            $hasTransition={true}
+            link={isLogIn ? `/mycollections/${userId}` : '/signin'}
           >
             Sign In
           </SquareLink>

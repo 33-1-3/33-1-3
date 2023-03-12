@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import LogoLink from './LogoLink';
 
 export default {
-  title: 'components/shared/LogoLink',
+  title: 'shared/LogoLink',
   component: LogoLink,
   parameters: {
     docs: {
@@ -16,12 +16,12 @@ export default {
     },
   },
   argTypes: {
-    width: {
+    $width: {
       description: '너비 지정',
       control: 'select',
       options: ['74px', '100px', '132px'],
     },
-    height: {
+    $height: {
       description: '높이 지정',
       control: 'select',
       options: ['40px', '54px', '72px'],
@@ -35,18 +35,18 @@ const Template: ComponentStory<typeof LogoLink> = (args) => (
 
 export const Header = Template.bind({});
 Header.args = {
-  width: '74px',
-  height: '40px',
+  $width: '74px',
+  $height: '40px',
 };
 
 export const SignInAndUp = Template.bind({});
 SignInAndUp.args = {
-  width: '132px',
-  height: '72px',
+  $width: '132px',
+  $height: '72px',
 };
 
 export const NotFound = Template.bind({});
 NotFound.args = {
-  width: '100px',
-  height: '54px',
+  $width: '100px',
+  $height: '54px',
 };

@@ -60,8 +60,9 @@ function SignInAndUpForm({
       ) : (
         <SubmitBtn
           type="submit"
-          fontSize={20}
-          size="small"
+          $width={97}
+          $height={46}
+          $fontSize={'20px'}
           isFilled={true}
           disabled={disabled}
         >

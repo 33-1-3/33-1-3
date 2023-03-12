@@ -1,9 +1,10 @@
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import { mockSearchResult_default } from '@/utils/mocks/mockInfo';
 import VinylItem from './VinylItem';
+import { mockSearchResult_default } from '@/utils/mocks/mockInfo';
 
+// TODO: 스토리북 새로고침 해야만 보이는 에러 해결(Album Info 컴포넌트 확인 필요)
 export default {
-  title: 'common/components/VinylItem',
+  title: 'features/VinylItem',
   component: VinylItem,
   args: {
     searchResult: mockSearchResult_default,

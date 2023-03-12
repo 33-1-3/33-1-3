@@ -61,7 +61,7 @@ interface Artist {
 
 export interface Tracklist {
   position: string;
-  type_: string;
+  type_?: string;
   title: string;
   duration: string;
   extraartists?: Artist[];
@@ -162,7 +162,7 @@ export interface ProcessedResult {
     infoContent: string | string[];
     isValid: boolean;
   }[];
-  imgUrl: string;
+  imgUrl: string | undefined;
   resourceUrl: string;
 }
 
@@ -191,7 +191,7 @@ export interface RawCommonVinyl {
 
 export interface RawTracklist {
   position: string;
-  type_: string;
+  type_?: string;
   title: string;
   duration: string;
 }
