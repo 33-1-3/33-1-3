@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FormEventHandler } from 'react';
 import SignInAndUpInput from './SignInAndUpInput';
 import Spinner from './Spinner';
 import { SquareButton } from '@/components';
@@ -10,13 +10,20 @@ import {
   VALIDATE_REGEXP,
 } from '@/utils/constants/signInAndUp';
 
+interface SignInAndUpFormProps {
+  option: formOptions;
+  isLoading?: boolean;
+  onSubmit: FormEventHandler<HTMLFormElement>;
+  [key: string]: unknown;
+}
+
 function SignInAndUpForm({
   option,
   isLoading = false,
   onSubmit,
   ...props
 }: SignInAndUpFormProps) {
-  const [formState, setFormState] = useState<formStateProps>({
+  const [formState, setFormState] = useState<FormStateProps>({
     id: '',
     nickname: '',
     pwd: '',
@@ -37,7 +44,7 @@ function SignInAndUpForm({
   }, false);
 
   return (
-    <Form onSubmit={onSubmit} {...props}>
+    <StyledForm onSubmit={onSubmit} {...props}>
       <InputSet>
         {INPUT_SET[option].map((option, idx) => (
           <SignInAndUpInput
@@ -61,11 +68,11 @@ function SignInAndUpForm({
           {BUTTON_INFO[option]}
         </SubmitBtn>
       )}
-    </Form>
+    </StyledForm>
   );
 }
 
-const Form = styled.form`
+const StyledForm = styled.form`
   width: min-content;
   text-align: center;
 `;

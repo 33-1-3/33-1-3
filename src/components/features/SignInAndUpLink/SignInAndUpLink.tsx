@@ -3,13 +3,18 @@ import styled from 'styled-components';
 import { flexContainer } from '@/styles/mixin';
 import { LINK_INFO } from '@/utils/constants/signInAndUp';
 
+interface SignInAndUpLinkProps {
+  moveTarget: formOptions;
+  [key: string]: unknown;
+}
+
 function SignInAndUpLink({ moveTarget, ...props }: SignInAndUpLinkProps) {
-  const { help, target } = LINK_INFO[moveTarget];
+  const { helpMsg, targetMsg } = LINK_INFO[moveTarget];
 
   return (
     <LinkWrapper {...props}>
-      <span>{help}</span>
-      <StyledLink to={`/${moveTarget}`}>{target}</StyledLink>
+      <span>{helpMsg}</span>
+      <StyledLink to={`/${moveTarget}`}>{targetMsg}</StyledLink>
     </LinkWrapper>
   );
 }

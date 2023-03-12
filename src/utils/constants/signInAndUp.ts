@@ -5,12 +5,12 @@ export const BUTTON_INFO = {
 
 export const LINK_INFO = {
   signin: {
-    help: '이미 회원이라면?',
-    target: '로그인!',
+    helpMsg: '이미 회원이라면?',
+    targetMsg: '로그인!',
   },
   signup: {
-    help: '아직 회원이 아니라면?',
-    target: '가입하기!',
+    helpMsg: '아직 회원이 아니라면?',
+    targetMsg: '가입하기!',
   },
 };
 
