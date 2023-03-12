@@ -49,14 +49,8 @@ const StyledInput = styled.div<InputProps>`
     height: 100%;
     background: no-repeat url('/assets/arrow.svg');
     background-position: center right 12px;
-    ${({ isOpen }) => {
-      return isOpen
-        ? `
-        transition: 0.3s;
-        transform: scaleY(-1);
-      `
-        : `transition: 0.3s;`;
-    }}
+    transition: 0.3s;
+    ${({ isOpen }) => isOpen && `transform:scaleY(-1);`}
   }
 `;
 

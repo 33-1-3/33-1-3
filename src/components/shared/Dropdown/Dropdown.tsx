@@ -1,4 +1,4 @@
-import { useState, useCallback, MouseEvent } from 'react';
+import { useState, MouseEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ComboInput from './ComboInput';
 import ComboMenu from './ComboMenu';
@@ -19,28 +19,46 @@ function Dropdown({ dropKind, label, content, ...props }: DropdownProps) {
   const dropKey = params.get(dropKind);
   const dropValue = content.find(({ key }) => key === dropKey)?.value;
 
-  const selectOption = useCallback(
-    (e: MouseEvent<HTMLUListElement>) => {
-      const target = e.target as HTMLUListElement;
+  const selectOption = (e: MouseEvent<HTMLUListElement>) => {
+    const target = e.target as HTMLUListElement;
 
-      if (!target.getAttribute) return;
+    if (!target.getAttribute) return;
 
-      const value = target.getAttribute('value');
-      const param = new URLSearchParams(window.location.search);
-      if (value !== null) {
-        param.set(`${dropKind}`, value);
-      }
+    const value = target.getAttribute('value');
+    const param = new URLSearchParams(window.location.search);
+    if (value !== null) {
+      param.set(`${dropKind}`, value);
+    }
 
-      setSearchParams(param);
-      setIsOpen(!isOpen);
-    },
-    [dropKind, isOpen, setSearchParams]
-  );
-
-  const toggleMenu = useCallback((): void => {
+    setSearchParams(param);
     setIsOpen(!isOpen);
-  }, [isOpen]);
+  };
 
+  const toggleMenu = (): void => {
+    setIsOpen(!isOpen);
+  };
+
+  // const selectOption = useCallback(
+  //   (e: MouseEvent<HTMLUListElement>) => {
+  //     const target = e.target as HTMLUListElement;
+
+  //     if (!target.getAttribute) return;
+
+  //     const value = target.getAttribute('value');
+  //     const param = new URLSearchParams(window.location.search);
+  //     if (value !== null) {
+  //       param.set(`${dropKind}`, value);
+  //     }
+
+  //     setSearchParams(param);
+  //     setIsOpen(!isOpen);
+  //   },
+  //   [dropKind, isOpen, setSearchParams]
+  // );
+
+  // const toggleMenu = useCallback((): void => {
+  //   setIsOpen(!isOpen);
+  // }, [isOpen]);
   return (
     <ComboContainer>
       <label className="srOnly" htmlFor="dropdown">
