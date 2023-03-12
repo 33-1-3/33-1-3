@@ -93,7 +93,7 @@ function MyCollection() {
             {collectionTitle}
           </PageTitle>
           <CenterSearchInput
-            page={collectionTitle}
+            ariaLabel={`${collectionTitle} 내 음반 검색`}
             placeholder="콜렉션 내에서 검색해 보세요."
             onSubmit={preventSubmit}
             onChange={handleChange}

@@ -17,7 +17,7 @@ function Signup() {
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     setShowAlert(false);
@@ -61,7 +61,7 @@ function Signup() {
         <FormContainer>
           <HeaderLogo height="72px" width="132px" />
           <SignInAndUpForm
-            onSubmit={submitHandler}
+            onSubmit={submitForm}
             option="signup"
             isLoading={isLoading}
           />

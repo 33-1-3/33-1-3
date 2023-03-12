@@ -11,14 +11,14 @@ function Header({ ...props }) {
 
   const isMain: boolean = window.location.pathname === '/';
 
-  const SearchInputRender = useHandleSubmit();
+  const showSearchResult = useHandleSubmit();
 
   return (
     <StyledHeader style={{ height: 64, width: '100vw' }} {...props}>
       <LogoLink height="40px" width="74px" />
       <BetaText>Beta</BetaText>
       {!isMain && isLogIn !== undefined && (
-        <SearchInput inputSize="small" onSubmit={SearchInputRender} />
+        <SearchInput inputSize="small" onSubmit={showSearchResult} />
       )}
       {isLogIn !== undefined && (
         <SquareLink link={isLogIn ? `/mycollections/${userId}` : '/signin'}>
