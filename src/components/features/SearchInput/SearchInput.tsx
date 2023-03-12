@@ -5,7 +5,7 @@ import { absolute } from '@/styles/mixin';
 
 export interface SearchInputProps {
   placeholder?: string;
-  page?: string;
+  ariaLabel?: string;
   inputSize?: 'small' | 'large';
   onSubmit?: FormEventHandler<HTMLFormElement>;
   onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -18,7 +18,7 @@ export interface InputProps {
 
 function SearchInput({
   placeholder = '가수나 음반을 검색하세요!',
-  page = '전체',
+  ariaLabel = '전체 음반 검색',
   inputSize = 'large',
   onSubmit,
   onChange,
@@ -29,7 +29,7 @@ function SearchInput({
       <StyledInput
         type="search"
         placeholder={placeholder}
-        aria-label={`${page} 검색 창`}
+        aria-label={ariaLabel}
         inputSize={inputSize}
         onChange={onChange}
       />
@@ -42,7 +42,7 @@ function SearchInput({
   );
 }
 
-const inputMixin = {
+const INPUT_STYLE = {
   small: css`
     width: 240px;
     height: 40px;
@@ -61,7 +61,7 @@ const inputMixin = {
   `,
 };
 
-const buttonMixin = {
+const BUTTON_STYLE = {
   small: css`
     width: 28px;
     height: 28px;
@@ -81,7 +81,7 @@ const InputWrapper = styled.form`
 `;
 
 const StyledInput = styled.input<InputProps>`
-  ${({ inputSize }) => inputMixin[inputSize]};
+  ${({ inputSize }) => INPUT_STYLE[inputSize]};
   font-weight: 400;
 
   &::-webkit-search-decoration,
@@ -99,7 +99,7 @@ const StyledInput = styled.input<InputProps>`
 
 const SearchButton = styled(motion.button)<InputProps>`
   ${absolute({ r: 0 })};
-  ${({ inputSize }) => buttonMixin[inputSize]};
+  ${({ inputSize }) => BUTTON_STYLE[inputSize]};
   background: url('/assets/searchButton.svg') no-repeat center/contain;
   border: none;
 `;
