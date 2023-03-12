@@ -1,49 +1,28 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { flexContainer } from '@/styles/mixin';
+import { LINK_INFO } from '@/utils/constants/signInAndUp';
 
-const INFO_MESSAGES = {
-  signin: '이미 회원이라면?',
-  signup: '아직 회원이 아니라면?',
-};
-const LINK_MESSAGES = {
-  signin: '로그인!',
-  signup: '가입하기!',
-};
-
-export interface LinkWrapperProps {
-  color?: string;
-  fontSize?: string;
+interface SignInAndUpLinkProps {
+  moveTarget: formOptions;
+  [key: string]: unknown;
 }
 
-export interface SignInAndUpLinkProps extends LinkWrapperProps {
-  moveTarget: 'signin' | 'signup';
-}
+function SignInAndUpLink({ moveTarget, ...props }: SignInAndUpLinkProps) {
+  const { helpMsg, targetMsg } = LINK_INFO[moveTarget];
 
-function SignInAndUpLink({
-  color,
-  fontSize,
-  moveTarget,
-  ...props
-}: SignInAndUpLinkProps) {
   return (
-    <LinkWrapper color={color} fontSize={fontSize} {...props}>
-      <span>{INFO_MESSAGES[moveTarget]}</span>
-      <StyledLink to={`/${moveTarget}`}>{LINK_MESSAGES[moveTarget]}</StyledLink>
+    <LinkWrapper {...props}>
+      <span>{helpMsg}</span>
+      <StyledLink to={`/${moveTarget}`}>{targetMsg}</StyledLink>
     </LinkWrapper>
   );
 }
 
-SignInAndUpLink.defaultProps = {
-  color: 'var(--purple-900)',
-  fontSize: 'var(--text-sm)',
-};
-
-const LinkWrapper = styled.div<LinkWrapperProps>`
-  display: flex;
-  flex-flow: row nowrap;
-  gap: 6px;
-  color: ${({ color }) => color};
-  font-size: ${({ fontSize }) => fontSize};
+const LinkWrapper = styled.div`
+  ${flexContainer({ d: 'row', w: 'nowrap', g: '6px' })}
+  color: var(--purple-900);
+  font-size: var(--text-sm);
 `;
 
 const StyledLink = styled(Link)`

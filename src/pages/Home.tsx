@@ -1,7 +1,8 @@
-import styled from 'styled-components';
 import { Header, SearchInput, Footer, Main } from '@/components';
-import useHandleSubmit from '../hooks/useHandleSubmit';
+import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { flexContainer } from '@/styles/mixin';
+import useHandleSubmit from '@/hooks/useHandleSubmit';
 import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
 
 function Home() {
@@ -15,7 +16,7 @@ function Home() {
           <Catchphrase>
             Record your <HighLight>Records!</HighLight>
           </Catchphrase>
-          <SearchInput handleSubmit={useHandleSubmit()} />
+          <SearchInput onSubmit={useHandleSubmit()} />
         </motion.div>
       </StyledMain>
       <Footer />
@@ -24,10 +25,7 @@ function Home() {
 }
 
 const StyledMain = styled(Main)`
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;
+  ${flexContainer({ d: 'column', w: 'wrap', jc: 'center', ai: 'center' })};
   min-width: 680px;
   background: url('/assets/background_main.svg') center/cover;
   text-align: center;

@@ -1,9 +1,12 @@
-import { useSearchParams } from 'react-router-dom';
 import { useState, useEffect, useRef, useMemo } from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
+import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import {
+  dialogContentState,
+  dialogState,
+  userState,
+} from '@/recoil/globalState';
 import {
   Header,
   Main,
@@ -17,26 +20,26 @@ import {
   NewDialog,
   SelectCollectionForm,
 } from '@/components';
-import {
-  SORT_LABEL,
-  VIEW_CONTENT,
-  VIEW_LABEL,
-  SORT_CONTENT,
-} from '@/utils/constants/dropdown';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { absolute, flexContainer } from '@/styles/mixin';
 import {
   getResourceUrl,
   commonRelease,
   commonMaster,
   processSearchResult,
 } from '@/utils/functions/processResult';
+import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
+import {
+  SORT_LABEL,
+  VIEW_CONTENT,
+  VIEW_LABEL,
+} from '@/utils/constants/dropdown';
 import { ViewProps } from '@/types/render';
 import { ProcessedResult } from '@/types/data';
-import { useRecoilState } from 'recoil';
-import { dialogContentState, dialogState } from '@/recoil/globalState';
 
 const SECRET = import.meta.env.VITE_API_SECRET;
 const KEY = import.meta.env.VITE_API_KEY;
-import { userState } from '../recoil/globalState';
 
 // 옵저버 범위 설정값
 interface IntersectionObserverInit {
@@ -220,11 +223,13 @@ function SearchResult() {
 }
 
 const SearchResultWrapper = styled.div`
+  ${flexContainer({
+    d: 'row',
+    w: 'nowrap',
+    ai: 'center',
+    g: 'var(--space-bs)',
+  })}
   position: relative;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  gap: var(--space-bs);
   min-width: 680px;
   max-width: 828px;
   width: 65vw;
@@ -238,15 +243,11 @@ const SearchResultWrapper = styled.div`
   }
 
   > div:nth-of-type(2) {
-    position: absolute;
-    top: 0;
-    right: 134px;
+    ${absolute({ t: 0, r: 134 })}
   }
 
   > div:last-child {
-    position: absolute;
-    top: 0;
-    right: 0;
+    ${absolute({ t: 0, r: 0 })}
   }
 `;
 

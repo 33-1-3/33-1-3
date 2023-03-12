@@ -69,4 +69,8 @@ export const NormalizeStyle = createGlobalStyle/*css*/ `
     text-decoration: none;
     color: inherit; 
   }
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+    box-shadow: 0 0 0 1000px white inset;
+  }
 `;

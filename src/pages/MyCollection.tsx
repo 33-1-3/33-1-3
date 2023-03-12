@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
+import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { dialogContentState, dialogState } from '@/recoil/globalState';
 import {
   Header,
   Main,
@@ -13,22 +16,15 @@ import {
   GoToTopButton,
   NewDialog,
 } from '@/components';
-import {
-  COLLECTION_SORT_CONTENT,
-  SORT_LABEL,
-  VIEW_CONTENT,
-  VIEW_LABEL,
-} from '@/utils/constants/dropdown';
-import { ViewProps } from '@/types/render';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
-import axios from 'axios';
-import { sortItems } from '@/utils/sortItems';
+import { absolute, flexContainer } from '@/styles/mixin';
 import { processCommonVinyl } from '@/utils/functions/processResult';
+import { VIEW_CONTENT, VIEW_LABEL } from '@/utils/constants/dropdown';
+import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
+import { sortItems } from '@/utils/sortItems';
+import { ViewProps } from '@/types/render';
 import { ProcessedResult } from '@/types/data';
-import { dialogContentState, dialogState } from '@/recoil/globalState';
-import { useRecoilState } from 'recoil';
 
 let collectionItems: undefined | ProcessedResult[];
 
@@ -43,6 +39,10 @@ function MyCollection() {
   const [dialogType, setDialogType] = useRecoilState(dialogState);
   const [dialogContent] = useRecoilState(dialogContentState);
 
+  const preventSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  }, []);
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     const matchItems = collectionItems?.filter(
@@ -55,6 +55,7 @@ function MyCollection() {
     setCount(matchItems?.length);
     setSearchWord(e.target.value);
   }
+
   const url = `${import.meta.env.VITE_DB_SERVER}collection/${collectionid}`;
 
   useEffect(() => setDialogType(''), []);
@@ -92,12 +93,10 @@ function MyCollection() {
             {collectionTitle}
           </PageTitle>
           <CenterSearchInput
-            page="나의 콜렉션"
+            ariaLabel={`${collectionTitle} 내 음반 검색`}
             placeholder="콜렉션 내에서 검색해 보세요."
-            handleSubmit={(e) => {
-              e.preventDefault();
-            }}
-            handleChange={handleChange}
+            onSubmit={preventSubmit}
+            onChange={handleChange}
           />
           <SearchResultWrapper>
             {count !== undefined && searchWord !== '' && (
@@ -149,9 +148,7 @@ function MyCollection() {
 }
 
 const MainWrapper = styled(Main)`
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
+  ${flexContainer({ d: 'column', w: 'nowrap', jc: 'flex-start' })}
 `;
 
 const TitleWrapper = styled.div`
@@ -168,11 +165,13 @@ const CenterSearchInput = styled(SearchInput)`
 `;
 
 const SearchResultWrapper = styled.div`
+  ${flexContainer({
+    d: 'row',
+    w: 'nowrap',
+    ai: 'center',
+    g: 'var(--space-bs)',
+  })}
   position: relative;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  gap: var(--space-bs);
   min-width: 680px;
   max-width: 828px;
   width: 65vw;
@@ -186,15 +185,11 @@ const SearchResultWrapper = styled.div`
   }
 
   > div:nth-of-type(2) {
-    position: absolute;
-    top: 0;
-    right: 134px;
+    ${absolute({ t: 0, r: 134 })}
   }
 
   > div:last-child {
-    position: absolute;
-    top: 0;
-    right: 0;
+    ${absolute({ t: 0, r: 0 })}
   }
 `;
 

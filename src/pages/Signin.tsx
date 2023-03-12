@@ -1,6 +1,8 @@
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
+import { useState, useLayoutEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { loginState, userState } from '@/recoil/globalState';
 import {
   LogoLink,
   SignInAndUpLink,
@@ -8,11 +10,10 @@ import {
   WaveFooter,
   Alert,
 } from '@/components';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useState, useLayoutEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { loginState, userState } from '@/recoil/globalState';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { FLOATING_MOTION_VALUE } from '@/utils/constants/motion';
+import { flexContainer } from '@/styles/mixin';
 
 function Signin() {
   const [isLogIn, setIsLogIn] = useRecoilState(loginState);
@@ -82,7 +83,7 @@ function Signin() {
       <motion.div initial={initial} animate={animate} transition={transition}>
         <FormContainer>
           <HeaderLogo $width="132px" $height="72px" />
-          <SignInAndUpForm submitHandler={submitHandler} option="signin" />
+          <SignInAndUpForm onSubmit={submitHandler} option="signin" />
           <SignInAndUpLink moveTarget="signup" />
         </FormContainer>
       </motion.div>
@@ -96,11 +97,12 @@ const HeaderLogo = styled(LogoLink)`
 `;
 
 const FormContainer = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-sm);
+  ${flexContainer({
+    d: 'column',
+    ai: 'center',
+    jc: 'center',
+    g: 'var(--space-sm)',
+  })}
   margin: auto;
   margin-top: 20vh;
 `;

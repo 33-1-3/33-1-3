@@ -14,22 +14,23 @@ export interface InputProps {
 
 function ComboInput({ isOpen, onClick, children, ...props }: ComboInputProps) {
   return (
-    <Input
+    <StyledInput
       role="combobox"
       id="dropdown"
       tabIndex={0}
       isOpen={isOpen}
       onClick={onClick}
-      style={{ width: '100%', height: '100%' }}
       {...props}
     >
       {children}
-    </Input>
+    </StyledInput>
   );
 }
 
-const Input = styled.div<InputProps>`
+const StyledInput = styled.div<InputProps>`
   ${flexContainer({ jc: 'center', ai: 'center' })}
+  width: 100%;
+  height: 100%;
   position: relative;
   padding-right: var(--space-lg);
   color: var(--black);
@@ -48,14 +49,8 @@ const Input = styled.div<InputProps>`
     height: 100%;
     background: no-repeat url('/assets/arrow.svg');
     background-position: center right 12px;
-    ${({ isOpen }) => {
-      return isOpen
-        ? `
-        transition: 0.3s;
-        transform: scaleY(-1);
-      `
-        : `transition: 0.3s;`;
-    }}
+    transition: 0.3s;
+    ${({ isOpen }) => isOpen && `transform:scaleY(-1);`}
   }
 `;
 

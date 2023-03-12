@@ -1,7 +1,8 @@
 import { useRecoilValue } from 'recoil';
 import { loginState, userState } from '@/recoil/globalState';
-import styled from 'styled-components';
 import { LogoLink, SearchInput, SquareLink, ProfileLink } from '@/components';
+import styled from 'styled-components';
+import { absolute, flexContainer } from '@/styles/mixin';
 import useHandleSubmit from '@/hooks/useHandleSubmit';
 
 function Header({ ...props }) {
@@ -10,14 +11,14 @@ function Header({ ...props }) {
 
   const isMain: boolean = window.location.pathname === '/';
 
-  const SearchInputRender = useHandleSubmit();
+  const showSearchResult = useHandleSubmit();
 
   return (
     <StyledHeader style={{ height: 64, width: '100vw' }} {...props}>
       <LogoLink $width="74px" $height="40px" />
       <BetaText>Beta</BetaText>
       {!isMain && isLogIn !== undefined && (
-        <SearchInput inputSize="small" handleSubmit={SearchInputRender} />
+        <SearchInput inputSize="small" onSubmit={showSearchResult} />
       )}
       {isLogIn !== undefined && (
         <SquareLink
@@ -49,16 +50,14 @@ function Header({ ...props }) {
 }
 
 const StyledHeader = styled.header`
+  ${flexContainer({ ai: 'center', g: '12px' })}
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  display: flex;
-  align-items: center;
   background-color: var(--white);
   min-width: 680px;
   padding: 12px 16px;
-  gap: 12px;
   box-shadow: var(--shadow-Header);
   z-index: 2000;
 
@@ -68,9 +67,7 @@ const StyledHeader = styled.header`
 `;
 
 const BetaText = styled.span`
-  position: absolute;
-  left: 96px;
-  bottom: 10px;
+  ${absolute({ l: 96, b: 10 })}
   font-style: italic;
   font-size: var(--text-sm);
   font-weight: 400;

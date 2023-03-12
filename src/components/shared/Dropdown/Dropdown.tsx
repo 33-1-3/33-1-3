@@ -1,9 +1,9 @@
 import { useState, MouseEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import styled from 'styled-components';
 import ComboInput from './ComboInput';
 import ComboMenu from './ComboMenu';
 import Option from './Option';
+import styled from 'styled-components';
 
 export interface DropdownProps {
   dropKind: 'view' | 'sort';
@@ -38,28 +38,48 @@ function Dropdown({ dropKind, label, content, ...props }: DropdownProps) {
     setIsOpen(!isOpen);
   };
 
+  // const selectOption = useCallback(
+  //   (e: MouseEvent<HTMLUListElement>) => {
+  //     const target = e.target as HTMLUListElement;
+
+  //     if (!target.getAttribute) return;
+
+  //     const value = target.getAttribute('value');
+  //     const param = new URLSearchParams(window.location.search);
+  //     if (value !== null) {
+  //       param.set(`${dropKind}`, value);
+  //     }
+
+  //     setSearchParams(param);
+  //     setIsOpen(!isOpen);
+  //   },
+  //   [dropKind, isOpen, setSearchParams]
+  // );
+
+  // const toggleMenu = useCallback((): void => {
+  //   setIsOpen(!isOpen);
+  // }, [isOpen]);
   return (
-    <>
+    <ComboContainer>
       <label className="srOnly" htmlFor="dropdown">
         {label}
       </label>
-      <ComboContainer>
-        <ComboInput isOpen={isOpen} onClick={toggleMenu} {...props}>
-          {dropValue ?? content[0].value}
-        </ComboInput>
-        <ComboMenuContainer isOpen={isOpen} onClick={selectOption} {...props}>
-          {content.map(({ key, value }, index) => (
-            <Option key={index} value={key}>
-              {value}
-            </Option>
-          ))}
-        </ComboMenuContainer>
-      </ComboContainer>
-    </>
+      <ComboInput isOpen={isOpen} onClick={toggleMenu} {...props}>
+        {dropValue ?? content[0].value}
+      </ComboInput>
+      <ComboMenuContainer isOpen={isOpen} onClick={selectOption} {...props}>
+        {content.map(({ key, value }, index) => (
+          <Option key={index} value={key}>
+            {value}
+          </Option>
+        ))}
+      </ComboMenuContainer>
+    </ComboContainer>
   );
 }
 
 const ComboContainer = styled.div`
+  position: relative;
   width: 7.5rem;
   height: 2.25rem;
 `;

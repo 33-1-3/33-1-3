@@ -2,19 +2,19 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import SearchInput from './SearchInput';
 
 export default {
-  title: 'common/components/SearchInput',
+  title: 'features/SearchInput',
   component: SearchInput,
   args: {
     placeholder: '검색어를 입력하세요.',
     page: '전체',
-    size: 'large',
+    inputSize: 'large',
   },
   argTypes: {
     page: {
       options: ['전체', '나의 콜렉션'],
       control: { type: 'radio' },
     },
-    size: {
+    inputSize: {
       options: ['small', 'large'],
       control: { type: 'radio' },
     },

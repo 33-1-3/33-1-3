@@ -1,7 +1,6 @@
 import { ReactNode, MouseEventHandler } from 'react';
 import styled from 'styled-components';
 import { flexContainer } from '@/styles/mixin';
-import { calcLength } from 'framer-motion';
 
 export interface ComboMenuProps {
   children: ReactNode[];
@@ -52,9 +51,9 @@ function ComboMenu({ children, isOpen, onClick, ...props }: ComboMenuProps) {
 }
 
 const StyledUl = styled.ul<ListProps>`
+  ${flexContainer({ d: 'column', jc: 'center', ai: 'center' })}
   width: 100%;
   height: ${({ length }) => 36 * length + 'px'};
-  ${flexContainer({ d: 'column', jc: 'center', ai: 'center' })}
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   position: relative;
   color: var(--black);
