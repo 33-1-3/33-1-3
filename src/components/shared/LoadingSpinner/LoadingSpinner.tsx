@@ -8,8 +8,14 @@ export interface SpinnerProps {
   isLastPage: boolean;
 }
 
-function LoadingSpinner({ isLastPage, height }: LoadingSpinnerProps) {
-  return <Spinner isLastPage={isLastPage} style={{ width: '100vw', height }} />;
+function LoadingSpinner({ isLastPage, height, ...props }: LoadingSpinnerProps) {
+  return (
+    <Spinner
+      isLastPage={isLastPage}
+      style={{ width: '100vw', height }}
+      {...props}
+    />
+  );
 }
 
 LoadingSpinner.defaultProps = {
