@@ -35,14 +35,18 @@ const processSearchResult = (result: RawResult[]): ProcessedResult[] =>
     ({
       country,
       cover_image,
+      thumb,
       genre,
       label,
+      master_url,
       resource_url,
       style,
       title,
       year,
     }: RawResult) => {
       const [artist, albumTitle] = title.split(' - ');
+      // console.log('master', master_url);
+      // console.log('resource', resource_url);
 
       return {
         id: getId(resource_url),
@@ -58,29 +62,29 @@ const processSearchResult = (result: RawResult[]): ProcessedResult[] =>
             infoContent: genre,
             isValid: validator(genre),
           },
-          {
-            infoName: 'Style',
-            infoContent: style,
-            isValid: validator(style),
-          },
-          {
-            infoName: 'Country',
-            infoContent: country,
-            isValid: validator(country),
-          },
-          {
-            infoName: 'Label',
-            infoContent: label,
-            isValid: validator(label),
-          },
+          // {
+          //   infoName: 'Style',
+          //   infoContent: style,
+          //   isValid: validator(style),
+          // },
+          // {
+          //   infoName: 'Country',
+          //   infoContent: country,
+          //   isValid: validator(country),
+          // },
+          // {
+          //   infoName: 'Label',
+          //   infoContent: label,
+          //   isValid: validator(label),
+          // },
         ],
-        imgUrl: cover_image,
+        imgUrl: thumb,
         resourceUrl: resource_url,
       };
     }
   );
 
-const tracklistVaildator = (tracklist: RawTracklist[]) =>
+const tracklistValidator = (tracklist: RawTracklist[]) =>
   tracklist.length !== 0 && Array.isArray(tracklist);
 
 // Release API 결과 처리
@@ -108,7 +112,7 @@ const processReleaseResult = ({
   }));
   const released = _released === undefined ? '' : _released;
   const year = released === '' ? _year ?? '' : released;
-  
+
   return {
     id: getId(resourceUrl),
     titleInfo: { title, artist },
@@ -144,7 +148,7 @@ const processReleaseResult = ({
     tracklist: {
       infoName: 'Tracklist',
       infoContent: tracklist,
-      isValid: tracklistVaildator(tracklist),
+      isValid: tracklistValidator(tracklist),
     },
   };
 };
@@ -191,7 +195,7 @@ const processMasterResult = ({
   const country = _country ?? '';
   const artist = artists[0].name;
   const imgUrl = images && images[0].resource_url;
-  const year = _year ?? '';
+  const year = (_year ?? '') + '';
   const labels = _labels?.map(({ name }) => name) ?? [];
   const tracklist = _tracklist.map(({ position, type_, title, duration }) => ({
     position,
@@ -235,7 +239,7 @@ const processMasterResult = ({
     tracklist: {
       infoName: 'Tracklist',
       infoContent: tracklist,
-      isValid: tracklistVaildator(tracklist),
+      isValid: tracklistValidator(tracklist),
     },
   };
 };
