@@ -15,8 +15,14 @@ function VinylItems({ searchResults, page, view, ...props }: VinylItemsProps) {
   return (
     <VinylItemsWrapper view={view} {...props}>
       {searchResults.map((result) => {
+        const {
+          titleInfo: { title, artist },
+        } = result;
+        const isEmpty = title === '' || artist === '';
         const releasedId = getId(result.resourceUrl);
-        return (
+        return isEmpty ? (
+          <></>
+        ) : (
           <VinylItem
             key={releasedId}
             searchResult={result}
