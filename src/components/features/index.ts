@@ -14,6 +14,7 @@ import TitleInfo from './TitleInfo/TitleInfo';
 import VinylItem from './VinylItem/VinylItem';
 import VinylItems from './VinylItems/VinylItems';
 import WritableInfo from './WritableInfo/WritableInfo';
+import NoSearchWord from './NoSearchWord/NoSearchWord';
 
 export {
   AddCollectionButton,
@@ -32,4 +33,5 @@ export {
   VinylItem,
   VinylItems,
   WritableInfo,
+  NoSearchWord,
 };
