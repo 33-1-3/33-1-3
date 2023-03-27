@@ -8,7 +8,11 @@ export interface SpinnerProps {
   isLastPage: boolean;
 }
 
-function LoadingSpinner({ isLastPage, height, ...props }: LoadingSpinnerProps) {
+function LoadingSpinner({
+  isLastPage,
+  height = '50px',
+  ...props
+}: LoadingSpinnerProps) {
   return (
     <Spinner
       isLastPage={isLastPage}
@@ -17,10 +21,6 @@ function LoadingSpinner({ isLastPage, height, ...props }: LoadingSpinnerProps) {
     />
   );
 }
-
-LoadingSpinner.defaultProps = {
-  height: '50px',
-};
 
 const Spinner = styled.div<SpinnerProps>`
   display: ${({ isLastPage }) => (isLastPage ? 'none' : 'block')};
