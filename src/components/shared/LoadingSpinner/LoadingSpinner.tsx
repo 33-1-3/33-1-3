@@ -1,20 +1,26 @@
 import styled from 'styled-components';
 
 export interface LoadingSpinnerProps extends SpinnerProps {
-  height: string | number;
+  height?: string;
 }
 
 export interface SpinnerProps {
   isLastPage: boolean;
 }
 
-function LoadingSpinner({ isLastPage, height }: LoadingSpinnerProps) {
-  return <Spinner isLastPage={isLastPage} style={{ width: '100vw', height }} />;
+function LoadingSpinner({
+  isLastPage,
+  height = '50px',
+  ...props
+}: LoadingSpinnerProps) {
+  return (
+    <Spinner
+      isLastPage={isLastPage}
+      style={{ width: '100vw', height }}
+      {...props}
+    />
+  );
 }
-
-LoadingSpinner.defaultProps = {
-  height: '50px',
-};
 
 const Spinner = styled.div<SpinnerProps>`
   display: ${({ isLastPage }) => (isLastPage ? 'none' : 'block')};

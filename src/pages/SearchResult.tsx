@@ -19,6 +19,7 @@ import {
   InquiryButton,
   NewDialog,
   SelectCollectionForm,
+  NoSearchWord,
 } from '@/components';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -77,17 +78,19 @@ function SearchResult() {
   useEffect(() => setDialogType(''), []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (pageNum === totalPageNum) return;
+    if (value) {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (pageNum === totalPageNum) return;
 
-      if (entry.isIntersecting) {
-        setPageNum((pageNum) => (pageNum += 1));
-      }
-    }, options);
+        if (entry.isIntersecting) {
+          setPageNum((pageNum) => (pageNum += 1));
+        }
+      }, options);
 
-    observer.observe(observerTarget?.current as HTMLDivElement);
+      observer.observe(observerTarget?.current as HTMLDivElement);
 
-    return () => observer.disconnect();
+      return () => observer.disconnect();
+    }
   }, [result]);
 
   useEffect(() => {
@@ -142,38 +145,44 @@ function SearchResult() {
         <Header />
         <Main>
           <h1 className="srOnly">Search Result</h1>
-          <SearchResultWrapper>
-            <SearchResultText resultCount={itemCount} />
-            {/* <Dropdown
+          {value ? (
+            <>
+              <SearchResultWrapper>
+                <SearchResultText resultCount={itemCount} />
+                {/* <Dropdown
               dropKind="sort"
               label={SORT_LABEL}
               content={SORT_CONTENT}
             /> */}
-            <Dropdown
-              dropKind="view"
-              label={VIEW_LABEL}
-              content={VIEW_CONTENT}
-            />
-          </SearchResultWrapper>
-          <motion.div
-            initial={initial}
-            animate={animate}
-            transition={transition}
-          >
-            <VinylItems
-              searchResults={result}
-              page={'all'}
-              view={params.get('view') as ViewProps['view']}
-            />
-          </motion.div>
-          <div
-            ref={observerTarget}
-            style={{
-              width: '100vw',
-              height: '40px',
-            }}
-          />
-          <LoadingSpinner isLastPage={pageNum === totalPageNum} />
+                <Dropdown
+                  dropKind="view"
+                  label={VIEW_LABEL}
+                  content={VIEW_CONTENT}
+                />
+              </SearchResultWrapper>
+              <motion.div
+                initial={initial}
+                animate={animate}
+                transition={transition}
+              >
+                <VinylItems
+                  searchResults={result}
+                  page={'all'}
+                  view={params.get('view') as ViewProps['view']}
+                />
+              </motion.div>
+              <div
+                ref={observerTarget}
+                style={{
+                  width: '100vw',
+                  height: '40px',
+                }}
+              />
+              <LoadingSpinner isLastPage={pageNum === totalPageNum} />
+            </>
+          ) : (
+            <NoSearchWord />
+          )}
           <InquiryButton />
           <GoToTopButton />
         </Main>

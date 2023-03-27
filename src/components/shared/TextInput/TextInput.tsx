@@ -29,7 +29,9 @@ function TextInput({
 }: TextInputProps) {
   const newId = uuid();
   const [inputValue, setInputValue] = useState(value);
-  const isValid = inputValue === '' || (validationTester && validationTester.test(inputValue.trim()));
+  const isValid =
+    inputValue === '' ||
+    (validationTester && validationTester.test(inputValue.trim()));
 
   return (
     <>
@@ -51,7 +53,7 @@ function TextInput({
         }
         {...props}
       />
-      <ErrorMsg>{(errorMsg && !isVaild) ? errorMsg : ''}</ErrorMsg>
+      <ErrorMsg>{errorMsg && !isValid ? errorMsg : ''}</ErrorMsg>
     </>
   );
 }
