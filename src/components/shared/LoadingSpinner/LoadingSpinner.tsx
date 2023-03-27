@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export interface LoadingSpinnerProps extends SpinnerProps {
-  height?: string | number;
+  height?: string;
 }
 
 export interface SpinnerProps {
