@@ -16,9 +16,16 @@ export interface RawResult {
   thumb: string;
   cover_image: string;
   resource_url: string;
-  community: string[];
+  community: {
+    want: number;
+    have: number;
+  };
   format_quantity: number;
-  formats: string[];
+  formats: {
+    name: string;
+    qty: string;
+    descriptions: string[];
+  }[];
 }
 
 interface ReleaseCompany {
